@@ -1,3 +1,4 @@
 seguridad\dominio\ejemplo.class
-seguridad\vista\ejemplo.class
 seguridad\datos\ejemplo.class
+seguridad\datos\Conexion.class
+seguridad\vista\ejemplo.class
