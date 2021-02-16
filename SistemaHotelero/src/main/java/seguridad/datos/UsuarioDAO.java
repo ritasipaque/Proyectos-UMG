@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author visitante
  */
-public class UsuarioDatos {
+public class UsuarioDAO {
     private static final String SQL_SELECT = "SELECT id_usuario, username, password FROM usuario";
     private static final String SQL_INSERT = "INSERT INTO usuario(username, password) VALUES(?, ?)";
     private static final String SQL_UPDATE = "UPDATE usuario SET username=?, password=? WHERE id_usuario = ?";
