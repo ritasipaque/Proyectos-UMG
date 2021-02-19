@@ -156,19 +156,3 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario_perfil` (
     REFERENCES `umg`.`tbl_usuario` (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
--- -----------------------------------------------------
--- Table `umg`.`tbl_modulo_aplicacion`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `umg`.`tbl_modulo_aplicacion` 
-(
-`PK_id_usuario` int(25) auto_increment PRIMARY KEY ,
-`id_username` varchar (25) not null,
-`id_perfil` varchar (25) not null,
-`ingresar` TINYINT  DEFAULT NULL,
-`consulta` TINYINT NULL DEFAULT NULL,
-`modificar` TINYINT NULL DEFAULT NULL,
-`eliminar` TINYINT NULL DEFAULT NULL,
-`imprimir` TINYINT NULL DEFAULT NULL) 
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8;
