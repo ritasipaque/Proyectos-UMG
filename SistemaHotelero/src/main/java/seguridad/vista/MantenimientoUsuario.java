@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import seguridad.datos.Conexion;
 import static seguridad.datos.Conexion.getConnection;
+import seguridad.dominio.Controlador;
 /**
  *
  * @author OtakuGT
@@ -46,21 +47,22 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        JTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnInsertar = new javax.swing.JButton();
+        BtnModificar = new javax.swing.JButton();
+        BtnEliminar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtDire = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BtnGenContraseña = new javax.swing.JButton();
+        BtnBuscar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
+        BtnListar = new javax.swing.JButton();
 
         jLabel5.setText("jLabel5");
 
@@ -88,7 +90,7 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tabla"));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        JTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -101,7 +103,7 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(JTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,24 +127,24 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setText("Insertar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnInsertar.setText("Insertar");
+        BtnInsertar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnInsertarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnModificar.setText("Modificar");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnModificarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Eliminar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnEliminarActionPerformed(evt);
             }
         });
 
@@ -160,21 +162,23 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
 
         txtPassword.setEditable(false);
 
-        jButton5.setText("Generar Contraseña");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BtnGenContraseña.setText("Generar Contraseña");
+        BtnGenContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BtnGenContraseñaActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnBuscarActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Buscar Usuario");
+
+        BtnListar.setText("Listar");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,17 +195,21 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(BtnGenContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -221,134 +229,55 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(BtnInsertar)
+                    .addComponent(BtnModificar)
+                    .addComponent(BtnEliminar))
                 .addGap(5, 5, 5)
-                .addComponent(jButton5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnGenContraseña)
+                    .addComponent(BtnListar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(12, 12, 12)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jButton4)
+                .addComponent(BtnBuscar)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(200, 10, 420, 320);
+        jPanel2.setBounds(180, 10, 420, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static void main(String args[]){
+        MantenimientoUsuario v = new MantenimientoUsuario();
+        Controlador c = new Controlador(v);
+        v.setVisible(true);
+        v.setLocation(null);
+    }
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-          getConnection();
-        
-           try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/FilmMagic", "root", "");
-            PreparedStatement pst = cn.prepareStatement("insert into Usuarios values(?,?,?,?,?,?)");
-           
-if(txtNombre.getText().length()==0){
-           JOptionPane.showMessageDialog(null, "Para continuar con el Registro LLene los campos solicitados");
-           txtNombre.requestFocus(); //Si algunos de los campos están vacios, el foco apunta al primer campo.......
-}else{
-            pst.setString(1, "");
-            pst.setString(2, "0");
-            pst.setString(3, txtNombre.getText().trim());
-            pst.setString(4, txtDire.getText().trim());
-            pst.setString(5, txtNum.getText().trim());
-            pst.setString(6, txtDPI.getText().trim());
-            pst.executeUpdate();
-            
-     
-}
-            
-            txtNombre.setText("");
-            txtDire.setText("");
-            txtPassword.setText("");
-            txtNum.setText("");
-            txtDPI.setText("");
-            lblEstatus.setText("Registro exitoso.");
-        }catch (Exception e){
-            
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BtnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInsertarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        try {
-            String ID = txtBuscar.getText().trim();
-            
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/FilmMagic", "root", "");
-            PreparedStatement pst = cn.prepareStatement("update Usuarios set nombre_usuario = ?, direccion_usuario = ?, membresia_usuario = ?, numero_usuario = ?, DPI_usuario = ? where membresia_usuario = " + ID);
-            
-            pst.setString(1, txtNombre.getText().trim());
-            pst.setString(3, txtDire.getText().trim());
-            pst.setString(4, txtPassword.getText().trim());
-            pst.setString(5, txtDire.getText().trim());
-            pst.setString(6, txtDPI.getText().trim());
-            
-            pst.executeUpdate();
-            
-            lblEstatus.setText("Modificación exitosa.");
-            
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnInsertarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-                try {
-             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/FilmMagic", "root", "");
-            PreparedStatement pst = cn.prepareStatement("delete from Usuarios where membresia_usuario = ?");
-            
-            pst.setString(1, txtBuscar.getText().trim());
-            pst.executeUpdate();
-            
-            txtNombre.setText("");
-            txtDire.setText("");
-            txtPassword.setText("");
-            txtDPI.setText("");
-            txtNum.setText("");
-            txtBuscar.setText("");
-            
-            lblEstatus.setText("Registro eliminado.");
-            
-        } catch (Exception e) {
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-          try{
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/FilmMagic", "root", "");
-            PreparedStatement pst = cn.prepareStatement("select * from Usuarios where membresia_usuario = ?");
-            pst.setString(1, txtBuscar.getText().trim());
-            
-            ResultSet rs = pst.executeQuery();
-            
-            if(rs.next()){
-                txtNombre.setText(rs.getString("nombre_usuario"));
-                txtDire.setText(rs.getString("direccion_usuario"));
-                txtNum.setText(rs.getString("numero_usuario"));
-                txtDPI.setText(rs.getString("DPI_usuario"));
-                txtPassword.setText(rs.getString("membresia_usuario"));
-            } else {
-            //    JOptionPane.showMessageDialog(null, "Usuario no registrado.");
-               lblEstatus.setText("Usuario NO REGISTRADO");
-            }
-            
-        }catch (Exception e){
-            
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BtnModificarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void BtnGenContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenContraseñaActionPerformed
 int[] numerosAleatorios = IntStream.rangeClosed(1, 1000).toArray();
 //desordenando los elementos
 Random r = new Random();
@@ -362,15 +291,17 @@ for (int i = numerosAleatorios.length; i > 0; i--) {
     txtPassword.setText(String.valueOf(numerosAleatorios));
     JOptionPane.showMessageDialog(null, "Su membresia es: "+numerosAleatorios);
 
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BtnGenContraseñaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton jButton1;
-    public javax.swing.JButton jButton2;
-    public javax.swing.JButton jButton3;
-    public javax.swing.JButton jButton4;
-    public javax.swing.JButton jButton5;
+    public javax.swing.JButton BtnBuscar;
+    public javax.swing.JButton BtnEliminar;
+    public javax.swing.JButton BtnGenContraseña;
+    public javax.swing.JButton BtnInsertar;
+    public javax.swing.JButton BtnListar;
+    public javax.swing.JButton BtnModificar;
+    public javax.swing.JTable JTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -382,7 +313,6 @@ for (int i = numerosAleatorios.length; i > 0; i--) {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    public javax.swing.JTable jTable3;
     public javax.swing.JTextField txtBuscar;
     public javax.swing.JTextField txtDire;
     public javax.swing.JTextField txtNombre;
