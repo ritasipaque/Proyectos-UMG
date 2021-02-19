@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import seguridad.datos.Usuario;
-import seguridad.datos.UsuarioDAO;
+import guardandosistemahotelero.UsuarioDAO;
 import seguridad.vista.MantenimientoUsuario;
 
 /**
@@ -38,14 +38,15 @@ public class Controlador implements ActionListener {
     public void listar(JTable tabla){
         modelo=(DefaultTableModel) tabla.getModel();
         List<Usuario>Usuarios=dao.select();
-        Object[]object=new Object[6];
+        Object[]object=new Object[7];
         for (int i = 0; i < Usuarios.size(); i++){
             object[0]=Usuarios.get(i).getId_usuario();
             object[1]=Usuarios.get(i).getNombre_usuario();
             object[2]=Usuarios.get(i).getApellido_usuario();
             object[3]=Usuarios.get(i).getPassword_usuario();
-            object[4]=Usuarios.get(i).getCambio_password();
-            object[0]=Usuarios.get(i).getEstado_usuario();
+            object[4]=Usuarios.get(i).getUltima_conexion();
+            object[5]=Usuarios.get(i).getCambio_password();
+            object[6]=Usuarios.get(i).getEstado_usuario();
             modelo.addRow(object);
             
         }

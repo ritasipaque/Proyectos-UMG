@@ -157,7 +157,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
@@ -169,9 +169,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu8ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-    MantenimientoUsuario FrmMantUsuario = new MantenimientoUsuario();
-    jDesktopPane1.add(FrmMantUsuario);
-    FrmMantUsuario.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**

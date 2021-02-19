@@ -1,13 +1,24 @@
 package seguridad.datos;
 
+import java.sql.Date;
+
 public class Usuario {
 
     private int id_usuario;
     private String nombre_usuario;
     private String apellido_usuario;
     private String password_usuario;
-    private int cambio_password;
+    private Date ultima_conexion;
     private int estado_usuario;
+
+    public Date getUltima_conexion() {
+        return ultima_conexion;
+    }
+
+    public void setUltima_conexion(Date ultima_conexion) {
+        this.ultima_conexion = ultima_conexion;
+    }
+    private int cambio_password;
 
     public String getApellido_usuario() {
         return apellido_usuario;
@@ -72,10 +83,15 @@ public class Usuario {
         this.apellido_usuario = apellido_usuario;
     }
 
-    public Usuario(int id_usuario, int cambio_password, int estado_usuario, String nombre_usuario, String apellido_usuario, String password_usuario ) {
+    public Usuario (Date ultima_conexion){
+        this.ultima_conexion = ultima_conexion;
+    }
+    
+    public Usuario(int id_usuario, int cambio_password, int estado_usuario, Date ultima_conexion, String nombre_usuario, String apellido_usuario, String password_usuario ) {
         this.id_usuario = id_usuario;
         this.cambio_password = cambio_password;
         this.estado_usuario = estado_usuario;
+        this.ultima_conexion = ultima_conexion;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
         this.password_usuario = password_usuario;
@@ -83,8 +99,9 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id_usuario=" + id_usuario + ", nombre_usuario=" + nombre_usuario + ", apellido_usuario=" + apellido_usuario + ", password_usuario=" + password_usuario + ", cambio_password=" + cambio_password +  ", estado_usuario=" +
-                estado_usuario + '}';
+        return "Usuario{" + "id_usuario=" + id_usuario + ", nombre_usuario=" + nombre_usuario + ", apellido_usuario=" + apellido_usuario + 
+                ", password_usuario=" + password_usuario + ", cambio_password=" + cambio_password + ", ultima_conexion" + ultima_conexion + 
+                ", estado_usuario=" + estado_usuario + '}';
         
     }
 
