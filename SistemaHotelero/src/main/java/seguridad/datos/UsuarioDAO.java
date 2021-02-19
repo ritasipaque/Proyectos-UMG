@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package seguridad.datos;
-import domain.Persona;
-import domain.Usuario;
+import seguridad.dominio.Usuario;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +15,11 @@ import java.util.List;
  * @author visitante
  */
 public class UsuarioDAO {
-    private static final String SQL_SELECT = "SELECT id_usuario, username, password FROM usuario";
-    private static final String SQL_INSERT = "INSERT INTO usuario(username, password) VALUES(?, ?)";
-    private static final String SQL_UPDATE = "UPDATE usuario SET username=?, password=? WHERE id_usuario = ?";
-    private static final String SQL_DELETE = "DELETE FROM usuario WHERE id_usuario=?";
-    private static final String SQL_QUERY = "SELECT id_usuario, username, password FROM usuario WHERE id_usuario = ?";
+    private static final String SQL_SELECT = "SELECT id_usuario, username, password FROM tbl_usuario";
+    private static final String SQL_INSERT = "INSERT INTO tbl_usuario(username, password) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_usuario SET username=?, password=? WHERE id_usuario = ?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_usuario WHERE id_usuario=?";
+    private static final String SQL_QUERY = "SELECT id_usuario, username, password FROM tbl_usuario WHERE id_usuario = ?";
     
     public List<Usuario> select(){
         Connection conn = null;

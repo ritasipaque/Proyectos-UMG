@@ -7,16 +7,6 @@ package seguridad.vista;
  */
 
 
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import java.awt.Desktop;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 import java.util.stream.IntStream;
 import javax.swing.JOptionPane;
@@ -24,10 +14,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
+import seguridad.datos.Conexion;
+import static seguridad.datos.Conexion.getConnection;
 /**
  *
  * @author OtakuGT
@@ -40,43 +28,9 @@ public class MantenimientoUsuario extends javax.swing.JInternalFrame {
     public MantenimientoUsuario() {
         initComponents();
     }
-    
-public void generar(String nombre) throws FileNotFoundException, DocumentException {
-        if(!(txtNombre.getText().isEmpty() || (txtDire.getText().isEmpty()) || (txtMem.getText().isEmpty()) || (txtNum.getText().isEmpty()) || (txtDPI.getText().isEmpty()))){
+  
 
-        FileOutputStream archivo = new FileOutputStream(nombre + ".pdf");
-        Document documento = new Document();
-        PdfWriter.getInstance(documento, archivo);
-        documento.open();
-        
-        Paragraph parrafo = new Paragraph("BIENVENIDO A LA MEMBRESIA FILM MAGIC");
-        Paragraph parrafo1 = new Paragraph("DATOS DE MEMBRESIA: ");
-        parrafo.setAlignment(1);
-        documento.add(parrafo);
-        documento.add(parrafo1);
-        
-        documento.add(new Paragraph("Nombre: " + txtNombre.getText()));
-        documento.add(new Paragraph("Direccion: " + txtDire.getText()));
-        documento.add(new Paragraph("Numero Telefonico: " + txtNum.getText()));
-        documento.add(new Paragraph("DPI: " + txtDPI.getText()));
-        documento.add(new Paragraph("Membresia: " + txtMem.getText()));
-        documento.add(new Paragraph("----------------------------------------------------------------------------------------------------------------------------------"));
-        documento.close();
-        JOptionPane.showMessageDialog(null, "Archivo PDF creado correctamente","Información",1);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Debe llenar todos los campos","Atención",2);
-        }
-    }
 
-    public void abrir(String nombre) {
-        try {
-            File path = new File(nombre + ".pdf");
-            Desktop.getDesktop().open(path);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex,"Atención",2);
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,23 +43,24 @@ public void generar(String nombre) throws FileNotFoundException, DocumentExcepti
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtDire = new javax.swing.JTextField();
-        txtBuscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtMem = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
 
         jLabel5.setText("jLabel5");
 
@@ -123,9 +78,52 @@ public void generar(String nombre) throws FileNotFoundException, DocumentExcepti
         jScrollPane1.setViewportView(jTable1);
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setIconifiable(true);
         setTitle("Mantenimiento Usuarios");
         setVisible(true);
+        getContentPane().setLayout(null);
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(501, 686, 0, 0);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tabla"));
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 739, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 330, 773, 351);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jButton1.setText("Insertar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,18 +146,9 @@ public void generar(String nombre) throws FileNotFoundException, DocumentExcepti
             }
         });
 
-        jButton4.setText("Buscar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Nombre");
 
         jLabel2.setText("Apellido");
-
-        jLabel3.setText("Buscar Usuario");
 
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +158,7 @@ public void generar(String nombre) throws FileNotFoundException, DocumentExcepti
 
         jLabel4.setText("Contraseñas");
 
-        txtMem.setEditable(false);
+        txtPassword.setEditable(false);
 
         jButton5.setText("Generar Contraseña");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -178,98 +167,76 @@ public void generar(String nombre) throws FileNotFoundException, DocumentExcepti
             }
         });
 
-        jButton6.setText("Enviar Datos");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
+        jLabel3.setText("Buscar Usuario");
 
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtDire, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
-                                .addComponent(txtNombre))
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton5))
-                                    .addComponent(jLabel4)
-                                    .addComponent(txtMem, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 41, Short.MAX_VALUE))))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDire, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(txtDire, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtMem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
+                .addGap(5, 5, 5)
+                .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(12, 12, 12)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addGap(61, 61, 61))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(200, 10, 420, 320);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,6 +247,8 @@ public void generar(String nombre) throws FileNotFoundException, DocumentExcepti
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+          getConnection();
+        
            try{
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3306/FilmMagic", "root", "");
             PreparedStatement pst = cn.prepareStatement("insert into Usuarios values(?,?,?,?,?,?)");
@@ -288,7 +257,7 @@ if(txtNombre.getText().length()==0){
            JOptionPane.showMessageDialog(null, "Para continuar con el Registro LLene los campos solicitados");
            txtNombre.requestFocus(); //Si algunos de los campos están vacios, el foco apunta al primer campo.......
 }else{
-            pst.setString(1, txtMem.getText().trim());
+            pst.setString(1, "");
             pst.setString(2, "0");
             pst.setString(3, txtNombre.getText().trim());
             pst.setString(4, txtDire.getText().trim());
@@ -301,7 +270,7 @@ if(txtNombre.getText().length()==0){
             
             txtNombre.setText("");
             txtDire.setText("");
-            txtMem.setText("");
+            txtPassword.setText("");
             txtNum.setText("");
             txtDPI.setText("");
             lblEstatus.setText("Registro exitoso.");
@@ -320,7 +289,7 @@ if(txtNombre.getText().length()==0){
             
             pst.setString(1, txtNombre.getText().trim());
             pst.setString(3, txtDire.getText().trim());
-            pst.setString(4, txtMem.getText().trim());
+            pst.setString(4, txtPassword.getText().trim());
             pst.setString(5, txtDire.getText().trim());
             pst.setString(6, txtDPI.getText().trim());
             
@@ -343,7 +312,7 @@ if(txtNombre.getText().length()==0){
             
             txtNombre.setText("");
             txtDire.setText("");
-            txtMem.setText("");
+            txtPassword.setText("");
             txtDPI.setText("");
             txtNum.setText("");
             txtBuscar.setText("");
@@ -368,7 +337,7 @@ if(txtNombre.getText().length()==0){
                 txtDire.setText(rs.getString("direccion_usuario"));
                 txtNum.setText(rs.getString("numero_usuario"));
                 txtDPI.setText(rs.getString("DPI_usuario"));
-                txtMem.setText(rs.getString("membresia_usuario"));
+                txtPassword.setText(rs.getString("membresia_usuario"));
             } else {
             //    JOptionPane.showMessageDialog(null, "Usuario no registrado.");
                lblEstatus.setText("Usuario NO REGISTRADO");
@@ -390,42 +359,33 @@ for (int i = numerosAleatorios.length; i > 0; i--) {
     numerosAleatorios[posicion] = tmp;
 }
     //usa el valor de aleatorio...
-    txtMem.setText(String.valueOf(numerosAleatorios));
+    txtPassword.setText(String.valueOf(numerosAleatorios));
     JOptionPane.showMessageDialog(null, "Su membresia es: "+numerosAleatorios);
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-     try {
-            generar(txtNombre.getText());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MantenimientoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (DocumentException ex) {
-            Logger.getLogger(MantenimientoUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }  
-    }//GEN-LAST:event_jButton6ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    public javax.swing.JButton jButton1;
+    public javax.swing.JButton jButton2;
+    public javax.swing.JButton jButton3;
+    public javax.swing.JButton jButton4;
+    public javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtDire;
-    private javax.swing.JTextField txtMem;
-    private javax.swing.JTextField txtNombre;
+    public javax.swing.JTable jTable3;
+    public javax.swing.JTextField txtBuscar;
+    public javax.swing.JTextField txtDire;
+    public javax.swing.JTextField txtNombre;
+    public javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 }
