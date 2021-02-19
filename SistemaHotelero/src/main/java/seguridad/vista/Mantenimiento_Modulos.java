@@ -25,7 +25,6 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
     public Mantenimiento_Modulos() {
         initComponents();
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,12 +121,16 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_Estado_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))))
-                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_actualizar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_actualizar)))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -143,20 +146,20 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                     .addComponent(btn_agregar)
                     .addComponent(jLabel2)
                     .addComponent(txt_Nombre_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(btn_eliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_actualizar))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(29, 29, 29)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_Estado_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,35 +172,40 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
 int valor;
 int valorbuscado=Integer.parseInt(txt_Codigo_Modulo.getText());
-String validarNombre;
+String validarCodigo, validarNombre, validarDescripcion, validarEstado;
+
         if (Integer.parseInt(txt_Codigo_Modulo.getText())>=0) {
             if (Integer.parseInt(txt_Codigo_Modulo.getText())>0) {
         ModulosDAO moduloDAO = new ModulosDAO();
         Modulos moduloConsultar = new Modulos();
         moduloConsultar.setCodigo_modulo(valorbuscado);
         moduloConsultar=moduloDAO.query(moduloConsultar);
+        
+        validarCodigo=String.valueOf(moduloConsultar.getCodigo_modulo());
         validarNombre=moduloConsultar.getNombre_modulo();
-                if (validarNombre!=null) {
+        validarDescripcion=moduloConsultar.getDescripcion_modulo();
+        validarEstado=moduloConsultar.getEstado_modulo();
+        
+                if (validarNombre!=null||validarDescripcion!=null||validarEstado!=null||validarCodigo!=null) {
                     txt_Nombre_Modulo.setText(moduloConsultar.getNombre_modulo());
                     txt_Descripcion_Modulo.setText(moduloConsultar.getDescripcion_modulo()); 
                     valor=Integer.parseInt(moduloConsultar.getEstado_modulo());
                      bloqueoactualizar=1;
-            if (valor==0) {
-            valor=2;
-            txt_Estado_Modulo.setSelectedIndex(valor);
-        }   else{
-            txt_Estado_Modulo.setSelectedIndex(valor);
-        }  
-                }else{
+                if (valor==0) {
+                valor=2;
+                txt_Estado_Modulo.setSelectedIndex(valor);
+                              }   else{
+                    txt_Estado_Modulo.setSelectedIndex(valor);
+                                      }  
+            }else{
                     JOptionPane.showMessageDialog(null, "Modulo no encontrado");
-                }
-        
+                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Codigo no puede ser 0");//Si no lo encuentra envia un mensaje de error
-        }
-        }else{
+                 }
+            }else{
             JOptionPane.showMessageDialog(null, "Modulo no puede ser menor o igual a 0");//Si no lo encuentra envia un mensaje de error
-        }  
+                 }  
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
@@ -233,6 +241,7 @@ String validarNombre;
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        
         ModulosDAO modulosDAO = new ModulosDAO();
         Modulos moduloEliminar = new Modulos();
         moduloEliminar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
