@@ -4,10 +4,15 @@ import java.sql.*;
 
 public class Conexion {
     // Estas constantes deben cambiarse temporalmente para probarlo localmente
+
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/umg";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASS = "";
+
     private static final String JDBC_URL = "jdbc:mysql://localhost/didactica?useSSL=false&serverTimezone=UTC";
-    private static final String JDBC_USER = "UsuPrueba";
-    private static final String JDBC_PASS = "123456";
-    
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASS = "informaticdv2016";
+ 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASS);
     }
