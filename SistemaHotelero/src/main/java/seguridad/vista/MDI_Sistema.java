@@ -10,7 +10,12 @@ import javax.swing.JOptionPane;
  * @author Diego
  */
 
+
 public class MDI_Sistema extends javax.swing.JFrame {
+
+public class MDI_Sistema extends javax.swing.JFrame {  
+private Mantenimiento_Modulos formMantenimiento_Modulo;
+
 
     /**
      * Creates new form MDI_Seguridad
@@ -140,7 +145,16 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
         jMenuItem10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem10.setText("Módulos");
+
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem10);
+
         JMenu_Mantenimientos.add(jMenuItem10);
+
 
         JMenu_Seguridad.add(JMenu_Mantenimientos);
 
@@ -163,6 +177,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void JMenuItem_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_CerrarSesionActionPerformed
         /*===== OPERACIÓN CERRAR SESIÓN ====
           Variable entera respuesta_cs*/
@@ -174,6 +189,12 @@ public class MDI_Sistema extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_JMenuItem_CerrarSesionActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+formMantenimiento_Modulo = new Mantenimiento_Modulos();
+jDesktopPane1.add(formMantenimiento_Modulo);  
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
 
     /**
      * @param args the command line arguments
