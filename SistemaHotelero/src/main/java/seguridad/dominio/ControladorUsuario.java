@@ -23,6 +23,8 @@ public class ControladorUsuario implements ActionListener{
     public ControladorUsuario (FrmCrudUsuarios v){
         this.vista=v;
         this.vista.BtnBus.addActionListener(this);
+        this.vista.BtnIng.addActionListener(this);
+
     }
     @Override
     public void actionPerformed(ActionEvent e){
@@ -30,6 +32,14 @@ public class ControladorUsuario implements ActionListener{
             listar(vista.Tabla);
         }
     }
+    public void insert(){
+        char id = vista.txtID.getText().charAt(0);
+        String nom = vista.txtNom.getText();
+        String ape = vista.txtApe.getText();
+        String pass = vista.txtPass.getText();
+        
+    }
+    
     public void listar(JTable Tabla){
         modelo=(DefaultTableModel)Tabla.getModel();
         List<Usuario>lista=dao.listar();
@@ -47,4 +57,6 @@ public class ControladorUsuario implements ActionListener{
         }
         vista.Tabla.setModel(modelo);
     }
+    
 }
+    

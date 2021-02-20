@@ -252,8 +252,8 @@ public class FrmCrudUsuarios extends javax.swing.JInternalFrame {
     public javax.swing.JRadioButton BtnEUDesh;
     public javax.swing.JRadioButton BtnEUHabil;
     public javax.swing.JButton BtnElim;
-    private javax.swing.ButtonGroup BtnGCambiarContrasena;
-    private javax.swing.ButtonGroup BtnGEstadoUs;
+    public javax.swing.ButtonGroup BtnGCambiarContrasena;
+    public javax.swing.ButtonGroup BtnGEstadoUs;
     public javax.swing.JButton BtnIng;
     public javax.swing.JButton BtnMod;
     public javax.swing.JTable Tabla;

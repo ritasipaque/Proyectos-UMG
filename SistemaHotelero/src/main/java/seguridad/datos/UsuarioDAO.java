@@ -49,7 +49,6 @@ public class UsuarioDAO {
      public int insert(Usuario usuario){
         Connection conn = null;
         PreparedStatement stmt = null;
-        int rows = 0;
         try {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
@@ -60,18 +59,16 @@ public class UsuarioDAO {
             stmt.setInt(5, usuario.getCambio_password());
             stmt.setDate(6, usuario.getUltima_conexion());
             stmt.setInt(7, usuario.getEstado_usuario());
-            
-            System.out.println("ejecutando query:" + SQL_INSERT);
-            rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
+            stmt.executeUpdate();
+        } catch (Exception ex) {
+            System.err.println(ex);
         }
         finally{
             Conexion.close(stmt);
             Conexion.close(conn);
-        }
-        
-        return rows;
+     }
+        return 1;
      }
 }
+       
+  
