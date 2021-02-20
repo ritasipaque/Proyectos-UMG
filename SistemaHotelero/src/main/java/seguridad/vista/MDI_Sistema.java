@@ -1,5 +1,5 @@
-
 package seguridad.vista;
+
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,23 +9,21 @@ import javax.swing.JOptionPane;
  *
  * @author Diego
  */
-
-
 public class MDI_Sistema extends javax.swing.JFrame {
 
-public class MDI_Sistema extends javax.swing.JFrame {  
-private Mantenimiento_Modulos formMantenimiento_Modulo;
-
+    private Mantenimiento_Modulos formMantenimiento_Modulo;
+    private Mantenimiento_Aplicacion formMantenimiento_Aplicacion;
 
     /**
      * Creates new form MDI_Seguridad
+     *
      * @throws java.net.UnknownHostException
      */
     MDI_Components mdi_components = new MDI_Components();
-    
+
     public MDI_Sistema() throws UnknownHostException {
         initComponents();
-        this.setTitle("Usuario: "+"["+"]"+" \t"+"IP: ["+mdi_components.getIp()+"]");
+        this.setTitle("Usuario: " + "[" + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
     }
 
     /**
@@ -137,6 +135,11 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
 
         jMenuItem8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem8.setText("Aplicaciones");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         JMenu_Mantenimientos.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -145,16 +148,12 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
 
         jMenuItem10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem10.setText("Módulos");
-
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem10);
-
         JMenu_Mantenimientos.add(jMenuItem10);
-
 
         JMenu_Seguridad.add(JMenu_Mantenimientos);
 
@@ -181,20 +180,23 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
     private void JMenuItem_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_CerrarSesionActionPerformed
         /*===== OPERACIÓN CERRAR SESIÓN ====
           Variable entera respuesta_cs*/
-        
-        int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión" ,JOptionPane.YES_NO_OPTION);
-        
-        if(respuesta_cs==0)
-        {
+
+        int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta_cs == 0) {
             this.dispose();
         }
     }//GEN-LAST:event_JMenuItem_CerrarSesionActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-formMantenimiento_Modulo = new Mantenimiento_Modulos();
-jDesktopPane1.add(formMantenimiento_Modulo);  
+        formMantenimiento_Modulo = new Mantenimiento_Modulos();
+        JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        formMantenimiento_Aplicacion = new Mantenimiento_Aplicacion();
+        JDesktopPane_Escritorio.add(formMantenimiento_Aplicacion);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
