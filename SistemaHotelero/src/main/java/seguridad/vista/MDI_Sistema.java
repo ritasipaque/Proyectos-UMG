@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Diego
+ * @author Diego Vásquez
  */
 
 public class MDI_Sistema extends javax.swing.JFrame {
