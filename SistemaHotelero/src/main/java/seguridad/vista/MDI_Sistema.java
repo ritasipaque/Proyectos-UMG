@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Diego
+ * @author Diego Vásquez
  */
 public class MDI_Sistema extends javax.swing.JFrame {
 
@@ -153,6 +153,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
                 jMenuItem10ActionPerformed(evt);
             }
         });
+
         JMenu_Mantenimientos.add(jMenuItem10);
 
         JMenu_Seguridad.add(JMenu_Mantenimientos);
@@ -190,7 +191,9 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         formMantenimiento_Modulo = new Mantenimiento_Modulos();
-        JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
+      JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
+      
+
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
