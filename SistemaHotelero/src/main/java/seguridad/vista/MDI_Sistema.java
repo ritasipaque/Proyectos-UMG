@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package seguridad.vista;
+import seguridad.datos.Usuario;
+import seguridad.datos.UsuarioDAO;
 import javax.swing.ImageIcon;
+import seguridad.dominio.ControladorUsuario;
 /**
  *
  * @author Diego
@@ -169,7 +172,10 @@ public class MDI_Sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu8ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-
+    FrmCrudUsuarios v = new FrmCrudUsuarios();
+    jDesktopPane1.add(v);
+    v.setVisible(true);
+    ControladorUsuario c = new ControladorUsuario(v);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
