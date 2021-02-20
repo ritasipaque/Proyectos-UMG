@@ -164,8 +164,8 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-formMantenimiento_Modulo = new Mantenimiento_Modulos();
-jDesktopPane1.add(formMantenimiento_Modulo);  
+        formMantenimiento_Modulo = new Mantenimiento_Modulos();
+    JDesktopPane_Escritorio.add(formMantenimiento_Modulo);  
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     /**
