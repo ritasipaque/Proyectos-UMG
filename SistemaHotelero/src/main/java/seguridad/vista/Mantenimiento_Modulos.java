@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package seguridad.vista;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import seguridad.dominio.Modulos;
 import seguridad.datos.ModulosDAO;
