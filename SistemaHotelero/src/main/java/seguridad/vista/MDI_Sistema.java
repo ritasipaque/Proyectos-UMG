@@ -1,14 +1,21 @@
 package seguridad.vista;
 
+import seguridad.dominio.Usuario;
+import seguridad.datos.UsuarioDAO;
+import javax.swing.ImageIcon;
+
+
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 /**
  *
  * @author Diego Vásquez
  */
+
 public class MDI_Sistema extends javax.swing.JFrame {
 
     private Mantenimiento_Modulos formMantenimiento_Modulo;
@@ -126,6 +133,24 @@ public class MDI_Sistema extends javax.swing.JFrame {
         JMenuItem_Bitacora.setText("Bitácora");
         JMenu_Seguridad.add(JMenuItem_Bitacora);
 
+
+        /*jMenu8.setText("Mantenimientos");
+        jMenu8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenu8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu8ActionPerformed(evt);
+            }
+        });*/
+
+        jMenuItem3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuItem3.setText("Usuarios");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        //jMenu8.add(jMenuItem3);
+
         JMenu_Mantenimientos.setText("Mantenimientos");
         JMenu_Mantenimientos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -133,9 +158,16 @@ public class MDI_Sistema extends javax.swing.JFrame {
         JMenuItem_Usuarios.setText("Usuarios");
         JMenu_Mantenimientos.add(JMenuItem_Usuarios);
 
+<<<<<<< HEAD
         JMenuItem_Aplicaciones.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_Aplicaciones.setText("Aplicaciones");
         JMenuItem_Aplicaciones.addActionListener(new java.awt.event.ActionListener() {
+=======
+
+        jMenuItem8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuItem8.setText("Aplicaciones");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+>>>>>>> dd821fef4059fd76c44b000295fe43957ca13272
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JMenuItem_AplicacionesActionPerformed(evt);
             }
@@ -169,12 +201,27 @@ public class MDI_Sistema extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
+            .addComponent(JDesktopPane_Escritorio)
+
             .addComponent(JDesktopPane_Escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
+        
+    }//GEN-LAST:event_jMenu8ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    Mantenimiento_Usuario v = new Mantenimiento_Usuario();
+    JDesktopPane_Escritorio.add(v);
+    v.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
     private void JMenuItem_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_CerrarSesionActionPerformed
@@ -188,17 +235,31 @@ public class MDI_Sistema extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMenuItem_CerrarSesionActionPerformed
 
+<<<<<<< HEAD
     private void JMenuItem_ModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_ModulosActionPerformed
       formMantenimiento_Modulo = new Mantenimiento_Modulos();
       formMantenimiento_Modulo.setVisible(true);
       JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
     }//GEN-LAST:event_JMenuItem_ModulosActionPerformed
+=======
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        formMantenimiento_Modulo = new Mantenimiento_Modulos();
+
+    JDesktopPane_Escritorio.add(formMantenimiento_Modulo);  
+
+      JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
+      
+
+
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+>>>>>>> dd821fef4059fd76c44b000295fe43957ca13272
 
     private void JMenuItem_AplicacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_AplicacionesActionPerformed
         formMantenimiento_Aplicacion = new Mantenimiento_Aplicacion();
         formMantenimiento_Aplicacion.setVisible(true);
         JDesktopPane_Escritorio.add(formMantenimiento_Aplicacion);
     }//GEN-LAST:event_JMenuItem_AplicacionesActionPerformed
+
 
     /**
      * @param args the command line arguments

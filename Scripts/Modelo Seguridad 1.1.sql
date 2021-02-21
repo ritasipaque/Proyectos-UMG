@@ -156,3 +156,20 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario_perfil` (
     REFERENCES `umg`.`tbl_usuario` (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `umg`.`tbl_aplicacion_a_modulo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion_a_modulos` (
+  `PK_id_modulo` INT(25) NOT NULL,
+`PK_id_aplicacion` INT NOT NULL,
+  PRIMARY KEY (`PK_id_modulo`,`PK_id_aplicacion` ),
+    CONSTRAINT `fk_tbl_aplicacion_a_modulos_aplicacion1`
+    FOREIGN KEY (`PK_id_aplicacion`)
+    REFERENCES `umg`.`tbl_aplicacion` (`PK_id_aplicacion`),
+  CONSTRAINT `fk_tbl_aplicacion_a_modulos_modulo`
+    FOREIGN KEY (`PK_id_modulo`)
+    REFERENCES `umg`.`tbl_modulo` (`PK_id_Modulo`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
