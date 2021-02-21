@@ -191,8 +191,12 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         formMantenimiento_Modulo = new Mantenimiento_Modulos();
+
+    JDesktopPane_Escritorio.add(formMantenimiento_Modulo);  
+
       JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
       
+
 
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
