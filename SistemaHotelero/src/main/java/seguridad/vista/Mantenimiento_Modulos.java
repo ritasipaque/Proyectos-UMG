@@ -5,10 +5,12 @@
  */
 package seguridad.vista;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import javax.swing.JOptionPane;
 import seguridad.dominio.Modulos;
 import seguridad.datos.ModulosDAO;
@@ -20,6 +22,9 @@ import seguridad.datos.ModulosDAO;
  */
 public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
 
+        int codigobloqueado, bloqueoactualizar=0, codigonoeditable;
+
+
     int codigobloqueado, bloqueoactualizar = 0;
 
     /**
@@ -27,6 +32,15 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
      */
     public Mantenimiento_Modulos() {
         initComponents();
+    }
+
+     private static boolean isNumeric(String cadena){
+        try {
+                Integer.parseInt(cadena);
+                return true;
+        } catch (NumberFormatException nfe){
+                return false;
+        }
     }
 
     /**
@@ -174,7 +188,12 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+
+        if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())) {
+            int valor;
+
         int valor;
+
         int valorbuscado = Integer.parseInt(txt_Codigo_Modulo.getText());
         String validarCodigo, validarNombre, validarDescripcion, validarEstado;
 
@@ -185,12 +204,18 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 moduloConsultar.setCodigo_modulo(valorbuscado);
                 moduloConsultar = moduloDAO.query(moduloConsultar);
 
+
                 validarCodigo = String.valueOf(moduloConsultar.getCodigo_modulo());
                 validarNombre = moduloConsultar.getNombre_modulo();
                 validarDescripcion = moduloConsultar.getDescripcion_modulo();
                 validarEstado = moduloConsultar.getEstado_modulo();
 
+
+                if (validarNombre != null && validarDescripcion != null && validarEstado != null && validarCodigo != null) {
+                    codigonoeditable=valorbuscado;
+
                 if (validarNombre != null || validarDescripcion != null || validarEstado != null || validarCodigo != null) {
+
                     txt_Nombre_Modulo.setText(moduloConsultar.getNombre_modulo());
                     txt_Descripcion_Modulo.setText(moduloConsultar.getDescripcion_modulo());
                     valor = Integer.parseInt(moduloConsultar.getEstado_modulo());
@@ -203,6 +228,14 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Modulo no encontrado");
+
+                    
+                         txt_Codigo_Modulo.setText("");
+                         txt_Nombre_Modulo.setText("");
+                         txt_Descripcion_Modulo.setText("");
+                         txt_Estado_Modulo.setSelectedIndex(0);
+
+
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Codigo no puede ser 0");//Si no lo encuentra envia un mensaje de error
@@ -210,11 +243,22 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Modulo no puede ser menor o igual a 0");//Si no lo encuentra envia un mensaje de error
         }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Los codigos son solamente números, no incluyen ninguna letra");//Si no lo encuentra envia un mensaje de error
+        }
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        if (txt_Estado_Modulo.getSelectedItem().toString()!= "Seleccionar..."&& txt_Nombre_Modulo.getText().length()!=0
+            && txt_Descripcion_Modulo.getText().length()!=0&& txt_Codigo_Modulo.getText().length()!=0    ) {
+
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." || txt_Codigo_Modulo.getText().length() != 0
                 || txt_Nombre_Modulo.getText().length() != 0 || txt_Descripcion_Modulo.getText().length() != 0) {
+
             ModulosDAO modulosDAO = new ModulosDAO();
             Modulos moduloInsertar = new Modulos();
             moduloInsertar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
@@ -222,33 +266,75 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
             moduloInsertar.setDescripcion_modulo(txt_Descripcion_Modulo.getText());
             moduloInsertar.setEstado_modulo(txt_Estado_Modulo.getSelectedItem().toString());
             modulosDAO.insert(moduloInsertar);
+            JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
+            bloqueoactualizar = 0;
+            txt_Codigo_Modulo.setText("");
+            txt_Nombre_Modulo.setText("");
+            txt_Descripcion_Modulo.setText("");
+            txt_Estado_Modulo.setSelectedIndex(0);
+        }else{
+            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios, verfifique y vuelva a intentarlo");
         }
     }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
         if (bloqueoactualizar == 1) {
+
+            if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." && txt_Codigo_Modulo.getText().length() != 0
+                    && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0) {
+                ModulosDAO modulosDAO = new ModulosDAO();
+                Modulos moduloActualizar = new Modulos();
+                moduloActualizar.setCodigo_modulo(codigonoeditable);
+
             if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." || txt_Codigo_Modulo.getText().length() != 0
                     || txt_Nombre_Modulo.getText().length() != 0 || txt_Descripcion_Modulo.getText().length() != 0) {
                 ModulosDAO modulosDAO = new ModulosDAO();
                 Modulos moduloActualizar = new Modulos();
                 moduloActualizar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
+
                 moduloActualizar.setNombre_modulo(txt_Nombre_Modulo.getText());
                 moduloActualizar.setDescripcion_modulo(txt_Descripcion_Modulo.getText());
                 moduloActualizar.setEstado_modulo(txt_Estado_Modulo.getSelectedItem().toString());
                 modulosDAO.update(moduloActualizar);
+
+                JOptionPane.showMessageDialog(null, "Modulo actualizado correctamente");
+                bloqueoactualizar = 0;
+                txt_Codigo_Modulo.setText("");
+                txt_Nombre_Modulo.setText("");
+                txt_Descripcion_Modulo.setText("");
+                txt_Estado_Modulo.setSelectedIndex(0);
+                bloqueoactualizar = 0;
+            }else{
+             JOptionPane.showMessageDialog(null, "No pueden haber campos vacios, verfifique y vuelva a intentarlo");
+        }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de actualizarlo o codigo no encontrado");
+
                 bloqueoactualizar = 0;
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de actualizar");
+
         }
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+       
+         if (bloqueoactualizar==1) {
 
         ModulosDAO modulosDAO = new ModulosDAO();
         Modulos moduloEliminar = new Modulos();
-        moduloEliminar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
-        modulosDAO.delete(moduloEliminar);
+        moduloEliminar.setCodigo_modulo(codigonoeditable);
+        modulosDAO.delete(moduloEliminar);   
+        JOptionPane.showMessageDialog(null, "Modulo eliminado correctamente");
+        bloqueoactualizar = 0;
+        txt_Codigo_Modulo.setText("");
+        txt_Nombre_Modulo.setText("");
+        txt_Descripcion_Modulo.setText("");
+        txt_Estado_Modulo.setSelectedIndex(0);
+        }else {
+            JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de eliminarlo o codigo no encontrado");
+        }
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
 
