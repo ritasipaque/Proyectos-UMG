@@ -1,25 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package seguridad.vista;
-import seguridad.datos.Usuario;
+
+import seguridad.dominio.Usuario;
 import seguridad.datos.UsuarioDAO;
 import javax.swing.ImageIcon;
-import seguridad.dominio.ControladorUsuario;
+
+
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+
 /**
  *
- * @author Diego
+ * @author Diego Vásquez
  */
 
 public class MDI_Sistema extends javax.swing.JFrame {
 
+    private Mantenimiento_Modulos formMantenimiento_Modulo;
+    private Mantenimiento_Aplicacion formMantenimiento_Aplicacion;
+
     /**
      * Creates new form MDI_Seguridad
+     *
+     * @throws java.net.UnknownHostException
      */
-    public MDI_Sistema() {
+    MDI_Components mdi_components = new MDI_Components();
+
+    public MDI_Sistema() throws UnknownHostException {
         initComponents();
+        this.setTitle("Usuario: " + "[" + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
     }
 
     /**
@@ -31,21 +42,21 @@ public class MDI_Sistema extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        JDesktopPane_Escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        JMenu_Archivo = new javax.swing.JMenu();
+        JMenuItem_CerrarSesion = new javax.swing.JMenuItem();
+        JMenu_Hoteleria = new javax.swing.JMenu();
+        JMenu_Comercial = new javax.swing.JMenu();
+        JMenu_Finanzas = new javax.swing.JMenu();
+        JMenu_Seguridad = new javax.swing.JMenu();
+        JMenu_Asignaciones = new javax.swing.JMenu();
+        JMenuItem_ApU = new javax.swing.JMenuItem();
+        JMenuItem_ApP = new javax.swing.JMenuItem();
+        JMenuItem_PU = new javax.swing.JMenuItem();
+        JMenuItem_ApM = new javax.swing.JMenuItem();
+        JMenuItem_Bitacora = new javax.swing.JMenuItem();
+        JMenu_Mantenimientos = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -55,75 +66,81 @@ public class MDI_Sistema extends javax.swing.JFrame {
         setTitle("Sistema Hotelero");
         setResizable(false);
 
-        jDesktopPane1.setBackground(new java.awt.Color(51, 51, 51));
+        JDesktopPane_Escritorio.setBackground(new java.awt.Color(0, 51, 51));
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout JDesktopPane_EscritorioLayout = new javax.swing.GroupLayout(JDesktopPane_Escritorio);
+        JDesktopPane_Escritorio.setLayout(JDesktopPane_EscritorioLayout);
+        JDesktopPane_EscritorioLayout.setHorizontalGroup(
+            JDesktopPane_EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 900, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        JDesktopPane_EscritorioLayout.setVerticalGroup(
+            JDesktopPane_EscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 579, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Archivo");
-        jMenu1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenu_Archivo.setText("Archivo");
+        JMenu_Archivo.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jMenuItem4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem4.setText("Cerrar Sesión");
-        jMenu1.add(jMenuItem4);
+        JMenuItem_CerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenuItem_CerrarSesion.setText("Cerrar Sesión");
+        JMenuItem_CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_CerrarSesionActionPerformed(evt);
+            }
+        });
+        JMenu_Archivo.add(JMenuItem_CerrarSesion);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(JMenu_Archivo);
 
-        jMenu5.setText("Hotelería");
-        jMenu5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuBar1.add(jMenu5);
+        JMenu_Hoteleria.setText("Hotelería");
+        JMenu_Hoteleria.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuBar1.add(JMenu_Hoteleria);
 
-        jMenu4.setText("Comercial");
-        jMenu4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuBar1.add(jMenu4);
+        JMenu_Comercial.setText("Comercial");
+        JMenu_Comercial.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuBar1.add(JMenu_Comercial);
 
-        jMenu3.setText("Finanzas");
-        jMenu3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuBar1.add(jMenu3);
+        JMenu_Finanzas.setText("Finanzas");
+        JMenu_Finanzas.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuBar1.add(JMenu_Finanzas);
 
-        jMenu2.setText("Seguridad");
-        jMenu2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenu_Seguridad.setText("Seguridad");
+        JMenu_Seguridad.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jMenu6.setText("Asignaciones");
-        jMenu6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenu_Asignaciones.setText("Asignaciones");
+        JMenu_Asignaciones.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
-        jMenuItem1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem1.setText("Aplicaciones - Usuario");
-        jMenu6.add(jMenuItem1);
+        JMenuItem_ApU.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenuItem_ApU.setText("Aplicaciones - Usuario");
+        JMenu_Asignaciones.add(JMenuItem_ApU);
 
-        jMenuItem5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem5.setText("Aplicaciones - Perfiles");
-        jMenu6.add(jMenuItem5);
+        JMenuItem_ApP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenuItem_ApP.setText("Aplicaciones - Perfiles");
+        JMenu_Asignaciones.add(JMenuItem_ApP);
 
-        jMenuItem6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem6.setText("Perfiles - Usuarios");
-        jMenu6.add(jMenuItem6);
+        JMenuItem_PU.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenuItem_PU.setText("Perfiles - Usuarios");
+        JMenu_Asignaciones.add(JMenuItem_PU);
 
-        jMenuItem7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem7.setText("Aplicaciones - Módulos");
-        jMenu6.add(jMenuItem7);
+        JMenuItem_ApM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenuItem_ApM.setText("Aplicaciones - Módulos");
+        JMenu_Asignaciones.add(JMenuItem_ApM);
 
-        jMenu2.add(jMenu6);
+        JMenu_Seguridad.add(JMenu_Asignaciones);
 
-        jMenuItem2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem2.setText("Bitácora");
-        jMenu2.add(jMenuItem2);
+        JMenuItem_Bitacora.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        JMenuItem_Bitacora.setText("Bitácora");
+        JMenu_Seguridad.add(JMenuItem_Bitacora);
 
-        jMenu8.setText("Mantenimientos");
+
+        /*jMenu8.setText("Mantenimientos");
         jMenu8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenu8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu8ActionPerformed(evt);
             }
-        });
+        });*/
 
         jMenuItem3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem3.setText("Usuarios");
@@ -132,23 +149,42 @@ public class MDI_Sistema extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem3);
+        //jMenu8.add(jMenuItem3);
+
+        JMenu_Mantenimientos.setText("Mantenimientos");
+        JMenu_Mantenimientos.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        jMenuItem3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuItem3.setText("Usuarios");
+        JMenu_Mantenimientos.add(jMenuItem3);
+
 
         jMenuItem8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem8.setText("Aplicaciones");
-        jMenu8.add(jMenuItem8);
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        JMenu_Mantenimientos.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem9.setText("Perfiles");
-        jMenu8.add(jMenuItem9);
+        JMenu_Mantenimientos.add(jMenuItem9);
 
         jMenuItem10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem10.setText("Módulos");
-        jMenu8.add(jMenuItem10);
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
 
-        jMenu2.add(jMenu8);
+        JMenu_Mantenimientos.add(jMenuItem10);
 
-        jMenuBar1.add(jMenu2);
+        JMenu_Seguridad.add(JMenu_Mantenimientos);
+
+        jMenuBar1.add(JMenu_Seguridad);
 
         setJMenuBar(jMenuBar1);
 
@@ -156,27 +192,56 @@ public class MDI_Sistema extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(JDesktopPane_Escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+
+            .addComponent(JDesktopPane_Escritorio)
+
+            .addComponent(JDesktopPane_Escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void jMenu8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu8ActionPerformed
         
     }//GEN-LAST:event_jMenu8ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-    FrmCrudUsuarios v = new FrmCrudUsuarios();
-    jDesktopPane1.add(v);
+    Mantenimiento_Usuario v = new Mantenimiento_Usuario();
+    JDesktopPane_Escritorio.add(v);
     v.setVisible(true);
-    ControladorUsuario c = new ControladorUsuario(v);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+
+    private void JMenuItem_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_CerrarSesionActionPerformed
+        /*===== OPERACIÓN CERRAR SESIÓN ====
+          Variable entera respuesta_cs*/
+
+        int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta_cs == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_JMenuItem_CerrarSesionActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        formMantenimiento_Modulo = new Mantenimiento_Modulos();
+      JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
+      
+
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        formMantenimiento_Aplicacion = new Mantenimiento_Aplicacion();
+        JDesktopPane_Escritorio.add(formMantenimiento_Aplicacion);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -204,29 +269,33 @@ public class MDI_Sistema extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MDI_Sistema().setVisible(true);
+                try {
+                    new MDI_Sistema().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(MDI_Sistema.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu8;
+    private javax.swing.JDesktopPane JDesktopPane_Escritorio;
+    private javax.swing.JMenuItem JMenuItem_ApM;
+    private javax.swing.JMenuItem JMenuItem_ApP;
+    private javax.swing.JMenuItem JMenuItem_ApU;
+    private javax.swing.JMenuItem JMenuItem_Bitacora;
+    private javax.swing.JMenuItem JMenuItem_CerrarSesion;
+    private javax.swing.JMenuItem JMenuItem_PU;
+    private javax.swing.JMenu JMenu_Archivo;
+    private javax.swing.JMenu JMenu_Asignaciones;
+    private javax.swing.JMenu JMenu_Comercial;
+    private javax.swing.JMenu JMenu_Finanzas;
+    private javax.swing.JMenu JMenu_Hoteleria;
+    private javax.swing.JMenu JMenu_Mantenimientos;
+    private javax.swing.JMenu JMenu_Seguridad;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables

@@ -1,5 +1,5 @@
 
-package seguridad.datos;
+package seguridad.dominio;
 
 import java.sql.Date;
 
@@ -8,7 +8,7 @@ import java.sql.Date;
  * @author OtakuGT
  */
 public class Usuario {
-    private char id_usuario;
+    private String id_usuario;
     private String nombre_usuario;
     private String apellido_usuario;
     private String password_usuario;
@@ -19,7 +19,7 @@ public class Usuario {
     public Usuario() {
     }
     
-    public Usuario(char id_usuario, String nombre_usuario, String apellido_usuario, String password_usuario, int cambio_password, Date ultima_conexion, int estado_usuario){
+    public Usuario(String id_usuario, String nombre_usuario, String apellido_usuario, String password_usuario, int cambio_password, Date ultima_conexion, int estado_usuario){
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
@@ -29,11 +29,11 @@ public class Usuario {
         this.estado_usuario = estado_usuario;
     }
 
-    public int getId_usuario() {
+    public String getId_usuario() {
         return id_usuario;
     }
 
-    public void setId_usuario(char id_usuario) {
+    public void setId_usuario(String id_usuario) {
         this.id_usuario = id_usuario;
     }
 
