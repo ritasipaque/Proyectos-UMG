@@ -13,13 +13,13 @@ public class Usuario {
     private String apellido_usuario;
     private String password_usuario;
     private int cambio_password;
-    private Date ultima_conexion;
+    private String ultima_conexion;
     private int estado_usuario;
     
     public Usuario() {
     }
     
-    public Usuario(String id_usuario, String nombre_usuario, String apellido_usuario, String password_usuario, int cambio_password, Date ultima_conexion, int estado_usuario){
+    public Usuario(String id_usuario, String nombre_usuario, String apellido_usuario, String password_usuario, int cambio_password, String ultima_conexion, int estado_usuario){
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
@@ -69,11 +69,11 @@ public class Usuario {
         this.cambio_password = cambio_password;
     }
 
-    public Date getUltima_conexion() {
+    public String getUltima_conexion() {
         return ultima_conexion;
     }
 
-    public void setUltima_conexion(Date ultima_conexion) {
+    public void setUltima_conexion(String ultima_conexion) {
         this.ultima_conexion = ultima_conexion;
     }
 

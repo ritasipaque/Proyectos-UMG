@@ -6,19 +6,19 @@
 package seguridad.vista;
 
 
-import java.sql.Date;
+import java.util.Objects;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import seguridad.datos.AplicacionDAO;
 import seguridad.dominio.Usuario;
 import seguridad.datos.UsuarioDAO;
-import seguridad.dominio.Aplicacion;
+import seguridad.datos.Hash;
+
 
 /**
  *
@@ -85,13 +85,13 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
 
-        jLabel1.setText("ID_USUARIO");
+        jLabel1.setText("ID Usuario");
 
-        jLabel2.setText("Nombre_Usuario");
+        jLabel2.setText("Nombre");
 
-        jLabel3.setText("Apellido_usuario");
+        jLabel3.setText("Apellido");
 
-        jLabel4.setText("Password_usuario");
+        jLabel4.setText("Password");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Cambiar contraseña"));
 
@@ -186,65 +186,68 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtID)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                     .addComponent(txtNom)
                     .addComponent(txtApe)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                    .addComponent(txtPass))
+                .addGap(98, 98, 98)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(BtnList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                        .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnMod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnList, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnBus, BtnElim, BtnMod});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnBus, BtnElim, BtnIng, BtnMod});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(18, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtApe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel4))
+                        .addGap(27, 27, 27))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
                     .addComponent(BtnMod)
@@ -276,7 +279,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -303,6 +306,9 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    String last_session=null;
+    Date date = new Date();
+    DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         Usuario usuarioBuscar = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -314,6 +320,8 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         txtNom.setText(String.valueOf(usuarioBuscar.getNombre_usuario()));
         txtApe.setText(String.valueOf(usuarioBuscar.getApellido_usuario()));
         txtPass.setText(String.valueOf(usuarioBuscar.getPassword_usuario()));
+        last_session = usuarioBuscar.getUltima_conexion();
+        
         if (usuarioBuscar.getEstado_usuario() == 1) {
             RBCC1.setSelected(true);
         }
@@ -325,6 +333,8 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         }
         if (usuarioBuscar.getEstado_usuario() == 0) {
             RBEU0.setSelected(true);
+        }
+        {
         }
     }//GEN-LAST:event_BtnBusActionPerformed
 
@@ -373,16 +383,19 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         Usuario usuarioMod = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-
+        String pass = txtPass.getText();
+        String nuevoPass = Hash.sha1(pass);
         usuarioMod.setId_usuario(txtID.getText());
         usuarioMod.setNombre_usuario(txtNom.getText());
         usuarioMod.setApellido_usuario(txtApe.getText());
-        usuarioMod.setPassword_usuario(txtPass.getText());
+        usuarioMod.setPassword_usuario(nuevoPass);
+        usuarioMod.setUltima_conexion(last_session);
+        
         if (RBCC1.isSelected()) {
-            usuarioMod.setEstado_usuario(1);
+            usuarioMod.setCambio_password(1);
         }
         if (RBCC0.isSelected()) {
-            usuarioMod.setEstado_usuario(0);
+            usuarioMod.setCambio_password(0);
         }
         if (RBEU1.isSelected()) {
             usuarioMod.setEstado_usuario(1);
@@ -393,7 +406,6 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
 
         usuarioDAO.update(usuarioMod);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa");
-        limpiar();
 
     }//GEN-LAST:event_BtnModActionPerformed
 
@@ -401,19 +413,18 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
 
         Usuario usuarioInsertar = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        long millis=System.currentTimeMillis();
-        java.sql.Date date=new java.sql.Date(millis);
-
+        
+        String pass = txtPass.getText();
         if (txtID.getText().length() != 0 && txtNom.getText().length() != 0
             && txtApe.getText().length() != 0 && txtPass.getText().length() != 0 && RBCC1.isSelected() ||
             RBCC0.isSelected() && RBEU1.isSelected() || RBEU0.isSelected())  {
             {
-                Date conex = date;
+                String nuevoPass = Hash.sha1(pass);
                 usuarioInsertar.setId_usuario(txtID.getText());
                 usuarioInsertar.setNombre_usuario(txtNom.getText());
                 usuarioInsertar.setApellido_usuario(txtApe.getText());
-                usuarioInsertar.setPassword_usuario(txtPass.getText());
-                usuarioInsertar.setUltima_conexion(conex);
+                usuarioInsertar.setPassword_usuario(nuevoPass);
+                usuarioInsertar.setUltima_conexion(fechaHora.format(date));
                 if (RBCC1.isSelected()) {
                     usuarioInsertar.setCambio_password(1);
                 }
@@ -426,12 +437,14 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
                 if (RBCC0.isSelected()) {
                     usuarioInsertar.setEstado_usuario(0);
                 }
-
+                {
+                    JOptionPane.showMessageDialog(null, "Usuario registrado Exitosamente");
+                }
                 limpiar();
                 usuarioDAO.insert(usuarioInsertar);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
+            JOptionPane.showMessageDialog(null, "Los campos estan vacios");
         }
     }//GEN-LAST:event_BtnIngActionPerformed
     
