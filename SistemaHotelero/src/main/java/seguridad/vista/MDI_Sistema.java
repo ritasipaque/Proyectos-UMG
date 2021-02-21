@@ -1,22 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package seguridad.vista;
-import javax.swing.ImageIcon;
+
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author Diego
+ * @author Diego Vásquez
  */
-public class MDI_Sistema extends javax.swing.JFrame {  
-private Mantenimiento_Modulos formMantenimiento_Modulo;
+public class MDI_Sistema extends javax.swing.JFrame {
+
+    private Mantenimiento_Modulos formMantenimiento_Modulo;
+    private Mantenimiento_Aplicacion formMantenimiento_Aplicacion;
 
     /**
      * Creates new form MDI_Seguridad
+     *
+     * @throws java.net.UnknownHostException
      */
-    public MDI_Sistema() {
+    MDI_Components mdi_components = new MDI_Components();
+
+    public MDI_Sistema() throws UnknownHostException {
         initComponents();
+        this.setTitle("Usuario: " + "[" + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
     }
 
     /**
@@ -52,7 +59,7 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
         setTitle("Sistema Hotelero");
         setResizable(false);
 
-        JDesktopPane_Escritorio.setBackground(new java.awt.Color(51, 51, 51));
+        JDesktopPane_Escritorio.setBackground(new java.awt.Color(0, 51, 51));
 
         javax.swing.GroupLayout JDesktopPane_EscritorioLayout = new javax.swing.GroupLayout(JDesktopPane_Escritorio);
         JDesktopPane_Escritorio.setLayout(JDesktopPane_EscritorioLayout);
@@ -70,6 +77,11 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
 
         JMenuItem_CerrarSesion.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_CerrarSesion.setText("Cerrar Sesión");
+        JMenuItem_CerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_CerrarSesionActionPerformed(evt);
+            }
+        });
         JMenu_Archivo.add(JMenuItem_CerrarSesion);
 
         jMenuBar1.add(JMenu_Archivo);
@@ -123,6 +135,11 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
 
         jMenuItem8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem8.setText("Aplicaciones");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         JMenu_Mantenimientos.add(jMenuItem8);
 
         jMenuItem9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -131,16 +148,13 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
 
         jMenuItem10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem10.setText("Módulos");
-
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem10ActionPerformed(evt);
             }
         });
-        jMenu8.add(jMenuItem10);
 
         JMenu_Mantenimientos.add(jMenuItem10);
-
 
         JMenu_Seguridad.add(JMenu_Mantenimientos);
 
@@ -163,10 +177,33 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void JMenuItem_CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_CerrarSesionActionPerformed
+        /*===== OPERACIÓN CERRAR SESIÓN ====
+          Variable entera respuesta_cs*/
+
+        int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta_cs == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_JMenuItem_CerrarSesionActionPerformed
+
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         formMantenimiento_Modulo = new Mantenimiento_Modulos();
+
     JDesktopPane_Escritorio.add(formMantenimiento_Modulo);  
+
+      JDesktopPane_Escritorio.add(formMantenimiento_Modulo);
+      
+
+
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        formMantenimiento_Aplicacion = new Mantenimiento_Aplicacion();
+        JDesktopPane_Escritorio.add(formMantenimiento_Aplicacion);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,7 +231,11 @@ private Mantenimiento_Modulos formMantenimiento_Modulo;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MDI_Sistema().setVisible(true);
+                try {
+                    new MDI_Sistema().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(MDI_Sistema.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
