@@ -6,10 +6,10 @@
 package seguridad.vista;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
+
+
+
 
 import javax.swing.JOptionPane;
 import seguridad.dominio.Modulos;
@@ -25,7 +25,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         int codigobloqueado, bloqueoactualizar=0, codigonoeditable;
 
 
-    int codigobloqueado, bloqueoactualizar = 0;
+    
 
     /**
      * Creates new form Mantenimiento_Modulos
@@ -192,7 +192,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())) {
             int valor;
 
-        int valor;
+        
 
         int valorbuscado = Integer.parseInt(txt_Codigo_Modulo.getText());
         String validarCodigo, validarNombre, validarDescripcion, validarEstado;
@@ -214,7 +214,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 if (validarNombre != null && validarDescripcion != null && validarEstado != null && validarCodigo != null) {
                     codigonoeditable=valorbuscado;
 
-                if (validarNombre != null || validarDescripcion != null || validarEstado != null || validarCodigo != null) {
+                
 
                     txt_Nombre_Modulo.setText(moduloConsultar.getNombre_modulo());
                     txt_Descripcion_Modulo.setText(moduloConsultar.getDescripcion_modulo());
@@ -225,8 +225,8 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                         txt_Estado_Modulo.setSelectedIndex(valor);
                     } else {
                         txt_Estado_Modulo.setSelectedIndex(valor);
-                    }
-                } else {
+                    }}
+                 else {
                     JOptionPane.showMessageDialog(null, "Modulo no encontrado");
 
                     
@@ -237,10 +237,10 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
 
 
                 }
-            } else {
+             }else {
                 JOptionPane.showMessageDialog(null, "Codigo no puede ser 0");//Si no lo encuentra envia un mensaje de error
             }
-        } else {
+         }else {
             JOptionPane.showMessageDialog(null, "Modulo no puede ser menor o igual a 0");//Si no lo encuentra envia un mensaje de error
         }
 
@@ -248,13 +248,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Los codigos son solamente números, no incluyen ninguna letra");//Si no lo encuentra envia un mensaje de error
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
-
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        if (txt_Estado_Modulo.getSelectedItem().toString()!= "Seleccionar..."&& txt_Nombre_Modulo.getText().length()!=0
-            && txt_Descripcion_Modulo.getText().length()!=0&& txt_Codigo_Modulo.getText().length()!=0    ) {
-
-    }//GEN-LAST:event_btn_buscarActionPerformed
-
+                                       
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." || txt_Codigo_Modulo.getText().length() != 0
                 || txt_Nombre_Modulo.getText().length() != 0 || txt_Descripcion_Modulo.getText().length() != 0) {
@@ -286,12 +280,6 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 Modulos moduloActualizar = new Modulos();
                 moduloActualizar.setCodigo_modulo(codigonoeditable);
 
-            if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." || txt_Codigo_Modulo.getText().length() != 0
-                    || txt_Nombre_Modulo.getText().length() != 0 || txt_Descripcion_Modulo.getText().length() != 0) {
-                ModulosDAO modulosDAO = new ModulosDAO();
-                Modulos moduloActualizar = new Modulos();
-                moduloActualizar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
-
                 moduloActualizar.setNombre_modulo(txt_Nombre_Modulo.getText());
                 moduloActualizar.setDescripcion_modulo(txt_Descripcion_Modulo.getText());
                 moduloActualizar.setEstado_modulo(txt_Estado_Modulo.getSelectedItem().toString());
@@ -304,9 +292,8 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 txt_Descripcion_Modulo.setText("");
                 txt_Estado_Modulo.setSelectedIndex(0);
                 bloqueoactualizar = 0;
-            }else{
-             JOptionPane.showMessageDialog(null, "No pueden haber campos vacios, verfifique y vuelva a intentarlo");
-        }
+            
+        
         } else {
             JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de actualizarlo o codigo no encontrado");
 

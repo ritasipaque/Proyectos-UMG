@@ -1,22 +1,15 @@
-<<<<<<< HEAD
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\Usuario.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\ejemplo.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\Login.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\ejemplo.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\FrmCrudUsuarios.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\dominio\ControladorUsuario.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\dominio\ejemplo.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
-=======
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\dominio\Modulos.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\datos\ejemplo.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\vista\Login.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\dominio\ejemplo.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Modulos.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\vista\ejemplo.java
-C:\Users\leone\Desktop\trabajos U\progra 3\github\PHoteleria\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
->>>>>>> 97c2eb5ad76e9b5c6ee6b01fa55ca0f4cdb42cf1
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\dominio\Usuario.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\vista\Login.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\vista\MDI_Components.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\dominio\Modulos.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\datos\AplicacionDAO.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\dominio\Aplicacion.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Aplicacion.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Modulos.java
+C:\Users\leone\Desktop\ACTU\SistemaHotelero\src\main\java\seguridad\reportes\Reporte_Modulos.java
