@@ -8,15 +8,15 @@ public class Aplicacion {
     private String Descripcion_Aplicacion;
     private int ReporteAsociado_Aplicacion;
     private int Estado_Aplicacion;
-    private int Id_ModuloCbx;
+    //private int Id_ModuloCbx;
 
-    public int getId_ModuloCbx() {
+    /*public int getId_ModuloCbx() {
         return Id_ModuloCbx;
-    }
+    }*/
 
-    public void setId_ModuloCbx(int Id_ModuloCbx) {
+    /*public void setId_ModuloCbx(int Id_ModuloCbx) {
         this.Id_ModuloCbx = Id_ModuloCbx;
-    }
+    }*/
 
     public int getId_Aplicacion() {
         return Id_Aplicacion;
