@@ -35,12 +35,11 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion` (
   `PK_id_aplicacion` INT NOT NULL,
-  `PK_id_modulo` INT NOT NULL,
   `nombre_aplicacion` VARCHAR(45) NULL DEFAULT NULL,
   `descripcion_aplicacion` VARCHAR(200) NULL DEFAULT NULL,
   `no_reporteAsociado` INT NULL DEFAULT NULL,
   `estado_aplicacion` TINYINT NULL DEFAULT NULL,
-  PRIMARY KEY (`PK_id_aplicacion`, `PK_id_modulo`))
+  PRIMARY KEY (`PK_id_aplicacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
