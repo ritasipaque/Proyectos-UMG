@@ -40,10 +40,7 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion` (
   `descripcion_aplicacion` VARCHAR(200) NULL DEFAULT NULL,
   `no_reporteAsociado` INT NULL DEFAULT NULL,
   `estado_aplicacion` TINYINT NULL DEFAULT NULL,
-  PRIMARY KEY (`PK_id_aplicacion`, `PK_id_modulo`),
-    CONSTRAINT `fk_Aplicacion_Modulo`
-    FOREIGN KEY (`PK_id_modulo`)
-    REFERENCES `umg`.`tbl_modulo` (`PK_id_Modulo`))
+  PRIMARY KEY (`PK_id_aplicacion`, `PK_id_modulo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
