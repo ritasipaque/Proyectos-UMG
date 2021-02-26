@@ -24,7 +24,7 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
      */
     public Mantenimiento_Aplicacion() {
         initComponents();
-        cargarCombobox.query2(cbxModulo);
+        //cargarCombobox.query2(cbxModulo);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
         grupoDeRadios.add(btnRadioInactivo);
@@ -37,7 +37,7 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         txtNombre.setText("");
         txtArea.setText("");
         txtReporte.setText("");
-        cbxModulo.setSelectedIndex(0);
+        //cbxModulo.setSelectedIndex(0);
         btnRadioActivo.setSelected(false);
         btnRadioInactivo.setSelected(false);
     }
@@ -56,7 +56,6 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtArea = new javax.swing.JTextArea();
@@ -72,7 +71,6 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        cbxModulo = new javax.swing.JComboBox<>();
         lblModulo = new javax.swing.JLabel();
         btnRadioVacio = new javax.swing.JRadioButton();
         btnLimpiar = new javax.swing.JButton();
@@ -84,21 +82,19 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         setTitle("Mantenimiento Aplicaciones");
         setVisible(true);
 
-        jLabel1.setText("ID Aplicación");
+        jLabel1.setText("ID Aplicación:");
 
-        jLabel2.setText("ID Modulo");
-
-        jLabel3.setText("Nombre");
+        jLabel3.setText("Nombre:");
 
         txtArea.setColumns(20);
         txtArea.setRows(5);
         jScrollPane1.setViewportView(txtArea);
 
-        jLabel4.setText("Descripción");
+        jLabel4.setText("Descripción:");
 
-        jLabel5.setText("No. Reporte");
+        jLabel5.setText("No. Reporte:");
 
-        jLabel6.setText("Estado");
+        jLabel6.setText("Estado:");
 
         btnRadioActivo.setText("Activo");
 
@@ -132,12 +128,6 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
             }
         });
 
-        cbxModulo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxModuloActionPerformed(evt);
-            }
-        });
-
         btnLimpiar.setText("LIMPIAR");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,91 +139,94 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel5)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel1))
+                                .addGap(7, 7, 7))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblModulo)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(83, 83, 83)
-                                    .addComponent(btnRadioInactivo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                                    .addComponent(btnRadioVacio))
-                                .addComponent(cbxModulo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtReporte, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(36, 36, 36))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnRadioActivo)
-                        .addGap(184, 184, 184))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnLimpiar)
-                        .addGap(17, 17, 17))))
+                                .addComponent(txtReporte, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                                .addComponent(txtAplicacion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(btnRadioActivo)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnRadioInactivo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRadioVacio))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(304, 304, 304)
+                        .addComponent(lblModulo))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(296, 296, 296)
+                            .addComponent(btnModificar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbxModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblModulo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(lblModulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel6)
-                                .addComponent(btnRadioActivo)
-                                .addComponent(btnRadioInactivo))
-                            .addComponent(btnRadioVacio)))
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtAplicacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregar)
-                    .addComponent(btnModificar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnLimpiar))
-                .addGap(21, 21, 21))
+                    .addComponent(jLabel3))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnRadioActivo)
+                                        .addComponent(btnRadioInactivo))
+                                    .addComponent(btnRadioVacio)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel6))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnModificar)
+                        .addGap(14, 14, 14)
+                        .addComponent(btnEliminar)
+                        .addGap(14, 14, 14)
+                        .addComponent(btnLimpiar)))
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -243,16 +236,16 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
 
         Aplicacion aplicacionInsertar = new Aplicacion();
         AplicacionDAO aplicacionDAO = new AplicacionDAO();
-        String cbx_Modulo = cbxModulo.getSelectedItem().toString();
+        //String cbx_Modulo = cbxModulo.getSelectedItem().toString();
         //int txt_Estado = Integer.parseInt(txtAplicacion.getText());
         //lbl_Modulo = cbxModulo.getSelectedItem().toString();
 
-        if (txtAplicacion.getText().length() != 0 && cbx_Modulo != "Seleccionar..." && txtNombre.getText().length() != 0
+        if (txtAplicacion.getText().length() != 0 && /*cbx_Modulo != "Seleccionar..." &&*/ txtNombre.getText().length() != 0
                 && txtArea.getText().length() != 0 && txtReporte.getText().length() != 0 && btnRadioActivo.isSelected() || 
                 btnRadioInactivo.isSelected()) {
             {
                 aplicacionInsertar.setId_Aplicacion(Integer.parseInt(txtAplicacion.getText()));
-                aplicacionInsertar.setId_Modulo(Integer.parseInt(cbxModulo.getSelectedItem().toString()));
+                //aplicacionInsertar.setId_Modulo(Integer.parseInt(cbxModulo.getSelectedItem().toString()));
                 aplicacionInsertar.setNombre_Aplicacion(txtNombre.getText());
                 aplicacionInsertar.setDescripcion_Aplicacion(txtArea.getText());
                 aplicacionInsertar.setReporteAsociado_Aplicacion(Integer.parseInt(txtReporte.getText()));
@@ -281,7 +274,7 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         
 
         aplicacionModificar.setId_Aplicacion(Integer.parseInt(txtAplicacion.getText()));
-        aplicacionModificar.setId_Modulo(Integer.parseInt(cbxModulo.getSelectedItem().toString()));
+        //aplicacionModificar.setId_Modulo(Integer.parseInt(cbxModulo.getSelectedItem().toString()));
         aplicacionModificar.setNombre_Aplicacion(txtNombre.getText());
         aplicacionModificar.setDescripcion_Aplicacion(txtArea.getText());
         aplicacionModificar.setReporteAsociado_Aplicacion(Integer.parseInt(txtReporte.getText()));
@@ -320,7 +313,7 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
 
         aplicacionBuscar = aplicacionDAO.query(aplicacionBuscar);
 
-        cbxModulo.setSelectedItem(aplicacionBuscar.getId_Modulo());
+        //cbxModulo.setSelectedItem(aplicacionBuscar.getId_Modulo());
         txtNombre.setText(String.valueOf(aplicacionBuscar.getNombre_Aplicacion()));
         txtArea.setText(String.valueOf(aplicacionBuscar.getDescripcion_Aplicacion()));
         txtReporte.setText(String.valueOf(aplicacionBuscar.getReporteAsociado_Aplicacion()));
@@ -333,11 +326,6 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void cbxModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxModuloActionPerformed
-
-        
-    }//GEN-LAST:event_cbxModuloActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         btnRadioVacio.setSelected(true);
@@ -354,9 +342,7 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton btnRadioActivo;
     private javax.swing.JRadioButton btnRadioInactivo;
     private javax.swing.JRadioButton btnRadioVacio;
-    private javax.swing.JComboBox<String> cbxModulo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
