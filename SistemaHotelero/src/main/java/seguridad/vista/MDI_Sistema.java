@@ -14,7 +14,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
     private Mantenimiento_Modulos formMantenimiento_Modulo;
     private Mantenimiento_Aplicacion formMantenimiento_Aplicacion;
-    
+    private Asignacion_modulos formModulos;
     
     private Mantenimiento_Perfil formMantenimiento_Perfil;
     /**
@@ -126,6 +126,11 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
         JMenuItem_ApM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_ApM.setText("Aplicaciones - Módulos");
+        JMenuItem_ApM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_ApMActionPerformed(evt);
+            }
+        });
         JMenu_Asignaciones.add(JMenuItem_ApM);
 
         JMenu_Seguridad.add(JMenu_Asignaciones);
@@ -233,6 +238,12 @@ public class MDI_Sistema extends javax.swing.JFrame {
         NuevaVentana = new Aplicacion_Perfil();
         JDesktopPane_Escritorio.add(NuevaVentana);
     }//GEN-LAST:event_JMenuItem_ApPActionPerformed
+
+    private void JMenuItem_ApMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_ApMActionPerformed
+        //  Asignacionmodulos Rita Sipaque
+        formModulos = new Asignacion_modulos();
+        JDesktopPane_Escritorio.add(formModulos );
+    }//GEN-LAST:event_JMenuItem_ApMActionPerformed
 
     /**
      * @param args the command line arguments
