@@ -1,7 +1,10 @@
 
 package seguridad.dominio;
-
 import java.sql.Date;
+/**
+ *
+ * @author Diego Vásquez
+ */
 
 /**
  *
@@ -84,6 +87,5 @@ public class Usuario {
     public void setEstado_usuario(int estado_usuario) {
         this.estado_usuario = estado_usuario;
     }
-
-    
+   
 }
