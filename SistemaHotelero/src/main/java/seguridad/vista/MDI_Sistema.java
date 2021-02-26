@@ -4,16 +4,18 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import seguridad.dominio.Usuario;
 
 /**
  *
  * @author Diego Vásquez
  */
 public class MDI_Sistema extends javax.swing.JFrame {
+    private Aplicacion_Perfil NuevaVentana;
 
     private Mantenimiento_Modulos formMantenimiento_Modulo;
     private Mantenimiento_Aplicacion formMantenimiento_Aplicacion;
-    
+    private Asignacion_modulos formModulos;
     
     private Mantenimiento_Perfil formMantenimiento_Perfil;
     /**
@@ -22,7 +24,29 @@ public class MDI_Sistema extends javax.swing.JFrame {
      * @throws java.net.UnknownHostException
      */
     MDI_Components mdi_components = new MDI_Components();
-
+    
+    /* ---- PERMISOS MODULOS: DIEGO VÁSQUEZ ----*/
+    Usuario objUsuario = new Usuario();
+    
+    public MDI_Sistema(Usuario objUsuario){
+        initComponents();
+        setLocationRelativeTo(null);
+        this.objUsuario = objUsuario;
+        String id_Usuario = objUsuario.getId_usuario();
+        
+        int id_perfil=0;
+        
+        //PENDIENTE
+        /*
+        Perfil objPerfil = new Perfil();
+        PerfilDAO perfilDAO = new PerfilDAO();
+        objPerfil.setFk_Usuario(id_Usuario);
+        perfilDAO.query(objPerfil);
+        id_perfil = objPerfil.getId_Perfil();
+        */
+    }
+    /*------------------------------------------*/
+    
     public MDI_Sistema() throws UnknownHostException {
         initComponents();
         this.setTitle("Usuario: " + "[" + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
@@ -112,6 +136,11 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
         JMenuItem_ApP.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_ApP.setText("Aplicaciones - Perfiles");
+        JMenuItem_ApP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_ApPActionPerformed(evt);
+            }
+        });
         JMenu_Asignaciones.add(JMenuItem_ApP);
 
         JMenuItem_PU.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -120,6 +149,11 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
         JMenuItem_ApM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_ApM.setText("Aplicaciones - Módulos");
+        JMenuItem_ApM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_ApMActionPerformed(evt);
+            }
+        });
         JMenu_Asignaciones.add(JMenuItem_ApM);
 
         JMenu_Seguridad.add(JMenu_Asignaciones);
@@ -221,6 +255,18 @@ public class MDI_Sistema extends javax.swing.JFrame {
       JDesktopPane_Escritorio.add(formMantenimiento_Perfil);
       
     }//GEN-LAST:event_JMenuItem_PerfilesActionPerformed
+
+    private void JMenuItem_ApPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_ApPActionPerformed
+        // TODO add your handling code here:
+        NuevaVentana = new Aplicacion_Perfil();
+        JDesktopPane_Escritorio.add(NuevaVentana);
+    }//GEN-LAST:event_JMenuItem_ApPActionPerformed
+
+    private void JMenuItem_ApMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_ApMActionPerformed
+        //  Asignacionmodulos Rita Sipaque
+        formModulos = new Asignacion_modulos();
+        JDesktopPane_Escritorio.add(formModulos );
+    }//GEN-LAST:event_JMenuItem_ApMActionPerformed
 
     /**
      * @param args the command line arguments
