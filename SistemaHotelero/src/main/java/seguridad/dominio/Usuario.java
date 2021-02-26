@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-package seguridad.dominio;
-
-/**
- *
- * @author Diego Vásquez
- */
-public class Usuario {
-=======
 
 package seguridad.dominio;
 
@@ -93,6 +84,6 @@ public class Usuario {
     public void setEstado_usuario(int estado_usuario) {
         this.estado_usuario = estado_usuario;
     }
->>>>>>> dd821fef4059fd76c44b000295fe43957ca13272
+
     
 }
