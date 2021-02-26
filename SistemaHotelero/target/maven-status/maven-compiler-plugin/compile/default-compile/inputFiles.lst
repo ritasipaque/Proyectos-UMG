@@ -1,4 +1,5 @@
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\datos\AplicacionDAO.java
+C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\datos\PerfilDAO.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\reportes\Reporte_Modulos.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
@@ -7,7 +8,9 @@ C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\vista\MDI
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\dominio\Modulos.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\dominio\Aplicacion.java
+C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Perfil.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
+C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\dominio\Perfil.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Modulos.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
 C:\Users\leone\Desktop\GIT LEO\SistemaHotelero\src\main\java\seguridad\dominio\Usuario.java
