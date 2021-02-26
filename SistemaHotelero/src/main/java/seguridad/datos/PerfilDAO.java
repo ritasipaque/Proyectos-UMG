@@ -151,4 +151,35 @@ public class PerfilDAO {
          }
          return perfil;
      }
+     
+      public List<Perfil> select(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Perfil perfil = null;
+        List<Perfil> perfiles = new ArrayList<Perfil>();
+        
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                int id_perfil = rs.getInt("PK_id_perfil");
+                
+                perfil = new Perfil();
+                perfil.setPk_id_perfil(id_perfil);
+                perfiles.add(perfil);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        
+        return perfiles;
+    }
 }

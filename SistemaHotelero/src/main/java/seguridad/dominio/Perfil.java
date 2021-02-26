@@ -63,5 +63,9 @@ public class Perfil {
      public String toString() {
     return "Perfil{" + "Pk_id_perfil=" + Pk_id_perfil + ", nombre_perfil=" + nombre_perfil + ", descripcion_perfil=" + descripcion_perfil + ", estado_perfil=" + estado_perfil+'}';
     }
+     
+    public String toString2() {
+         return String.valueOf(Pk_id_perfil);
+    }
 
 }
