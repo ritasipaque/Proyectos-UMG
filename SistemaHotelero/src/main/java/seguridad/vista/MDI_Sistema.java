@@ -133,17 +133,9 @@ public class MDI_Sistema extends javax.swing.JFrame {
         JMenuItem_Usuarios.setText("Usuarios");
         JMenu_Mantenimientos.add(JMenuItem_Usuarios);
 
-
         JMenuItem_Aplicaciones.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_Aplicaciones.setText("Aplicaciones");
         JMenuItem_Aplicaciones.addActionListener(new java.awt.event.ActionListener() {
-
-
-
-        jMenuItem8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem8.setText("Aplicaciones");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JMenuItem_AplicacionesActionPerformed(evt);
             }
