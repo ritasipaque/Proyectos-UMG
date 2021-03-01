@@ -4,6 +4,8 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import seguridad.datos.PerfilDAO;
+import seguridad.dominio.Perfil;
 import seguridad.dominio.Usuario;
 
 /**
@@ -36,14 +38,19 @@ public class MDI_Sistema extends javax.swing.JFrame {
         
         int id_perfil=0;
         
-        //PENDIENTE
-        /*
+        
+        
         Perfil objPerfil = new Perfil();
         PerfilDAO perfilDAO = new PerfilDAO();
-        objPerfil.setFk_Usuario(id_Usuario);
+        //objPerfil.setFk_Usuario(id_Usuario);
         perfilDAO.query(objPerfil);
-        id_perfil = objPerfil.getId_Perfil();
-        */
+        id_perfil = objPerfil.getPk_id_perfil();
+        
+        switch(id_perfil)
+        {
+            case 1:
+                break;
+        }
     }
     /*------------------------------------------*/
     
@@ -167,6 +174,11 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
         JMenuItem_Usuarios.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         JMenuItem_Usuarios.setText("Usuarios");
+        JMenuItem_Usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItem_UsuariosActionPerformed(evt);
+            }
+        });
         JMenu_Mantenimientos.add(JMenuItem_Usuarios);
 
         JMenuItem_Aplicaciones.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -265,8 +277,15 @@ public class MDI_Sistema extends javax.swing.JFrame {
     private void JMenuItem_ApMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_ApMActionPerformed
         //  Asignacionmodulos Rita Sipaque
         formModulos = new Asignacion_modulos();
-        JDesktopPane_Escritorio.add(formModulos );
+        formModulos.setVisible(true);
+        JDesktopPane_Escritorio.add(formModulos);
     }//GEN-LAST:event_JMenuItem_ApMActionPerformed
+
+    private void JMenuItem_UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItem_UsuariosActionPerformed
+        Mantenimiento_Usuario frm_mantusu = new Mantenimiento_Usuario();
+        frm_mantusu.setVisible(true);
+        JDesktopPane_Escritorio.add(frm_mantusu);
+    }//GEN-LAST:event_JMenuItem_UsuariosActionPerformed
 
     /**
      * @param args the command line arguments
