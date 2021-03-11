@@ -128,9 +128,12 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Usuarios"/>
                   </Properties>
+<<<<<<< HEAD
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_UsuariosActionPerformed"/>
                   </Events>
+=======
+>>>>>>> 33d2bbde268aaa743747371a6949ac614e1ac6bd
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_Aplicaciones">
                   <Properties>
