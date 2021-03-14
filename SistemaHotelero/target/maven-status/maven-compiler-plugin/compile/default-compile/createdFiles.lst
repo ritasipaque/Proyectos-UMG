@@ -1,6 +1,10 @@
 seguridad\vista\Mantenimiento_Usuario$3.class
 seguridad\datos\Hash.class
 seguridad\vista\MDI_Sistema$3.class
+seguridad\datos\PerfilDAO.class
+seguridad\dominio\Perfil.class
+seguridad\vista\Mantenimiento_Perfil$1.class
+seguridad\vista\Mantenimiento_Perfil$3.class
 seguridad\vista\MDI_Sistema$5.class
 seguridad\vista\Mantenimiento_Usuario$5.class
 seguridad\dominio\Aplicacion.class
@@ -14,6 +18,8 @@ seguridad\datos\AplicacionDAO.class
 seguridad\vista\MDI_Sistema$1.class
 seguridad\vista\Mantenimiento_Aplicacion$5.class
 seguridad\vista\Mantenimiento_Usuario.class
+seguridad\vista\Mantenimiento_Perfil$4.class
+seguridad\vista\Mantenimiento_Perfil$2.class
 seguridad\vista\Mantenimiento_Aplicacion$3.class
 seguridad\vista\Mantenimiento_Aplicacion.class
 seguridad\vista\Mantenimiento_Modulos$4.class
@@ -22,8 +28,9 @@ seguridad\datos\UsuarioDAO.class
 seguridad\vista\Login$2.class
 seguridad\vista\Mantenimiento_Aplicacion$1.class
 seguridad\vista\Mantenimiento_Usuario$4.class
+seguridad\vista\Mantenimiento_Perfil.class
 seguridad\vista\Mantenimiento_Modulos$1.class
-seguridad\vista\Mantenimiento_Aplicacion$6.class
+seguridad\vista\Mantenimiento_Perfil$5.class
 seguridad\datos\ModulosDAO.class
 seguridad\dominio\Modulos.class
 seguridad\vista\MDI_Sistema.class
@@ -34,4 +41,4 @@ seguridad\vista\Login$1.class
 seguridad\vista\Mantenimiento_Modulos$3.class
 seguridad\datos\Conexion.class
 seguridad\vista\Mantenimiento_Aplicacion$4.class
-seguridad\vista\Mantenimiento_Usuario$2.class}
+seguridad\vista\Mantenimiento_Usuario$2.class
