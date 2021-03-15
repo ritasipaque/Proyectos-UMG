@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import seguridad.dominio.Usuario;
 
 /**
  *
@@ -23,7 +24,29 @@ public class MDI_Sistema extends javax.swing.JFrame {
      * @throws java.net.UnknownHostException
      */
     MDI_Components mdi_components = new MDI_Components();
-
+    
+    /* ---- PERMISOS MODULOS: DIEGO VÁSQUEZ ----*/
+    Usuario objUsuario = new Usuario();
+    
+    public MDI_Sistema(Usuario objUsuario){
+        initComponents();
+        setLocationRelativeTo(null);
+        this.objUsuario = objUsuario;
+        String id_Usuario = objUsuario.getId_usuario();
+        
+        int id_perfil=0;
+        
+        //PENDIENTE
+        /*
+        Perfil objPerfil = new Perfil();
+        PerfilDAO perfilDAO = new PerfilDAO();
+        objPerfil.setFk_Usuario(id_Usuario);
+        perfilDAO.query(objPerfil);
+        id_perfil = objPerfil.getId_Perfil();
+        */
+    }
+    /*------------------------------------------*/
+    
     public MDI_Sistema() throws UnknownHostException {
         initComponents();
         this.setTitle("Usuario: " + "[" + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
