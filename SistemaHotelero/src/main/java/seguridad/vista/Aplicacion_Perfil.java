@@ -335,8 +335,9 @@ int filaSeleccionada=tabla1.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
                String Vector[]=new String[2];   //CREAR UN VECTOR
                 //LE ASIGNAMOS AL VECTOR Y CAPTURAMOS LOS DATOS DE LA TABLA1 EN LA FILA SELECCIONADA EN LA POSICION 0 Y 1,
                 //ES DECIR COLUMNA NOMBRES Y APELLIDOS
-               Vector[0]=tabla1.getValueAt(filaSeleccionada, 0).toString();
-               Vector[1]=consulta_perfil.getSelectedItem().toString();
+                
+               Vector[0]=consulta_perfil.getSelectedItem().toString();
+               Vector[1]=tabla1.getValueAt(filaSeleccionada, 0).toString();
                modelo2.addRow(Vector); 
                
                
@@ -349,8 +350,9 @@ int filaSeleccionada=tabla1.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 for (int i = 0; i < tabla1.getRowCount(); i++) {
             String Vector[]=new String[2];
-            Vector[0]=tabla1.getValueAt(i, 0).toString();
-            Vector[1]=consulta_perfil.getSelectedItem().toString();
+            
+            Vector[0]=consulta_perfil.getSelectedItem().toString();
+            Vector[1]=tabla1.getValueAt(i, 0).toString();
             
             modelo2.addRow(Vector);    //LLAMAMOS AL MODELO DE LA PANTALLA2 Y LE AGREGAMOS EL VECTOR COMO UNA NUEVA FILA
             
@@ -384,6 +386,32 @@ int filaSeleccionada=tabla2.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
+        Asignacion_Aplicacion_PerfilDAO modulosDAO = new Asignacion_Aplicacion_PerfilDAO();
+        String Vector[]=new String[7];
+            Asignacion_Aplicacion_Perfil moduloInsertar = new Asignacion_Aplicacion_Perfil();
+            for (int i = 0; i < tabla2.getRowCount(); i++) {
+             
+           
+           Vector[0]=(String) tabla2.getValueAt(i, 0);
+           Vector[1]=(String) tabla2.getValueAt(i, 1);
+           Vector[2]=(String) tabla2.getValueAt(i, 2);
+           Vector[3]=(String) tabla2.getValueAt(i, 3);
+           Vector[4]=(String) tabla2.getValueAt(i, 4);
+           Vector[5]=(String) tabla2.getValueAt(i, 5);
+           Vector[6]=(String) tabla2.getValueAt(i, 6);
+            
+            moduloInsertar.setCodigo_Perfil(Vector[0]);           
+            moduloInsertar.setCodigo_Aplicacion(Vector[1]);
+            moduloInsertar.setIngresar(Vector[2]);
+            moduloInsertar.setConsultar(Vector[3]);
+            moduloInsertar.setModificar(Vector[4]);
+            moduloInsertar.setEliminar(Vector[5]);
+            moduloInsertar.setImprimir(Vector[6]);
+            
+            modulosDAO.insert(moduloInsertar);   
+        }
+            
+            JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
