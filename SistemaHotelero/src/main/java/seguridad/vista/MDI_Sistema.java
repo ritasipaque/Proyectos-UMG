@@ -42,7 +42,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         
         int id_perfil=0;
         
-<<<<<<< HEAD
+
         //PENDIENTE
         /*
         Perfil objPerfil = new Perfil();
@@ -51,7 +51,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         perfilDAO.query(objPerfil);
         id_perfil = objPerfil.getId_Perfil();
         */
-=======
+
         
         
         Perfil objPerfil = new Perfil();
@@ -65,7 +65,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
             case 1:
                 break;
         }
->>>>>>> 6c86bf96f32375a413ac4fd1d3e7c8ea7e9bf5b3
+
     }
     /*------------------------------------------*/
     
