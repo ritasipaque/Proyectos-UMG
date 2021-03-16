@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 //import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
@@ -30,6 +32,7 @@ public class AplicacionDAO {
     public static final String SQL_QUERY = "SELECT PK_id_aplicacion, nombre_aplicacion, descripcion_aplicacion, no_reporteAsociado, estado_aplicacion FROM tbl_aplicacion WHERE PK_id_aplicacion = ?";
     //Buscar 2 en la BD
     //public static final String SQL_QUERY2 = "SELECT PK_id_Modulo FROM tbl_modulo";
+     private static final String SQL_SELECT2 = "SELECT PK_id_aplicacion, PK_id_modulo, nombre_aplicacion, descripcion_aplicacion, no_reporteAsociado, estado_aplicacion FROM tbl_aplicacion";
 
     public List<Aplicacion> select() {
         Connection conn = null;
@@ -226,5 +229,30 @@ public class AplicacionDAO {
         }
 
     }*/
+    
+    public void select2(){
+    DefaultTableModel modo = new DefaultTableModel();
+    modo.addColumn("Codigo");
+    modo.addColumn("Nombre");
+    Aplicacion_Perfil.tabla1.setModel(modo);
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    String datos[]= new String[2];
+    try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT2);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                datos[0] = rs.getString("PK_id_aplicacion");
+                datos[1] = rs.getString("nombre_aplicacion");
+                
+                modo.addRow(datos);
+            }
+            Aplicacion_Perfil.tabla1.setModel(modo);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+}
 
 }

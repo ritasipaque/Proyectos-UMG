@@ -80,6 +80,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Aplicaciones - Perfiles"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_ApPActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_PU">
                   <Properties>
@@ -96,6 +99,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Aplicaciones - M&#xf3;dulos"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_ApMActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -141,6 +147,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Perfiles"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_PerfilesActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_Modulos">
                   <Properties>
