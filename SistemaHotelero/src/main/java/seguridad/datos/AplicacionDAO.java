@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 //import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
@@ -30,6 +32,7 @@ public class AplicacionDAO {
     public static final String SQL_QUERY = "SELECT PK_id_aplicacion, nombre_aplicacion, descripcion_aplicacion, no_reporteAsociado, estado_aplicacion FROM tbl_aplicacion WHERE PK_id_aplicacion = ?";
     //Buscar 2 en la BD
     //public static final String SQL_QUERY2 = "SELECT PK_id_Modulo FROM tbl_modulo";
+     private static final String SQL_SELECT2 = "SELECT PK_id_aplicacion, PK_id_modulo, nombre_aplicacion, descripcion_aplicacion, no_reporteAsociado, estado_aplicacion FROM tbl_aplicacion";
 
     public List<Aplicacion> select() {
         Connection conn = null;
@@ -226,5 +229,41 @@ public class AplicacionDAO {
         }
 
     }*/
+    
+    public List<Aplicacion> select2(){
+    Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Aplicacion a_app_usu = null;
+        List<Aplicacion> personas = new ArrayList<Aplicacion>();
+        
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                int id_aplicacion = rs.getInt("PK_id_aplicacion");
+                String nombre_aplicacion = rs.getString("nombre_aplicacion");
+                
+                
+                a_app_usu = new Aplicacion();
+                a_app_usu.setId_Aplicacion(id_aplicacion);
+                a_app_usu.setNombre_Aplicacion(nombre_aplicacion);
+                
+                
+                personas.add(a_app_usu);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        
+        return personas;
+}
 
 }
