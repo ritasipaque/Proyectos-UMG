@@ -22,7 +22,10 @@ seguridad\vista\Aplicacion_Perfil$3.class
 seguridad\vista\Aplicacion_Perfil$8.class
 seguridad\vista\Mantenimiento_Aplicacion$3.class
 seguridad\vista\MDI_Sistema$4.class
+Finanzas\vista\MDI.class
+Finanzas\vista\MDI$1.class
 seguridad\vista\Asignacion_modulos$6.class
+seguridad\vista\Mantenimiento_Modulos$6.class
 seguridad\vista\Aplicacion_Perfil$1.class
 seguridad\vista\Mantenimiento_Aplicacion$6.class
 seguridad\datos\ModulosDAO.class
@@ -43,6 +46,7 @@ seguridad\vista\MDI_Sistema$3.class
 seguridad\dominio\Perfil.class
 seguridad\vista\Aplicacion_Perfil$9.class
 seguridad\vista\Mantenimiento_Perfil$1.class
+seguridad\vista\Mantenimiento_Modulos$5.class
 seguridad\vista\Login$3.class
 seguridad\vista\Aplicacion_Perfil$5.class
 seguridad\vista\Asignacion_modulos$3.class
@@ -69,6 +73,7 @@ seguridad\vista\Asignacion_modulos$4.class
 seguridad\vista\Mantenimiento_Aplicacion$7.class
 seguridad\dominio\Usuario.class
 seguridad\vista\MDI_Sistema$2.class
+Finanzas\datos\Conexion.class
 seguridad\vista\Aplicacion_Perfil.class
 seguridad\datos\Conexion.class
 seguridad\vista\Mantenimiento_Aplicacion$4.class
