@@ -3,15 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package seguridad.vista;
 
-
-
-
-
-
-
+import java.io.File;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import seguridad.dominio.Modulos;
 import seguridad.datos.ModulosDAO;
 
@@ -21,19 +17,41 @@ import seguridad.datos.ModulosDAO;
  * @author Herbert Leonel Dominguez Chavez 15/02/2021
  */
 public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
-
-        int codigobloqueado, bloqueoactualizar=0, codigonoeditable;
-
-
-    
-
+    DefaultTableModel modelo1; 
     /**
      * Creates new form Mantenimiento_Modulos
      */
     public Mantenimiento_Modulos() {
         initComponents();
+        limpio.setVisible(false);
+        actualizartabla();
+            
     }
-
+    public void actualizartabla(){
+        modelo1=new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
+        modelo1.addColumn("CODIGO");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
+        modelo1.addColumn("NOMBRE");
+        modelo1.addColumn("DESCRIPCION");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
+        modelo1.addColumn("ESTADO");
+        tabla1.setModel(modelo1);
+        String datos[]= new String[4];
+        ModulosDAO dao = new  ModulosDAO();
+        List<Modulos> Modulo = dao.select();
+        for (Modulos persona : Modulo) {       
+               datos[0]=String.valueOf(persona.getCodigo_modulo());
+               datos[1]=persona.getNombre_modulo();
+               datos[2]=persona.getDescripcion_modulo();
+               datos[3]=persona.getEstado_modulo();  
+               modelo1.addRow(datos);
+               tabla1.setModel(modelo1);
+               }
+    }
+    public void limpiar(){
+        txt_Codigo_Modulo.setText("");
+        txt_Nombre_Modulo.setText("");
+        txt_Descripcion_Modulo.setText("");
+        limpio.setSelected(true);
+    }
      private static boolean isNumeric(String cadena){
         try {
                 Integer.parseInt(cadena);
@@ -52,40 +70,45 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txt_Codigo_Modulo = new javax.swing.JTextField();
+        ESTADO = new javax.swing.ButtonGroup();
+        CajaInformacion = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_Nombre_Modulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_Codigo_Modulo = new javax.swing.JTextField();
+        txt_Nombre_Modulo = new javax.swing.JTextField();
+        btn_buscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         txt_Descripcion_Modulo = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        txt_Estado_Modulo = new javax.swing.JComboBox<>();
-        btn_buscar = new javax.swing.JButton();
-        btn_agregar = new javax.swing.JButton();
-        btn_actualizar = new javax.swing.JButton();
+        activo = new javax.swing.JRadioButton();
+        inactivo = new javax.swing.JRadioButton();
+        limpio = new javax.swing.JRadioButton();
+        btn_guardar = new javax.swing.JButton();
+        btn_modificar = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btn_limpiar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla1 = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("MANTENIMIENTO DE MODULOS");
         setEnabled(false);
+        setPreferredSize(new java.awt.Dimension(790, 645));
         setVisible(true);
+
+        CajaInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder("Información:"));
+        CajaInformacion.setAutoscrolls(true);
+
+        jLabel1.setText("CODIGO:");
 
         jLabel2.setText("NOMBRE:");
 
         jLabel3.setText("DESCRIPCIÓN:");
-
-        txt_Descripcion_Modulo.setColumns(20);
-        txt_Descripcion_Modulo.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        txt_Descripcion_Modulo.setRows(5);
-        txt_Descripcion_Modulo.setAutoscrolls(false);
-        jScrollPane2.setViewportView(txt_Descripcion_Modulo);
-
-        jLabel4.setText("ESTADO:");
-
-        txt_Estado_Modulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "1", "0" }));
 
         btn_buscar.setText("BUSCAR");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,17 +117,32 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_agregar.setText("AGREGAR");
-        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
+        txt_Descripcion_Modulo.setColumns(20);
+        txt_Descripcion_Modulo.setRows(5);
+        jScrollPane1.setViewportView(txt_Descripcion_Modulo);
+
+        jLabel4.setText("ESTADO:");
+
+        ESTADO.add(activo);
+        activo.setText("ACTIVO");
+
+        ESTADO.add(inactivo);
+        inactivo.setText("INACTIVO");
+
+        ESTADO.add(limpio);
+        limpio.setEnabled(false);
+
+        btn_guardar.setText("GUARDAR");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_agregarActionPerformed(evt);
+                btn_guardarActionPerformed(evt);
             }
         });
 
-        btn_actualizar.setText("ACTUALIZAR");
-        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+        btn_modificar.setText("MODIFICAR");
+        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_actualizarActionPerformed(evt);
+                btn_modificarActionPerformed(evt);
             }
         });
 
@@ -115,233 +153,258 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("CODIGO:");
+        btn_limpiar.setText("LIMPIAR");
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("AYUDA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CajaInformacionLayout = new javax.swing.GroupLayout(CajaInformacion);
+        CajaInformacion.setLayout(CajaInformacionLayout);
+        CajaInformacionLayout.setHorizontalGroup(
+            CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CajaInformacionLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CajaInformacionLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_Codigo_Modulo))
+                    .addGroup(CajaInformacionLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(9, 9, 9)
+                        .addComponent(txt_Nombre_Modulo))
+                    .addGroup(CajaInformacionLayout.createSequentialGroup()
+                        .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CajaInformacionLayout.createSequentialGroup()
+                                .addComponent(activo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(inactivo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(limpio))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 19, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44))
+        );
+        CajaInformacionLayout.setVerticalGroup(
+            CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CajaInformacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_Codigo_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_Nombre_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(activo)
+                    .addComponent(inactivo)
+                    .addComponent(limpio)
+                    .addComponent(jLabel4))
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(CajaInformacionLayout.createSequentialGroup()
+                .addComponent(btn_buscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_guardar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_modificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_eliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_limpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        tabla1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tabla1.setEnabled(false);
+        jScrollPane2.setViewportView(tabla1);
+        tabla1.getAccessibleContext().setAccessibleParent(jScrollPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_Nombre_Modulo, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                            .addComponent(txt_Codigo_Modulo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_Estado_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_actualizar)))
-                .addGap(0, 9, Short.MAX_VALUE))
+            .addComponent(CajaInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_buscar)
-                    .addComponent(jLabel1)
-                    .addComponent(txt_Codigo_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(CajaInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_agregar)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_Nombre_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(btn_eliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_actualizar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(29, 29, 29)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_Estado_Modulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
-
-        if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())) {
-            int valor;
-
-        
-
-        int valorbuscado = Integer.parseInt(txt_Codigo_Modulo.getText());
-        String validarCodigo, validarNombre, validarDescripcion, validarEstado;
-
-        if (Integer.parseInt(txt_Codigo_Modulo.getText()) >= 0) {
-            if (Integer.parseInt(txt_Codigo_Modulo.getText()) > 0) {
-                ModulosDAO moduloDAO = new ModulosDAO();
-                Modulos moduloConsultar = new Modulos();
-                moduloConsultar.setCodigo_modulo(valorbuscado);
-                moduloConsultar = moduloDAO.query(moduloConsultar);
-
-
-                validarCodigo = String.valueOf(moduloConsultar.getCodigo_modulo());
-                validarNombre = moduloConsultar.getNombre_modulo();
-                validarDescripcion = moduloConsultar.getDescripcion_modulo();
-                validarEstado = moduloConsultar.getEstado_modulo();
-
-
-                if (validarNombre != null && validarDescripcion != null && validarEstado != null && validarCodigo != null) {
-                    codigonoeditable=valorbuscado;
-
+        if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&&txt_Codigo_Modulo.getText().length()!=0) {
+            
+    ModulosDAO moduloDAO = new ModulosDAO();
+    Modulos moduloConsultar = new Modulos();
+    moduloConsultar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
+    moduloConsultar = moduloDAO.query(moduloConsultar);
                 
-
-                    txt_Nombre_Modulo.setText(moduloConsultar.getNombre_modulo());
-                    txt_Descripcion_Modulo.setText(moduloConsultar.getDescripcion_modulo());
-                    valor = Integer.parseInt(moduloConsultar.getEstado_modulo());
-                    bloqueoactualizar = 1;
-                    if (valor == 0) {
-                        valor = 2;
-                        txt_Estado_Modulo.setSelectedIndex(valor);
-                    } else {
-                        txt_Estado_Modulo.setSelectedIndex(valor);
-                    }}
-                 else {
-                    JOptionPane.showMessageDialog(null, "Modulo no encontrado");
-
-                    
-                         txt_Codigo_Modulo.setText("");
-                         txt_Nombre_Modulo.setText("");
-                         txt_Descripcion_Modulo.setText("");
-                         txt_Estado_Modulo.setSelectedIndex(0);
-
-
-                }
-             }else {
-                JOptionPane.showMessageDialog(null, "Codigo no puede ser 0");//Si no lo encuentra envia un mensaje de error
-            }
-         }else {
-            JOptionPane.showMessageDialog(null, "Modulo no puede ser menor o igual a 0");//Si no lo encuentra envia un mensaje de error
+    txt_Nombre_Modulo.setText(moduloConsultar.getNombre_modulo());
+    txt_Descripcion_Modulo.setText(moduloConsultar.getDescripcion_modulo());
+        if (Integer.parseInt(moduloConsultar.getEstado_modulo())==1) {
+            activo.setSelected(true);
         }
-
+        if (Integer.parseInt(moduloConsultar.getEstado_modulo())==0) {
+            inactivo.setSelected(true);
+        }
         }else{
-            JOptionPane.showMessageDialog(null, "Los codigos son solamente números, no incluyen ninguna letra");//Si no lo encuentra envia un mensaje de error
+             JOptionPane.showMessageDialog(null, "Los codigos son solamente números, no incluyen ninguna letra o el campo esta vacio");
+            //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
     }//GEN-LAST:event_btn_buscarActionPerformed
-                                       
-    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
-        if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." || txt_Codigo_Modulo.getText().length() != 0
-                || txt_Nombre_Modulo.getText().length() != 0 || txt_Descripcion_Modulo.getText().length() != 0) {
 
-            ModulosDAO modulosDAO = new ModulosDAO();
-            Modulos moduloInsertar = new Modulos();
-            moduloInsertar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
-            moduloInsertar.setNombre_modulo(txt_Nombre_Modulo.getText());
-            moduloInsertar.setDescripcion_modulo(txt_Descripcion_Modulo.getText());
-            moduloInsertar.setEstado_modulo(txt_Estado_Modulo.getSelectedItem().toString());
-            modulosDAO.insert(moduloInsertar);
-            JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
-            bloqueoactualizar = 0;
-            txt_Codigo_Modulo.setText("");
-            txt_Nombre_Modulo.setText("");
-            txt_Descripcion_Modulo.setText("");
-            txt_Estado_Modulo.setSelectedIndex(0);
-        }else{
-            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios, verfifique y vuelva a intentarlo");
-        }
-    }//GEN-LAST:event_btn_agregarActionPerformed
-
-    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
-        if (bloqueoactualizar == 1) {
-
-            if (txt_Estado_Modulo.getSelectedItem().toString() != "Seleccionar..." && txt_Codigo_Modulo.getText().length() != 0
-                    && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0) {
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&& txt_Codigo_Modulo.getText().length()!=0 
+            && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0 && limpio.isSelected()==false) {
                 ModulosDAO modulosDAO = new ModulosDAO();
+                Modulos moduloInsertar = new Modulos();
+                moduloInsertar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
+                moduloInsertar.setNombre_modulo(txt_Nombre_Modulo.getText());
+                moduloInsertar.setDescripcion_modulo(txt_Descripcion_Modulo.getText());
+        if (activo.isSelected()) {
+                moduloInsertar.setEstado_modulo("1");
+        }
+        if (inactivo.isSelected()) {
+                moduloInsertar.setEstado_modulo("0");
+        }
+                modulosDAO.insert(moduloInsertar);
+                JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
+                limpiar();
+                actualizartabla();
+        }else{
+                JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
+                //Si el campo esta vacio o no inserta números muestra un mensaje de error
+        }
+    }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+        if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&& txt_Codigo_Modulo.getText().length()!=0 
+            && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0 && limpio.isSelected()==false) {
+             ModulosDAO modulosDAO = new ModulosDAO();
                 Modulos moduloActualizar = new Modulos();
-                moduloActualizar.setCodigo_modulo(codigonoeditable);
+                moduloActualizar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
 
                 moduloActualizar.setNombre_modulo(txt_Nombre_Modulo.getText());
                 moduloActualizar.setDescripcion_modulo(txt_Descripcion_Modulo.getText());
-                moduloActualizar.setEstado_modulo(txt_Estado_Modulo.getSelectedItem().toString());
-                modulosDAO.update(moduloActualizar);
-
-                JOptionPane.showMessageDialog(null, "Modulo actualizado correctamente");
-                bloqueoactualizar = 0;
-                txt_Codigo_Modulo.setText("");
-                txt_Nombre_Modulo.setText("");
-                txt_Descripcion_Modulo.setText("");
-                txt_Estado_Modulo.setSelectedIndex(0);
-                bloqueoactualizar = 0;
-            
-        
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de actualizarlo o codigo no encontrado");
-
-                bloqueoactualizar = 0;
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de actualizar");
-
+        if (activo.isSelected()) {
+                moduloActualizar.setEstado_modulo("1");
         }
-    }//GEN-LAST:event_btn_actualizarActionPerformed
+        if (inactivo.isSelected()) {
+                moduloActualizar.setEstado_modulo("0");
+        }
+                modulosDAO.update(moduloActualizar);
+                JOptionPane.showMessageDialog(null, "Modulo actualizado correctamente");
+                limpiar();
+                actualizartabla();
+        }else{
+            JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
+                //Si el campo esta vacio o no inserta números muestra un mensaje de error
+        }
+    }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-       
-         if (bloqueoactualizar==1) {
-
-        ModulosDAO modulosDAO = new ModulosDAO();
-        Modulos moduloEliminar = new Modulos();
-        moduloEliminar.setCodigo_modulo(codigonoeditable);
-        modulosDAO.delete(moduloEliminar);   
-        JOptionPane.showMessageDialog(null, "Modulo eliminado correctamente");
-        bloqueoactualizar = 0;
-        txt_Codigo_Modulo.setText("");
-        txt_Nombre_Modulo.setText("");
-        txt_Descripcion_Modulo.setText("");
-        txt_Estado_Modulo.setSelectedIndex(0);
-        }else {
-            JOptionPane.showMessageDialog(null, "Debe de buscar el codigo antes de eliminarlo o codigo no encontrado");
+        if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&& txt_Codigo_Modulo.getText().length()!=0 
+            && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0 && limpio.isSelected()==false) {
+            ModulosDAO modulosDAO = new ModulosDAO();
+            Modulos moduloEliminar = new Modulos();
+            moduloEliminar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
+            modulosDAO.delete(moduloEliminar);   
+            JOptionPane.showMessageDialog(null, "Modulo eliminado correctamente");
+        }else{
+            JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
+                //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
+            limpiar();
+            actualizartabla();
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
+    limpiar();
+    }//GEN-LAST:event_btn_limpiarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+try {
+            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoModulos.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoModulos.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }    
+    }//GEN-LAST:event_jButton2ActionPerformed
+                                       
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton btn_actualizar;
-    public javax.swing.JButton btn_agregar;
-    public javax.swing.JButton btn_buscar;
-    public javax.swing.JButton btn_eliminar;
+    private javax.swing.JPanel CajaInformacion;
+    private javax.swing.ButtonGroup ESTADO;
+    private javax.swing.JRadioButton activo;
+    private javax.swing.JButton btn_buscar;
+    private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_guardar;
+    private javax.swing.JButton btn_limpiar;
+    private javax.swing.JButton btn_modificar;
+    private javax.swing.JRadioButton inactivo;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    public javax.swing.JScrollPane jScrollPane2;
-    public javax.swing.JTextField txt_Codigo_Modulo;
-    public javax.swing.JTextArea txt_Descripcion_Modulo;
-    public javax.swing.JComboBox<String> txt_Estado_Modulo;
-    public javax.swing.JTextField txt_Nombre_Modulo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JRadioButton limpio;
+    private javax.swing.JTable tabla1;
+    private javax.swing.JTextField txt_Codigo_Modulo;
+    private javax.swing.JTextArea txt_Descripcion_Modulo;
+    private javax.swing.JTextField txt_Nombre_Modulo;
     // End of variables declaration//GEN-END:variables
 
-    public int getText() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
