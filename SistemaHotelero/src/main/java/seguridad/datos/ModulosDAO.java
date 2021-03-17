@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,12 +19,50 @@ import java.sql.SQLException;
 public class ModulosDAO {
 
     private static final String SQL_INSERT = "insert into tbl_modulo values(?,?,?,?)";
-    private static final String SQL_SELECT = "select * from tbl_modulo where PK_id_Modulo = ?";
+    private static final String SQL_SELECT = "SELECT PK_id_Modulo, nombre_modulo, descripcion_modulo, estado_modulo FROM tbl_modulo";
     private static final String SQL_DELETE = "delete from tbl_modulo where PK_id_Modulo = ?";  
     private static final String SQL_UPDATE = "UPDATE tbl_modulo SET nombre_modulo=?, descripcion_modulo=?, estado_modulo=? WHERE PK_id_Modulo=?";
     private static final String SQL_QUERY = "SELECT PK_id_Modulo, nombre_modulo, descripcion_modulo, estado_modulo FROM tbl_modulo WHERE PK_id_Modulo = ?";
     
 
+public List<Modulos> select(){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Modulos modulos = null;
+        List<Modulos> modulo = new ArrayList<Modulos>();
+        
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                int id_modulo = rs.getInt("PK_id_Modulo");
+                String nombre_modulo = rs.getString("nombre_modulo");
+                String descripcion_modulo = rs.getString("descripcion_modulo");
+                String estado_modulo = rs.getString("estado_modulo");
+                
+                modulos = new Modulos();
+                modulos.setCodigo_modulo(id_modulo);
+                modulos.setNombre_modulo(nombre_modulo);
+                modulos.setDescripcion_modulo(descripcion_modulo);
+                modulos.setEstado_modulo(estado_modulo);
+                
+                
+                modulo.add(modulos);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        finally{
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        
+        return modulo;
+    }
     public int insert(Modulos modulos){
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -75,23 +115,23 @@ public class ModulosDAO {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
-        
         try {
             conn = Conexion.getConnection();
             //System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, modulos.getCodigo_modulo());
             rows = stmt.executeUpdate();
+            System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-        }
-        finally{
+        } finally {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
+
         return rows;
     }    
-     public Modulos query(Modulos moduloC) {    
+    public Modulos query(Modulos moduloC) {    
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
