@@ -38,7 +38,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         this.objUsuario = objUsuario;
-        String id_Usuario = objUsuario.getId_usuario();
+        int id_Usuario = objUsuario.getId_usuario();
         
         int id_perfil=0;
         
