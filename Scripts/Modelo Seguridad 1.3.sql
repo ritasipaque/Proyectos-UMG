@@ -17,6 +17,13 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `umg` DEFAULT CHARACTER SET utf8 ;
 USE `umg` ;
 
+CREATE TABLE IF NOT EXISTS `umg`.`tbl_login` (
+  `PK_id_usuario` INT NOT NULL AUTO_INCREMENT,
+  `username_login` VARCHAR(60) NOT NULL,
+  `password_login` VARCHAR(25)NOT NULL,
+  PRIMARY KEY (`PK_id_usuario`) )
+ENGINE = InnoDB CHARACTER SET = latin1;
+
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_modulo`
 -- -----------------------------------------------------
@@ -49,12 +56,14 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   `PK_id_usuario` INT(20) AUTO_INCREMENT,
-  `usuario_usuario` VARCHAR(45) NULL DEFAULT NULL,
-  `password_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `nombre_usuario` VARCHAR(45) NULL DEFAULT NULL,
+  `apellido_usuario` VARCHAR(45) NULL DEFAULT NULL,
+  `username_usuario` VARCHAR(45) NULL DEFAULT NULL,
+  `password_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `correo_usuarios` VARCHAR(45) NULL DEFAULT NULL,
-  `respuesta_usuarios` VARCHAR(45) NULL DEFAULT NULL,
-  `idtipo_usuario` TINYINT NULL DEFAULT NULL,
+  `cambio_password` TINYINT(1) NULL DEFAULT NULL,
+  `estado_usuario` TINYINT NULL DEFAULT NULL,
+  `ultima_conexion` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
