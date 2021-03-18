@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  *
+<<<<<<< HEAD
  * @author Diana
  */
 public class LoginDAO {
@@ -21,6 +22,17 @@ public class LoginDAO {
     private static final String SQL_UPDATE = "UPDATE `umg`.`tbl_login` SET  password=? WHERE id_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM `umg`.`tbl_login` WHERE PK_id_usuario=?";
     private static final String SQL_QUERY = "SELECT PK_id_usuario, username_login, password_login FROM usuario WHERE username_login = ?";
+=======
+ * @author visitante
+ */
+public class LoginDAO {
+
+    private static final String SQL_SELECT = "SELECT id_usuario, username, password FROM usuario";
+    private static final String SQL_INSERT = "INSERT INTO usuario(username, password) VALUES(?, ?)";
+    private static final String SQL_UPDATE = "UPDATE usuario SET  password=? WHERE id_usuario = ?";
+    private static final String SQL_DELETE = "DELETE FROM usuario WHERE id_usuario=?";
+    private static final String SQL_QUERY = "SELECT id_usuario, username, password FROM usuario WHERE username = ?";
+>>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
 
     public List<Login> select() {
         Connection conn = null;
@@ -33,9 +45,15 @@ public class LoginDAO {
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
+<<<<<<< HEAD
                 int id_usuario = rs.getInt("PK_id_usuario");
                 String username = rs.getString("username_login");
                 String password = rs.getString("password_login");
+=======
+                int id_usuario = rs.getInt("id_usuario");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+>>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
 
                 usuario = new Login();
                 usuario.setId_usuario(id_usuario);
@@ -137,9 +155,15 @@ public class LoginDAO {
             stmt.setString(1, usuario.getUsername());
             rs = stmt.executeQuery();
             while (rs.next()) {
+<<<<<<< HEAD
                 int id_usuario = rs.getInt("PK_id_usuario");
                 String username = rs.getString("username_login");
                 String password = rs.getString("password_login");
+=======
+                int id_usuario = rs.getInt("id_usuario");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+>>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
 
                 usuario = new Login();
                 usuario.setId_usuario(id_usuario);

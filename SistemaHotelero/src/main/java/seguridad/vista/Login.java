@@ -132,6 +132,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+<<<<<<< HEAD
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
@@ -176,6 +177,52 @@ public class Login extends javax.swing.JFrame {
 
     private void btncambiodecontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncambiodecontraActionPerformed
         // TODO add your handling code here:
+=======
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+
+        if (txtUsuario.getText().trim().isEmpty() || txtContraseña.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                seguridad.dominio.Login usuarioAConsultar = new seguridad.dominio.Login();
+                LoginDAO usuarioDAO = new LoginDAO();
+                usuarioAConsultar.setUsername(txtUsuario.getText().trim());
+                // Recuperación de información a través de otro objeto
+                usuarioAConsultar = usuarioDAO.query(usuarioAConsultar);
+
+                if (txtContraseña.getText().equals(usuarioAConsultar.getPassword()) && txtUsuario.getText().equals(usuarioAConsultar.getUsername())) {
+                    JOptionPane.showMessageDialog(null, "Bienvenido\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
+
+                    MDI_Sistema menuGeneral = new MDI_Sistema ();
+                    menuGeneral.setVisible(true);
+                    this.dispose();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO O CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    txtContraseña.setText("");
+                    txtUsuario.setText("");
+                }
+            } catch (HeadlessException e) {
+                JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO O CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txtContraseña.setText("");
+                txtUsuario.setText("");
+            }
+        }
+
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btncambiodecontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncambiodecontraActionPerformed
+        // TODO add your handling code here:
+>>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
          CambioC frmRecupera = new CambioC();
                 frmRecupera.setVisible(true);
         

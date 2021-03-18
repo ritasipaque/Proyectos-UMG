@@ -34,6 +34,10 @@ public class CambioContra {
     
     @Override
     public String toString() {
+<<<<<<< HEAD
         return "Usuario{" + "PK_id_usuario=" + usu  + ", password_login=" + contra + '}';
+=======
+        return "Usuario{" + "id_usuario=" + usu  + ", password=" + contra + '}';
+>>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
     }
 }
