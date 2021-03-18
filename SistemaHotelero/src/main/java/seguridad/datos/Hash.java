@@ -1,12 +1,6 @@
 
 package seguridad.datos;
 
-import java.util.logging.Logger;
-
-/**
- *
- * @author OtakuGT
- */
 public class Hash {
     
     // Retorna un hash a partir de un tipo y un texto
@@ -34,8 +28,5 @@ public class Hash {
     public static String sha1(String txt) {
         return Hash.getHash(txt, "SHA1");
     }
-    private static final Logger LOG = Logger.getLogger(Hash.class.getName());
-
- 
 
 }
