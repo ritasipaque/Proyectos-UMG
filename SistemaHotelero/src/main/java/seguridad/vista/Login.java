@@ -152,7 +152,7 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Bienvenido\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
 
                     MDI_Components menuGeneral = new  MDI_Components();
-                  //  menuGeneral.setVisible(true);
+                  // menuGeneral.setVisible(true);
                     this.dispose();
 
                 } else {
