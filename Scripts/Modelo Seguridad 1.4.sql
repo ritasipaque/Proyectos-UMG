@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_perfil_encabezado` (
   PRIMARY KEY (`PK_id_perfil`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `umg`.`tbl_perfil_encabezado` (`PK_id_perfil`, `nombre_perfil`, `descripcion_perfil`, `estado_perfil`) VALUES ('1', 'perfil1', 'prueba en el perfil 1', '1');
 
 
 -- -----------------------------------------------------
