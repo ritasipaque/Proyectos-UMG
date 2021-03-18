@@ -32,27 +32,28 @@ public class Aplicacion_Perfil extends javax.swing.JInternalFrame {
         initComponents();
         String perfil;
         PerfilDAO personaDAO = new PerfilDAO();
-        List<Perfil> perfiles = personaDAO.select();
+        List<Perfil> perfiles = personaDAO.listar();
         for (Perfil persona : perfiles) {
            
            consulta_perfil.addItem(String.valueOf(persona.getPk_id_perfil()));
         }
-        
-        modelo1=new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
+//-----------------------------------------------------------------------------------------------------------//     
+modelo1=new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
         modelo1.addColumn("CODIGO");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
         modelo1.addColumn("NOMBRE");
         tabla1.setModel(modelo1);
-        modelo2=new DefaultTableModel();
-        modelo2.addColumn("ID PERFIL");
-        modelo2.addColumn("ID APLICACION");
-        modelo2.addColumn("INGRESAR");
-        modelo2.addColumn("CONSULTAR");
-        modelo2.addColumn("MODIFICAR");
-        modelo2.addColumn("ELIMINAR");
-        modelo2.addColumn("IMPRIMIR");
-        tabla2.setModel(modelo2);
-        AplicacionDAO dao =new AplicacionDAO();
-        dao.select2();  
+String datos[]= new String[2];
+        AplicacionDAO dao = new  AplicacionDAO();
+        List<Aplicacion> personas = dao.select2();
+        for (Aplicacion persona : personas) {       
+               
+               datos[0]=String.valueOf(persona.getId_Aplicacion());
+               datos[1]=persona.getNombre_Aplicacion();
+               
+                modelo1.addRow(datos);
+        tabla1.setModel(modelo1);
+                        
+        }
     }
     
 public void LimpiarTabla2(){
@@ -370,8 +371,6 @@ int filaSeleccionada=tabla2.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
                Vector[0]=tabla2.getValueAt(filaSeleccionada, 0).toString();    
                Vector[1]=tabla2.getValueAt(filaSeleccionada, 1).toString();
                
-               
-               modelo1.addRow(Vector);    //LLAMAMOS AL MODELO DE LA PANTALLA2 Y LE AGREGAMOS EL VECTOR COMO UNA NUEVA FILA
                modelo2.removeRow(filaSeleccionada);  //ELIMINAMOS LA FILA TRASPASADA DE LA PANTALLA1
         }
     }//GEN-LAST:event_jButton3ActionPerformed
