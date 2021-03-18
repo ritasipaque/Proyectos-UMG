@@ -32,7 +32,7 @@ public class Aplicacion_Perfil extends javax.swing.JInternalFrame {
         initComponents();
         String perfil;
         PerfilDAO personaDAO = new PerfilDAO();
-        List<Perfil> perfiles = personaDAO.select();
+        List<Perfil> perfiles = personaDAO.listar();
         for (Perfil persona : perfiles) {
            
            consulta_perfil.addItem(String.valueOf(persona.getPk_id_perfil()));
