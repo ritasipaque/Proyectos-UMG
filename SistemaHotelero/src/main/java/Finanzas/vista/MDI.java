@@ -1,6 +1,5 @@
 package Finanzas.vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
 import javax.swing.UIManager;
 
 /*
@@ -35,7 +34,7 @@ public class MDI extends javax.swing.JFrame {
     public static void main(String args[]) {
 
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+          //  UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
