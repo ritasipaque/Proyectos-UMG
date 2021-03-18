@@ -20,7 +20,7 @@ import seguridad.dominio.Asignacion_Usuario_Perfil;
  *
  * @author TagoKG
  */
-public class Asignacion_usuario_perfil extends javax.swing.JInternalFrame {
+public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
      public void llenadoDeCombos2() {
        UsuarioDAO empleadoDAO = new UsuarioDAO();
@@ -63,7 +63,7 @@ public class Asignacion_usuario_perfil extends javax.swing.JInternalFrame {
     /**
      * Creates new form Asignacion_Perfil_usuario
      */
-    public Asignacion_usuario_perfil() {
+    public Asignacion_usuario_Perfil1() {
         initComponents();
            llenadoDeCombos1();
        llenadoDeTablas();
