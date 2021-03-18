@@ -55,13 +55,13 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `umg`.`tbl_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
-  `PK_id_usuario` INT(20) AUTO_INCREMENT,
+  `PK_id_usuario` VARCHAR(25) NOT NULL,
   `nombre_usuario` VARCHAR(45) NULL DEFAULT NULL,
-  `apellido_usuario` VARCHAR(45) NULL DEFAULT NULL,
+  `apellido_usuarios` VARCHAR(45) NULL DEFAULT NULL,
   `username_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `password_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `correo_usuarios` VARCHAR(45) NULL DEFAULT NULL,
-  `cambio_password` TINYINT(1) NULL DEFAULT NULL,
+  `cambio_password` TINYINT NULL DEFAULT NULL,
   `estado_usuario` TINYINT NULL DEFAULT NULL,
   `ultima_conexion` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`PK_id_usuario`))
