@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package seguridad.vista;
-import java.io.File;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -33,28 +32,27 @@ public class Aplicacion_Perfil extends javax.swing.JInternalFrame {
         initComponents();
         String perfil;
         PerfilDAO personaDAO = new PerfilDAO();
-        List<Perfil> perfiles = personaDAO.listar();
+        List<Perfil> perfiles = personaDAO.select();
         for (Perfil persona : perfiles) {
            
            consulta_perfil.addItem(String.valueOf(persona.getPk_id_perfil()));
         }
-//-----------------------------------------------------------------------------------------------------------//     
-modelo1=new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
+        
+        modelo1=new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
         modelo1.addColumn("CODIGO");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
         modelo1.addColumn("NOMBRE");
         tabla1.setModel(modelo1);
-String datos[]= new String[2];
-        AplicacionDAO dao = new  AplicacionDAO();
-        List<Aplicacion> personas = dao.select2();
-        for (Aplicacion persona : personas) {       
-               
-               datos[0]=String.valueOf(persona.getId_Aplicacion());
-               datos[1]=persona.getNombre_Aplicacion();
-               
-                modelo1.addRow(datos);
-        tabla1.setModel(modelo1);
-                        
-        }
+        modelo2=new DefaultTableModel();
+        modelo2.addColumn("ID PERFIL");
+        modelo2.addColumn("ID APLICACION");
+        modelo2.addColumn("INGRESAR");
+        modelo2.addColumn("CONSULTAR");
+        modelo2.addColumn("MODIFICAR");
+        modelo2.addColumn("ELIMINAR");
+        modelo2.addColumn("IMPRIMIR");
+        tabla2.setModel(modelo2);
+        AplicacionDAO dao =new AplicacionDAO();
+        dao.select2();  
     }
     
 public void LimpiarTabla2(){
@@ -96,8 +94,6 @@ public void LimpiarTabla2(){
         tabla1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla2 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
@@ -198,14 +194,6 @@ public void LimpiarTabla2(){
         ));
         jScrollPane2.setViewportView(tabla2);
 
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Ayuda");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,26 +206,19 @@ public void LimpiarTabla2(){
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(8, 8, 8)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel6)
-                                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton2)
-                                                .addComponent(jLabel5)
-                                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jButton4)
-                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(jLabel4))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton2)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jButton4)
+                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel7)))
+                                        .addComponent(jLabel4)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
@@ -261,7 +242,7 @@ public void LimpiarTabla2(){
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(7, 7, 7)
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_Nombre_Perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(consulta_perfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,7 +252,7 @@ public void LimpiarTabla2(){
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,11 +268,7 @@ public void LimpiarTabla2(){
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
@@ -393,6 +370,8 @@ int filaSeleccionada=tabla2.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
                Vector[0]=tabla2.getValueAt(filaSeleccionada, 0).toString();    
                Vector[1]=tabla2.getValueAt(filaSeleccionada, 1).toString();
                
+               
+               modelo1.addRow(Vector);    //LLAMAMOS AL MODELO DE LA PANTALLA2 Y LE AGREGAMOS EL VECTOR COMO UNA NUEVA FILA
                modelo2.removeRow(filaSeleccionada);  //ELIMINAMOS LA FILA TRASPASADA DE LA PANTALLA1
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -435,23 +414,6 @@ int filaSeleccionada=tabla2.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
             JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        try {
-            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionAplicacionAPerfiles.chm")).exists()) {
-                Process p = Runtime
-                        .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionAplicacionAPerfiles.chm");
-                p.waitFor();
-            } else {
-                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
-            }
-            //System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_jButton6ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_Buscar_Perfil;
@@ -461,14 +423,12 @@ int filaSeleccionada=tabla2.getSelectedRow();  //LE ASIGNAMOS UNA VARIABLE INTEG
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable tabla1;

@@ -230,40 +230,29 @@ public class AplicacionDAO {
 
     }*/
     
-    public List<Aplicacion> select2(){
+    public void select2(){
+    DefaultTableModel modo = new DefaultTableModel();
+    modo.addColumn("Codigo");
+    modo.addColumn("Nombre");
+    Aplicacion_Perfil.tabla1.setModel(modo);
     Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Aplicacion a_app_usu = null;
-        List<Aplicacion> personas = new ArrayList<Aplicacion>();
-        
-        try {
+    PreparedStatement stmt = null;
+    ResultSet rs = null;
+    String datos[]= new String[2];
+    try {
             conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_SELECT);
+            stmt = conn.prepareStatement(SQL_SELECT2);
             rs = stmt.executeQuery();
             while(rs.next()){
-                int id_aplicacion = rs.getInt("PK_id_aplicacion");
-                String nombre_aplicacion = rs.getString("nombre_aplicacion");
+                datos[0] = rs.getString("PK_id_aplicacion");
+                datos[1] = rs.getString("nombre_aplicacion");
                 
-                
-                a_app_usu = new Aplicacion();
-                a_app_usu.setId_Aplicacion(id_aplicacion);
-                a_app_usu.setNombre_Aplicacion(nombre_aplicacion);
-                
-                
-                personas.add(a_app_usu);
+                modo.addRow(datos);
             }
-            
+            Aplicacion_Perfil.tabla1.setModel(modo);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         }
-        finally{
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-        
-        return personas;
 }
 
 }
