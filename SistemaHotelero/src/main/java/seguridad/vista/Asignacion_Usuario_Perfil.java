@@ -94,6 +94,7 @@ public class Asignacion_usuario_perfil extends javax.swing.JInternalFrame {
         BtnAyuda = new javax.swing.JButton();
 
         setTitle("Asignacion Usuario a Perfil");
+        setVisible(true);
 
         cbox_usuario.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         cbox_usuario.addActionListener(new java.awt.event.ActionListener() {
