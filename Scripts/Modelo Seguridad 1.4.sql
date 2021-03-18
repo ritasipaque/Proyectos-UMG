@@ -26,6 +26,8 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_login` (
   `password_login` VARCHAR(25)NOT NULL,
   PRIMARY KEY (`PK_id_usuario`) )
 ENGINE = InnoDB CHARACTER SET = latin1;
+INSERT INTO `umg`.`tbl_login` (`PK_id_usuario`, `username_login`, `password_login`) VALUES ('1', 'admin', '12345');
+
 
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_modulo`
@@ -38,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_modulo` (
   PRIMARY KEY (`PK_id_Modulo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `umg`.`tbl_modulo` (`PK_id_Modulo`, `nombre_modulo`, `descripcion_modulo`, `estado_modulo`) VALUES ('1', 'Modulo 1', 'Esta es una prueba de un módulo.', '1');
 
 
 -- -----------------------------------------------------
@@ -52,6 +55,7 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion` (
   PRIMARY KEY (`PK_id_aplicacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('1', 'Contabilidad', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
 
 
 -- -----------------------------------------------------
@@ -70,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   PRIMARY KEY (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuarios`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'Carlos', 'Castillo', 'carloscastillo1', '12345', 'carlos@gmail.com', '1', '2021-03-17 21:20:10');
 
 
 -- -----------------------------------------------------
