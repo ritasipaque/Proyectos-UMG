@@ -1,34 +1,70 @@
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\PerfilDAO.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\MDI_Components.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Login.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion_Aplicacion_Perfil.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Perfil.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\reportes\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Aplicacion.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\dominio\Perfil.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_a_modulosDAO.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_modulos.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\reportes\Reporte_Modulos.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\AplicacionDAO.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\dominio\Aplicacion.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\dominio\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Modulos.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\datos\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\reportes\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\dominio\Usuario.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\dominio\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Aplicacion_Perfil.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\vista\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Aplicacion_PerfilDAO.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\dominio\Modulos.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\datos\Conexion.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\vista\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\datos\Modulo_guia.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\vista\MDI.java
-C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\recursos\Modulo_guia.java
+
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_a_modulosDAO.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Login.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Comercial\reportes\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion_Aplicacion_Perfil.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_modulos.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\reportes\Reporte_Modulos.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Aplicacion.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\AplicacionDAO.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Hoteleria\dominio\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Aplicacion_PerfilDAO.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Aplicacion_Perfil.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Modulos.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\PerfilDAO.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Modulos.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Finanzas\datos\Conexion.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Hoteleria\vista\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Hoteleria\reportes\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Aplicacion.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\recursos\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Perfil.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Hoteleria\datos\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Finanzas\vista\MDI.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Comercial\vista\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Comercial\dominio\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\Comercial\datos\Modulo_guia.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Perfil.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Usuario.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
+C:\Users\leelu\Desktop\proyecto seguridad\SistemaHotelero\src\main\java\seguridad\vista\MDI_Components.java
+=======
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Comercial\datos\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Finanzas\datos\Conexion.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Aplicacion_Perfil.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Comercial\reportes\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Finanzas\vista\MDI.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\recursos\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Aplicacion.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Hoteleria\datos\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Perfil.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_modulos.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Usuario.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Comercial\vista\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\reportes\Reporte_Modulos.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\MDI_Components.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Comercial\dominio\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Hoteleria\reportes\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Hoteleria\vista\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion_Aplicacion_Perfil.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Login.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Aplicacion.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\Hoteleria\dominio\Modulo_guia.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\AplicacionDAO.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Perfil.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Aplicacion_PerfilDAO.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Modulos.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_a_modulosDAO.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\datos\PerfilDAO.java
+C:\Users\TagoKG\Desktop\Proyecto Seguridad\SistemaHotelero\src\main\java\seguridad\dominio\Modulos.java
