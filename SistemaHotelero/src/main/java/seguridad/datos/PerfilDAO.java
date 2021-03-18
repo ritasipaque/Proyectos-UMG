@@ -22,7 +22,7 @@ public class PerfilDAO {
  private static final String SQL_SELECT = "SELECT Pk_id_perfil, nombre_perfil, descripcion_perfil, estado_perfil FROM tbl_perfil_encabezado";
  private static final String SQL_INSERT = "INSERT INTO tbl_perfil_encabezado VALUES(?, ?, ?, ?)";
  private static final String SQL_DELETE = "DELETE FROM tbl_perfil_encabezado WHERE Pk_id_perfil=?";
- private static final String SQL_UPDATE = "UPDATE tbl_perfil_encabezado SET Pk_id_perfil, nombre_perfil=?, descripcion_perfil=?, estado_perfil=? WHERE Pk_id_perfil = ?";
+ private static final String SQL_UPDATE = "UPDATE tbl_perfil_encabezado SET Pk_id_perfil=?, nombre_perfil=?, descripcion_perfil=?, estado_perfil=? WHERE Pk_id_perfil = ?";
  private static final String SQL_QUERY = "SELECT Pk_id_perfil, nombre_perfil, descripcion_perfil, estado_perfil FROM tbl_perfil_encabezado WHERE Pk_id_perfil = ?";
     
     public int insert(Perfil perfil){
@@ -56,10 +56,11 @@ public class PerfilDAO {
             conn = Conexion.getConnection();
             //System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, perfil.getNombre_perfil());
-            stmt.setString(2, perfil.getDescripcion_perfil());
-            stmt.setInt(3, perfil.getEstado_perfil());
-            stmt.setInt(4, perfil.getPk_id_perfil());
+            stmt.setInt(1, perfil.getPk_id_perfil());
+            stmt.setString(2, perfil.getNombre_perfil());
+            stmt.setString(3, perfil.getDescripcion_perfil());
+            stmt.setInt(4, perfil.getEstado_perfil());
+            stmt.setInt(5, perfil.getPk_id_perfil());
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);
             
@@ -151,35 +152,4 @@ public class PerfilDAO {
          }
          return perfil;
      }
-     
-      public List<Perfil> select(){
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        Perfil perfil = null;
-        List<Perfil> perfiles = new ArrayList<Perfil>();
-        
-        try {
-            conn = Conexion.getConnection();
-            stmt = conn.prepareStatement(SQL_SELECT);
-            rs = stmt.executeQuery();
-            while(rs.next()){
-                int id_perfil = rs.getInt("PK_id_perfil");
-                
-                perfil = new Perfil();
-                perfil.setPk_id_perfil(id_perfil);
-                perfiles.add(perfil);
-            }
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
-        finally{
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-        
-        return perfiles;
-    }
 }
