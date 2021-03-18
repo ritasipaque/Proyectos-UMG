@@ -30,8 +30,8 @@ public class Asignacion_Usuario_PerfilDAO {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Asignacion_Usuario_Perfil vendedor = null;
-        List<Asignacion_Usuario_Perfil> vendedores = new ArrayList<Asignacion_Usuario_Perfil>();
+        Asignacion_Usuario_Perfil usuario1 = null;
+        List<Asignacion_Usuario_Perfil> usuarios = new ArrayList<Asignacion_Usuario_Perfil>();
 
         try {
             conn = Conexion.getConnection();
@@ -43,11 +43,11 @@ public class Asignacion_Usuario_PerfilDAO {
                  String usuario = rs.getString("PK_id_usuario");
                  int perfil  = rs.getInt("PK_id_perfil");
                  
-                vendedor = new Asignacion_Usuario_Perfil();
-                vendedor.setPK_id_usuario(usuario);   
-                vendedor.setPK_id_perfil(perfil);
+                usuario1 = new Asignacion_Usuario_Perfil();
+                usuario1.setPK_id_usuario(usuario);   
+                usuario1.setPK_id_perfil(perfil);
                             
-                vendedores.add(vendedor);
+                usuarios.add(usuario1);
             }
 
         } catch (SQLException ex) {
@@ -58,7 +58,7 @@ public class Asignacion_Usuario_PerfilDAO {
             Conexion.close(conn);
         }
 
-        return vendedores;
+        return usuarios;
     }
 
     public int insert(Asignacion_Usuario_Perfil Asignacion) {
@@ -161,7 +161,7 @@ public class Asignacion_Usuario_PerfilDAO {
                 
                 //vendedores.add(vendedor); // Si se utiliza un ArrayList
             }
-            //System.out.println("Registros buscado:" + vendedor);
+    
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {

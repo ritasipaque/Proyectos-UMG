@@ -24,6 +24,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
     private Asignacion_modulos formModulos;
     
     private Mantenimiento_Perfil formMantenimiento_Perfil;
+    private Asignacion_usuario_perfil fromAsignacion_UsuarioP;
     /**
      * Creates new form MDI_Seguridad
      *
