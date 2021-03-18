@@ -17,6 +17,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `umg` DEFAULT CHARACTER SET utf8 ;
 USE `umg` ;
 
+-- -----------------------------------------------------
+-- Table `umg`.`tbl_login`
+-- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_login` (
   `PK_id_usuario` INT NOT NULL AUTO_INCREMENT,
   `username_login` VARCHAR(60) NOT NULL,
@@ -57,7 +60,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   `PK_id_usuario` VARCHAR(25) NOT NULL,
   `nombre_usuario` VARCHAR(45) NULL DEFAULT NULL,
-  `apellido_usuarios` VARCHAR(45) NULL DEFAULT NULL,
+  `apellido_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `username_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `password_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `correo_usuarios` VARCHAR(45) NULL DEFAULT NULL,
