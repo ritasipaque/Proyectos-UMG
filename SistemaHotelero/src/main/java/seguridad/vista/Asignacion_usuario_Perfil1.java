@@ -405,11 +405,17 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        Asignacion_Usuario_PerfilDAO asignaciondao = new Asignacion_Usuario_PerfilDAO();
-        Asignacion_Usuario_Perfil asignacioneliminar = new Asignacion_Usuario_Perfil();
+     //   Asignacion_Usuario_PerfilDAO asignaciondao = new Asignacion_Usuario_PerfilDAO();
+      //  Asignacion_Usuario_Perfil asignacioneliminar = new Asignacion_Usuario_Perfil();
       //  vendedorAEliminar.setPK_id_usuario((txtbuscado.getText()));
-        asignaciondao.delete(asignacioneliminar);
-        llenadoDeTablas();
+        //asignaciondao.delete(asignacioneliminar);
+        //llenadoDeTablas();
+                int viewIndex = TablaAsignacion.getSelectedRow();
+        if(viewIndex != -1) {
+            int modelIndex = TablaAsignacion.convertRowIndexToModel(viewIndex); 
+            DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
+            model.removeRow(modelIndex);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void BotonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultarActionPerformed
@@ -444,15 +450,15 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
     private void BtnMovervariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMovervariasActionPerformed
         // TODO add your handling code here:
-      DefaultTableModel tabla2 = (DefaultTableModel)TablaAsignacion.getModel();
+       DefaultTableModel tabla = (DefaultTableModel)TablaPerfiles.getModel();
 
         Object[] row = new Object[2];
 
-        DefaultTableModel modelo22 = (DefaultTableModel)  TablaPerfiles.getModel();
-        for(int i = 0; i< tabla2.getRowCount();i++){
-            row [0] = tabla2.getValueAt(i,0);
+        DefaultTableModel tabla1 = (DefaultTableModel)  TablaAsignacion.getModel();
+        for(int i = 0; i< tabla.getRowCount();i++){
+            row [0] = tabla.getValueAt(i,0);
 
-            modelo22.addRow(row);
+            tabla1.addRow(row);
         }
     }//GEN-LAST:event_BtnMovervariasActionPerformed
 
