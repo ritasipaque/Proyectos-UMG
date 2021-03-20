@@ -43,8 +43,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
  
             DefaultTableModel modelo1 = new DefaultTableModel();
           modelo1 = new DefaultTableModel();
-          modelo1.addColumn("PK_id_usuario");
-          modelo1.addColumn("nombre_usuario");
+          modelo1.addColumn("ID Usuario");
+          modelo1.addColumn("NOMBRE");
         UsuarioDAO aplicacionDAO = new UsuarioDAO();
         List<Usuario> asignaciones = aplicacionDAO.select();
         TablaPerfiles.setModel(modelo1);
@@ -97,6 +97,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         Btnquitar = new javax.swing.JButton();
         label9 = new javax.swing.JLabel();
         label10 = new javax.swing.JLabel();
+        label7 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -230,7 +231,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID PERFIL", "NOMBRE"
+                "ID  Usuario", "NOMBRE"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -285,6 +286,9 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         label10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         label10.setText("Agregar:");
 
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        label7.setText("Usuarios Disponibles:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -306,16 +310,19 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
                                     .addComponent(BotonConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(TxtConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(BtnMovervarias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(BtnMoveruna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnQuitarVarias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Btnquitar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(label7)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(BtnMovervarias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(BtnMoveruna, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnQuitarVarias, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(Btnquitar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(label9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(429, 429, 429)
                                 .addComponent(label10)))
@@ -342,10 +349,15 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
                     .addComponent(cbox_perfiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BotonConsultar)
                     .addComponent(TxtConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label10)
-                    .addComponent(label8))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label10)
+                            .addComponent(label8)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(label7)))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -390,10 +402,10 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
         // TODO add your handling code here:
         try {
-            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionUsuarios_perfil.chm")).exists()) {
+            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionPerfilesA.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionUsuarios_perfil.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionPerfilesA.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -442,7 +454,9 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
             row[0] = model1.getValueAt(indexs[i], 0);
             row[0] = model1.getValueAt(indexs[i], 0);
             model.addRow(row);
+            
         }
+         
     }//GEN-LAST:event_BtnMoverunaActionPerformed
 
     private void BtnMovervariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMovervariasActionPerformed
@@ -518,6 +532,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label4;
     private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
     private javax.swing.JLabel label9;
     // End of variables declaration//GEN-END:variables

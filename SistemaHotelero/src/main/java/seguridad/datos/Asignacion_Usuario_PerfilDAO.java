@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import seguridad.dominio.Asignacion_Usuario_Perfil;
 
 /**
@@ -73,9 +74,9 @@ public class Asignacion_Usuario_PerfilDAO {
             //stmt.setInt(2, Asignacion.getPK_id_perfil());
            stmt.setString(2, Asignacion.getPK_id_perfil());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
+           
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
+           JOptionPane.showMessageDialog(null, "Registro exitoso");
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
