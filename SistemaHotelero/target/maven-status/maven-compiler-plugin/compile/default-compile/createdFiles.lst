@@ -38,6 +38,7 @@ seguridad\datos\UsuarioDAO.class
 seguridad\vista\Mantenimiento_Usuario$4.class
 seguridad\vista\MDI_Sistema$9.class
 seguridad\vista\Aplicacion_Perfil$6.class
+seguridad\vista\Asignacion_usuario_Perfil1$8.class
 seguridad\vista\Asignacion_modulos$4.class
 seguridad\dominio\Usuario.class
 seguridad\vista\MDI_Sistema$2.class
@@ -45,10 +46,12 @@ seguridad\datos\Conexion.class
 seguridad\vista\Mantenimiento_Aplicacion$4.class
 seguridad\vista\Mantenimiento_Aplicacion$9.class
 seguridad\datos\PerfilDAO.class
+seguridad\vista\Asignacion_usuario_Perfil1$12.class
 seguridad\vista\Aplicacion_Perfil$7.class
 seguridad\vista\Asignacion_modulos.class
 seguridad\vista\Mantenimiento_Perfil$3.class
 seguridad\vista\Asignacion_modulos$5.class
+seguridad\vista\Asignacion_usuario_Perfil1$9.class
 seguridad\vista\MDI_Sistema$5.class
 seguridad\vista\Mantenimiento_Usuario$5.class
 seguridad\vista\MDI_Components.class
@@ -72,6 +75,7 @@ seguridad\dominio\Perfil.class
 seguridad\vista\Aplicacion_Perfil$9.class
 seguridad\vista\Asignacion_usuario_Perfil1$4.class
 seguridad\datos\Asignacion_Usuario_PerfilDAO.class
+seguridad\vista\Asignacion_usuario_Perfil1$10.class
 seguridad\vista\Mantenimiento_Usuario$6.class
 seguridad\vista\Mantenimiento_Modulos$2.class
 seguridad\vista\MDI_Sistema$6.class
@@ -87,4 +91,5 @@ seguridad\vista\Mantenimiento_Perfil$5.class
 seguridad\vista\Mantenimiento_Aplicacion$7.class
 Finanzas\datos\Conexion.class
 seguridad\vista\Aplicacion_Perfil.class
+seguridad\vista\Asignacion_usuario_Perfil1$11.class
 seguridad\vista\Asignacion_modulos$7.class
