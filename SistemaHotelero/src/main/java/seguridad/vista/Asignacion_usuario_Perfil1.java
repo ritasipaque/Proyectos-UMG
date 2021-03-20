@@ -405,17 +405,14 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-     //   Asignacion_Usuario_PerfilDAO asignaciondao = new Asignacion_Usuario_PerfilDAO();
-      //  Asignacion_Usuario_Perfil asignacioneliminar = new Asignacion_Usuario_Perfil();
-      //  vendedorAEliminar.setPK_id_usuario((txtbuscado.getText()));
-        //asignaciondao.delete(asignacioneliminar);
-        //llenadoDeTablas();
-                int viewIndex = TablaAsignacion.getSelectedRow();
-        if(viewIndex != -1) {
-            int modelIndex = TablaAsignacion.convertRowIndexToModel(viewIndex); 
-            DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
-            model.removeRow(modelIndex);
+    
+    DefaultTableModel tb = (DefaultTableModel) TablaAsignacion.getModel();
+        int eliminar = TablaAsignacion.getRowCount()-1;
+        for (int i = eliminar; i >= 0; i--) {          
+        tb.removeRow(tb.getRowCount()-1);
         }
+     
+    
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void BotonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultarActionPerformed
