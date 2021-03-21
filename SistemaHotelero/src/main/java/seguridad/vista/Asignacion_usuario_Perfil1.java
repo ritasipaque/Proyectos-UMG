@@ -405,10 +405,10 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
         // TODO add your handling code here:
         try {
-            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionPerfilesA.chm")).exists()) {
+            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionPerfilesAUsuarios.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionPerfilesA.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaAsignacionPerfilesAUsuarios.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
