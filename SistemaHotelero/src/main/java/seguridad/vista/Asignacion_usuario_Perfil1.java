@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package seguridad.vista;
+import java.awt.event.MouseAdapter;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -64,6 +65,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         initComponents();
         llenadoDeCombos();
        llenadoDeTablas();
+
+                
     }
 
     /**
@@ -208,6 +211,11 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        TablaAsignacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablaAsignacionMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(TablaAsignacion);
@@ -445,14 +453,14 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void BtnMoverunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMoverunaActionPerformed
         // TODO add your handling code here:
         
-        int [] indexs=TablaPerfiles.getSelectedRows();
+        int [] tabla=TablaPerfiles.getSelectedRows();
         Object [] row = new Object[2];
         DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
         DefaultTableModel model1 = (DefaultTableModel)TablaPerfiles.getModel();
-        for (int i=0; i < indexs.length; i++)
+        for (int i=0; i < tabla.length; i++)
         {
-            row[0] = model1.getValueAt(indexs[i], 0);
-            row[0] = model1.getValueAt(indexs[i], 0);
+            row[0] = model1.getValueAt(tabla[i], 0);
+            row[0] = model1.getValueAt(tabla[i], 0);
             model.addRow(row);
             
         }
@@ -476,9 +484,9 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void BtnquitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnquitarActionPerformed
         // TODO add your handling code here:
         
-                int viewIndex = TablaAsignacion.getSelectedRow();
-        if(viewIndex != -1) {
-            int modelIndex = TablaAsignacion.convertRowIndexToModel(viewIndex); 
+                int tabla = TablaAsignacion.getSelectedRow();
+        if(tabla != -1) {
+            int modelIndex = TablaAsignacion.convertRowIndexToModel(tabla); 
             DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
             model.removeRow(modelIndex);
         }
@@ -486,29 +494,25 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
     private void btnQuitarVariasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarVariasActionPerformed
         // TODO add your handling code here:
-                 int viewIndex = TablaAsignacion.getSelectedRow();
-        if(viewIndex != -1) {
-            int modelIndex = TablaAsignacion.convertRowIndexToModel(viewIndex);
-            DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
-            model.removeRow(modelIndex);
+       DefaultTableModel tb = (DefaultTableModel) TablaAsignacion.getModel();
+        int eliminar = TablaAsignacion.getRowCount()-1;
+        for (int i = eliminar; i >= 0; i--) {          
+        tb.removeRow(tb.getRowCount()-1);
         }
+     
+    
     }//GEN-LAST:event_btnQuitarVariasActionPerformed
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         // TODO add your handling code here:
-        
-      if(TablaAsignacion.getSelectedRow()>0){
-        try{
-              TxtAñadir.setText(TablaAsignacion.getValueAt(TablaAsignacion.getSelectedRow(),0).toString());
-               TxtAñadir.setText(TablaAsignacion.getValueAt(TablaAsignacion.getSelectedRow(),1).toString());
-              TxtAñadir.setText(TablaAsignacion.getValueAt(TablaAsignacion.getSelectedRow(),2).toString());
-
-          }      catch(Exception e){
-               
-           }
-
-      }
+                
     }//GEN-LAST:event_BtnAgregarActionPerformed
+
+    private void TablaAsignacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignacionMouseClicked
+        // TODO add your handling code here:
+        int seleccionar = TablaAsignacion.rowAtPoint(evt.getPoint());
+        TxtAñadir.setText(String.valueOf(TablaAsignacion.getValueAt(seleccionar, 0)));
+    }//GEN-LAST:event_TablaAsignacionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
