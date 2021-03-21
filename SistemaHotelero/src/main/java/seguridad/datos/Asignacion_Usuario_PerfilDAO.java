@@ -138,48 +138,5 @@ public class Asignacion_Usuario_PerfilDAO {
         return rows;
     }
 
-//    public List<Persona> query(Persona vendedor) { // Si se utiliza un ArrayList
-    public Asignacion_Usuario_Perfil query(Asignacion_Usuario_Perfil Asignacion) {    
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<Asignacion_Usuario_Perfil> vendedores = new ArrayList<Asignacion_Usuario_Perfil>();
-        int rows = 0;
-
-        try {
-            conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY);
-           // stmt.setInt(1, Asignacion.getPK_id_perfil());
-            stmt.setString(1, Asignacion.getPK_id_perfil());
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                
-          //int perfil  = rs.getInt("PK_id_perfil");
-          String perfil = rs.getString("PK_id_perfil");
-                 String usuario = rs.getString("PK_id_usuario");
-                
-                Asignacion = new Asignacion_Usuario_Perfil();
-                Asignacion.setPK_id_perfil(perfil);
-                Asignacion.setPK_id_usuario(usuario);
-       
-                
-                //vendedores.add(vendedor); // Si se utiliza un ArrayList
-            }
-    
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-
-        //return ;  // Si se utiliza un ArrayList
-        return Asignacion;
-    }
-
-
-        
     
 }

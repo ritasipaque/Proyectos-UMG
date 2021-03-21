@@ -46,8 +46,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
           modelo1 = new DefaultTableModel();
           modelo1.addColumn("ID Usuario");
           modelo1.addColumn("NOMBRE");
-        UsuarioDAO aplicacionDAO = new UsuarioDAO();
-        List<Usuario> asignaciones = aplicacionDAO.select();
+        UsuarioDAO asignaciondao = new UsuarioDAO();
+        List<Usuario> asignaciones = asignaciondao.select();
         TablaPerfiles.setModel(modelo1);
         String[] dato = new String[2];
         for (int i = 0; i < asignaciones.size(); i++) {
