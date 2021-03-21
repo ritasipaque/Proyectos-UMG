@@ -83,8 +83,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         btnRegistrar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         BtnAyuda = new javax.swing.JButton();
-        BtnAgregar = new javax.swing.JButton();
         TxtAñadir = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         label4 = new javax.swing.JLabel();
         label6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -145,46 +145,41 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
             }
         });
 
-        BtnAgregar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        BtnAgregar.setText("Agregar");
-        BtnAgregar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAgregarActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 14)); // NOI18N
+        jLabel1.setText("Agregar:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(TxtAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 12, Short.MAX_VALUE)
-                        .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TxtAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -195,7 +190,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         label6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         label6.setText("Perfiles Disponibles:");
 
-        TablaAsignacion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TablaAsignacion.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         TablaAsignacion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         TablaAsignacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +227,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
             }
         });
 
-        TablaPerfiles.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TablaPerfiles.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         TablaPerfiles.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         TablaPerfiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -344,7 +339,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(100, 100, 100))
+                .addGap(174, 174, 174))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,10 +433,10 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void BotonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultarActionPerformed
         // TODO add your handling code here:
          String valor=cbox_perfiles.getSelectedItem().toString();
-        int valorint=Integer.parseInt(valor);
+        int val =Integer.parseInt(valor);
         PerfilDAO perfilDAO = new PerfilDAO();
         Perfil perfilconsultar = new Perfil();
-        perfilconsultar.setPk_id_perfil(valorint);
+        perfilconsultar.setPk_id_perfil(val);
         perfilconsultar=perfilDAO.query(perfilconsultar);
         if (perfilconsultar.getPk_id_perfil()!=0) {
             TxtConsulta.setText(perfilconsultar.getNombre_perfil());
@@ -503,11 +498,6 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     
     }//GEN-LAST:event_btnQuitarVariasActionPerformed
 
-    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
-        // TODO add your handling code here:
-                
-    }//GEN-LAST:event_BtnAgregarActionPerformed
-
     private void TablaAsignacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignacionMouseClicked
         // TODO add your handling code here:
         int seleccionar = TablaAsignacion.rowAtPoint(evt.getPoint());
@@ -517,7 +507,6 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonConsultar;
-    private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnAyuda;
     private javax.swing.JButton BtnMoveruna;
     private javax.swing.JButton BtnMovervarias;
@@ -530,6 +519,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnQuitarVarias;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbox_perfiles;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
