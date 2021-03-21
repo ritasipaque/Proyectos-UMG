@@ -6,10 +6,6 @@
 package seguridad.vista;
 import java.awt.event.MouseAdapter;
 import java.io.File;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -197,7 +193,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "ID PERFIL"
+                "ID Usuario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
