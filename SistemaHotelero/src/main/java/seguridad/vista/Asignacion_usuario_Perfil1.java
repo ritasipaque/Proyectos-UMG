@@ -391,10 +391,10 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Asignacion_Usuario_PerfilDAO Asignacion = new Asignacion_Usuario_PerfilDAO();
         Asignacion_Usuario_Perfil AsignacionINsertar = new Asignacion_Usuario_Perfil();
-
+        
         AsignacionINsertar.setPK_id_perfil(cbox_perfiles.getSelectedItem().toString());
         AsignacionINsertar.setPK_id_usuario(TxtAñadir.getText());
-
+        
         Asignacion.insert(AsignacionINsertar);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
