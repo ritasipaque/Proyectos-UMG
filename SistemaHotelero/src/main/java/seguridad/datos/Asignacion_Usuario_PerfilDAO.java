@@ -20,7 +20,7 @@ import seguridad.dominio.Asignacion_Usuario_Perfil;
  */
 public class Asignacion_Usuario_PerfilDAO {
     
-    
+    //Dos propiedades con objetos del tipo String las cuales contienen consultas de base de datos de seleccionar e insertar. 
     private static final String SQL_SELECT = "SELECT PK_id_usuario, PK_id_perfil FROM tbl_usuario_perfil";
     private static final String SQL_INSERT = "INSERT INTO tbl_usuario_perfil(PK_id_usuario, PK_id_perfil) VALUES(?,?)";
 

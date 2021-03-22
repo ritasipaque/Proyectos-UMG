@@ -23,6 +23,8 @@ import seguridad.dominio.Asignacion_Usuario_Perfil;
  */
 public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
+    
+    //Metodo Llenado de Combos consulta los dominios y datos PerfilDAO y Perfi para obetner la id perfil en el combobox
       public void llenadoDeCombos() {
        PerfilDAO empleadoDAO = new PerfilDAO();
       List<Perfil> empleados = empleadoDAO.listar();
@@ -35,7 +37,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     }
      
 
-     
+     //Metodo llenadoDeTablas llena las tabla TablaPerfiles llamando los datos de Usuario
    public void llenadoDeTablas() {
  
             DefaultTableModel modelo1 = new DefaultTableModel();
@@ -58,8 +60,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
      * Creates new form Asignacion_Perfil_usuario
      */
     public Asignacion_usuario_Perfil1() {
-        initComponents();
-        llenadoDeCombos();
+       initComponents();
+       llenadoDeCombos();
        llenadoDeTablas();
 
                 
@@ -391,7 +393,6 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         Asignacion_Usuario_PerfilDAO Asignacion = new Asignacion_Usuario_PerfilDAO();
         Asignacion_Usuario_Perfil AsignacionINsertar = new Asignacion_Usuario_Perfil();
-        
         AsignacionINsertar.setPK_id_perfil(cbox_perfiles.getSelectedItem().toString());
         AsignacionINsertar.setPK_id_usuario(TxtAñadir.getText());
         
