@@ -67,6 +67,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Perfiles - Usuarios"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_PUActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_ApM">
                   <Properties>
