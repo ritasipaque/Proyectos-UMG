@@ -1,5 +1,6 @@
 package Finanzas.datos;
 
+//CONEXION
 /*
     @author Diego Vásquez
 */
