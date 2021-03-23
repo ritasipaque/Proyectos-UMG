@@ -17,9 +17,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `umg` DEFAULT CHARACTER SET utf8 ;
 USE `umg` ;
 
--- -----------------------------------------------------
--- Table `umg`.`tbl_login`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_login` (
   `PK_id_usuario` INT NOT NULL AUTO_INCREMENT,
   `username_login` VARCHAR(60) NOT NULL,
@@ -64,7 +61,7 @@ INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `de
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   `PK_id_usuario` VARCHAR(25) NOT NULL,
   `nombre_usuario` VARCHAR(45) NULL DEFAULT NULL,
-  `apellido_usuario` VARCHAR(45) NULL DEFAULT NULL,
+  `apellido_usuarios` VARCHAR(45) NULL DEFAULT NULL,
   `username_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `password_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `correo_usuarios` VARCHAR(45) NULL DEFAULT NULL,
@@ -74,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   PRIMARY KEY (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuarios`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'Carlos', 'Castillo', 'carloscastillo1', '12345', 'carlos@gmail.com', '1', '2021-03-17 21:20:10');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuarios`, `username_usuario`, `password_usuario`, `correo_usuarios`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'Usuario1', 'Usuario11', 'pruebaUsuario', '12345', 'usuario@gmail.com', '1', '1', '2021-03-23 23:59:59');
 
 
 -- -----------------------------------------------------
