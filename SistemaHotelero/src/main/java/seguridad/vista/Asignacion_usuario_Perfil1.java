@@ -26,15 +26,15 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     
     //Metodo Llenado de Combos consulta los dominios y datos PerfilDAO y Perfi para obetner la id perfil en el combobox
       public void llenadoDeCombos() {
-       PerfilDAO empleadoDAO = new PerfilDAO();
-      List<Perfil> empleados = empleadoDAO.listar();
+       PerfilDAO asignaciondao = new PerfilDAO();
+      List<Perfil> asignacion = asignaciondao.listar();
       cbox_perfiles.addItem("");
-      for (int i = 0; i < empleados.size(); i++) {
-         cbox_perfiles.addItem(Integer.toString(empleados.get(i).getPk_id_perfil()));
-     
+      for (int i = 0; i < asignacion.size(); i++) {
+         cbox_perfiles.addItem(Integer.toString(asignacion.get(i).getPk_id_perfil()));
        }
    
     }
+      
      
 
      //Metodo llenadoDeTablas llena las tabla TablaPerfiles llamando los datos de Usuario
@@ -63,6 +63,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
        initComponents();
        llenadoDeCombos();
        llenadoDeTablas();
+       
 
                 
     }
@@ -463,24 +464,24 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        DefaultTableModel tabla = (DefaultTableModel)TablaPerfiles.getModel();
 
-        Object[] row = new Object[2];
+       Object[] row = new Object[2];
 
-        DefaultTableModel tabla1 = (DefaultTableModel)  TablaAsignacion.getModel();
-        for(int i = 0; i< tabla.getRowCount();i++){
-            row [0] = tabla.getValueAt(i,0);
+       DefaultTableModel tabla1 = (DefaultTableModel)  TablaAsignacion.getModel();
+       for(int i = 0; i< tabla.getRowCount();i++){
+       row [0] = tabla.getValueAt(i,0);
 
-            tabla1.addRow(row);
+       tabla1.addRow(row);
         }
     }//GEN-LAST:event_BtnMovervariasActionPerformed
 
     private void BtnquitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnquitarActionPerformed
         // TODO add your handling code here:
         
-                int tabla = TablaAsignacion.getSelectedRow();
+          int tabla = TablaAsignacion.getSelectedRow();
         if(tabla != -1) {
-            int modelIndex = TablaAsignacion.convertRowIndexToModel(tabla); 
-            DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
-            model.removeRow(modelIndex);
+        int tabla1 = TablaAsignacion.convertRowIndexToModel(tabla); 
+        DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
+        model.removeRow(tabla1);
         }
     }//GEN-LAST:event_BtnquitarActionPerformed
 
@@ -497,6 +498,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
     private void TablaAsignacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaAsignacionMouseClicked
         // TODO add your handling code here:
+        
+         // La variable seleccionar es para capturar la fila que ha sido seleccionada Con el Mouse
         int seleccionar = TablaAsignacion.rowAtPoint(evt.getPoint());
         TxtAñadir.setText(String.valueOf(TablaAsignacion.getValueAt(seleccionar, 0)));
     }//GEN-LAST:event_TablaAsignacionMouseClicked
