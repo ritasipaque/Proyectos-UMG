@@ -18,11 +18,7 @@ import java.util.logging.Logger;
  * @author Diana
  */
 public class CambioCDAO {
-<<<<<<< HEAD
     private static final String SQL_UPDATE = "UPDATE `umg`.`tbl_login' SET password_login=?  WHERE PK_id_usuario=?";
-=======
-    private static final String SQL_UPDATE = "UPDATE usuario SET password=?  WHERE id_usuario=?";
->>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
   
     
     public int update(CambioContra AActualizar){

@@ -159,15 +159,12 @@ public class CambioC extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-<<<<<<< HEAD
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-=======
->>>>>>> 21857b3b70ddf1047e23e82c69e1b3bf355ee96c
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
