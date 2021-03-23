@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import seguridad.dominio.Asignacion_Usuario_Perfil;
 
 /**
@@ -41,8 +42,8 @@ public class Asignacion_Usuario_PerfilDAO {
                
                 
                  String usuario = rs.getString("PK_id_usuario");
-                 int perfil  = rs.getInt("PK_id_perfil");
-                 
+                 //int perfil  = rs.getInt("PK_id_perfil");
+                 String perfil = rs.getString("PK_id_perfil");
                 usuario1 = new Asignacion_Usuario_Perfil();
                 usuario1.setPK_id_usuario(usuario);   
                 usuario1.setPK_id_perfil(perfil);
@@ -70,12 +71,12 @@ public class Asignacion_Usuario_PerfilDAO {
             stmt = conn.prepareStatement(SQL_INSERT);
             
             stmt.setString(1, Asignacion.getPK_id_usuario());
-            stmt.setInt(2, Asignacion.getPK_id_perfil());
-           
+            //stmt.setInt(2, Asignacion.getPK_id_perfil());
+           stmt.setString(2, Asignacion.getPK_id_perfil());
 
-            System.out.println("ejecutando query:" + SQL_INSERT);
+           
             rows = stmt.executeUpdate();
-            System.out.println("Registros afectados:" + rows);
+           JOptionPane.showMessageDialog(null, "Registro exitoso");
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -96,7 +97,8 @@ public class Asignacion_Usuario_PerfilDAO {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             
-            stmt.setInt(1, Asignacion.getPK_id_perfil());
+           // stmt.setInt(1, Asignacion.getPK_id_perfil());
+           stmt.setString(1, Asignacion.getPK_id_perfil());
             stmt.setString(2, Asignacion.getPK_id_usuario());
            
 
@@ -122,7 +124,8 @@ public class Asignacion_Usuario_PerfilDAO {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_DELETE);
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1, Asignacion.getPK_id_perfil());
+           // stmt.setInt(1, Asignacion.getPK_id_perfil());
+           stmt.setString(1, Asignacion.getPK_id_perfil());
             rows = stmt.executeUpdate();
             System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
@@ -135,46 +138,5 @@ public class Asignacion_Usuario_PerfilDAO {
         return rows;
     }
 
-//    public List<Persona> query(Persona vendedor) { // Si se utiliza un ArrayList
-    public Asignacion_Usuario_Perfil query(Asignacion_Usuario_Perfil Asignacion) {    
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<Asignacion_Usuario_Perfil> vendedores = new ArrayList<Asignacion_Usuario_Perfil>();
-        int rows = 0;
-
-        try {
-            conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, Asignacion.getPK_id_perfil());
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                
-          int perfil  = rs.getInt("PK_id_perfil");
-                 String usuario = rs.getString("PK_id_usuario");
-                
-                Asignacion = new Asignacion_Usuario_Perfil();
-                Asignacion.setPK_id_perfil(perfil);
-                Asignacion.setPK_id_usuario(usuario);
-       
-                
-                //vendedores.add(vendedor); // Si se utiliza un ArrayList
-            }
-    
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(rs);
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-
-        //return ;  // Si se utiliza un ArrayList
-        return Asignacion;
-    }
-
-
-        
     
 }
