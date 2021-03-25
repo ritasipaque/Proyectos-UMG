@@ -1,12 +1,9 @@
 package seguridad.vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import seguridad.dominio.Usuario;
