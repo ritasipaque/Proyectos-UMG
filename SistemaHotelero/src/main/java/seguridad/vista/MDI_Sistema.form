@@ -48,6 +48,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Aplicaciones - Usuario"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JMenuItem_ApUActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="JMenuItem_ApP">
                   <Properties>
