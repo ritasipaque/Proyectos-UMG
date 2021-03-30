@@ -5,10 +5,12 @@
  */
 package seguridad.vista;
 
-import seguridad.datos.CambioCDAO;
-import seguridad.dominio.CambioContra;
-import seguridad.dominio.Login;
+import seguridad.datos.UsuarioDAO;
+import seguridad.dominio.Usuario;
+import seguridad.dominio.Usuario;
 import javax.swing.JOptionPane;
+import seguridad.datos.UsuarioDAO;
+import seguridad.dominio.Usuario;
 
 
 /**
@@ -112,21 +114,15 @@ public class CambioC extends javax.swing.JFrame {
          if (txtUsuario.getText().trim().isEmpty() || txtContraseña.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
 
-                CambioCDAO actualizacionDAO = new CambioCDAO();
-                CambioContra AActualizar = new CambioContra();
-                 AActualizar.setUser(txtUsuario.getText());
-                 AActualizar.setContra(txtContraseña.getText());
+                UsuarioDAO actualizacionDAO = new UsuarioDAO();
+                Usuario AActualizar = new Usuario();
+                 AActualizar.setUser_usuario(txtUsuario.getText());
+                 AActualizar.setPassword_usuario(txtContraseña.getText());
                  actualizacionDAO.update(AActualizar);
-                
-//                 CambioCDAO modulosDAO = new CambioCDAO();
-//                 CambioContra moduloActualizar = new CambioContra();
-//                 moduloActualizar.setUser(usu.getText());
-//                 moduloActualizar.setContra(contra.getText());
-//                 modulosDAO.update(moduloActualizar);
+ 
                 
                     
-                    Login log = new Login();              
-                    this.dispose();
+                    
      }          
     }//GEN-LAST:event_btncambiocontraseñaActionPerformed
 
