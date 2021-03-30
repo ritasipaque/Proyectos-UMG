@@ -16,7 +16,7 @@ import seguridad.dominio.Aplicacion;
 
 /**
  *
- * @author OtakuGT
+ * @author Diana
  */
 public class UsuarioDAO extends Conexion {
 
