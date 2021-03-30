@@ -113,11 +113,9 @@ public class CambioC extends javax.swing.JFrame {
 
          if (txtUsuario.getText().trim().isEmpty() || txtContraseña.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
-<<<<<<< HEAD
-            //update de usuarioDAO y Usuario ...
-=======
 
->>>>>>> 8147d322a4039500b489464dbf5d4b9c464f5d28
+            //update de usuarioDAO y Usuario ...
+
                 UsuarioDAO actualizacionDAO = new UsuarioDAO();
                 Usuario AActualizar = new Usuario();
                  AActualizar.setUser_usuario(txtUsuario.getText());
@@ -165,7 +163,7 @@ public class CambioC extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-<<<<<<< HEAD
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -174,8 +172,7 @@ public class CambioC extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-=======
->>>>>>> 8147d322a4039500b489464dbf5d4b9c464f5d28
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
