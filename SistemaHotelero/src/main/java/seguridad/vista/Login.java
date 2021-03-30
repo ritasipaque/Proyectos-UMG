@@ -143,7 +143,10 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
+<<<<<<< HEAD
                 //viene de Uusuario y UsuarioDAO ...
+=======
+>>>>>>> 8147d322a4039500b489464dbf5d4b9c464f5d28
                 
                 seguridad.dominio.Usuario usuarioAConsultar = new seguridad.dominio.Usuario();
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
