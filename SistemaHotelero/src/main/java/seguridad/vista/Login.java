@@ -9,6 +9,7 @@ import seguridad.datos.UsuarioDAO;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import seguridad.datos.UsuarioDAO;
+import seguridad.dominio.Usuario;
 
 /**
  *
@@ -146,7 +147,6 @@ public class Login extends javax.swing.JFrame {
 
                 //viene de Uusuario y UsuarioDAO ...
 
-                
                 seguridad.dominio.Usuario usuarioAConsultar = new seguridad.dominio.Usuario();
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 usuarioAConsultar.setUser_usuario(txtUsuario.getText().trim());
@@ -181,8 +181,8 @@ public class Login extends javax.swing.JFrame {
 
     private void btncambiodecontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncambiodecontraActionPerformed
         // TODO add your handling code here:
-         CambioC frmRecupera = new CambioC();
-                frmRecupera.setVisible(true);
+         Usuario frmRecupera = new Usuario();
+      //          frmRecupera.setVisible(true);
         
     }//GEN-LAST:event_btncambiodecontraActionPerformed
 

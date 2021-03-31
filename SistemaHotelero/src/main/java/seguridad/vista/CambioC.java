@@ -115,7 +115,6 @@ public class CambioC extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
 
             //update de usuarioDAO y Usuario ...
-
                 UsuarioDAO actualizacionDAO = new UsuarioDAO();
                 Usuario AActualizar = new Usuario();
                  AActualizar.setUser_usuario(txtUsuario.getText());
