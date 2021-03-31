@@ -227,7 +227,7 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-<<<<<<< HEAD
+
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -244,8 +244,7 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-=======
->>>>>>> aca70d68738a386883caf8a8c8dc53dd35a2afed
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
