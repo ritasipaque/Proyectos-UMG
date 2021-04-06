@@ -14,7 +14,7 @@ import javax.swing.UIManager;
  */
 public class MDIHoteleria extends javax.swing.JFrame {
 
-    private Mantenimiento_Ama_De_Llaves formMantenimiento_Aplicacion;
+    private Mantenimiento_Ama_De_Llaves formMantenimiento_Ama_De_Llaves;
     /**
      * Creates new form MDIHoteleria
      */
@@ -110,9 +110,9 @@ public class MDIHoteleria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        formMantenimiento_Aplicacion = new Mantenimiento_Ama_De_Llaves();
-        formMantenimiento_Aplicacion.setVisible(true);
-        jDesktopPane1.add(formMantenimiento_Aplicacion);
+        formMantenimiento_Ama_De_Llaves = new Mantenimiento_Ama_De_Llaves();
+        formMantenimiento_Ama_De_Llaves.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_Ama_De_Llaves);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
