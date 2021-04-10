@@ -10,6 +10,7 @@ import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import seguridad.datos.UsuarioDAO;
 import seguridad.dominio.Usuario;
+import seguridad.datos.PermisosDAO;
 
 /**
  *
@@ -158,8 +159,16 @@ public class Login extends javax.swing.JFrame {
 
                     MDI_Components menuGeneral = new  MDI_Components();
                   //  menuGeneral.setVisible(true);
+                  
+                    //----
+                    PermisosDAO permisos = new PermisosDAO();
+                    permisos.setNombreUsuario(usuarioAConsultar.getNombre_usuario());
+                    //----
+                    
+                    
                     this.dispose();
 
+                    JOptionPane.showMessageDialog(null, permisos.getNombreUsuario());
                 } else {
                     JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO O CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
                     txtContraseña.setText("");
