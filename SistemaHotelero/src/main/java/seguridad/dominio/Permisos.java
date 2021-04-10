@@ -20,4 +20,15 @@ public class Permisos {
         }
         return appsDeUsuario;
     }
+    
+    public String[] getPermisosApps(int codApp){
+        
+        String permisos[];
+        permisos = new String[permisosDAO.getPermisosApp(codApp).length];
+        
+        for(int i=0; i<permisos.length; i++){
+            permisos[i] = permisosDAO.getPermisosApp(codApp)[i];
+        }
+        return permisos;
+    }
 }

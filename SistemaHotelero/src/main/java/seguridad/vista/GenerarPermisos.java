@@ -25,7 +25,7 @@ public class GenerarPermisos {
                 MDI_Sistema.JMenuItem_Perfiles.setVisible(false);
                 MDI_Sistema.JMenuItem_Modulos.setVisible(false);
                 MDI_Sistema.JMenuItem_AplicacionesUsuario.setVisible(false);
-                
+
                 ejecutarPermisos.ejecutarBusqueda(usuario);
 
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -64,5 +64,14 @@ public class GenerarPermisos {
         } catch (NumberFormatException ex) {
             System.out.println(ex);
         }
+    }
+
+    public String[] getAccionesAplicacion(int codigoAplicacion, String usuario) {
+        ejecutarPermisos.ejecutarBusqueda(usuario);
+        String[] matrixPermisos = new String[5];
+        for (int i = 0; i < 5; i++) {
+            matrixPermisos[i] = ejecutarPermisos.getPermisosApps(codigoAplicacion)[i];
+        }
+        return matrixPermisos;
     }
 }
