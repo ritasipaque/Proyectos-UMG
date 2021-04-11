@@ -6,9 +6,9 @@ public class Conexion {
 
     // Estas constantes deben cambiarse temporalmente para probarlo localmente
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost/umg4?useSSL=false&serverTimezone=UTC";
-    private static final String JDBC_USER = "SantiagoSMD";
-    private static final String JDBC_PASS = "123";
+    private static final String JDBC_URL = "jdbc:mysql://localhost/umg?useSSL=false&serverTimezone=UTC";
+    private static final String JDBC_USER = "root";
+    private static final String JDBC_PASS = "";
 
 
     public static Connection getConnection() throws SQLException {
