@@ -17,9 +17,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `umg` DEFAULT CHARACTER SET utf8 ;
 USE `umg` ;
 
--- -----------------------------------------------------
--- Table `umg`.`tbl_login`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_login` (
   `PK_id_usuario` INT NOT NULL AUTO_INCREMENT,
   `username_login` VARCHAR(60) NOT NULL,
@@ -67,14 +64,14 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   `apellido_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `username_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `password_usuario` VARCHAR(45) NULL DEFAULT NULL,
-  `correo_usuarios` VARCHAR(45) NULL DEFAULT NULL,
+  `correo_usuario` VARCHAR(45) NULL DEFAULT NULL,
   `cambio_password` TINYINT NULL DEFAULT NULL,
   `estado_usuario` TINYINT NULL DEFAULT NULL,
   `ultima_conexion` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuarios`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'Carlos', 'Castillo', 'carloscastillo1', '12345', 'carlos@gmail.com', '1', '2021-03-17 21:20:10');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'prueba1', 'prueba2', 'prueba', '12345', 'prueba@gmail.com', '1', '1', '2021-03-23 23:59:59');
 
 
 -- -----------------------------------------------------
@@ -83,16 +80,13 @@ INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_us
 CREATE TABLE IF NOT EXISTS `umg`.`tbl_bitacora` (
   `PK_id_bitacora` INT NOT NULL AUTO_INCREMENT,
   `PK_id_usuario` VARCHAR(25) NOT NULL,
-  `fecha` DATE NULL DEFAULT NULL,
-  `hora` TIME NULL DEFAULT NULL,
-  `host` VARCHAR(45) NULL DEFAULT NULL,
+  `fecha` VARCHAR(25) NULL DEFAULT NULL,
+  `hora` VARCHAR(25) NULL DEFAULT NULL,
+  `host1` VARCHAR(45) NULL DEFAULT NULL,
   `ip` VARCHAR(25) NULL DEFAULT NULL,
   `accion` VARCHAR(50) NULL DEFAULT NULL,
   `tabla` VARCHAR(45) NULL DEFAULT NULL,
-  PRIMARY KEY (`PK_id_bitacora`, `PK_id_usuario`),
-    CONSTRAINT `fk_Bitacora_Usuario1`
-    FOREIGN KEY (`PK_id_usuario`)
-    REFERENCES `umg`.`tbl_usuario` (`PK_id_usuario`))
+  PRIMARY KEY (`PK_id_bitacora`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

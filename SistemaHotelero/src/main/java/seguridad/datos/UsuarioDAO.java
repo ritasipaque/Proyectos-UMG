@@ -17,26 +17,21 @@ import seguridad.dominio.Aplicacion;
  *
  * @author OtakuGT
  */
-    
-   
+public class UsuarioDAO extends Conexion {
 
-
-public class UsuarioDAO {
     private static final String SQL_SELECT = "SELECT * FROM tbl_usuario";
-    private static final String SQL_INSERT = "INSERT INTO tbl_usuario(PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuarios, cambio_password, estado_usuario, ultima_conexion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_usuario SET PK_id_usuario=?, nombre_usuario=?, apellido_usuario=?, username_usuario=?, password_usuario=?, correo_usuarios=?, cambio_password=?, estado_usuario=?, ultima_conexion=? WHERE PK_id_usuario = ?";
+    private static final String SQL_INSERT = "INSERT INTO tbl_usuario(PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuario, cambio_password, estado_usuario, ultima_conexion) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_usuario SET PK_id_usuario=?, nombre_usuario=?, apellido_usuario=?, username_usuario=?, password_usuario=?, correo_usuario=?, cambio_password=?, estado_usuario=?, ultima_conexion=? WHERE PK_id_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_usuario WHERE PK_id_usuario=?";
-    private static final String SQL_QUERY = "SELECT PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuarios, cambio_password, estado_usuario, ultima_conexion FROM tbl_usuario WHERE PK_id_usuario = ?";
-    
+    private static final String SQL_QUERY = "SELECT PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuario, cambio_password, estado_usuario, ultima_conexion FROM tbl_usuario WHERE username_usuario = ?";
+
     Conexion conectar = new Conexion();
     Connection conn = null;
     PreparedStatement stmt = null;
     ResultSet rs = null;
     Usuario usuario = null;
-    
-    
-    
-  public List<Usuario> select() {
+
+    public List<Usuario> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -52,7 +47,7 @@ public class UsuarioDAO {
                 String apellido = rs.getString("apellido_usuario");
                 String username = rs.getString("username_usuario");
                 String pass = rs.getString("password_usuario");
-                var correo = rs.getString("correo_usuarios");
+                var correo = rs.getString("correo_usuario");
                 int cambio = rs.getInt("cambio_password");
                 int estado = rs.getInt("estado_usuario");
                 String ultima = rs.getString("ultima_conexion");
@@ -81,29 +76,30 @@ public class UsuarioDAO {
 
         return usuarios;
     }
-   public Usuario query(Usuario usuario){
+
+    public Usuario query(Usuario usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
-        ResultSet rs = null;        
-        int rows=0;
-        
-         try {
+        ResultSet rs = null;
+        int rows = 0;
+
+        try {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, usuario.getId_usuario());
+            stmt.setString(1, usuario.getUser_usuario());
             rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 int id_usuario = rs.getInt("PK_id_usuario");
                 String nombre_usuario = rs.getString("nombre_usuario");
                 String apellido_usuario = rs.getString("apellido_usuario");
                 String user_usuario = rs.getString("username_usuario");
                 String password_usuario = rs.getString("password_usuario");
-                String correo_usuario = rs.getString("correo_usuarios");
+                String correo_usuario = rs.getString("correo_usuario");
                 int cambio_contrasena = rs.getInt("cambio_password");
                 int estado_usuario = rs.getInt("estado_usuario");
                 String ultima_conexion = rs.getString("ultima_conexion");
-                
+
                 usuario = new Usuario();
                 usuario.setId_usuario(id_usuario);
                 usuario.setNombre_usuario(nombre_usuario);
@@ -115,21 +111,20 @@ public class UsuarioDAO {
                 usuario.setEstado_usuario(estado_usuario);
                 usuario.setUltima_conexion(ultima_conexion);
 
-               rows++;           
+                rows++;
             }
             System.out.println("Registros buscado:" + usuario);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
-        }
-        finally{
+        } finally {
             Conexion.close(rs);
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        
+
         return usuario;
     }
-    
+
     public int delete(Usuario usuario) {
 
         Connection conn = null;
@@ -152,7 +147,7 @@ public class UsuarioDAO {
 
         return rows;
     }
-   
+
     public int update(Usuario usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -166,7 +161,7 @@ public class UsuarioDAO {
             stmt.setString(2, usuario.getNombre_usuario());
             stmt.setString(3, usuario.getApellido_usuario());
             stmt.setString(4, usuario.getUser_usuario());
-            stmt.setString(5, usuario.getPassword_usuario());            
+            stmt.setString(5, usuario.getPassword_usuario());
             stmt.setString(6, usuario.getCorreo_usuario());
             stmt.setInt(7, usuario.getCambio_password());
             stmt.setInt(8, usuario.getEstado_usuario());
@@ -184,8 +179,8 @@ public class UsuarioDAO {
 
         return rows;
     }
-    
-     public int insert(Usuario usuario){
+
+    public int insert(Usuario usuario) {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -195,7 +190,7 @@ public class UsuarioDAO {
             stmt.setString(2, usuario.getNombre_usuario());
             stmt.setString(3, usuario.getApellido_usuario());
             stmt.setString(4, usuario.getUser_usuario());
-            stmt.setString(5, usuario.getPassword_usuario());            
+            stmt.setString(5, usuario.getPassword_usuario());
             stmt.setString(6, usuario.getCorreo_usuario());
             stmt.setInt(7, usuario.getCambio_password());
             stmt.setInt(8, usuario.getEstado_usuario());
@@ -203,13 +198,57 @@ public class UsuarioDAO {
             stmt.executeUpdate();
         } catch (Exception ex) {
             System.err.println(ex);
-        }
-        finally{
+        } finally {
             Conexion.close(stmt);
             Conexion.close(conn);
-     }
+        }
         return 1;
-     }
-}
+    }
+
+    /*
+        Autor: Diego Vásquez [9959 - 19 - 19543]
+        Fecha: sábado, 20 de marzo de 2021
+     
+        public boolean login
        
-  
+        Función <login>, de tipo booleano, esta función hará la validación y accceso del usuario al
+        sistema. Será de utilidad para las funciones posteriores de seguridad y permisos.
+     */
+    public boolean login(Usuario user) throws SQLException {
+
+        //========================================//
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conexion = getConnection();
+        //========================================//
+        try {
+            ps = conexion.prepareStatement("SELECT PK_id_usuario, username_usuario, password_usuario, nombre_usuario FROM tbl_usuario WHERE username_usuario = ?");
+            ps.setString(1, user.getNombre_usuario());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                if (user.getPassword_usuario().equals(rs.getString(3))) {
+                    String sql_LastSession = "UPDATE tbl_usuario SET ultima_conexion = ? WHERE PK_id_usuario = ?";
+                    ps = conexion.prepareStatement(sql_LastSession);
+                    ps.setString(1, user.getUltima_conexion());
+                    ps.setInt(2, rs.getInt(1));
+                    ps.execute();
+                    //========================================//
+                    user.setId_usuario(rs.getInt(1));
+                    user.setUser_usuario(rs.getString(2));
+                    //=======================================//
+                    return true;
+                }
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(ps);
+            Conexion.close(conexion);
+        }
+        return false;
+    }
+}
