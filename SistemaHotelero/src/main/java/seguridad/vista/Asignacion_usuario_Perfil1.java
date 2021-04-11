@@ -60,6 +60,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
      * Creates new form Asignacion_Perfil_usuario
      */
     public Asignacion_usuario_Perfil1() {
+       int CodigoAplicacion = 120;
        initComponents();
        llenadoDeCombos();
        llenadoDeTablas();
@@ -446,15 +447,22 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private void BtnMoverunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMoverunaActionPerformed
         // TODO add your handling code here:
         
+         //En una variable tipo int, guardaremos la fila que se haya seleccionado  en nuestra tabla.
         int [] tabla=TablaPerfiles.getSelectedRows();
+        
+        // La  matriz es para filas 
         Object [] row = new Object[2];
+        
+        //Obtenemos el modelo de nuestra tabla.
         DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
         DefaultTableModel model1 = (DefaultTableModel)TablaPerfiles.getModel();
+        
+       //  bucle for dara como resultado una operación el número de elementos del array, su miembro dato length nos proporciona la dimensión del array
         for (int i=0; i < tabla.length; i++)
         {
             row[0] = model1.getValueAt(tabla[i], 0);
             row[0] = model1.getValueAt(tabla[i], 0);
-            model.addRow(row);
+            model.addRow(row); //Agregamos la fila seleccionada, del modelo de la tabla
             
         }
          
@@ -481,7 +489,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         if(tabla != -1) {
         int tabla1 = TablaAsignacion.convertRowIndexToModel(tabla); 
         DefaultTableModel model = (DefaultTableModel)TablaAsignacion.getModel();
-        model.removeRow(tabla1);
+        model.removeRow(tabla1); //Removemos la fila seleccionada, del modelo de la tabla
         }
     }//GEN-LAST:event_BtnquitarActionPerformed
 
@@ -490,7 +498,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
        DefaultTableModel tb = (DefaultTableModel) TablaAsignacion.getModel();
         int eliminar = TablaAsignacion.getRowCount()-1;
         for (int i = eliminar; i >= 0; i--) {          
-        tb.removeRow(tb.getRowCount()-1);
+        tb.removeRow(tb.getRowCount()-1); //Removemos la fila seleccionada, del modelo de la tabla
         }
      
     
