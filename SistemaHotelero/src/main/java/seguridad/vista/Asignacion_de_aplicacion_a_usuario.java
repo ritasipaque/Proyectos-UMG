@@ -39,6 +39,8 @@ public class Asignacion_de_aplicacion_a_usuario extends javax.swing.JInternalFra
      */
     public Asignacion_de_aplicacion_a_usuario() {
         initComponents();
+        int codigoAsignacionDeAplicacionaUsuario=105;
+        
         Asignacion_Aplicacion_UsuarioDAO personaDAO = new Asignacion_Aplicacion_UsuarioDAO();
         List<Usuario> perfiles = personaDAO.select2();
         for (Usuario persona : perfiles) {
