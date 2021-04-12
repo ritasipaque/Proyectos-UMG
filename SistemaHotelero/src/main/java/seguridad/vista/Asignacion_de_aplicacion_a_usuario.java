@@ -209,7 +209,7 @@ public class Asignacion_de_aplicacion_a_usuario extends javax.swing.JInternalFra
             }
         });
 
-        btnModificar.setText("jButton7");
+        btnModificar.setText("Editar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
