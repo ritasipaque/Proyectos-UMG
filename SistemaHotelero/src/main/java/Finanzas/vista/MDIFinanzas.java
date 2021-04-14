@@ -75,6 +75,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoContabilidad.add(jMenuItem3);
 
         jMenuItem2.setText("Mantenimiento de Periodo Fiscal");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoContabilidad.add(jMenuItem2);
 
         jMenuItem4.setText("Mantenimiento de Tipo de Asiento Contable");
@@ -144,11 +149,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
                 fmTipo = new FrmTipoTransaccion();
         JDesktopFinanzas.add(fmTipo);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+=======
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
+        frm_mantPerFis.setVisible(true);
+        JDesktopFinanzas.add(frm_mantPerFis);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+>>>>>>> CastilloC
 
     public static void main(String args[]) {
        

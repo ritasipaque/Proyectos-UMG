@@ -18,7 +18,6 @@ C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Comer
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\UsuarioDAO.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion_Aplicacion_Perfil.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\dominio\Perfil.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Finanzas\vista\PeriodoFiscal.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\AplicacionDAO.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Hoteleria\reportes\Modulo_guia.java
@@ -26,6 +25,7 @@ C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\segur
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\Login.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\PermisosDAO.java
+C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Finanzas\vista\Mantenimiento_PeriodoFiscal.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Finanzas\dominio\PeriodoFiscal.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_modulos.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Hoteleria\dominio\Modulo_guia.java
@@ -43,7 +43,6 @@ C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Finan
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\MDI_Components.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\AsignacionDAO.java
-C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Finanzas\vista\TipoAsiento.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Comercial\vista\Modulo_guia.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Perfil.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Aplicacion_UsuarioDAO.java
@@ -58,3 +57,4 @@ C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Hotel
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Hoteleria\datos\ConexionHoteleria.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\vista\CambioC.java
 C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion.java
+C:\Users\OtakuGT\Documents\Git\Proyectos-UMG\SistemaHotelero\src\main\java\Finanzas\vista\Mantenimiento_TipoAsiento.java

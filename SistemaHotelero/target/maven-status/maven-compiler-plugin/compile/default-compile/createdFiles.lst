@@ -30,6 +30,7 @@ seguridad\vista\Mantenimiento_Modulos$6.class
 
 
 Hoteleria\vista\Mantenimiento_Ama_De_Llaves$9.class
+Finanzas\vista\Mantenimiento_PeriodoFiscal$3.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$1.class
 seguridad\dominio\Modulos.class
 seguridad\vista\MDI_Sistema.class
@@ -47,7 +48,11 @@ Hoteleria\vista\Mantenimiento_Ama_De_Llaves$5.class
 Finanzas\vista\MDIFinanzas$2.class
 
 Finanzas\dominio\PeriodoFiscal.class
+<<<<<<< HEAD
 
+=======
+Finanzas\vista\MDIFinanzas$2.class
+>>>>>>> CastilloC
 seguridad\vista\Mantenimiento_Modulos$5.class
 seguridad\vista\Aplicacion_Perfil$5.class
 seguridad\vista\Asignacion_modulos$3.class
@@ -65,6 +70,7 @@ seguridad\vista\Asignacion_usuario_Perfil1$1.class
 seguridad\vista\Asignacion_usuario_Perfil1.class
 seguridad\datos\UsuarioDAO.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$10.class
+Finanzas\vista\Mantenimiento_TipoAsiento.class
 Hoteleria\datos\FormasDePagoDAO.class
 seguridad\vista\Mantenimiento_Usuario$4.class
 seguridad\vista\MDI_Sistema$9.class
@@ -76,8 +82,11 @@ seguridad\vista\Asignacion_modulos$4.class
 seguridad\datos\Asignacion_Aplicacion_UsuarioDAO.class
 seguridad\dominio\Usuario.class
 seguridad\vista\MDI_Sistema$2.class
+<<<<<<< HEAD
 
 Finanzas\vista\PeriodoFiscal.class
+=======
+>>>>>>> CastilloC
 Hoteleria\vista\Mantenimiento_habitaciones$1.class
 
 seguridad\datos\Conexion.class
@@ -87,6 +96,13 @@ Finanzas\dominio\CalculoIVA.class
 seguridad\vista\Asignacion_usuario_Perfil1$12.class
 seguridad\vista\Asignacion_modulos.class
 seguridad\vista\Mantenimiento_Perfil$3.class
+<<<<<<< HEAD
+=======
+Finanzas\vista\Mantenimiento_PeriodoFiscal$4.class
+seguridad\vista\Asignacion_modulos$5.class
+seguridad\vista\Asignacion_usuario_Perfil1$9.class
+seguridad\vista\MDI_Sistema$5.class
+>>>>>>> CastilloC
 seguridad\vista\Mantenimiento_Usuario$5.class
 Hoteleria\vista\Mantenimiento_habitaciones$8.class
 Hoteleria\datos\Ama_De_Llaves_DAO.class
@@ -116,6 +132,13 @@ seguridad\vista\Asignacion_modulos$2.class
 seguridad\vista\Aplicacion_Perfil$4.class
 seguridad\vista\Asignacion_usuario_Perfil1$6.class
 seguridad\vista\Aplicacion_Perfil$2.class
+<<<<<<< HEAD
+=======
+seguridad\dominio\Perfil.class
+seguridad\vista\Aplicacion_Perfil$9.class
+Finanzas\vista\Mantenimiento_PeriodoFiscal$2.class
+Hoteleria\datos\HabitacionesDAO.class
+>>>>>>> CastilloC
 seguridad\vista\Asignacion_de_aplicacion_a_usuario.class
 Hoteleria\vista\Mantenimiento_Ama_De_Llaves$8.class
 seguridad\vista\Asignacion_usuario_Perfil1$4.class
@@ -219,10 +242,19 @@ seguridad\vista\Mantenimiento_Aplicacion$1.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$3.class
 seguridad\vista\Mantenimiento_Perfil.class
 Hoteleria\dominio\Habitaciones.class
+<<<<<<< HEAD
 
 Finanzas\vista\TipoAsiento.class
+=======
+Finanzas\vista\Mantenimiento_PeriodoFiscal.class
+>>>>>>> CastilloC
 seguridad\vista\Mantenimiento_Aplicacion$7.class
 
 Hoteleria\vista\Mantenimiento_Ama_De_Llaves$1.class
 seguridad\vista\Aplicacion_Perfil.class
+<<<<<<< HEAD
+=======
+seguridad\vista\Asignacion_usuario_Perfil1$11.class
+Finanzas\vista\Mantenimiento_PeriodoFiscal$1.class
+>>>>>>> CastilloC
 seguridad\vista\Asignacion_modulos$7.class
