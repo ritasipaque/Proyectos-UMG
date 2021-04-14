@@ -12,7 +12,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Finanzas.dominio.TipoTransaccion;
 import Finanzas.datos.TipoTransaccionDAO;
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 /**
  *
  * @author Santiago Martinez Diaz
@@ -25,7 +30,16 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
           modelo.addColumn("Tipo Transaccion");
           modelo.addColumn("Efecto Transaccio");
 
-          
+       JTableHeader Theader = JTableTransaccion.getTableHeader();
+           Theader.setBackground(Color.red); // change the Background color
+        Theader.setForeground(Color.WHITE); // change the Foreground
+        
+        Theader.setFont(new Font("Tahome", Font.BOLD, 20)); // font name style size
+        ((DefaultTableCellRenderer)Theader.getDefaultRenderer())
+                .setHorizontalAlignment(JLabel.CENTER); // center header text
+        
+        JTableTransaccion.setFont(new Font("Tahome", Font.BOLD, 15));
+
           
           TipoTransaccionDAO TipoTDAO = new TipoTransaccionDAO();
           List<TipoTransaccion> tipot = TipoTDAO.select();
@@ -92,13 +106,13 @@ public void buscarperfil(){
         TxtCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         TxtCodigo.setOpaque(false);
 
-        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
         label7.setText("Codigo:");
 
-        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label8.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
         label8.setText("Efecto De Transaccion:");
 
-        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label9.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
         label9.setText("Tipo De Transaccion:");
 
         TxtEfecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -109,6 +123,7 @@ public void buscarperfil(){
         TxtTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         TxtTipo.setOpaque(false);
 
+        JTableTransaccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         JTableTransaccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         JTableTransaccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,35 +143,47 @@ public void buscarperfil(){
         });
         jScrollPane1.setViewportView(JTableTransaccion);
 
+        btnEliminar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
+        btnModificar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
         btnModificar.setText("Modificar");
+        btnModificar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
             }
         });
 
+        btnRegistrar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
         btnRegistrar.setText("Registrar");
+        btnRegistrar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
 
+        btnLimpiar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
             }
         });
 
+        txtbuscado.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+
+        btnLimpiar1.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
         btnLimpiar1.setText("Buscar:");
+        btnLimpiar1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
         btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiar1ActionPerformed(evt);
@@ -170,11 +197,7 @@ public void buscarperfil(){
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -197,12 +220,17 @@ public void buscarperfil(){
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(33, 38, Short.MAX_VALUE)))
+                        .addGap(33, 39, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -223,16 +251,19 @@ public void buscarperfil(){
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(txtbuscado)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLimpiar1))
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnEliminar)
-                            .addComponent(btnModificar)
-                            .addComponent(btnRegistrar)
-                            .addComponent(btnLimpiar)))
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
