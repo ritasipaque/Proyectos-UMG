@@ -147,7 +147,7 @@ public class Login extends javax.swing.JFrame {
                 //viene de Uusuario y UsuarioDAO ...
                 seguridad.dominio.Usuario usuarioAConsultar = new seguridad.dominio.Usuario();
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
-                usuarioAConsultar.setId_usuario(Integer.parseInt(txtUsuario.getText()));
+                usuarioAConsultar.setUser_usuario((txtUsuario.getText()));
 
                 System.out.println(usuarioAConsultar.toString());
                 // Recuperación de información a través de otro objeto
@@ -163,7 +163,7 @@ public class Login extends javax.swing.JFrame {
 //
 //                System.out.println("regresa objeto usuario " + usuarioAConsultar.getId_usuario());
                 //**********************************************************************************************************************************************************************           
-                if (txtContraseña.getText().equals(usuarioAConsultar.getPassword_usuario()) && txtUsuario.getText().equals(Integer.toString(usuarioAConsultar.getId_usuario()))) {
+                if (txtContraseña.getText().equals(usuarioAConsultar.getPassword_usuario()) && txtUsuario.getText().equals(usuarioAConsultar.getUser_usuario())) {
                     //  if (txtUsuario.getText().equals(Integer.toString(usuarioAConsultar.getId_usuario()))) {
                     // if (txtContraseña.getText().equals(usuarioAConsultar.getPassword_usuario())){
                     JOptionPane.showMessageDialog(null, "Bienvenido\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
