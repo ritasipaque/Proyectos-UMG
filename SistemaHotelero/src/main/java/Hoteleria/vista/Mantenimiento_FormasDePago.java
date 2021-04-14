@@ -142,6 +142,11 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         });
 
         btn_cancelar.setText("CANCELAR");
+        btn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cancelarActionPerformed(evt);
+            }
+        });
 
         btn_buscar.setText("BUSCAR");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -346,6 +351,10 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null,"El codigo esta vacio y/o el codigo debe de ser solo números");
     }
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btn_cancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
