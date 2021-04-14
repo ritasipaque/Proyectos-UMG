@@ -1,6 +1,6 @@
 
 
-package Finanzas.datos;
+package Finanzas.dominio;
 
 /**
  * 
@@ -42,6 +42,11 @@ public class TipoTransaccion {
 
     public void setEfecto_TipoTransaccion(int Efecto_TipoTransaccion) {
         this.Efecto_TipoTransaccion = Efecto_TipoTransaccion;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoTransaccion{" + "Codigo_TipoTransaccion=" + Codigo_TipoTransaccion + ", Transaccion_Tipo=" + Transaccion_Tipo + ", Efecto_TipoTransaccion=" + Efecto_TipoTransaccion + '}';
     }
     
     

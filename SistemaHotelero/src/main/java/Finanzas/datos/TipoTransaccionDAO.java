@@ -1,5 +1,5 @@
 
-package Finanzas.dominio;
+package Finanzas.datos;
 
 import Finanzas.datos.Conexion;
 import java.sql.Connection;
@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import Finanzas.datos.TipoTransaccion;
+import Finanzas.dominio.TipoTransaccion;
 
 /**
  * 

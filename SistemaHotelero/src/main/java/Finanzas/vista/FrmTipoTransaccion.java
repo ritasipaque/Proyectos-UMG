@@ -10,8 +10,8 @@ import java.io.File;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import Finanzas.datos.TipoTransaccion;
-import Finanzas.dominio.TipoTransaccionDAO;
+import Finanzas.dominio.TipoTransaccion;
+import Finanzas.datos.TipoTransaccionDAO;
 import javax.swing.JOptionPane;
 /**
  *
@@ -259,6 +259,7 @@ public void buscarperfil(){
         tipomodificar.setCodigo_TipoTransaccion(TxtCodigo.getText());
         tipomodificar.setTransaccion_Tipo(TxtTipo.getText());
         tipomodificar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+        
    
         tipodao.update(tipomodificar);
         JOptionPane.showMessageDialog(null, " Modificado Exitosamente");
