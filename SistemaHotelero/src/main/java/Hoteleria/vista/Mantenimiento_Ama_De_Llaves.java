@@ -31,7 +31,7 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
      */
     public Mantenimiento_Ama_De_Llaves() {
         initComponents();
-        //cargarCombobox.query2(cbxModulo);
+        cargarCombobox.query2(cbxPiso);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
         grupoDeRadios.add(btnRadioInactivo);
@@ -237,8 +237,6 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Piso:");
 
-        cbxPiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "1", "2", "3" }));
-
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Horario");
 
@@ -358,7 +356,7 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel10)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(cbxSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(30, 30, 30))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -434,11 +432,11 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
                 .addComponent(lblModulo)
                 .addGap(292, 292, 292))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -558,7 +556,7 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
         txtId.setText(String.valueOf(ama_De_Llaves_Buscar.getId_Ama_De_Llaves()));
         txtNombre.setText(String.valueOf(ama_De_Llaves_Buscar.getNombre_Ama_De_Llaves()));
         txtApellido.setText(String.valueOf(ama_De_Llaves_Buscar.getApellido_Ama_De_Llaves()));
-        cbxPiso.setSelectedItem(String.valueOf(ama_De_Llaves_Buscar.getPiso_Ama_De_Llaves()));
+        cbxPiso.setSelectedItem(ama_De_Llaves_Buscar.getPiso_Ama_De_Llaves());
         cbxEntrada.setSelectedItem(String.valueOf(ama_De_Llaves_Buscar.getEntrada_Ama_De_Llaves()));
         cbxSalida.setSelectedItem(String.valueOf(ama_De_Llaves_Buscar.getSalida_Ama_De_Llaves()));
         String fecha = String.valueOf(ama_De_Llaves_Buscar.getInicio_Ama_De_Llaves());
