@@ -61,7 +61,6 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -71,11 +70,10 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         cbxPiso = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtaDescripcion = new javax.swing.JTextArea();
+        txtDescripcion = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnNuevo = new javax.swing.JButton();
         btnAyuda = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         btnTipo = new javax.swing.JComboBox<>();
@@ -85,7 +83,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Aplicaciones Hoteleria");
+        setTitle("Mantenimiento Aplicaciones Hoteleria (GersonGomez)");
         setVisible(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado Ama de Llaves"));
@@ -111,14 +109,6 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEliminar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -126,34 +116,40 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Ama de Llaves"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("agregar habitaciones"));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                jPanel2AncestorMoved(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("ID:");
@@ -186,9 +182,9 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Descripción:");
 
-        txtaDescripcion.setColumns(20);
-        txtaDescripcion.setRows(5);
-        jScrollPane1.setViewportView(txtaDescripcion);
+        txtDescripcion.setColumns(20);
+        txtDescripcion.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcion);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel6.setText("Estado:");
@@ -206,14 +202,6 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
-            }
-        });
-
-        btnNuevo.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btnNuevo.setText("Nuevo");
-        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNuevoActionPerformed(evt);
             }
         });
 
@@ -236,34 +224,18 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(btnGuardar)
-                .addGap(34, 34, 34)
-                .addComponent(btnModificar)
-                .addGap(29, 29, 29)
-                .addComponent(btnNuevo)
-                .addGap(18, 18, 18)
-                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(92, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(25, 25, 25))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(btnGuardar)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,10 +243,21 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                         .addGap(8, 8, 8)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cbxEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(166, 166, 166))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnModificar)
+                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(134, 134, 134))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(156, 156, 156)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel6))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,21 +286,20 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(7, 7, 7)
                 .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
+                .addGap(17, 17, 17)
+                .addComponent(jLabel8)
+                .addGap(9, 9, 9)
+                .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardar)
                     .addComponent(btnModificar)
-                    .addComponent(btnNuevo)
+                    .addComponent(btnGuardar)
                     .addComponent(btnAyuda))
-                .addContainerGap())
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -339,9 +321,9 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 .addComponent(lblModulo)
                 .addGap(292, 292, 292))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
+                .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,7 +341,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
         
         int id=Integer.parseInt(txtId.getText());
-        String desc=txtaDescripcion.getText();
+        String desc=txtDescripcion.getText();
         int precio=Integer.parseInt(txtPrecio.getText());
         int piso=cbxPiso.getSelectedIndex();
         String tipo=String.valueOf(btnTipo.getSelectedItem());
@@ -369,30 +351,54 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         habitaciones.setDescripcion(desc);
         habitaciones.setPrecio(precio);
         habitaciones.setPiso(piso);
-        habitaciones.setEstado_Habitacion(estado);
         habitaciones.setTipo_Habitacion(tipo);
+        habitaciones.setEstado_Habitacion(estado);
         
         habitacionesDAO.insert(habitaciones);
         
         JOptionPane.showMessageDialog(null, "Habitacion ingresada correctamente");
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
+Habitaciones habitaciones_Modificar = new Habitaciones();
+        HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
+        
+        int id=Integer.parseInt(txtId.getText());
+        String desc=txtDescripcion.getText();
+        int precio=Integer.parseInt(txtPrecio.getText());
+        int piso=cbxPiso.getSelectedIndex();
+        String tipo=String.valueOf(btnTipo.getSelectedItem());
+        String estado=String.valueOf(cbxEstado.getSelectedItem());
        
+        habitaciones_Modificar.setId_Habitaciones(id);
+        habitaciones_Modificar.setDescripcion(desc);
+        habitaciones_Modificar.setPrecio(precio);
+        habitaciones_Modificar.setPiso(piso);
+        habitaciones_Modificar.setEstado_Habitacion(estado);
+        habitaciones_Modificar.setTipo_Habitacion(tipo);
+        
+        habitacionesDAO.update(habitaciones_Modificar);
+        
+        JOptionPane.showMessageDialog(null, "Habitacion Modificada correctamente");
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
+        Habitaciones habitaciones_Buscar = new Habitaciones();
+        HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
+        habitaciones_Buscar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
+        habitaciones_Buscar=habitacionesDAO.query(habitaciones_Buscar);
+        
+        txtId.setText(String.valueOf(habitaciones_Buscar.getId_Habitaciones()));
+        txtDescripcion.setText(String.valueOf(habitaciones_Buscar.getDescripcion()));
+        txtPrecio.setText(String.valueOf(habitaciones_Buscar.getPrecio()));
+        cbxPiso.setSelectedItem(String.valueOf(habitaciones_Buscar.getPiso()));
+        cbxEstado.setSelectedItem(String.valueOf(habitaciones_Buscar.getEstado_Habitacion()));
+        btnTipo.setSelectedItem(String.valueOf(habitaciones_Buscar.getTipo_Habitacion()));
+        
+       // habitacionesDAO.query(habitaciones_Buscar); 
+       
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-
-    }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void txtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyTyped
 
@@ -411,14 +417,16 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdActionPerformed
 
+    private void jPanel2AncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPanel2AncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2AncestorMoved
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnNuevo;
     private javax.swing.JComboBox<String> btnTipo;
     private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxPiso;
@@ -436,8 +444,8 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextArea txtDescripcion;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextArea txtaDescripcion;
     // End of variables declaration//GEN-END:variables
 }

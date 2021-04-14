@@ -10,7 +10,8 @@ import javax.swing.UIManager;
     @author Diego Vásquez
  */
 public class MDIFinanzas extends javax.swing.JFrame {
-
+  private FrmTipoTransaccion fmTipo;
+  
     public MDIFinanzas() {
         initComponents();
     }
@@ -84,6 +85,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoBancos.setText("Catálogos Bancos");
 
         jMenuItem5.setText("Mantenimiento de Tipo de Transacción");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem5);
 
         jMenuItem6.setText("Mantenimiento de Cuentas Bancarias");
@@ -137,6 +143,12 @@ public class MDIFinanzas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+                fmTipo = new FrmTipoTransaccion();
+        JDesktopFinanzas.add(fmTipo);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     public static void main(String args[]) {
        
