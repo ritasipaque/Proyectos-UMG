@@ -118,7 +118,7 @@ public class TipoTransaccionDAO {
             stmt = conn.prepareStatement(sql_delete);
              stmt.setString(1, tipo.getCodigo_TipoTransaccion());
             rows = stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Alumno Eliminado Con Exito");
+            JOptionPane.showMessageDialog(null, " Eliminado Con Exito");
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {

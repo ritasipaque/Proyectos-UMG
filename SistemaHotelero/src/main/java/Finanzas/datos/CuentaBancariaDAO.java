@@ -19,7 +19,7 @@ import Finanzas.dominio.CuentaBancaria;
  */
 public class CuentaBancariaDAO {
     private static final String sql_select = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta FROM CuentaBancaria";
-    private static final String sql_insert = "INSERT INTO CuentaBancaria(Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta) VALUES(?,?,?.?)";
+    private static final String sql_insert = "INSERT INTO CuentaBancaria(Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta) VALUES(?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE CuentaBancaria SET Numero_CuentaBancaria=?, Moneda_Cuenta=?, CuentaHabiente_Cuenta=?,Banco_Cuenta=? WHERE Numero_CuentaBancaria = ?";
     private static final String sql_delete = "DELETE FROM CuentaBancaria WHERE Numero_CuentaBancaria=?";
     private static final String sql_query = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta FROM TipoTransaccion WHERE CuentaBancaria=?";
@@ -123,7 +123,7 @@ public class CuentaBancariaDAO {
             stmt = conn.prepareStatement(sql_delete);
              stmt.setString(1, cuenta.getNumero_CuentaBancaria());
             rows = stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Alumno Eliminado Con Exito");
+            JOptionPane.showMessageDialog(null, " Eliminado Con Exito");
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
