@@ -18,7 +18,7 @@ import Finanzas.datos.TipoTransaccion;
 public class TipoTransaccionDAO {
        private static final String sql_select = "SELECT Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion FROM TipoTransaccion";
     private static final String sql_insert = "INSERT INTO TipoTransaccion(Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion) VALUES(?,?,?)";
-    private static final String sql_update = "UPDATE TipoTransaccion SET Codigo_TipoTransaccion=?, Transaccion_Tipo=?, Efecto_TipoTransaccion=? WHERE Codigo_TipoTransaccion=?";
+    private static final String SQL_UPDATE = "UPDATE TipoTransaccion SET Codigo_TipoTransaccion=?, Transaccion_Tipo=?, Efecto_TipoTransaccion=? WHERE Codigo_TipoTransaccion = ?";
     private static final String sql_delete = "DELETE FROM TipoTransaccion WHERE Codigo_TipoTransaccion=?";
     private static final String sql_query = "SELECT Codigo_TipoTransaccion, Transaccion_Tipo, Efecto_TipoTransaccion FROM TipoTransaccion WHERE Codigo_TipoTransaccion=?";
 
@@ -81,27 +81,30 @@ public class TipoTransaccionDAO {
         return rows;
     }
 
-    public int update(TipoTransaccion tipo) {
-        Connection con = null;
+      public int update(TipoTransaccion perfil){
+        Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
+        
         try {
-            con = Conexion.getConnection();
-            System.out.println("ejecutando query: " + sql_update);
-            stmt = con.prepareStatement(sql_update);
-             stmt.setString(1, tipo.getCodigo_TipoTransaccion());
-             stmt.setString(2, tipo.getTransaccion_Tipo());
-             stmt.setInt(3, tipo.getEfecto_TipoTransaccion());
-
+            conn = Conexion.getConnection();
+            //System.out.println("ejecutando query: " + SQL_UPDATE);
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, perfil.getCodigo_TipoTransaccion());
+            stmt.setString(2, perfil.getTransaccion_Tipo());
+            stmt.setInt(3, perfil.getEfecto_TipoTransaccion());
+          stmt.setString(4, perfil.getCodigo_TipoTransaccion());
             rows = stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Actualizacion exitosa ");
-        } catch (Exception ex) {
-            System.out.println(ex);
-        } finally {
-            Conexion.close(con);
-            Conexion.close(stmt);
+            //System.out.println("Registros actualizado:" + rows);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
         }
+        finally{
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        
         return rows;
     }
 

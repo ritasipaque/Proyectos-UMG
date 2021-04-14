@@ -4,12 +4,55 @@
  * and open the template in the editor.
  */
 package Finanzas.vista;
-
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.io.File;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Finanzas.datos.TipoTransaccion;
+import Finanzas.dominio.TipoTransaccionDAO;
+import javax.swing.JOptionPane;
 /**
  *
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author Santiago Martinez Diaz
  */
 public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
+ public void llenadoDeTablas() {
+      try {
+          DefaultTableModel modelo = new DefaultTableModel();
+          modelo.addColumn("Codigo");
+          modelo.addColumn("Tipo Transaccion");
+          modelo.addColumn("Efecto Transaccio");
+
+          
+          
+          TipoTransaccionDAO vendedorDAO = new TipoTransaccionDAO();
+          List<TipoTransaccion> vendedores = vendedorDAO.select();
+          TablaAlumnos.setModel(modelo);
+          String[] dato = new String[3];
+          for (int i = 0; i < vendedores.size(); i++) {
+              dato[0] = vendedores.get(i).getCodigo_TipoTransaccion();
+              dato[1] = vendedores.get(i).getTransaccion_Tipo();
+              dato[2] = Integer.toString(vendedores.get(i).getEfecto_TipoTransaccion());
+              modelo.addRow(dato);
+          }
+      } catch (SQLException ex) {
+          Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+      }
+    }
+public void buscarperfil(){
+        TipoTransaccion perfilconsultar = new TipoTransaccion();
+    TipoTransaccionDAO perfilDAO = new TipoTransaccionDAO();
+    perfilconsultar.setCodigo_TipoTransaccion((txtbuscado.getText()));
+    //-------------------------------------------------------------------
+    perfilconsultar = perfilDAO.query(perfilconsultar);
+    TxtCodigo.setText(String.valueOf(perfilconsultar.getCodigo_TipoTransaccion()));
+    TxtTipo.setText(perfilconsultar.getTransaccion_Tipo());
+    TxtEfecto.setText(Integer.toString(perfilconsultar.getEfecto_TipoTransaccion()));
+}
+       
+    
 
     /**
      * Creates new form FrmTipoTransaccion
@@ -27,21 +70,249 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TxtCodigo = new javax.swing.JTextField();
+        label7 = new javax.swing.JLabel();
+        label8 = new javax.swing.JLabel();
+        label9 = new javax.swing.JLabel();
+        TxtEfecto = new javax.swing.JTextField();
+        TxtTipo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaAlumnos = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        txtbuscado = new javax.swing.JTextField();
+        btnLimpiar1 = new javax.swing.JButton();
+
+        setTitle("Mantenimiento TipoTransaccion\n");
+        setVisible(true);
+
+        TxtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        TxtCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        TxtCodigo.setOpaque(false);
+
+        label7.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label7.setText("Codigo:");
+
+        label8.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label8.setText("Efecto De Transaccion:");
+
+        label9.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        label9.setText("Tipo De Transaccion:");
+
+        TxtEfecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        TxtEfecto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        TxtEfecto.setOpaque(false);
+
+        TxtTipo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        TxtTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
+        TxtTipo.setOpaque(false);
+
+        TablaAlumnos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        TablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Tipo De Transaccion", "Efecto De Transaccion"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TablaAlumnos);
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar1.setText("Buscar:");
+        btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 652, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(21, 21, 21)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(label7)
+                                        .addComponent(label9))
+                                    .addGap(22, 22, 22)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(TxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(label8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 38, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLimpiar1))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnModificar)
+                            .addComponent(btnRegistrar)
+                            .addComponent(btnLimpiar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        TipoTransaccionDAO vendedorDAO = new TipoTransaccionDAO();
+        TipoTransaccion vendedorAEliminar = new TipoTransaccion();
+        vendedorAEliminar.setCodigo_TipoTransaccion((txtbuscado.getText()));
+        vendedorDAO.delete(vendedorAEliminar);
+        llenadoDeTablas();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+     TipoTransaccionDAO perfilDAO = new TipoTransaccionDAO();
+        TipoTransaccion perfilesModificar = new TipoTransaccion();
+        //perfil a buscar
+        //perfilesModificar.setPk_id_perfil(Integer.parseInt(Txtbuscar.getText()));
+        //perfil modificar
+        perfilesModificar.setCodigo_TipoTransaccion(TxtCodigo.getText());
+        perfilesModificar.setTransaccion_Tipo(TxtTipo.getText());
+        perfilesModificar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+   
+        perfilDAO.update(perfilesModificar);
+        JOptionPane.showMessageDialog(null, "Perfil Modificado Exitosamente");
+        llenadoDeTablas();
+    
+   
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        TipoTransaccionDAO vendedorDAO = new TipoTransaccionDAO();
+        TipoTransaccion vendedorAInsertar = new TipoTransaccion();
+        vendedorAInsertar.setCodigo_TipoTransaccion(TxtCodigo.getText());
+        vendedorAInsertar.setTransaccion_Tipo(TxtTipo.getText());
+         vendedorAInsertar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+
+        vendedorDAO.insert(vendedorAInsertar);
+        llenadoDeTablas();
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+
+        TxtCodigo.setText("");
+        TxtTipo.setText("");
+        TxtEfecto.setText("");
+        txtbuscado.setText("");
+        btnRegistrar.setEnabled(true);
+        btnModificar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
+        // TODO add your handling code here:
+    buscarperfil();
+  
+        
+    }//GEN-LAST:event_btnLimpiar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TablaAlumnos;
+    private javax.swing.JTextField TxtCodigo;
+    private javax.swing.JTextField TxtEfecto;
+    private javax.swing.JTextField TxtTipo;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnLimpiar1;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
+    private javax.swing.JTextField txtbuscado;
     // End of variables declaration//GEN-END:variables
 }
