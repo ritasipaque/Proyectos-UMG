@@ -10,7 +10,8 @@ import javax.swing.UIManager;
     @author Diego Vásquez
  */
 public class MDIFinanzas extends javax.swing.JFrame {
-
+  private FrmTipoTransaccion fmTipo;
+  
     public MDIFinanzas() {
         initComponents();
     }
@@ -89,6 +90,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoBancos.setText("Catálogos Bancos");
 
         jMenuItem5.setText("Mantenimiento de Tipo de Transacción");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem5);
 
         jMenuItem6.setText("Mantenimiento de Cuentas Bancarias");
@@ -143,11 +149,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
         frm_mantPerFis.setVisible(true);
         JDesktopFinanzas.add(frm_mantPerFis);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+=======
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+                fmTipo = new FrmTipoTransaccion();
+        JDesktopFinanzas.add(fmTipo);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+>>>>>>> 946743bc898d0ef9f1ecaf1dc19c4ccf1438d952
 
     public static void main(String args[]) {
        
