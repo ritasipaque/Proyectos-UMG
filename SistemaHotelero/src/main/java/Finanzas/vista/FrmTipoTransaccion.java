@@ -27,14 +27,14 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
 
           
           
-          TipoTransaccionDAO vendedorDAO = new TipoTransaccionDAO();
-          List<TipoTransaccion> vendedores = vendedorDAO.select();
-          TablaAlumnos.setModel(modelo);
+          TipoTransaccionDAO TipoTDAO = new TipoTransaccionDAO();
+          List<TipoTransaccion> tipot = TipoTDAO.select();
+          JTableTransaccion.setModel(modelo);
           String[] dato = new String[3];
-          for (int i = 0; i < vendedores.size(); i++) {
-              dato[0] = vendedores.get(i).getCodigo_TipoTransaccion();
-              dato[1] = vendedores.get(i).getTransaccion_Tipo();
-              dato[2] = Integer.toString(vendedores.get(i).getEfecto_TipoTransaccion());
+          for (int i = 0; i < tipot.size(); i++) {
+              dato[0] = tipot.get(i).getCodigo_TipoTransaccion();
+              dato[1] = tipot.get(i).getTransaccion_Tipo();
+              dato[2] = Integer.toString(tipot.get(i).getEfecto_TipoTransaccion());
               modelo.addRow(dato);
           }
       } catch (SQLException ex) {
@@ -42,14 +42,14 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
       }
     }
 public void buscarperfil(){
-        TipoTransaccion perfilconsultar = new TipoTransaccion();
-    TipoTransaccionDAO perfilDAO = new TipoTransaccionDAO();
-    perfilconsultar.setCodigo_TipoTransaccion((txtbuscado.getText()));
+        TipoTransaccion ConsultarT = new TipoTransaccion();
+    TipoTransaccionDAO consultarDao = new TipoTransaccionDAO();
+    ConsultarT.setCodigo_TipoTransaccion((txtbuscado.getText()));
     //-------------------------------------------------------------------
-    perfilconsultar = perfilDAO.query(perfilconsultar);
-    TxtCodigo.setText(String.valueOf(perfilconsultar.getCodigo_TipoTransaccion()));
-    TxtTipo.setText(perfilconsultar.getTransaccion_Tipo());
-    TxtEfecto.setText(Integer.toString(perfilconsultar.getEfecto_TipoTransaccion()));
+    ConsultarT = consultarDao.query(ConsultarT);
+    TxtCodigo.setText(String.valueOf(ConsultarT.getCodigo_TipoTransaccion()));
+    TxtTipo.setText(ConsultarT.getTransaccion_Tipo());
+    TxtEfecto.setText(Integer.toString(ConsultarT.getEfecto_TipoTransaccion()));
 }
        
     
@@ -77,7 +77,7 @@ public void buscarperfil(){
         TxtEfecto = new javax.swing.JTextField();
         TxtTipo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablaAlumnos = new javax.swing.JTable();
+        JTableTransaccion = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
@@ -109,8 +109,8 @@ public void buscarperfil(){
         TxtTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         TxtTipo.setOpaque(false);
 
-        TablaAlumnos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        TablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+        JTableTransaccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        JTableTransaccion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -126,7 +126,7 @@ public void buscarperfil(){
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(TablaAlumnos);
+        jScrollPane1.setViewportView(JTableTransaccion);
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -170,9 +170,7 @@ public void buscarperfil(){
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(141, 141, 141)
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,9 +196,12 @@ public void buscarperfil(){
                                     .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
-                                .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(33, 38, Short.MAX_VALUE)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -243,38 +244,37 @@ public void buscarperfil(){
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        TipoTransaccionDAO vendedorDAO = new TipoTransaccionDAO();
-        TipoTransaccion vendedorAEliminar = new TipoTransaccion();
-        vendedorAEliminar.setCodigo_TipoTransaccion((txtbuscado.getText()));
-        vendedorDAO.delete(vendedorAEliminar);
+        TipoTransaccionDAO tipodAO = new TipoTransaccionDAO();
+        TipoTransaccion tipoEliminar = new TipoTransaccion();
+        tipoEliminar.setCodigo_TipoTransaccion((txtbuscado.getText()));
+        tipodAO.delete(tipoEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-     TipoTransaccionDAO perfilDAO = new TipoTransaccionDAO();
-        TipoTransaccion perfilesModificar = new TipoTransaccion();
-        //perfil a buscar
-        //perfilesModificar.setPk_id_perfil(Integer.parseInt(Txtbuscar.getText()));
-        //perfil modificar
-        perfilesModificar.setCodigo_TipoTransaccion(TxtCodigo.getText());
-        perfilesModificar.setTransaccion_Tipo(TxtTipo.getText());
-        perfilesModificar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+     TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
+        TipoTransaccion tipomodificar = new TipoTransaccion();
+  
+        
+        tipomodificar.setCodigo_TipoTransaccion(TxtCodigo.getText());
+        tipomodificar.setTransaccion_Tipo(TxtTipo.getText());
+        tipomodificar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
    
-        perfilDAO.update(perfilesModificar);
-        JOptionPane.showMessageDialog(null, "Perfil Modificado Exitosamente");
+        tipodao.update(tipomodificar);
+        JOptionPane.showMessageDialog(null, " Modificado Exitosamente");
         llenadoDeTablas();
     
    
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        TipoTransaccionDAO vendedorDAO = new TipoTransaccionDAO();
-        TipoTransaccion vendedorAInsertar = new TipoTransaccion();
-        vendedorAInsertar.setCodigo_TipoTransaccion(TxtCodigo.getText());
-        vendedorAInsertar.setTransaccion_Tipo(TxtTipo.getText());
-         vendedorAInsertar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+        TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
+        TipoTransaccion insertartipo = new TipoTransaccion();
+        insertartipo.setCodigo_TipoTransaccion(TxtCodigo.getText());
+        insertartipo.setTransaccion_Tipo(TxtTipo.getText());
+         insertartipo.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
 
-        vendedorDAO.insert(vendedorAInsertar);
+        tipodao.insert(insertartipo);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -300,7 +300,7 @@ public void buscarperfil(){
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable TablaAlumnos;
+    private javax.swing.JTable JTableTransaccion;
     private javax.swing.JTextField TxtCodigo;
     private javax.swing.JTextField TxtEfecto;
     private javax.swing.JTextField TxtTipo;

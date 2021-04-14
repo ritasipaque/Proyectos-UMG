@@ -81,7 +81,7 @@ public class TipoTransaccionDAO {
         return rows;
     }
 
-      public int update(TipoTransaccion perfil){
+      public int update(TipoTransaccion tipo){
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -90,10 +90,10 @@ public class TipoTransaccionDAO {
             conn = Conexion.getConnection();
             //System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, perfil.getCodigo_TipoTransaccion());
-            stmt.setString(2, perfil.getTransaccion_Tipo());
-            stmt.setInt(3, perfil.getEfecto_TipoTransaccion());
-          stmt.setString(4, perfil.getCodigo_TipoTransaccion());
+            stmt.setString(1, tipo.getCodigo_TipoTransaccion());
+            stmt.setString(2, tipo.getTransaccion_Tipo());
+            stmt.setInt(3, tipo.getEfecto_TipoTransaccion());
+          stmt.setString(4, tipo.getCodigo_TipoTransaccion());
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);
             
