@@ -43,7 +43,7 @@ public class TipoTransaccion {
     public void setEfecto_TipoTransaccion(int Efecto_TipoTransaccion) {
         this.Efecto_TipoTransaccion = Efecto_TipoTransaccion;
     }
-    
-    
+
+
 
 }
