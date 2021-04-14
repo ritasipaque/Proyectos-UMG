@@ -5,7 +5,7 @@
  */
 package Hoteleria.vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.UIManager;
 
 /**
@@ -137,7 +137,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     public static void main(String args[]) {
         //FLATLAF
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
