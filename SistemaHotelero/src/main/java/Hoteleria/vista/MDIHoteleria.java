@@ -5,7 +5,7 @@
  */
 package Hoteleria.vista;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.UIManager;
 
 /**
@@ -16,6 +16,8 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
     private Mantenimiento_Ama_De_Llaves formMantenimiento_Ama_De_Llaves;
     private Mantenimiento_habitaciones formMantenimiento_habitaciones;
+    private Mantenimiento_FormasDePago formMantenimiento_FormasDePago;
+    private Mantenimiento_Servicios formMantenimiento_Servicios;
     /**
      * Creates new form MDIHoteleria
      */
@@ -39,6 +41,9 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -88,6 +93,27 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
         jMenu3.setText("Procesos");
         jMenu3.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+
+        jMenu7.setText("Mantenimientos");
+
+        jMenuItem3.setText("Mantenimiento de Metodos de Pago");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem3);
+
+        jMenuItem4.setText("Mantenimiento de Servicios");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem4);
+
+        jMenu3.add(jMenu7);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Informes");
@@ -131,13 +157,25 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jDesktopPane1.add(formMantenimiento_habitaciones);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        formMantenimiento_FormasDePago = new Mantenimiento_FormasDePago();
+        formMantenimiento_FormasDePago.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_FormasDePago);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        formMantenimiento_Servicios = new Mantenimiento_Servicios();
+        formMantenimiento_Servicios.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_Servicios);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         //FLATLAF
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -158,8 +196,11 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
