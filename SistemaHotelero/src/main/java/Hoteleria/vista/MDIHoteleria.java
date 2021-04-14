@@ -17,6 +17,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private Mantenimiento_Ama_De_Llaves formMantenimiento_Ama_De_Llaves;
     private Mantenimiento_habitaciones formMantenimiento_habitaciones;
     private Mantenimiento_FormasDePago formMantenimiento_FormasDePago;
+    private Mantenimiento_Servicios formMantenimiento_Servicios;
     /**
      * Creates new form MDIHoteleria
      */
@@ -42,6 +43,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -102,6 +104,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem3);
 
+        jMenuItem4.setText("Mantenimiento de Servicios");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem4);
+
         jMenu3.add(jMenu7);
 
         jMenuBar1.add(jMenu3);
@@ -153,6 +163,12 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jDesktopPane1.add(formMantenimiento_FormasDePago);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        formMantenimiento_Servicios = new Mantenimiento_Servicios();
+        formMantenimiento_Servicios.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_Servicios);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -185,5 +201,6 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     // End of variables declaration//GEN-END:variables
 }
