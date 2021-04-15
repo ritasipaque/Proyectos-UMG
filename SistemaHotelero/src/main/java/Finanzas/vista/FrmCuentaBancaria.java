@@ -16,7 +16,7 @@ import Finanzas.dominio.Banco;
 import Finanzas.datos.BancoDAO;
 /**
  *
- * @author Santiago Martinez Diaz
+ * @author Santiago Martinez Diaz 9959-19-13847
  */
 public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
     
