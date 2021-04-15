@@ -10,8 +10,8 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Hoteleria.datos.Ama_De_Llaves_DAO;
-import Hoteleria.dominio.Ama_De_Llaves;
+import Hoteleria.datos.AmaDeLlavesDAO;
+import Hoteleria.dominio.AmaDeLlaves;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,16 +20,16 @@ import java.util.Date;
  *
  * @author Jeff
  */
-public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
+public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
 
-    Ama_De_Llaves_DAO cargarCombobox = new Ama_De_Llaves_DAO();
+    AmaDeLlavesDAO cargarCombobox = new AmaDeLlavesDAO();
     ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
 
     /**
      * Creates new form MantenimientoAplicacion
      */
-    public Mantenimiento_Ama_De_Llaves() {
+    public Mantenimiento_AmaDeLlaves() {
         initComponents();
         cargarCombobox.query2(cbxPiso);
         grupoDeRadios = new ButtonGroup();
@@ -54,9 +54,9 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
         modelo1.addColumn("Estado");
         jTable.setModel(modelo1);
         String datos[] = new String[9];
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
-        List<Ama_De_Llaves> ama_De_Llaves = ama_De_Llaves_DAO.select();
-        for (Ama_De_Llaves ama_De_Llave : ama_De_Llaves) {
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
+        List<AmaDeLlaves> ama_De_Llaves = ama_De_Llaves_DAO.select();
+        for (AmaDeLlaves ama_De_Llave : ama_De_Llaves) {
             datos[0] = String.valueOf(ama_De_Llave.getId_Ama_De_Llaves());
             datos[1] = ama_De_Llave.getNombre_Ama_De_Llaves();
             datos[2] = ama_De_Llave.getApellido_Ama_De_Llaves();
@@ -444,8 +444,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Insertar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Insertar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
 
         String cbx_Entrada = cbxEntrada.getSelectedItem().toString();
         String cbx_Salida = cbxSalida.getSelectedItem().toString();
@@ -493,8 +493,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Modificar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Modificar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
 
         String cbx_Entrada = cbxEntrada.getSelectedItem().toString();
         String cbx_Salida = cbxSalida.getSelectedItem().toString();
@@ -533,8 +533,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Eliminar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Eliminar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
 
         ama_De_Llaves_Eliminar.setId_Ama_De_Llaves(Integer.parseInt(txtBuscar.getText()));
         ama_De_Llaves_DAO.delete(ama_De_Llaves_Eliminar);
@@ -547,8 +547,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Buscar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Buscar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
         ama_De_Llaves_Buscar.setId_Ama_De_Llaves(Integer.parseInt(txtBuscar.getText()));
 
         ama_De_Llaves_Buscar = ama_De_Llaves_DAO.query(ama_De_Llaves_Buscar);
