@@ -3,6 +3,9 @@ package Finanzas.vista;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 
@@ -14,6 +17,9 @@ public class MDIFinanzas extends javax.swing.JFrame {
   private Mantenimiento_Banco formMantenimiento_Banco;//llamado a la ventana Mantenimiento Banco
   private Mantenimiento_TipoPersona formMantenimiento_TipoPersona;//llamado a la ventana Mantenimiento Tipo Persona
   private Mantenimiento_Moneda formMantenimiento_Moneda;//llamado a la ventana Mantenimiento Moneda 
+  private FrmCuentaBancaria FrmBancaria;
+  private FrmCuentaHabiente FrmHabiente;
+ 
     public MDIFinanzas() {
         initComponents();
     }
@@ -110,9 +116,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoBancos.add(jMenuItem5);
 
         jMenuItem6.setText("Mantenimiento de Cuentas Bancarias");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem6);
 
         jMenuItem7.setText("Mantenimiento de Cuentahabientes");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem7);
 
         jMenuItem8.setText("Mantenimiento de Bancos");
@@ -221,6 +237,26 @@ public class MDIFinanzas extends javax.swing.JFrame {
         formMantenimiento_TipoPersona = new Mantenimiento_TipoPersona();
         JDesktopFinanzas.add(formMantenimiento_TipoPersona);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+      try {
+          // TODO add your handling code here:
+          FrmBancaria = new FrmCuentaBancaria();
+      } catch (SQLException ex) {
+          Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        JDesktopFinanzas.add(FrmBancaria);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+      try {
+          // TODO add your handling code here:
+          FrmHabiente = new FrmCuentaHabiente();
+      } catch (SQLException ex) {
+          Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+      }
+        JDesktopFinanzas.add(FrmHabiente);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
 
     public static void main(String args[]) {
