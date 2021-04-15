@@ -1,6 +1,6 @@
 package Hoteleria.dominio;
 
-public class Ama_De_Llaves {
+public class AmaDeLlaves {
 
     private int Id_Ama_De_Llaves;
     private String Nombre_Ama_De_Llaves;
