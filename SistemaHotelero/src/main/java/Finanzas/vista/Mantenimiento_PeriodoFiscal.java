@@ -53,7 +53,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         RBPF0.setSelected(false);
         RBPrueba.setSelected(true);
     }
-     
+    //Codigo de aplicacion 
      int CodigoAplicacion = 10;
      
      
