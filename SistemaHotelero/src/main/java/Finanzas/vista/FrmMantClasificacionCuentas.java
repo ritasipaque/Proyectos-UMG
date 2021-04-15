@@ -70,9 +70,19 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         JBtnModificar.setText("Modificar");
         JBtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnModificarActionPerformed(evt);
+            }
+        });
 
         JBtnEliminar.setText("Eliminar");
         JBtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnEliminarActionPerformed(evt);
+            }
+        });
 
         JBtnBuscar.setText("Buscar");
         JBtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -188,8 +198,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
-
+  
     /*private void cargarTabla() {
        for(int i=0; i<objClasificarCuenta.getTablaRegistros().length; i++){
             for(int j=0; j<3; j++){
@@ -199,18 +208,59 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
     }*/
 
     private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+        
+        var codigoClasificacion = JTxtCodigo.getText();
+        var clasificacionCuenta = JTxtClasificacion.getText();
+        var descripcionCuenta = JTxtDescripcion.getText();
 
-        objClasificarCuenta.setCodigoClasificacion(JTxtCodigo.getText());
-        objClasificarCuenta.setClasificacionCuenta(JTxtClasificacion.getText());
-        objClasificarCuenta.setDescripcionClasificacion(JTxtDescripcion.getText());
+        objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
+        objClasificarCuenta.setClasificacionCuenta(clasificacionCuenta);
+        objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
-        objClasificarCuenta.Registrar(objClasificarCuenta);
+        objClasificarCuenta.Insertar(objClasificarCuenta);
 
     }//GEN-LAST:event_JBtnIngresarActionPerformed
 
     private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+        
+        var codigoClasificacion = JTxtCodigo.getText();
+
+        objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
+
+        objClasificarCuenta.Buscar(objClasificarCuenta);
+        
+        JTxtCodigo.setText(objClasificarCuenta.Buscar(objClasificarCuenta).getCodigoClasificacion());
+        JTxtClasificacion.setText(objClasificarCuenta.Buscar(objClasificarCuenta).getClasificacionCuenta());
+        JTxtDescripcion.setText(objClasificarCuenta.Buscar(objClasificarCuenta).getDescripcionClasificacion());
+        
         
     }//GEN-LAST:event_JBtnBuscarActionPerformed
+
+    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+        
+        var codigoClasificacion = JTxtCodigo.getText();
+        var clasificacionCuenta = JTxtClasificacion.getText();
+        var descripcionCuenta = JTxtDescripcion.getText();
+
+        objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
+        objClasificarCuenta.setClasificacionCuenta(clasificacionCuenta);
+        objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
+
+        objClasificarCuenta.Actualizar(objClasificarCuenta);
+    }//GEN-LAST:event_JBtnModificarActionPerformed
+
+    private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+        
+        var codigoClasificacion = JTxtCodigo.getText();
+
+        objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
+
+        objClasificarCuenta.Eliminar(objClasificarCuenta);
+    }//GEN-LAST:event_JBtnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
