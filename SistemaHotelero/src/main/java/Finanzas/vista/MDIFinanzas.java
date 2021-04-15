@@ -10,7 +10,10 @@ import javax.swing.UIManager;
     @author Diego Vásquez
  */
 public class MDIFinanzas extends javax.swing.JFrame {
-
+  private FrmTipoTransaccion fmTipo;
+  private Mantenimiento_Banco formMantenimiento_Banco;//llamado a la ventana Mantenimiento Banco
+  private Mantenimiento_TipoPersona formMantenimiento_TipoPersona;//llamado a la ventana Mantenimiento Tipo Persona
+  private Mantenimiento_Moneda formMantenimiento_Moneda;//llamado a la ventana Mantenimiento Moneda 
     public MDIFinanzas() {
         initComponents();
     }
@@ -74,6 +77,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoContabilidad.add(jMenuItem3);
 
         jMenuItem2.setText("Mantenimiento de Periodo Fiscal");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoContabilidad.add(jMenuItem2);
 
         jMenuItem4.setText("Mantenimiento de Tipo de Asiento Contable");
@@ -84,6 +92,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoBancos.setText("Catálogos Bancos");
 
         jMenuItem5.setText("Mantenimiento de Tipo de Transacción");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem5);
 
         jMenuItem6.setText("Mantenimiento de Cuentas Bancarias");
@@ -93,12 +106,27 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoBancos.add(jMenuItem7);
 
         jMenuItem8.setText("Mantenimiento de Bancos");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem8);
 
         jMenuItem9.setText("Mantenimiento de Divisas");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem9);
 
         jMenuItem10.setText("Mantenimiento de Persona Bancaria");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoBancos.add(jMenuItem10);
 
         JMenuCatalogos.add(JMenuCatalogoBancos);
@@ -137,6 +165,39 @@ public class MDIFinanzas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
+        frm_mantPerFis.setVisible(true);
+        JDesktopFinanzas.add(frm_mantPerFis);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+                fmTipo = new FrmTipoTransaccion();
+        JDesktopFinanzas.add(fmTipo);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+    //Banco
+        formMantenimiento_Banco = new Mantenimiento_Banco();
+        JDesktopFinanzas.add(formMantenimiento_Banco);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // Moneda
+        formMantenimiento_Moneda = new Mantenimiento_Moneda();
+        JDesktopFinanzas.add(formMantenimiento_Moneda);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    //Tipo de persona 
+        formMantenimiento_TipoPersona = new Mantenimiento_TipoPersona();
+        JDesktopFinanzas.add(formMantenimiento_TipoPersona);
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
 
     public static void main(String args[]) {
        
