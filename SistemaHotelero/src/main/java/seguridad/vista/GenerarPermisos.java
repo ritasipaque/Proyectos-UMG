@@ -57,7 +57,45 @@ public class GenerarPermisos {
 
             }
             if (modulo == "Hotelero") {
-
+                
+                MDIHoteleria.mnt_amadellaves.setVisible(false);
+                MDIHoteleria.mnt_habitaciones.setVisible(false);
+                MDIHoteleria.mnt_servicios.setVisible(false);
+                MDIHoteleria.mnt_huespedes.setVisible(false);
+                MDIHoteleria.mnt_formasdepago.setVisible(false);
+                MDIHoteleria.mnt_pisos.setVisible(false);
+                
+                ejecutarPermisos.ejecutarBusqueda(usuario);
+                
+                for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
+                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
+                    if (varApp >= 2001 && varApp <= 2201) {
+                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
+                        MDIHoteleria.submenu_procesos.setVisible(false);
+                        switch (varApp) {
+                            case 2001:
+                                MDIHoteleria.mnt_amadellaves.setVisible(true);
+                                MDIHoteleria.mnt_habitaciones.setVisible(true);
+                                break;
+                            case 2101:
+                                MDIHoteleria.mnt_servicios.setVisible(true);
+                                MDIHoteleria.mnt_huespedes.setVisible(true);
+                                break;
+                        }
+                    }
+                    if (varApp >= 2202 && varApp <= 2400) {
+                        MDIHoteleria.submenu_procesos.setVisible(true);
+                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
+                        switch (varApp) {
+                            case 2202:
+                                MDIHoteleria.mnt_formasdepago.setVisible(false);
+                                break;
+                            case 2400:
+                                MDIHoteleria.mnt_pisos.setVisible(false);
+                                break;
+                        }
+                    }
+                }
             }
             if (modulo == "Comercial") {
 

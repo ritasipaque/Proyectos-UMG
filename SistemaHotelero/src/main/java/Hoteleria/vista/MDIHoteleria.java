@@ -232,13 +232,13 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private javax.swing.JMenu menu_herramientas;
     private javax.swing.JMenu menu_informes;
     private javax.swing.JMenu menu_procesos;
-    private javax.swing.JMenuItem mnt_amadellaves;
-    private javax.swing.JMenuItem mnt_formasdepago;
-    private javax.swing.JMenuItem mnt_habitaciones;
-    private javax.swing.JMenuItem mnt_huespedes;
-    private javax.swing.JMenuItem mnt_pisos;
-    private javax.swing.JMenuItem mnt_servicios;
-    private javax.swing.JMenu submenu_mantenimientos;
-    private javax.swing.JMenu submenu_procesos;
+    public static javax.swing.JMenuItem mnt_amadellaves;
+    public static javax.swing.JMenuItem mnt_formasdepago;
+    public static javax.swing.JMenuItem mnt_habitaciones;
+    public static javax.swing.JMenuItem mnt_huespedes;
+    public static javax.swing.JMenuItem mnt_pisos;
+    public static javax.swing.JMenuItem mnt_servicios;
+    public static javax.swing.JMenu submenu_mantenimientos;
+    public static javax.swing.JMenu submenu_procesos;
     // End of variables declaration//GEN-END:variables
 }
