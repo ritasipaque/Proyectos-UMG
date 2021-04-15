@@ -68,9 +68,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoContabilidad.setText("Catálogos Contabilidad");
 
         jMenuItem1.setText("Mantenimiento de Clasificación de Cuentas");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoContabilidad.add(jMenuItem1);
 
         jMenuItem3.setText("Mantenimiento de Cuentas Contables");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoContabilidad.add(jMenuItem3);
 
         jMenuItem2.setText("Mantenimiento de Periodo Fiscal");
@@ -137,6 +147,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        FrmMantCuentaContable frmMantCuentaContable = new FrmMantCuentaContable();
+        JDesktopFinanzas.add(frmMantCuentaContable);
+        frmMantCuentaContable.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FrmMantClasificacionCuentas frmMantClasificacionCuentas = new FrmMantClasificacionCuentas();
+        JDesktopFinanzas.add(frmMantClasificacionCuentas);
+        frmMantClasificacionCuentas.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
        
