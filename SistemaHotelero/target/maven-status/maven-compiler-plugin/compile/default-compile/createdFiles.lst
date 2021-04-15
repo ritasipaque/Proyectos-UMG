@@ -114,6 +114,7 @@ seguridad\vista\Mantenimiento_Modulos$3.class
 Hoteleria\vista\Mantenimiento_habitaciones$6.class
 seguridad\dominio\Asignacion_Aplicacion_Perfil.class
 seguridad\vista\Mantenimiento_Usuario$3.class
+Finanzas\vista\FrmTipoTransaccion$7.class
 seguridad\datos\Hash.class
 seguridad\vista\MDI_Sistema$3.class
 Finanzas\dominio\PeriodoFiscal.class
@@ -136,6 +137,7 @@ Finanzas\vista\FrmCuentaBancaria$1.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$6.class
 Finanzas\vista\PeriodoFiscal.class
 Hoteleria\vista\Mantenimiento_habitaciones$1.class
+Finanzas\vista\FrmTipoTransaccion$8.class
 Finanzas\datos\TipoTransaccionDAO.class
 Finanzas\vista\FrmCuentaBancaria$5.class
 seguridad\datos\PerfilDAO.class
