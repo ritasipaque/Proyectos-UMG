@@ -20,33 +20,38 @@ import Finanzas.datos.BancoDAO;
  */
 public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
     
-        //Metodo Llenado de Combos consulta los dominios y datos PerfilDAO y Perfi para obetner la id perfil en el combobox
+        //Metodo Llenado de Combos consulta los dominios y datos MonedaDAO y Moneda para obetner el codigo en el combobox
    public void llenadoDeCombos()  {
-       MonedaDAO empleadoDAO = new MonedaDAO();
-      List<Moneda> empleados = empleadoDAO.listar();
+       MonedaDAO monedaDao = new MonedaDAO();
+      List<Moneda> moneda = monedaDao.listar();
       cbox_Moneda.addItem("Seleccione una opción");
-      for (int i = 0; i < empleados.size(); i++) {
-           cbox_Moneda.addItem(empleados.get(i).getCodigo_Moneda());
+      for (int i = 0; i < moneda.size(); i++) {
+           cbox_Moneda.addItem(moneda.get(i).getCodigo_Moneda());
        }
  }
       public void llenadoDeCombos2() throws SQLException  {
-       CuentaHabienteDAO empleadoDAO = new CuentaHabienteDAO();
-      List<CuentaHabiente> empleados = empleadoDAO.select();
+       CuentaHabienteDAO cuentadao = new CuentaHabienteDAO();
+      List<CuentaHabiente> cuenta = cuentadao.select();
       Cbox_Cuenta.addItem("Seleccione una opción");
-      for (int i = 0; i < empleados.size(); i++) {
-           Cbox_Cuenta.addItem(empleados.get(i).getCodigo_CuentaHabiente());
+      for (int i = 0; i < cuenta.size(); i++) {
+           Cbox_Cuenta.addItem(cuenta.get(i).getCodigo_CuentaHabiente());
        }
  }
          public void llenadoDeCombos3()  {
-       BancoDAO empleadoDAO = new BancoDAO();
-      List<Banco> empleados = empleadoDAO.listar();
+       BancoDAO bancodao = new BancoDAO();
+      List<Banco> banco = bancodao.listar();
       Cbox_Banco.addItem("Seleccione una opción");
-      for (int i = 0; i < empleados.size(); i++) {
-           Cbox_Banco.addItem(empleados.get(i).getCodigo_Banco());
+      for (int i = 0; i < banco.size(); i++) {
+        Cbox_Banco.addItem(banco.get(i).getCodigo_Banco());
+    
+           
+           
        }
       
       
  }
+         
+    // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
  public void llenadoDeTablas() {
       try {
           DefaultTableModel modelo = new DefaultTableModel();
@@ -80,6 +85,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         llenadoDeCombos();
         llenadoDeCombos2();
         llenadoDeCombos3();
+        llenadoDeTablas();
     }
 
     /**
@@ -103,9 +109,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        TxtMoneda = new javax.swing.JTextField();
+        TxtCuenta = new javax.swing.JTextField();
+        TxtBanco = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         btnRegistrar = new javax.swing.JButton();
         btnLimpiar3 = new javax.swing.JButton();
@@ -153,19 +159,29 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("?");
-
-        jButton3.setText("?");
-
-        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        jTextField3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jButton3.setText("?");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        TxtMoneda.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        TxtMoneda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtMonedaActionPerformed(evt);
+            }
+        });
+
+        TxtCuenta.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+
+        TxtBanco.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
         btnEliminar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
@@ -235,9 +251,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                    .addComponent(jTextField1)))))
+                                    .addComponent(TxtCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                    .addComponent(TxtBanco)
+                                    .addComponent(TxtMoneda)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(252, 252, 252)
                         .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -268,15 +284,15 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1))
+                            .addComponent(TxtMoneda))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3)
+                            .addComponent(TxtCuenta)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField2))))
+                            .addComponent(TxtBanco))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -314,7 +330,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -329,43 +345,45 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(38, 38, 38)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-          CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
+        CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
         CuentaBancaria insertarcuenta = new CuentaBancaria();
+        //METODO INSERTAR
         insertarcuenta.setNumero_CuentaBancaria(TxtNumero.getText());
         insertarcuenta.setMoneda_Cuenta(cbox_Moneda.getSelectedItem().toString());
-          insertarcuenta.setCuentaHabiente_Cuenta(Cbox_Cuenta.getSelectedItem().toString());
+         insertarcuenta.setCuentaHabiente_Cuenta(Cbox_Cuenta.getSelectedItem().toString());
         insertarcuenta.setBanco_Cuenta(Cbox_Banco.getSelectedItem().toString());
 
           cuentadao.insert(insertarcuenta);
-    
+           
+          //LLena La jtable con los datos ya ingresados en db
            llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-  CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
+       CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
         CuentaBancaria cuentaeliminar = new CuentaBancaria();
+        //Metodo Para Eliminar con el Numero de Cuenta Bancaria
         cuentaeliminar.setNumero_CuentaBancaria((TxtBuscar.getText()));
         cuentadao.delete(cuentaeliminar);
      
@@ -381,21 +399,58 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiar3ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void TxtMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMonedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_TxtMonedaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
+       String val =cbox_Moneda.getSelectedItem().toString();
+        MonedaDAO perfilDAO = new MonedaDAO();
+        Moneda consultar = new Moneda();
+        consultar.setCodigo_Moneda(val);
+        consultar=perfilDAO.query(consultar);
+      
+          
+        TxtMoneda.setText(consultar.getNombre_Moneda());
+        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+           String val =Cbox_Cuenta.getSelectedItem().toString();
+        CuentaHabienteDAO perfilDAO = new CuentaHabienteDAO();
+        CuentaHabiente consultar = new CuentaHabiente();
+        consultar.setCodigo_CuentaHabiente(val);
+        consultar=perfilDAO.query(consultar);
+             
+        TxtCuenta.setText(consultar.getNombre_CuentaHabiente());
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         String val =Cbox_Banco.getSelectedItem().toString();
+        BancoDAO perfilDAO = new BancoDAO();
+        Banco consultar = new Banco();
+        consultar.setCodigo_Banco(val);
+        consultar=perfilDAO.query(consultar);
+             
+        TxtBanco.setText(consultar.getNombre_Banco());
+
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Cbox_Banco;
     private javax.swing.JComboBox<String> Cbox_Cuenta;
     private javax.swing.JTable JTableTransaccion;
+    private javax.swing.JTextField TxtBanco;
     private javax.swing.JTextField TxtBuscar;
+    private javax.swing.JTextField TxtCuenta;
+    private javax.swing.JTextField TxtMoneda;
     private javax.swing.JTextField TxtNumero;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar3;
@@ -407,9 +462,6 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel label10;
     private javax.swing.JLabel label7;
     private javax.swing.JLabel label8;
