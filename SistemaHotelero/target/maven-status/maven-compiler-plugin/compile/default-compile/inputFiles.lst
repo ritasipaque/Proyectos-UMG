@@ -11,6 +11,7 @@ C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Mante
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\datos\HabitacionesDAO.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\dominio\FormasDePago.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\datos\CuentaBancariaDAO.java
+C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\vista\MantenimientoProveedor.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\vista\FrmCuentaHabiente.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\dominio\Moneda.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_modulos.java
@@ -23,6 +24,7 @@ C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\MDI_S
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\dominio\Banco.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Usuario_PerfilDAO.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\vista\Mantenimiento_habitaciones.java
+C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\datos\ProveedorDAO1.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\dominio\TipoPersona.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_de_aplicacion_a_usuario.java
@@ -37,11 +39,14 @@ C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\dominio\Peri
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\datos\Conexion.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\datos\Modulo_guia.java
+C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Comercial\dominio\Proveedor.java
+C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\datos\ClasificacionCuentaDAO.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\datos\ServiciosDAO.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\datos\AmaDeLlavesDAO.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\vista\Mantenimiento_PeriodoFiscal.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\dominio\Servicios.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\MDI_Components.java
+C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\dominio\ClasificacionCuenta.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Finanzas\dominio\TipoTransaccion.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\Hoteleria\dominio\Huespedes.java
 C:\Users\leone\Desktop\Hotel\SistemaHotelero\src\main\java\seguridad\vista\Login.java
