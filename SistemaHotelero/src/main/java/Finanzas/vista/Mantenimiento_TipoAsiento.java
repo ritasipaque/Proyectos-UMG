@@ -9,12 +9,12 @@ package Finanzas.vista;
  *
  * @author OtakuGT
  */
-public class TipoAsiento extends javax.swing.JInternalFrame {
+public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form TipoAsiento
      */
-    public TipoAsiento() {
+    public Mantenimiento_TipoAsiento() {
         initComponents();
     }
 
