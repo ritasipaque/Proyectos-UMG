@@ -64,7 +64,6 @@ public class GenerarPermisos {
                 MDIHoteleria.mnt_huespedes.setVisible(false);
                 MDIHoteleria.mnt_formasdepago.setVisible(false);
                 MDIHoteleria.mnt_pisos.setVisible(false);
-                
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
@@ -88,10 +87,10 @@ public class GenerarPermisos {
                         MDIHoteleria.submenu_mantenimientos.setVisible(true);
                         switch (varApp) {
                             case 2202:
-                                MDIHoteleria.mnt_formasdepago.setVisible(false);
+                                MDIHoteleria.mnt_formasdepago.setVisible(true);
                                 break;
                             case 2400:
-                                MDIHoteleria.mnt_pisos.setVisible(false);
+                                MDIHoteleria.mnt_pisos.setVisible(true);
                                 break;
                         }
                     }

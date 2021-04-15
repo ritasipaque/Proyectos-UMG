@@ -7,6 +7,9 @@ package Hoteleria.vista;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.UIManager;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -20,11 +23,22 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private Mantenimiento_Servicios formMantenimiento_Servicios;
     private Mantenimiento_Huespedes formMantenimiento_Huespedes;
     private Mantenimiento_Pisos formMantenimiento_Pisos;
+    
+   
     /**
      * Creates new form MDIHoteleria
      */
     public MDIHoteleria() {
         initComponents();
+         MDI_Components mdi_components = new MDI_Components();
+        GenerarPermisos generarPermisos = new GenerarPermisos();
+        
+        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
+
+        var usuario = Login.usuarioSesion;
+        var modulo = "Hoteleria";
+
+        generarPermisos.getPermisos(modulo, usuario);
     }
 
     /**
