@@ -18,6 +18,8 @@ import javax.swing.JOptionPane;
  * @author Santiago Martinez Diaz
  */
 public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
+    
+    // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
  public void llenadoDeTablas() {
       try {
           DefaultTableModel modelo = new DefaultTableModel();
@@ -41,6 +43,9 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
           Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
+ 
+ 
+ //metodo para buscar Tipo De transaccion guardada en la db y que  despligue la informacion en los textfield
 public void buscarperfil(){
         TipoTransaccion ConsultarT = new TipoTransaccion();
     TipoTransaccionDAO consultarDao = new TipoTransaccionDAO();
@@ -59,6 +64,7 @@ public void buscarperfil(){
      */
     public FrmTipoTransaccion() {
         initComponents();
+        llenadoDeTablas();
     }
 
     /**
@@ -234,7 +240,7 @@ public void buscarperfil(){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
@@ -278,8 +284,8 @@ public void buscarperfil(){
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,19 +301,18 @@ public void buscarperfil(){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel1.getAccessibleContext().setAccessibleName("");
@@ -319,13 +324,15 @@ public void buscarperfil(){
         // TODO add your handling code here:
         TipoTransaccionDAO tipodAO = new TipoTransaccionDAO();
         TipoTransaccion tipoEliminar = new TipoTransaccion();
+        //Metodo Eliminar utilizando el codigo de tipo transaccion para eliminarlo de la bd
         tipoEliminar.setCodigo_TipoTransaccion((txtbuscado.getText()));
         tipodAO.delete(tipoEliminar);
         llenadoDeTablas();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-     TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
+       //METODO MODIFICAR
+        TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
         TipoTransaccion tipomodificar = new TipoTransaccion();
   
         
@@ -383,6 +390,7 @@ public void buscarperfil(){
     private void btnLimpiar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar2ActionPerformed
         // TODO add your handling code here:
         
+         //metodo de Limpiar automaticamente los textfield seleecionados 
         TxtCodigo.setText("");
         TxtTipo.setText("");
         TxtEfecto.setText("");
