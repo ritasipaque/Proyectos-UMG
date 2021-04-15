@@ -5,6 +5,9 @@
  */
 package Finanzas.vista;
 
+import Finanzas.dominio.ClasificacionCuenta;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego Vásquez
@@ -59,6 +62,11 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         JBtnIngresar.setText("Ingresar");
         JBtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnIngresarActionPerformed(evt);
+            }
+        });
 
         JBtnModificar.setText("Modificar");
         JBtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -68,6 +76,11 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         JBtnBuscar.setText("Buscar");
         JBtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,6 +188,29 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+
+    /*private void cargarTabla() {
+       for(int i=0; i<objClasificarCuenta.getTablaRegistros().length; i++){
+            for(int j=0; j<3; j++){
+                JTableClasificacion.setValueAt(objClasificarCuenta.getTablaRegistros()[i][j], i, j);
+            }
+        }
+    }*/
+
+    private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
+
+        objClasificarCuenta.setCodigoClasificacion(JTxtCodigo.getText());
+        objClasificarCuenta.setClasificacionCuenta(JTxtClasificacion.getText());
+        objClasificarCuenta.setDescripcionClasificacion(JTxtDescripcion.getText());
+
+        objClasificarCuenta.Registrar(objClasificarCuenta);
+
+    }//GEN-LAST:event_JBtnIngresarActionPerformed
+
+    private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
+        
+    }//GEN-LAST:event_JBtnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
