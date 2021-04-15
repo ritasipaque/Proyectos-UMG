@@ -70,8 +70,8 @@ public class CuentaBancariaDAO {
             stmt = con.prepareStatement(sql_insert);
             stmt.setString(1, cuenta.getNumero_CuentaBancaria());
             stmt.setString(2, cuenta.getMoneda_Cuenta());
-            stmt.setString(1, cuenta.getCuentaHabiente_Cuenta());
-            stmt.setString(2, cuenta.getBanco_Cuenta());
+            stmt.setString(3, cuenta.getCuentaHabiente_Cuenta());
+            stmt.setString(4, cuenta.getBanco_Cuenta());
             rows = stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Registro exitoso");
@@ -97,7 +97,7 @@ public class CuentaBancariaDAO {
           stmt.setString(2, cuenta.getMoneda_Cuenta());
           stmt.setString(3, cuenta.getCuentaHabiente_Cuenta());
           stmt.setString(4, cuenta.getBanco_Cuenta());
-          stmt.setString(3, cuenta.getNumero_CuentaBancaria());
+          stmt.setString(5, cuenta.getNumero_CuentaBancaria());
  
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);

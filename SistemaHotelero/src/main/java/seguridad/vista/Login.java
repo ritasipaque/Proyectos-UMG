@@ -176,7 +176,7 @@ public class Login extends javax.swing.JFrame {
 
                     try {
                        
-                        usuarioSesion="carloscastillo1";
+                        usuarioSesion=txtUsuario.getText();
                         MDI_Sistema menuGeneral = new MDI_Sistema();
                         menuGeneral.setVisible(true);
                         this.dispose();
