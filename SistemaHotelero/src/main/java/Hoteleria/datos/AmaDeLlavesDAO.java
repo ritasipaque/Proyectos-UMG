@@ -5,17 +5,18 @@
  */
 package Hoteleria.datos;
 
-import Hoteleria.dominio.Ama_De_Llaves;
+import Hoteleria.dominio.AmaDeLlaves;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author visitante
  */
-public class Ama_De_Llaves_DAO {
+public class AmaDeLlavesDAO {
 
     //Buscar en la BD
     private static final String SQL_SELECT = "SELECT PK_id_ama_de_llaves, nombre_ama_de_llaves, apellido_ama_de_llaves, piso_ama_de_llaves, entrada_ama_de_llaves, salida_ama_de_llaves, inicio_labores_ama_de_llaves, descripcion_ama_de_llaves, estado_ama_de_llaves FROM tbl_ama_de_llaves";
@@ -28,12 +29,14 @@ public class Ama_De_Llaves_DAO {
     //Buscar 2 en la BD
     public static final String SQL_QUERY = "SELECT PK_id_ama_de_llaves, nombre_ama_de_llaves, apellido_ama_de_llaves, piso_ama_de_llaves, entrada_ama_de_llaves, salida_ama_de_llaves, inicio_labores_ama_de_llaves, descripcion_ama_de_llaves, estado_ama_de_llaves FROM tbl_ama_de_llaves WHERE PK_id_ama_de_llaves = ?";
 
-    public List<Ama_De_Llaves> select() {
+    public static final String SQL_QUERY2 = "SELECT PK_numero_piso FROM tbl_piso_hotel";
+
+    public List<AmaDeLlaves> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Ama_De_Llaves ama_De_Llave = null;
-        List<Ama_De_Llaves> ama_De_Llaves = new ArrayList<Ama_De_Llaves>();
+        AmaDeLlaves ama_De_Llave = null;
+        List<AmaDeLlaves> ama_De_Llaves = new ArrayList<AmaDeLlaves>();
 
         try {
             conn = ConexionHoteleria.getConnection();
@@ -50,7 +53,7 @@ public class Ama_De_Llaves_DAO {
                 String descripcion_ama_de_llaves = rs.getString("descripcion_ama_de_llaves");
                 int estado_ama_de_llaves = rs.getInt("estado_ama_de_llaves");
 
-                ama_De_Llave = new Ama_De_Llaves();
+                ama_De_Llave = new AmaDeLlaves();
                 ama_De_Llave.setId_Ama_De_Llaves(id_ama_de_llaves);
                 ama_De_Llave.setNombre_Ama_De_Llaves(nombre_ama_de_llaves);
                 ama_De_Llave.setApellido_Ama_De_Llaves(apellido_ama_de_llaves);
@@ -74,7 +77,7 @@ public class Ama_De_Llaves_DAO {
         return ama_De_Llaves;
     }
 
-    public int insert(Ama_De_Llaves ama_De_Llaves) {
+    public int insert(AmaDeLlaves ama_De_Llaves) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -105,7 +108,7 @@ public class Ama_De_Llaves_DAO {
         return rows;
     }
 
-    public int update(Ama_De_Llaves ama_De_Llaves) {
+    public int update(AmaDeLlaves ama_De_Llaves) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -136,7 +139,7 @@ public class Ama_De_Llaves_DAO {
         return rows;
     }
 
-    public int delete(Ama_De_Llaves ama_De_Llaves) {
+    public int delete(AmaDeLlaves ama_De_Llaves) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -160,7 +163,7 @@ public class Ama_De_Llaves_DAO {
     }
     //    public List<Persona> query(Persona persona) { // Si se utiliza un ArrayList
 
-    public Ama_De_Llaves query(Ama_De_Llaves ama_De_Llaves) {
+    public AmaDeLlaves query(AmaDeLlaves ama_De_Llaves) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -187,7 +190,7 @@ public class Ama_De_Llaves_DAO {
                 String descripcion_ama_de_llaves = rs.getString("descripcion_ama_de_llaves");
                 int estado_ama_de_llaves = rs.getInt("estado_ama_de_llaves");
 
-                ama_De_Llaves = new Ama_De_Llaves();
+                ama_De_Llaves = new AmaDeLlaves();
                 ama_De_Llaves.setId_Ama_De_Llaves(id_ama_de_llaves);
                 ama_De_Llaves.setNombre_Ama_De_Llaves(nombre_ama_de_llaves);
                 ama_De_Llaves.setApellido_Ama_De_Llaves(apellido_ama_de_llaves);
@@ -208,6 +211,36 @@ public class Ama_De_Llaves_DAO {
             ConexionHoteleria.close(conn);
         }
         return ama_De_Llaves;
+
+    }
+    
+    public void query2(JComboBox cbxModulo) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = ConexionHoteleria.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY2);
+            //stmt.setInt(1, aplicacion.getId_ModuloCbx());
+            rs = stmt.executeQuery();
+
+            cbxModulo.addItem("Seleccionar...");
+            
+            while (rs.next()) {
+                cbxModulo.addItem(rs.getInt("PK_numero_piso"));
+            }
+            //System.out.println("Registros buscado:" + aplicacion);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(rs);
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
 
     }
 

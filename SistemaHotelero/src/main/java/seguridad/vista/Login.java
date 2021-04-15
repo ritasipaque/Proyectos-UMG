@@ -5,9 +5,11 @@
  */
 package seguridad.vista;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import seguridad.datos.UsuarioDAO;
 import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import seguridad.datos.UsuarioDAO;
 import seguridad.dominio.Usuario;
 import seguridad.datos.PermisosDAO;
@@ -21,6 +23,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
+    public static String usuarioSesion="";
+    
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -170,11 +175,14 @@ public class Login extends javax.swing.JFrame {
 
 
                     try {
+                       
+                        usuarioSesion="carloscastillo1";
                         MDI_Sistema menuGeneral = new MDI_Sistema();
                         menuGeneral.setVisible(true);
                         this.dispose();
 
                     } catch (Exception e) {
+                        System.out.println(e);
                     }
 
                     MDI_Components menuGeneral = new  MDI_Components();
@@ -221,60 +229,13 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        //FLATLAF
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            UIManager.setLookAndFeel(new FlatDarkLaf());
+        } catch (Exception ex) {
+            System.out.println(ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
