@@ -5,6 +5,8 @@
  */
 package Finanzas.dominio;
 
+import java.util.Date;
+
 /**
  *
  * @author OtakuGT

@@ -57,8 +57,77 @@ public class ClasificacionCuenta {
 
     ClasificacionCuentaDAO clasificarDAO = new ClasificacionCuentaDAO();
 
-    public void Registrar(ClasificacionCuenta objClasificacion) {
-        clasificarDAO.Insertar(objClasificacion);
+    public void Insertar(ClasificacionCuenta objClasificacion) {
+        if (objClasificacion.getCodigoClasificacion().equals("") || objClasificacion.getCodigoClasificacion().equals("") || objClasificacion.getDescripcionClasificacion().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "¡NO PUEDEN HABER CAMPOS VACÍOS!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int respuesta = clasificarDAO.Insertar(objClasificacion);
+
+            if (respuesta == 1) {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO EXITOSO!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO ERRÓNEO!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public void Actualizar(ClasificacionCuenta objClasificacion) {
+        if (objClasificacion.getCodigoClasificacion().equals("") || objClasificacion.getCodigoClasificacion().equals("") || objClasificacion.getDescripcionClasificacion().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "¡NO PUEDEN HABER CAMPOS VACÍOS!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int respuesta = clasificarDAO.Actualizar(objClasificacion);
+
+            if (respuesta == 1) {
+                JOptionPane.showMessageDialog(null, "¡ACTUALIZACIÓN EXITOSA!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "¡ACTUALIZACIÓN ERRÓNEA!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public void Eliminar(ClasificacionCuenta objClasificacion) {
+        if (objClasificacion.getCodigoClasificacion().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "¡CAMPO CÓDIGO NO PUEDE ESTAR VACÍO!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int respuesta = clasificarDAO.Eliminar(objClasificacion);
+
+            if (respuesta == 1) {
+                JOptionPane.showMessageDialog(null, "¡ELIMINACIÓN EXITOSA!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "¡ELIMINACIÓN ERRÓNEA!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    public ClasificacionCuenta Buscar(ClasificacionCuenta objClasificacion) {
+        if (objClasificacion.getCodigoClasificacion().equals("")) {
+
+            JOptionPane.showMessageDialog(null, "¡CAMPO CÓDIGO NO PUEDE ESTAR VACÍO!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            objClasificacion = new ClasificacionCuenta();
+            clasificarDAO.Buscar(objClasificacion);
+            
+            objClasificacion.setCodigoClasificacion(clasificarDAO.Buscar(objClasificacion).getCodigoClasificacion());
+            objClasificacion.setClasificacionCuenta(clasificarDAO.Buscar(objClasificacion).getClasificacionCuenta());
+            objClasificacion.setDescripcionClasificacion(clasificarDAO.Buscar(objClasificacion).getDescripcionClasificacion());
+
+            if (objClasificacion.getCodigoClasificacion().equals("") || objClasificacion.getClasificacionCuenta().equals("") || objClasificacion.getDescripcionClasificacion().equals("")) {
+                
+                JOptionPane.showMessageDialog(null, "¡REGISTRO NO ENCONTRADO!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO ENCONTRADO!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+        return objClasificacion;
     }
 
     /*public String[][] getTablaRegistros() {
@@ -73,5 +142,4 @@ public class ClasificacionCuenta {
         }
         return matrixRegistros;
     }*/
-
 }
