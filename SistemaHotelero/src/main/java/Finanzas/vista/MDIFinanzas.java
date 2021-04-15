@@ -77,6 +77,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoContabilidad.add(jMenuItem3);
 
         jMenuItem2.setText("Mantenimiento de Periodo Fiscal");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoContabilidad.add(jMenuItem2);
 
         jMenuItem4.setText("Mantenimiento de Tipo de Asiento Contable");
@@ -161,11 +166,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
+        frm_mantPerFis.setVisible(true);
+        JDesktopFinanzas.add(frm_mantPerFis);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
                 fmTipo = new FrmTipoTransaccion();
         JDesktopFinanzas.add(fmTipo);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
     //Banco
@@ -184,6 +197,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         formMantenimiento_TipoPersona = new Mantenimiento_TipoPersona();
         JDesktopFinanzas.add(formMantenimiento_TipoPersona);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
+
 
     public static void main(String args[]) {
        
