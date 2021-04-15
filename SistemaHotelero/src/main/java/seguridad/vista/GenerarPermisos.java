@@ -11,7 +11,7 @@ import seguridad.dominio.Permisos;
  * @author Diego Vásquez
  */
 public class GenerarPermisos {
-
+ 
     Permisos ejecutarPermisos = new Permisos();
 
     public void getPermisos(String modulo, String usuario) {
@@ -25,6 +25,7 @@ public class GenerarPermisos {
                 MDI_Sistema.JMenuItem_Perfiles.setVisible(false);
                 MDI_Sistema.JMenuItem_Modulos.setVisible(false);
                 MDI_Sistema.JMenuItem_AplicacionesUsuario.setVisible(false);
+                MDI_Sistema.JMenuItem_Bitacora.setVisible(false);
 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
 
