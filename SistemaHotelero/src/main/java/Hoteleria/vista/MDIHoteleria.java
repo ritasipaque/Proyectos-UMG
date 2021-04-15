@@ -16,6 +16,10 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
     private Mantenimiento_AmaDeLlaves formMantenimiento_Ama_De_Llaves;
     private Mantenimiento_habitaciones formMantenimiento_habitaciones;
+    private Mantenimiento_FormasDePago formMantenimiento_FormasDePago;
+    private Mantenimiento_Servicios formMantenimiento_Servicios;
+    private Mantenimiento_Huespedes formMantenimiento_Huespedes;
+    private Mantenimiento_Pisos formMantenimiento_Pisos;
     /**
      * Creates new form MDIHoteleria
      */
@@ -37,12 +41,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_archivo = new javax.swing.JMenu();
         menu_catalogos = new javax.swing.JMenu();
         menu_procesos = new javax.swing.JMenu();
-        jMenu7 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu8 = new javax.swing.JMenu();
+        submenu_mantenimientos = new javax.swing.JMenu();
+        mnt_amadellaves = new javax.swing.JMenuItem();
+        mnt_habitaciones = new javax.swing.JMenuItem();
+        mnt_servicios = new javax.swing.JMenuItem();
+        mnt_huespedes = new javax.swing.JMenuItem();
+        mnt_formasdepago = new javax.swing.JMenuItem();
+        mnt_pisos = new javax.swing.JMenuItem();
+        submenu_procesos = new javax.swing.JMenu();
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
@@ -76,34 +82,60 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_procesos.setText("Procesos");
         menu_procesos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
-        jMenu7.setText("Mantenimientos");
+        submenu_mantenimientos.setText("Mantenimientos");
 
-        jMenuItem1.setText("Mantenimiento Ama de Llaves");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnt_amadellaves.setText("Mantenimiento Ama de Llaves");
+        mnt_amadellaves.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnt_amadellavesActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem1);
+        submenu_mantenimientos.add(mnt_amadellaves);
 
-        jMenuItem2.setText("Mantenimiento Habitaciones");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mnt_habitaciones.setText("Mantenimiento Habitaciones");
+        mnt_habitaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mnt_habitacionesActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem2);
+        submenu_mantenimientos.add(mnt_habitaciones);
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu7.add(jMenuItem3);
+        mnt_servicios.setText("Mantenimiento de Servicios");
+        mnt_servicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnt_serviciosActionPerformed(evt);
+            }
+        });
+        submenu_mantenimientos.add(mnt_servicios);
 
-        jMenuItem4.setText("jMenuItem4");
-        jMenu7.add(jMenuItem4);
+        mnt_huespedes.setText("Mantenimiento de Huespedes");
+        mnt_huespedes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnt_huespedesActionPerformed(evt);
+            }
+        });
+        submenu_mantenimientos.add(mnt_huespedes);
 
-        menu_procesos.add(jMenu7);
+        mnt_formasdepago.setText("Mantenimiento de Formas de Pago");
+        mnt_formasdepago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnt_formasdepagoActionPerformed(evt);
+            }
+        });
+        submenu_mantenimientos.add(mnt_formasdepago);
 
-        jMenu8.setText("Procesos");
-        menu_procesos.add(jMenu8);
+        mnt_pisos.setText("Mantenimiento de Pisos");
+        mnt_pisos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnt_pisosActionPerformed(evt);
+            }
+        });
+        submenu_mantenimientos.add(mnt_pisos);
+
+        menu_procesos.add(submenu_mantenimientos);
+
+        submenu_procesos.setText("Procesos");
+        menu_procesos.add(submenu_procesos);
 
         jMenuBar1.add(menu_procesos);
 
@@ -136,17 +168,41 @@ public class MDIHoteleria extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mnt_amadellavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnt_amadellavesActionPerformed
         formMantenimiento_Ama_De_Llaves = new Mantenimiento_AmaDeLlaves();
         formMantenimiento_Ama_De_Llaves.setVisible(true);
         jDesktopPane1.add(formMantenimiento_Ama_De_Llaves);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mnt_amadellavesActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnt_habitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnt_habitacionesActionPerformed
         formMantenimiento_habitaciones = new Mantenimiento_habitaciones();
         formMantenimiento_habitaciones.setVisible(true);
         jDesktopPane1.add(formMantenimiento_habitaciones);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnt_habitacionesActionPerformed
+
+    private void mnt_serviciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnt_serviciosActionPerformed
+        formMantenimiento_Servicios = new Mantenimiento_Servicios();
+        formMantenimiento_Servicios.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_Servicios);
+    }//GEN-LAST:event_mnt_serviciosActionPerformed
+
+    private void mnt_huespedesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnt_huespedesActionPerformed
+        formMantenimiento_Huespedes = new Mantenimiento_Huespedes();
+        formMantenimiento_Huespedes.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_Huespedes);
+    }//GEN-LAST:event_mnt_huespedesActionPerformed
+
+    private void mnt_formasdepagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnt_formasdepagoActionPerformed
+        formMantenimiento_FormasDePago = new Mantenimiento_FormasDePago();
+        formMantenimiento_FormasDePago.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_FormasDePago);
+    }//GEN-LAST:event_mnt_formasdepagoActionPerformed
+
+    private void mnt_pisosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnt_pisosActionPerformed
+        formMantenimiento_Pisos = new Mantenimiento_Pisos();
+        formMantenimiento_Pisos.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_Pisos);
+    }//GEN-LAST:event_mnt_pisosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,18 +225,20 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu7;
-    private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenu menu_archivo;
     private javax.swing.JMenu menu_ayuda;
     private javax.swing.JMenu menu_catalogos;
     private javax.swing.JMenu menu_herramientas;
     private javax.swing.JMenu menu_informes;
     private javax.swing.JMenu menu_procesos;
+    private javax.swing.JMenuItem mnt_amadellaves;
+    private javax.swing.JMenuItem mnt_formasdepago;
+    private javax.swing.JMenuItem mnt_habitaciones;
+    private javax.swing.JMenuItem mnt_huespedes;
+    private javax.swing.JMenuItem mnt_pisos;
+    private javax.swing.JMenuItem mnt_servicios;
+    private javax.swing.JMenu submenu_mantenimientos;
+    private javax.swing.JMenu submenu_procesos;
     // End of variables declaration//GEN-END:variables
 }
