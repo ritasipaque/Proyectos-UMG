@@ -14,7 +14,7 @@ public class Habitaciones {
     private String Descripcion;
     private int Precio;
     private int piso;
-    private String Estado_Habitacion;
+    private int Estado_Habitacion;
     private String Tipo_Habitacion;
 
     public int getId_Habitaciones() {
@@ -49,11 +49,11 @@ public class Habitaciones {
         this.piso = piso;
     }
 
-    public String getEstado_Habitacion() {
+    public int getEstado_Habitacion() {
         return Estado_Habitacion;
     }
 
-    public void setEstado_Habitacion(String Estado_Habitacion) {
+    public void setEstado_Habitacion(int Estado_Habitacion) {
         this.Estado_Habitacion = Estado_Habitacion;
     }
 
