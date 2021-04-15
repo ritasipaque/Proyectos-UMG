@@ -9,7 +9,10 @@ import Finanzas.dominio.PeriodoFiscal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Finanzas.datos.PeriodoFiscalDAO;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.sql.*;
+import java.text.ParseException;
 import javax.swing.JOptionPane;
 
 
@@ -44,8 +47,11 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
      
      public void limpiar() {
         txtID.setText("");
+        InicioDC.setDate(null);
+        FinDC.setDate(null);
         RBPF1.setSelected(false);
         RBPF0.setSelected(false);
+        RBPrueba.setSelected(true);
     }
      
      int CodigoAplicacion = 10;
@@ -70,10 +76,12 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        AñoJC = new com.toedter.calendar.JYearChooser();
         jLabel1 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        InicioDC = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        FinDC = new com.toedter.calendar.JDateChooser();
         BtnAgregar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -82,7 +90,8 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         RBPF1 = new javax.swing.JRadioButton();
         RBPF0 = new javax.swing.JRadioButton();
-        jButton4 = new javax.swing.JButton();
+        RBPrueba = new javax.swing.JRadioButton();
+        BtnModificar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -95,37 +104,46 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
 
         jLabel1.setText("ID");
 
-        jLabel2.setText("Año");
+        jLabel2.setText("Inicio");
+
+        jLabel3.setText("Fin");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(jLabel1))
+                        .addComponent(jLabel2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(AñoJC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                    .addComponent(txtID)
+                    .addComponent(InicioDC, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addComponent(FinDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AñoJC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap())
+                    .addComponent(jLabel2)
+                    .addComponent(InicioDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(FinDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         BtnAgregar.setText("Agregar");
@@ -167,6 +185,10 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         buttonGroup1.add(RBPF0);
         RBPF0.setText("Inactivo");
 
+        buttonGroup1.add(RBPrueba);
+        RBPrueba.setText("jRadioButton1");
+        RBPrueba.setVisible(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -174,24 +196,32 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(RBPF0)
-                    .addComponent(RBPF1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(RBPF0)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(RBPF1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(RBPrueba, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(RBPF1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(RBPF1))
+                    .addComponent(RBPrueba))
+                .addGap(9, 9, 9)
                 .addComponent(RBPF0)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton4.setText("Modificar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnModificar.setText("Modificar");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnModificarActionPerformed(evt);
             }
         });
 
@@ -212,7 +242,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -225,37 +255,33 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAgregar)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(BtnModificar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnAgregar, jButton2, jButton3, jButton4});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnAgregar, BtnModificar, jButton2, jButton3});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         PeriodoFiscal PFInsertar = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
-        int Year = AñoJC.getYear(); 
-        int Day = (1);
-        int Month = (1);
-        int DayEnd = (31);
-        int MonthEnd = (12);
-        String FechaInicio = String.valueOf(Day + "-" + Month + "-" + Year);
-        String FechaFin = String.valueOf(DayEnd + "-" + MonthEnd + "-" + Year);
         if (txtID.getText().length() != 0 && RBPF1.isSelected() || RBPF0.isSelected()) {
             {
+                String Inicio = new SimpleDateFormat("dd/MM/yyyy").format(InicioDC.getDate());
+                String Fin = new SimpleDateFormat("dd/MM/yyyy").format(FinDC.getDate());
                 PFInsertar.setIDPerFis(Integer.parseInt(txtID.getText()));
-                PFInsertar.setInicioAñoPerFis(FechaInicio);
-                PFInsertar.setFinAñoPerFis(FechaFin);
+                PFInsertar.setInicioAñoPerFis(Inicio);
+                PFInsertar.setFinAñoPerFis(Fin);
                 if (RBPF1.isSelected()) {
                     PFInsertar.setEstadoPerFis(1);
                 }
@@ -276,19 +302,14 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         llenadoDeTablas();
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         PeriodoFiscal PFMod = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
-        int Year = AñoJC.getYear(); 
-        int Day = (1);
-        int Month = (1);
-        int DayEnd = (31);
-        int MonthEnd = (12);
-        String FechaInicio = String.valueOf(Day + "-" + Month + "-" + Year);
-        String FechaFin = String.valueOf(DayEnd + "-" + MonthEnd + "-" + Year);
+        String Inicio = new SimpleDateFormat("dd/MM/yyyy").format(InicioDC.getDate());
+        String Fin = new SimpleDateFormat("dd/MM/yyyy").format(FinDC.getDate());
         PFMod.setIDPerFis(Integer.parseInt(txtID.getText()));
-        PFMod.setInicioAñoPerFis(FechaInicio);
-        PFMod.setFinAñoPerFis(FechaFin);
+        PFMod.setInicioAñoPerFis(Inicio);
+        PFMod.setFinAñoPerFis(Fin);
 
         if (RBPF1.isSelected()) {
             PFMod.setEstadoPerFis(1);
@@ -300,7 +321,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         PFDAO.update(PFMod);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         llenadoDeTablas();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         PeriodoFiscal PFDel = new PeriodoFiscal();
@@ -317,11 +338,26 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         PeriodoFiscal PFBuscar = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
         PFBuscar.setIDPerFis(Integer.parseInt(txtID.getText()));
-
+        String Inicio = new SimpleDateFormat("dd/MM/yyyy").format(InicioDC.getDate());
+        String Fin = new SimpleDateFormat("dd/MM/yyyy").format(FinDC.getDate());
         PFBuscar = PFDAO.query(PFBuscar);
-
+        
         txtID.setText(String.valueOf(PFBuscar.getIDPerFis()));
-        AñoJC.setYear(Integer.parseInt(PFBuscar.getInicioAñoPerFis()));
+        String inicio = String.valueOf(PFBuscar.getInicioAñoPerFis());
+        SimpleDateFormat modelo = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date iniPF = modelo.parse(inicio);
+            InicioDC.setDate(iniPF);
+        } catch (ParseException e) {
+            e.printStackTrace(System.out);
+        }
+        String fin = String.valueOf(PFBuscar.getInicioAñoPerFis());
+        try {
+            Date finPF = modelo.parse(fin);
+            FinDC.setDate(finPF);
+        } catch (ParseException e) {
+            e.printStackTrace(System.out);
+        }
 
         if (PFBuscar.getEstadoPerFis() == 1) {
             RBPF1.setSelected(true);
@@ -338,17 +374,20 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JYearChooser AñoJC;
     private javax.swing.JButton BtnAgregar;
+    private javax.swing.JButton BtnModificar;
+    private com.toedter.calendar.JDateChooser FinDC;
+    private com.toedter.calendar.JDateChooser InicioDC;
     private javax.swing.JRadioButton RBPF0;
     private javax.swing.JRadioButton RBPF1;
+    private javax.swing.JRadioButton RBPrueba;
     private javax.swing.JTable Tabla;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

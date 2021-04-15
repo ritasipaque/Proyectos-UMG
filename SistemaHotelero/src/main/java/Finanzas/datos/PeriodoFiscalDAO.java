@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import Finanzas.dominio.PeriodoFiscal;
+import Finanzas.datos.Conexion;
+import java.util.Date;
 
 /**
  *
@@ -163,7 +165,7 @@ public class PeriodoFiscalDAO extends Conexion {
             conn = seguridad.datos.Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, PeriodoFiscal.getIDPerFis());
-            stmt.setString(2, PeriodoFiscal.getInicioAñoPerFis());
+            stmt.setString(2,PeriodoFiscal.getInicioAñoPerFis());
             stmt.setString(3, PeriodoFiscal.getFinAñoPerFis());
             stmt.setInt(4, PeriodoFiscal.getEstadoPerFis());
             stmt.executeUpdate();
