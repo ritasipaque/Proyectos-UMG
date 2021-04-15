@@ -10,8 +10,8 @@ import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import Hoteleria.datos.Ama_De_Llaves_DAO;
-import Hoteleria.dominio.Ama_De_Llaves;
+import Hoteleria.datos.AmaDeLlavesDAO;
+import Hoteleria.dominio.AmaDeLlaves;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,18 +20,18 @@ import java.util.Date;
  *
  * @author Jeff
  */
-public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
+public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
 
-    Ama_De_Llaves_DAO cargarCombobox = new Ama_De_Llaves_DAO();
+    AmaDeLlavesDAO cargarCombobox = new AmaDeLlavesDAO();
     ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
 
     /**
      * Creates new form MantenimientoAplicacion
      */
-    public Mantenimiento_Ama_De_Llaves() {
+    public Mantenimiento_AmaDeLlaves() {
         initComponents();
-        //cargarCombobox.query2(cbxModulo);
+        cargarCombobox.query2(cbxPiso);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
         grupoDeRadios.add(btnRadioInactivo);
@@ -54,9 +54,9 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
         modelo1.addColumn("Estado");
         jTable.setModel(modelo1);
         String datos[] = new String[9];
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
-        List<Ama_De_Llaves> ama_De_Llaves = ama_De_Llaves_DAO.select();
-        for (Ama_De_Llaves ama_De_Llave : ama_De_Llaves) {
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
+        List<AmaDeLlaves> ama_De_Llaves = ama_De_Llaves_DAO.select();
+        for (AmaDeLlaves ama_De_Llave : ama_De_Llaves) {
             datos[0] = String.valueOf(ama_De_Llave.getId_Ama_De_Llaves());
             datos[1] = ama_De_Llave.getNombre_Ama_De_Llaves();
             datos[2] = ama_De_Llave.getApellido_Ama_De_Llaves();
@@ -237,8 +237,6 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Piso:");
 
-        cbxPiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "1", "2", "3" }));
-
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel8.setText("Horario");
 
@@ -358,7 +356,7 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
                                             .addComponent(jLabel10)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(cbxSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(30, 30, 30))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -434,11 +432,11 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
                 .addComponent(lblModulo)
                 .addGap(292, 292, 292))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -446,8 +444,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Insertar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Insertar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
 
         String cbx_Entrada = cbxEntrada.getSelectedItem().toString();
         String cbx_Salida = cbxSalida.getSelectedItem().toString();
@@ -495,8 +493,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Modificar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Modificar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
 
         String cbx_Entrada = cbxEntrada.getSelectedItem().toString();
         String cbx_Salida = cbxSalida.getSelectedItem().toString();
@@ -535,8 +533,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Eliminar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Eliminar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
 
         ama_De_Llaves_Eliminar.setId_Ama_De_Llaves(Integer.parseInt(txtBuscar.getText()));
         ama_De_Llaves_DAO.delete(ama_De_Llaves_Eliminar);
@@ -549,8 +547,8 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
-        Ama_De_Llaves ama_De_Llaves_Buscar = new Ama_De_Llaves();
-        Ama_De_Llaves_DAO ama_De_Llaves_DAO = new Ama_De_Llaves_DAO();
+        AmaDeLlaves ama_De_Llaves_Buscar = new AmaDeLlaves();
+        AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
         ama_De_Llaves_Buscar.setId_Ama_De_Llaves(Integer.parseInt(txtBuscar.getText()));
 
         ama_De_Llaves_Buscar = ama_De_Llaves_DAO.query(ama_De_Llaves_Buscar);
@@ -558,7 +556,7 @@ public class Mantenimiento_Ama_De_Llaves extends javax.swing.JInternalFrame {
         txtId.setText(String.valueOf(ama_De_Llaves_Buscar.getId_Ama_De_Llaves()));
         txtNombre.setText(String.valueOf(ama_De_Llaves_Buscar.getNombre_Ama_De_Llaves()));
         txtApellido.setText(String.valueOf(ama_De_Llaves_Buscar.getApellido_Ama_De_Llaves()));
-        cbxPiso.setSelectedItem(String.valueOf(ama_De_Llaves_Buscar.getPiso_Ama_De_Llaves()));
+        cbxPiso.setSelectedItem(ama_De_Llaves_Buscar.getPiso_Ama_De_Llaves());
         cbxEntrada.setSelectedItem(String.valueOf(ama_De_Llaves_Buscar.getEntrada_Ama_De_Llaves()));
         cbxSalida.setSelectedItem(String.valueOf(ama_De_Llaves_Buscar.getSalida_Ama_De_Llaves()));
         String fecha = String.valueOf(ama_De_Llaves_Buscar.getInicio_Ama_De_Llaves());
