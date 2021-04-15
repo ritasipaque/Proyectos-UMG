@@ -1,4 +1,8 @@
 seguridad\vista\Asignacion_usuario_Perfil1$2.class
+<<<<<<< HEAD
+=======
+Comercial\datos\ProveedorDAO1.class
+>>>>>>> edelaguila-main
 Finanzas\datos\MonedaDAO.class
 Finanzas\vista\FrmTipoTransaccion$5.class
 seguridad\dominio\Aplicacion.class
@@ -12,6 +16,10 @@ seguridad\vista\Mantenimiento_Usuario$1.class
 seguridad\datos\AplicacionDAO.class
 seguridad\vista\MDI_Sistema$1.class
 Hoteleria\vista\Mantenimiento_FormasDePago.class
+<<<<<<< HEAD
+=======
+Comercial\vista\MantenimientoProveedor$4.class
+>>>>>>> edelaguila-main
 seguridad\vista\Mantenimiento_Aplicacion$5.class
 Hoteleria\vista\MDIHoteleria$3.class
 Finanzas\vista\Mantenimiento_Banco$1.class
@@ -34,6 +42,7 @@ seguridad\vista\Mantenimiento_Modulos$5.class
 seguridad\vista\Aplicacion_Perfil$5.class
 seguridad\vista\Asignacion_modulos$3.class
 Hoteleria\datos\ConexionHoteleria.class
+<<<<<<< HEAD
 Finanzas\vista\MDIFinanzas$9.class
 seguridad\vista\Aplicacion_Perfil$10.class
 Hoteleria\vista\Mantenimiento_Huespedes.class
@@ -42,6 +51,16 @@ Hoteleria\vista\MDIHoteleria$4.class
 seguridad\vista\Asignacion_usuario_Perfil1$1.class
 seguridad\vista\Asignacion_usuario_Perfil1.class
 Hoteleria\datos\FormasDePagoDAO.class
+=======
+Comercial\vista\MantenimientoProveedor.class
+seguridad\vista\Aplicacion_Perfil$10.class
+Hoteleria\vista\Mantenimiento_Huespedes.class
+seguridad\vista\Mantenimiento_Perfil$2.class
+seguridad\vista\Asignacion_usuario_Perfil1$1.class
+seguridad\vista\Asignacion_usuario_Perfil1.class
+Hoteleria\datos\FormasDePagoDAO.class
+Comercial\dominio\Proveedor.class
+>>>>>>> edelaguila-main
 seguridad\vista\Aplicacion_Perfil$6.class
 seguridad\vista\Asignacion_usuario_Perfil1$8.class
 Hoteleria\vista\Mantenimiento_Huespedes$1.class
@@ -126,6 +145,10 @@ seguridad\vista\Asignacion_usuario_Perfil1$11.class
 Hoteleria\vista\Mantenimiento_Huespedes$4.class
 Finanzas\vista\FrmTipoTransaccion$2.class
 Finanzas\vista\Mantenimiento_Moneda$3.class
+<<<<<<< HEAD
+=======
+Comercial\vista\MantenimientoProveedor$1.class
+>>>>>>> edelaguila-main
 seguridad\vista\Mantenimiento_Aplicacion$2.class
 Hoteleria\vista\Mantenimiento_Servicios$1.class
 Finanzas\vista\Mantenimiento_Banco$4.class
@@ -141,7 +164,10 @@ seguridad\vista\Asignacion_modulos$6.class
 Finanzas\vista\MDIFinanzas$6.class
 seguridad\vista\GenerarPermisos.class
 Hoteleria\vista\MDIHoteleria$6.class
+<<<<<<< HEAD
 Finanzas\vista\MDIFinanzas$10.class
+=======
+>>>>>>> edelaguila-main
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$1.class
 Hoteleria\vista\Mantenimiento_Pisos$5.class
 seguridad\dominio\Modulos.class
@@ -176,6 +202,7 @@ Finanzas\vista\FrmCuentaHabiente$1.class
 seguridad\dominio\Asignacion_Usuario_Perfil.class
 Finanzas\vista\FrmMantCuentaContable.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$11.class
+Comercial\vista\MantenimientoProveedor$2.class
 Finanzas\vista\MDIFinanzas$1.class
 seguridad\vista\Mantenimiento_Modulos$4.class
 Hoteleria\datos\HuespedesDAO.class
@@ -206,6 +233,7 @@ Comercial\vista\MantenimientoProductos$1.class
 Hoteleria\vista\Mantenimiento_AmaDeLlaves$9.class
 Hoteleria\vista\MDIHoteleria.class
 seguridad\vista\MDI_Components.class
+Comercial\vista\MDIcomercial$3.class
 Hoteleria\vista\Mantenimiento_habitaciones$5.class
 Hoteleria\vista\Mantenimiento_Pisos$4.class
 Finanzas\dominio\Moneda.class
@@ -226,6 +254,7 @@ Finanzas\vista\FrmTipoTransaccion$6.class
 Hoteleria\vista\Mantenimiento_Pisos$1.class
 Finanzas\vista\Mantenimiento_Moneda$2.class
 Finanzas\vista\FrmTipoTransaccion$3.class
+Comercial\vista\MantenimientoProveedor$3.class
 seguridad\vista\Mantenimiento_Usuario$2.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$4.class
 Hoteleria\vista\Mantenimiento_habitaciones$3.class
@@ -258,6 +287,7 @@ seguridad\vista\Mantenimiento_Aplicacion$1.class
 Finanzas\vista\Mantenimiento_Banco.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$3.class
 seguridad\vista\Mantenimiento_Perfil.class
+Comercial\vista\MantenimientoProveedor$5.class
 Hoteleria\dominio\Habitaciones.class
 Finanzas\vista\Mantenimiento_PeriodoFiscal.class
 Finanzas\vista\MDIFinanzas$5.class
