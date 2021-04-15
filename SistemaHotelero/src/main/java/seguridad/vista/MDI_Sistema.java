@@ -36,13 +36,17 @@ public class MDI_Sistema extends javax.swing.JFrame {
     MDI_Components mdi_components = new MDI_Components();
 
     GenerarPermisos generarPermisos = new GenerarPermisos();
-    
+
     /*------------------------------------------*/
     public MDI_Sistema() throws UnknownHostException {
         initComponents();
-        
-        this.setTitle("Usuario: " + "[" + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
-        generarPermisos.getPermisos("Seguridad", "carloscastillo1");
+
+        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
+
+        var usuario = Login.usuarioSesion;
+        var modulo = "Seguridad";
+
+        generarPermisos.getPermisos(modulo, usuario);
     }
 
     /**
@@ -71,7 +75,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         JMenuItem_Aplicaciones = new javax.swing.JMenuItem();
         JMenuItem_Perfiles = new javax.swing.JMenuItem();
         JMenuItem_Modulos = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        JMenuItemCambioC = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Hotelero");
@@ -193,9 +197,14 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
         JMenu_Seguridad.add(JMenu_Mantenimientos);
 
-        jMenu1.setText("Cambio Contraseña");
-        jMenu1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        JMenu_Seguridad.add(jMenu1);
+        JMenuItemCambioC.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        JMenuItemCambioC.setText("Cambio de contraseña");
+        JMenuItemCambioC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemCambioCActionPerformed(evt);
+            }
+        });
+        JMenu_Seguridad.add(JMenuItemCambioC);
 
         jMenuBar1.add(JMenu_Seguridad);
 
@@ -286,6 +295,11 @@ public class MDI_Sistema extends javax.swing.JFrame {
         JDesktopPane_Escritorio.add(formAsignacion_de_aplicacion_a_usuario);
     }//GEN-LAST:event_JMenuItem_AplicacionesUsuarioActionPerformed
 
+    private void JMenuItemCambioCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemCambioCActionPerformed
+        CambioC cambioContraseña = new CambioC();
+        cambioContraseña.setVisible(true);
+    }//GEN-LAST:event_JMenuItemCambioCActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -311,11 +325,12 @@ public class MDI_Sistema extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane JDesktopPane_Escritorio;
+    private javax.swing.JMenuItem JMenuItemCambioC;
     public static javax.swing.JMenuItem JMenuItem_Aplicaciones;
     public static javax.swing.JMenuItem JMenuItem_AplicacionesModulos;
     public static javax.swing.JMenuItem JMenuItem_AplicacionesPerfiles;
     public static javax.swing.JMenuItem JMenuItem_AplicacionesUsuario;
-    private javax.swing.JMenuItem JMenuItem_Bitacora;
+    public static javax.swing.JMenuItem JMenuItem_Bitacora;
     private javax.swing.JMenuItem JMenuItem_CerrarSesion;
     public static javax.swing.JMenuItem JMenuItem_Modulos;
     public static javax.swing.JMenuItem JMenuItem_Perfiles;
@@ -325,7 +340,6 @@ public class MDI_Sistema extends javax.swing.JFrame {
     public static javax.swing.JMenu JMenu_Asignaciones;
     public static javax.swing.JMenu JMenu_Mantenimientos;
     public javax.swing.JMenu JMenu_Seguridad;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
