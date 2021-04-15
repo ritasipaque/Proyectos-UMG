@@ -68,9 +68,9 @@ public class CuentaHabienteDAO {
             stmt = con.prepareStatement(sql_insert);
             stmt.setString(1, cuenta.getCodigo_CuentaHabiente());
             stmt.setString(2, cuenta.getNombre_CuentaHabiente());
-            stmt.setString(1, cuenta.getApellidoP_CuentaHabiente());
-            stmt.setString(2, cuenta.getApellidoM_CuentaHabiente());
-            stmt.setString(2, cuenta.getTipoPersona_CuentaHabiente());
+            stmt.setString(3, cuenta.getApellidoP_CuentaHabiente());
+            stmt.setString(4, cuenta.getApellidoM_CuentaHabiente());
+            stmt.setString(5, cuenta.getTipoPersona_CuentaHabiente());
             rows = stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Registro exitoso");

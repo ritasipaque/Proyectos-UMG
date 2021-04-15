@@ -2,6 +2,9 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
     <Property name="title" type="java.lang.String" value="Mantenimiento TipoTransaccion&#xa;"/>
     <Property name="visible" type="boolean" value="true"/>
   </Properties>
@@ -99,7 +102,7 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnLimpiar2" min="-2" pref="95" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="btnLimpiar" min="-2" pref="95" max="-2" attributes="0"/>
+                                  <Component id="BtnAyuda" min="-2" pref="95" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="btnLimpiar1" min="-2" pref="95" max="-2" attributes="0"/>
@@ -145,7 +148,7 @@
                       <Component id="btnModificar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="btnRegistrar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="btnLimpiar2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="btnLimpiar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="BtnAyuda" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
@@ -326,7 +329,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiar2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLimpiar">
+        <Component class="javax.swing.JButton" name="BtnAyuda">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Eras Light ITC" size="12" style="1"/>
@@ -341,7 +344,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimpiarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAyudaActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
