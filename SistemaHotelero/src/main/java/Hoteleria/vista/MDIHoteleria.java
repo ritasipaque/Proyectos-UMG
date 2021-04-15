@@ -6,6 +6,9 @@
 package Hoteleria.vista;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
@@ -28,7 +31,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     /**
      * Creates new form MDIHoteleria
      */
-    public MDIHoteleria() {
+    public MDIHoteleria() throws UnknownHostException {
         initComponents();
          MDI_Components mdi_components = new MDI_Components();
         GenerarPermisos generarPermisos = new GenerarPermisos();
@@ -232,7 +235,11 @@ public class MDIHoteleria extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MDIHoteleria().setVisible(true);
+                try {
+                    new MDIHoteleria().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(MDIHoteleria.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
