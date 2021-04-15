@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_piso_hotel` (
   PRIMARY KEY (`PK_numero_piso`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_piso_hotel` (`PK_numero_piso`, `cantidad_habitaciones`, `descripcion_piso`, `estado_piso`) VALUES ('1', '10', 'Habitaciones pequeñas', '1');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_ama_de_llaves`
@@ -34,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_ama_de_llaves` (
   FOREIGN KEY (`piso_ama_de_llaves`) REFERENCES `tbl_piso_hotel`(`PK_numero_piso`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_ama_de_llaves` (`PK_id_ama_de_llaves`, `nombre_ama_de_llaves`, `apellido_ama_de_llaves`, `piso_ama_de_llaves`, `entrada_ama_de_llaves`, `salida_ama_de_llaves`, `inicio_labores_ama_de_llaves`, `descripcion_ama_de_llaves`, `estado_ama_de_llaves`) VALUES ('1', 'Carmen', 'Dominguez', '1', '8am', '8pm', '15/04/2021', 'Encargada del área', '1');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_mantenimiento_habitaciones`
@@ -43,12 +45,13 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_mantenimiento_habitaciones` (
   `descripcion_habitacion` VARCHAR(45) NULL DEFAULT NULL,
   `precio_habitacion` int(45) NULL DEFAULT NULL,
   `piso_habitaciones` INT NULL DEFAULT NULL,
-  `estado_habitacion` VARCHAR(10) NULL DEFAULT NULL,
+  `estado_habitacion` INT NULL DEFAULT NULL,
   `tipo_de_habitacion` VARCHAR(20) NULL DEFAULT NULL,
   PRIMARY KEY (`PK_id_habitacion`),
   FOREIGN KEY (`piso_habitaciones`) REFERENCES `tbl_piso_hotel`(`PK_numero_piso`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_mantenimiento_habitaciones` (`PK_id_habitacion`, `descripcion_habitacion`, `precio_habitacion`, `piso_habitaciones`, `estado_habitacion`, `tipo_de_habitacion`) VALUES ('1', 'Habitación Grande', '250', '1', '1', 'Matrimonial');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_metodos_de_pago`
@@ -61,6 +64,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_metodos_de_pago` (
    PRIMARY KEY (`PK_id_metodo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_metodos_de_pago` (`PK_id_metodo`, `nombre_metodo`, `descripcion_metodo`, `estado_metodo`) VALUES ('1', 'Tarjeta', 'Pago con tarjeta', '1');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_huespedes`
@@ -77,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_huespedes` (
    PRIMARY KEY (`PK_no_identificacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_huespedes` (`PK_no_identificacion`, `nombre_huesped`, `apellido_huesped`, `nacionalidad_huesped`, `direccion_huesped`, `frecuencia_huesped`, `telefono_huesped`, `nit_huesped`) VALUES ('1', 'Alberto', 'Suarez', 'Mexicano', '12 calle', 'Constante', '12345678', '87654321');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_servicios`
@@ -90,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_servicios` (
   PRIMARY KEY (`PK_id_servicio`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_servicios` (`PK_id_servicio`, `nombre_servicio`, `descripcion_servicio`, `tipo_servicio`, `estado_servicio`) VALUES ('1', 'Internet', '50mg', '1', '1');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_reservaciones`
@@ -106,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_reservaciones` (
   FOREIGN KEY (`PK_id_habitacion`) REFERENCES `tbl_mantenimiento_habitaciones`(`PK_id_habitacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_metodo_pago`

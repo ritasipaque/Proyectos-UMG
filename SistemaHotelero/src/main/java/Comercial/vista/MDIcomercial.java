@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+import java.io.File;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -12,7 +14,8 @@ import javax.swing.UIManager;
  */
 public class MDIcomercial extends javax.swing.JFrame {
  private MantenimientoProductos formModulos;
- 
+  private Mantenimiento_Cliente Mantenimiento_Cliente ;
+  private Mantenimiento_Acreedor  Mantenimiento_Acreedor;
     /**
      * Creates new form MDIcomercial
      */
@@ -34,25 +37,37 @@ public class MDIcomercial extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu8 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 200, 23));
+
+        jDesktopPane1.setBackground(new java.awt.Color(255, 204, 0));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 777, Short.MAX_VALUE)
+            .addGap(0, 847, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 572, Short.MAX_VALUE)
+            .addGap(0, 574, Short.MAX_VALUE)
         );
+
+        jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
 
         jMenu1.setText("Archivo");
         jMenu1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -65,13 +80,48 @@ public class MDIcomercial extends javax.swing.JFrame {
         jMenu2.setText("Catalogos");
         jMenu2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
-        jMenuItem1.setText("Mantenimiento Producto");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu8.setText("Mantenimientos Ventas");
+
+        jMenuItem3.setText("Mantenimineto Cliente");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu8.add(jMenuItem3);
+
+        jMenuItem4.setText("Mantenimiento Acreedor");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu8.add(jMenuItem4);
+
+        jMenu2.add(jMenu8);
+
+        jMenu9.setText("Mantenimientos Compras");
+
+        jMenuItem5.setText("Mantenimiento Producto");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem5);
+
+        jMenuItem6.setText("Mantenimiento Proveedor");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu9.add(jMenuItem6);
+
+        jMenu2.add(jMenu9);
+
+        jMenu10.setText("Mantenimientos Inventarios");
+        jMenu2.add(jMenu10);
 
         jMenuBar1.add(jMenu2);
 
@@ -89,6 +139,20 @@ public class MDIcomercial extends javax.swing.JFrame {
 
         jMenu7.setText("Ayuda");
         jMenu7.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+
+        jMenu11.setText("Ayuda");
+        jMenu11.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+
+        jMenuItem7.setText("Ayuda Menu");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem7);
+
+        jMenu7.add(jMenu11);
+
         jMenuBar1.add(jMenu7);
 
         setJMenuBar(jMenuBar1);
@@ -97,9 +161,7 @@ public class MDIcomercial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 70, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,12 +171,51 @@ public class MDIcomercial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-     //  Asignacionmodulos Rita Sipaque
-        
-       MantenimientoProductos ventana = new MantenimientoProductos();
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+ MantenimientoProveedor ventana = new MantenimientoProveedor();
         jDesktopPane1.add(ventana);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+MantenimientoProductos ventana = new MantenimientoProductos();
+        jDesktopPane1.add(ventana);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Mantenimiento_Acreedor= new Mantenimiento_Acreedor();
+        Mantenimiento_Acreedor.setVisible(true);
+          jDesktopPane1.add(Mantenimiento_Acreedor);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Mantenimiento_Cliente= new Mantenimiento_Cliente();
+        Mantenimiento_Cliente.setVisible(true);
+          jDesktopPane1.add(Mantenimiento_Cliente);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\menu.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\menu.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,13 +258,21 @@ public class MDIcomercial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }
