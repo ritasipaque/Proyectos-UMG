@@ -59,34 +59,34 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmCrudUsuarios
      */
-    
-    int CodigoAplicacion = 10;
-    
     void habilitarAcciones() {
-        
+
+        var codigoAplicacion = 10;
+        var usuario = Login.usuarioSesion;
+
         BtnIng.setEnabled(false);
         BtnMod.setEnabled(false);
         BtnElim.setEnabled(false);
         BtnBus.setEnabled(false);
-        
+
         GenerarPermisos permisos = new GenerarPermisos();
-        
+
         String[] permisosApp = new String[5];
 
         for (int i = 0; i < 5; i++) {
-            permisosApp[i] = permisos.getAccionesAplicacion(CodigoAplicacion, "carloscastillo1")[i];
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
-        
-        if(permisosApp[0].equals("1")){
+
+        if (permisosApp[0].equals("1")) {
             BtnIng.setEnabled(true);
         }
-        if(permisosApp[1].equals("1")){
+        if (permisosApp[1].equals("1")) {
             BtnBus.setEnabled(true);
         }
-        if(permisosApp[2].equals("1")){
+        if (permisosApp[2].equals("1")) {
             BtnMod.setEnabled(true);
         }
-        if(permisosApp[3].equals("1")){
+        if (permisosApp[3].equals("1")) {
             BtnElim.setEnabled(true);
         }
     }
