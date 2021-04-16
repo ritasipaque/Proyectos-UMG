@@ -14,6 +14,8 @@ import Finanzas.dominio.CuentaHabiente;
 import Finanzas.datos.CuentaHabienteDAO;
 import Finanzas.dominio.Banco;
 import Finanzas.datos.BancoDAO;
+import com.mysql.cj.Query;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Santiago Martinez Diaz 9959-19-13847
@@ -27,8 +29,11 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
       cbox_Moneda.addItem("Seleccione una opción");
       for (int i = 0; i < moneda.size(); i++) {
            cbox_Moneda.addItem(moneda.get(i).getCodigo_Moneda());
+         
+           
        }
  }
+
       public void llenadoDeCombos2() throws SQLException  {
        CuentaHabienteDAO cuentadao = new CuentaHabienteDAO();
       List<CuentaHabiente> cuenta = cuentadao.select();
@@ -127,22 +132,22 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         setToolTipText("");
         setVisible(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
 
-        label7.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label7.setText("Numero De cuenta:");
 
         TxtNumero.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         TxtNumero.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         TxtNumero.setOpaque(false);
 
-        label9.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label9.setText("Tipo De Moneda:");
 
-        label8.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label8.setText("Cuenta de CuentaHabiente:");
 
-        label10.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label10.setText("Cuenta  Del Banco;");
 
         Cbox_Cuenta.addActionListener(new java.awt.event.ActionListener() {
@@ -172,45 +177,45 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
             }
         });
 
-        TxtMoneda.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        TxtMoneda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         TxtMoneda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtMonedaActionPerformed(evt);
             }
         });
 
-        TxtCuenta.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        TxtCuenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        TxtBanco.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        TxtBanco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnEliminar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        btnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnRegistrar.setText("Registrar");
-        btnRegistrar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        btnRegistrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
 
-        btnLimpiar3.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnLimpiar3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnLimpiar3.setText("Ayuda:");
-        btnLimpiar3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        btnLimpiar3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiar3ActionPerformed(evt);
             }
         });
 
-        TxtBuscar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        TxtBuscar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -245,13 +250,19 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                                             .addComponent(Cbox_Cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(cbox_Moneda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(2, 2, 2)
+                                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jButton2))
+                                        .addGap(16, 16, 16)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                    .addComponent(TxtCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                                     .addComponent(TxtBanco)
                                     .addComponent(TxtMoneda)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -303,7 +314,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                 .addGap(39, 39, 39))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
 
         JTableTransaccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         JTableTransaccion.setModel(new javax.swing.table.DefaultTableModel(
@@ -359,7 +370,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
 
         pack();
@@ -397,6 +408,19 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
     private void btnLimpiar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar3ActionPerformed
 
         // TODO add your handling code here:
+                      try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaBancaria.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaBancaria.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+        
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }    
     }//GEN-LAST:event_btnLimpiar3ActionPerformed
 
     private void TxtMonedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtMonedaActionPerformed
@@ -405,16 +429,13 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-       String val =cbox_Moneda.getSelectedItem().toString();
+     String val =cbox_Moneda.getSelectedItem().toString();
         MonedaDAO perfilDAO = new MonedaDAO();
         Moneda consultar = new Moneda();
         consultar.setCodigo_Moneda(val);
         consultar=perfilDAO.query(consultar);
-      
-          
+             
         TxtMoneda.setText(consultar.getNombre_Moneda());
-        
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
