@@ -6,12 +6,17 @@
 package seguridad.vista;
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import seguridad.datos.AplicacionDAO;
+import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Aplicacion;
+import seguridad.dominio.Bitacora;
 
 /**
  *
@@ -26,10 +31,11 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
     /**
      * Creates new form MantenimientoAplicacion
      */
-    int codigoAplicacion=20;
-    
+    int codigoAplicacion = 20;
+
     public Mantenimiento_Aplicacion() {
         initComponents();
+        int codigoAplicacion = 25;
         //cargarCombobox.query2(cbxModulo);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
@@ -343,6 +349,8 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
 
         Aplicacion aplicacionInsertar = new Aplicacion();
         AplicacionDAO aplicacionDAO = new AplicacionDAO();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
         //String cbx_Modulo = cbxModulo.getSelectedItem().toString();
         //int txt_Estado = Integer.parseInt(txtAplicacion.getText());
         //lbl_Modulo = cbxModulo.getSelectedItem().toString();
@@ -364,6 +372,17 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
                 }
 
                 btnRadioVacio.setSelected(true);
+
+                AInsertar.setId_Usuario("Aplicacion");
+                AInsertar.setAccion("Inserción");
+                AInsertar.setCodigoAplicacion(String.valueOf(codigoAplicacion));
+
+                try {
+                    BitacoraDAO.insert(AInsertar);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
                 limpiar();
                 aplicacionDAO.insert(aplicacionInsertar);
             }
@@ -378,6 +397,8 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
 
         Aplicacion aplicacionModificar = new Aplicacion();
         AplicacionDAO aplicacionDAO = new AplicacionDAO();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
 
         aplicacionModificar.setId_Aplicacion(Integer.parseInt(txtAplicacion.getText()));
         //aplicacionModificar.setId_Modulo(Integer.parseInt(cbxModulo.getSelectedItem().toString()));
@@ -395,6 +416,16 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
         btnRadioVacio.setSelected(true);
 
+        AInsertar.setId_Usuario("Aplicacion");
+        AInsertar.setAccion("Modificación");
+        AInsertar.setCodigoAplicacion(String.valueOf(codigoAplicacion));
+
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         tabla();
         limpiar();
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -403,11 +434,23 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
 
         Aplicacion aplicacionEliminar = new Aplicacion();
         AplicacionDAO aplicacionDAO = new AplicacionDAO();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
 
         aplicacionEliminar.setId_Aplicacion(Integer.parseInt(txtAplicacion.getText()));
         aplicacionDAO.delete(aplicacionEliminar);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
         btnRadioVacio.setSelected(true);
+        
+        AInsertar.setId_Usuario("Aplicacion");
+        AInsertar.setAccion("Eliminación");
+        AInsertar.setCodigoAplicacion(String.valueOf(codigoAplicacion));
+
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         tabla();
         limpiar();
