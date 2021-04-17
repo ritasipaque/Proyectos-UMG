@@ -5,12 +5,20 @@
  */
 package Comercial.vista;
 
+import Comercial.datos.DeudoresDAO;
 import Comercial.datos.ClienteDao;
+import Comercial.dominio.Deudores;
 import Comercial.dominio.Cliente;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
@@ -26,8 +34,8 @@ public void llenadoDeTablas() {
        modelo.addColumn("ID Acreedores");
         modelo.addColumn("Cliente");
         modelo.addColumn("Monto");
-          modelo.addColumn("Nit");
           modelo.addColumn("Estatus Cliente");
+          modelo.addColumn("Nit");
           modelo.addColumn("Telefono");
            modelo.addColumn("Producto");
   
@@ -172,7 +180,7 @@ producto.setText(Buscar.getProducto());
 
         jLabel7.setText("Estatus de Cliente");
 
-        jLabel8.setText("capital");
+        jLabel8.setText("Capital");
 
         JtProductos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,9 +217,9 @@ producto.setText(Buscar.getProducto());
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8))
                                 .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -225,11 +233,15 @@ producto.setText(Buscar.getProducto());
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel6))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(producto)
-                                    .addComponent(telefono)
-                                    .addComponent(monto))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(producto)
+                                            .addComponent(telefono)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 344, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addGap(40, 40, 40)
@@ -263,10 +275,10 @@ producto.setText(Buscar.getProducto());
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(monto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -275,13 +287,11 @@ producto.setText(Buscar.getProducto());
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addComponent(jLabel7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(89, 89, 89)
@@ -306,20 +316,32 @@ producto.setText(Buscar.getProducto());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        ClienteDao dao = new ClienteDao ();
+         ClienteDao dao = new    ClienteDao  ();
 
-        Cliente modificar = new Cliente();
-        modificar.setId_cliente(ID.getText());
-        modificar.setCliente(cliente.getText());
-        modificar.setNit(nit.getText());
-        modificar.setMonto(monto.getText());
-        modificar.setEstatus_Cliente(estatus.getText());
-        modificar.setTelefono(telefono.getText());
-        modificar.setProducto(producto.getText());
+         Cliente modi = new    Cliente ();
+        modi.setId_cliente (ID.getText());
+        modi.setCliente(cliente.getText());
+        modi.setNit(nit.getText());
+        modi.setMonto(monto.getText());
+        modi.setEstatus_Cliente(estatus.getText());
+        modi.setTelefono(telefono.getText());
+        modi.setProducto(producto.getText());
 
-        dao.update(modificar);
+        dao.update(modi);
         llenadoDeTablas();
          limpiar();
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Usuario");
+        Insertar.setAccion("Modificar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -340,12 +362,35 @@ producto.setText(Buscar.getProducto());
         llenadoDeTablas();
  limpiar();
         JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
+            BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Usuario");
+        Insertar.setAccion("Eliminar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
          
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
+    BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Buscar");
+        Insertar.setAccion("Buscar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         buscarVendedor();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -363,8 +408,21 @@ producto.setText(Buscar.getProducto());
         AInsertar.setTelefono(telefono.getText());
         AInsertar.setProducto(producto.getText());
         ClienteDAO.insert(AInsertar);
+        
         llenadoDeTablas();
          limpiar();
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Usuario");
+        Insertar.setAccion("Insertar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 

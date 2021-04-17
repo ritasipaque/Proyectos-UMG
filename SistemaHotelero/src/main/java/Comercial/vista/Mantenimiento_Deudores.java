@@ -5,18 +5,24 @@
  */
 package Comercial.vista;
 
-import Comercial.datos.AcreedoresDAO;
-import Comercial.dominio.Acreedores;
+import Comercial.datos.DeudoresDAO;
+import Comercial.dominio.Deudores;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
  * @author PERSONAL
  */
-public class Mantenimiento_Acreedor extends javax.swing.JInternalFrame {
+public class Mantenimiento_Deudores extends javax.swing.JInternalFrame {
 public void llenadoDeTablas() {
         /**
  *
@@ -32,11 +38,11 @@ public void llenadoDeTablas() {
            modelo.addColumn("Producto");
        
   
-     AcreedoresDAO  ventasDAO = new   AcreedoresDAO ();
+     DeudoresDAO  ventasDAO = new   DeudoresDAO ();
   
 
 
-       List<Acreedores> ventas = ventasDAO.select();
+       List<Deudores> ventas = ventasDAO.select();
         JtProductos1.setModel(modelo);
         String[] dato = new String[7];
     for (int i = 0; i < ventas.size(); i++) {
@@ -56,9 +62,9 @@ public void llenadoDeTablas() {
   public void buscarVendedor() {
      
    
-     AcreedoresDAO Clientes= new  AcreedoresDAO ();
+     DeudoresDAO Clientes= new  DeudoresDAO ();
             
-         Acreedores Buscar = new  Acreedores();
+         Deudores Buscar = new  Deudores();
 
 Buscar.setId_Acreedores(ID.getText());
 Buscar=Clientes.query(Buscar);         
@@ -83,7 +89,7 @@ producto.setText(Buscar.getProducto());
         telefono.setText("");
            producto.setText("");
     }
-    public Mantenimiento_Acreedor() {
+    public Mantenimiento_Deudores() {
         initComponents();
          llenadoDeTablas() ;
     }
@@ -132,7 +138,7 @@ producto.setText(Buscar.getProducto());
             }
         });
 
-        jLabel8.setText("capital");
+        jLabel8.setText("Capital");
 
         jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +154,7 @@ producto.setText(Buscar.getProducto());
             }
         });
 
-        jLabel1.setText("Mantenimiento Acreedores");
+        jLabel1.setText("Mantenimiento Deudor");
 
         jButton4.setText("Buscar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +163,7 @@ producto.setText(Buscar.getProducto());
             }
         });
 
-        jLabel2.setText("ID Acreedor");
+        jLabel2.setText("ID Deudor");
 
         JtProductos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -172,7 +178,7 @@ producto.setText(Buscar.getProducto());
         ));
         jScrollPane1.setViewportView(JtProductos1);
 
-        jLabel3.setText("Acreedor");
+        jLabel3.setText("Deudor");
 
         jLabel4.setText("Nit");
 
@@ -187,7 +193,7 @@ producto.setText(Buscar.getProducto());
 
         jLabel6.setText(" Producto");
 
-        jLabel7.setText("Estatus de Acreedor");
+        jLabel7.setText("Estatus de Deudor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -234,7 +240,7 @@ producto.setText(Buscar.getProducto());
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 303, Short.MAX_VALUE)
+                        .addGap(0, 312, Short.MAX_VALUE)
                         .addComponent(jButton5)
                         .addGap(40, 40, 40)
                         .addComponent(jButton4)
@@ -299,9 +305,9 @@ producto.setText(Buscar.getProducto());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        AcreedoresDAO dao = new   AcreedoresDAO  ();
+        DeudoresDAO dao = new   DeudoresDAO  ();
 
-        Acreedores  modificar = new   Acreedores ();
+        Deudores  modificar = new   Deudores ();
         modificar.setId_Acreedores (ID.getText());
         modificar.setAcreedores(cliente.getText());
         modificar.setNit(nit.getText());
@@ -313,14 +319,26 @@ producto.setText(Buscar.getProducto());
         dao.update(modificar);
         llenadoDeTablas();
          limpiar();
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Usuario");
+        Insertar.setAccion("Modificar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        AcreedoresDAO acreedor = new AcreedoresDAO  ();
+        DeudoresDAO acreedor = new DeudoresDAO  ();
 
-        Acreedores  vendedorAEliminar = new Acreedores();
+        Deudores  vendedorAEliminar = new Deudores();
         vendedorAEliminar.setId_Acreedores(ID.getText());
         vendedorAEliminar.setAcreedores(cliente.getText());
         vendedorAEliminar.setNit(nit.getText());
@@ -332,6 +350,18 @@ producto.setText(Buscar.getProducto());
         llenadoDeTablas();
         JOptionPane.showMessageDialog(null, "Acreedor Eliminado.");
          limpiar();
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Usuario");
+        Insertar.setAccion("Eliminar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -343,9 +373,9 @@ producto.setText(Buscar.getProducto());
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        AcreedoresDAO    AcreedoresDAO = new   AcreedoresDAO  ();
+        DeudoresDAO    AcreedoresDAO = new   DeudoresDAO  ();
 
-        Acreedores  AInsertar = new   Acreedores ();
+        Deudores  AInsertar = new   Deudores ();
         AInsertar.setId_Acreedores(ID.getText());
         AInsertar.setAcreedores(cliente.getText());
         AInsertar.setNit(nit.getText());
@@ -356,15 +386,27 @@ producto.setText(Buscar.getProducto());
         AcreedoresDAO.insert(AInsertar);
         llenadoDeTablas();
          limpiar();
+             BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("Usuario");
+        Insertar.setAccion("Insertar");
+        Insertar.setCodigoAplicacion("03");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     try {
-            if ((new File("src\\main\\java\\Comercial\\ayuda\\Clientes.chm")).exists()) {
+      try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\Clientes.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\ayuda\\Clientes.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\Clientes.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
