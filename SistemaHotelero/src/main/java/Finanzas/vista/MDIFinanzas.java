@@ -198,6 +198,9 @@ public class MDIFinanzas extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         FrmMantCuentaContable frmMantCuentaContable = new FrmMantCuentaContable();
@@ -219,11 +222,21 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(frm_mantPerFis);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+>>>>>>> CastilloC
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
                 fmTipo = new FrmTipoTransaccion();
         JDesktopFinanzas.add(fmTipo);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+<<<<<<< HEAD
+=======
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
+        frm_mantPerFis.setVisible(true);
+        JDesktopFinanzas.add(frm_mantPerFis);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+>>>>>>> CastilloC
+=======
 
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -244,6 +257,9 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(formMantenimiento_TipoPersona);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
+<<<<<<< HEAD
+>>>>>>> CastilloC
+=======
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
       try {
           // TODO add your handling code here:
@@ -264,12 +280,16 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(FrmHabiente);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+<<<<<<< HEAD
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         Mantenimiento_TipoAsiento FrmTipoAsiento = new Mantenimiento_TipoAsiento();
         FrmTipoAsiento.setVisible(true);
         JDesktopFinanzas.add(FrmTipoAsiento);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+=======
+>>>>>>> 2a6f8a70b0b40255f3502969812bcff8b86de0d8
+>>>>>>> main
 
     public static void main(String args[]) {
        
