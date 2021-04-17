@@ -7,12 +7,7 @@ package Finanzas.vista;
 import Finanzas.dominio.TipoAsiento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import Finanzas.datos.PeriodoFiscalDAO;
 import Finanzas.datos.TipoAsientoDAO;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.sql.*;
-import java.text.ParseException;
 import javax.swing.JOptionPane;
 
 /**
@@ -74,6 +69,8 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
 
+        setClosable(true);
+        setIconifiable(true);
         setTitle("Tipo Asiento");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
