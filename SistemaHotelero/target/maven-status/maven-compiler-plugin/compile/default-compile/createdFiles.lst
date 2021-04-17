@@ -274,6 +274,7 @@ seguridad\vista\Mantenimiento_Usuario$2.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$4.class
 Hoteleria\vista\Mantenimiento_habitaciones$3.class
 Finanzas\vista\Mantenimiento_TipoPersona.class
+Finanzas\vista\MDIFinanzas$11.class
 seguridad\dominio\Perfil.class
 Comercial\vista\Mantenimiento_Cliente.class
 Hoteleria\datos\PisosDAO.class
