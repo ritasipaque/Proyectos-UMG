@@ -26,6 +26,8 @@ public class PisosDAO {
     //Buscar 2 en la BD
     public static final String SQL_QUERY = "SELECT PK_numero_piso, cantidad_habitaciones, descripcion_piso, estado_piso FROM tbl_piso_hotel WHERE PK_numero_piso = ?";
 
+    private static final String SQL_DELETE = "DELETE FROM tbl_piso_hotel WHERE PK_numero_piso=?";
+
     public List<Pisos> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -143,6 +145,29 @@ public class PisosDAO {
             ConexionHoteleria.close(conn);
         }
         return pisos;
+    }
+    
+    public int delete(Pisos pisos) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = ConexionHoteleria.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, pisos.getId_Numero_De_Piso());
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros eliminados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+
+        return rows;
     }
 
 }
