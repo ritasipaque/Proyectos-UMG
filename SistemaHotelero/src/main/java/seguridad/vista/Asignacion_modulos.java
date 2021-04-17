@@ -13,9 +13,12 @@ import seguridad.dominio.Modulos;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.io.File;
+import java.net.UnknownHostException;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 /**
 /**
  *
@@ -28,6 +31,7 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
     DefaultTableModel modelo2; 
    int estadovalidacion;
     int uno; 
+    int codigoAplicacion = 130;
     
    
 
@@ -36,6 +40,7 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
      */
     public Asignacion_modulos() {
         initComponents();
+        int codigoAplicacion = 130;
         cargarCombobox.query2(cbox_modulos);
           DefaultTableModel modelo1 = new DefaultTableModel();
           modelo1 = new DefaultTableModel();
@@ -66,7 +71,6 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cbox_modulos = new javax.swing.JComboBox<>();
-        jButtonAyuda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAplicaciones = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -83,6 +87,7 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
         Txt_Asignar = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         REGISTAR = new javax.swing.JButton();
+        btnAyuda2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -103,13 +108,6 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Modulos  Disponibles:");
-
-        jButtonAyuda.setText("Ayuda");
-        jButtonAyuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAyudaActionPerformed(evt);
-            }
-        });
 
         tablaAplicaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tablaAplicaciones.setModel(new javax.swing.table.DefaultTableModel(
@@ -202,6 +200,13 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
             }
         });
 
+        btnAyuda2.setText("Ayuda");
+        btnAyuda2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyuda2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,12 +215,6 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
                 .addGap(49, 49, 49)
                 .addComponent(jLabel4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel1)
-                        .addGap(131, 131, 131)
-                        .addComponent(jButtonAyuda)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbox_modulos, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,8 +241,14 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel2)
-                                        .addGap(48, 48, 48)))))))
-                .addGap(205, 205, 205))
+                                        .addGap(48, 48, 48)))))
+                        .addGap(205, 205, 205))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAyuda2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(174, 174, 174))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -272,7 +277,7 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButtonAyuda))
+                    .addComponent(btnAyuda2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -334,23 +339,6 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButtonAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAyudaActionPerformed
-        // TODO add your handling code here:
-        try {
-            if ((new File("src\\main\\java\\ayudas\\Asignacion.Aplicacion.chm")).exists()) {
-                Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\ayudas\\Asignacion.Aplicacion.chm");
-                p.waitFor();
-            } else {
-                System.out.println("La ayuda no Fue encontrada");
-            }
-            System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_jButtonAyudaActionPerformed
 
     private void jButtonPASARTODOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPASARTODOActionPerformed
         TableModel modelo1 = tablaAplicaciones.getModel();
@@ -436,9 +424,20 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         AsignacionDAO  vendedorDAO = new AsignacionDAO ();
         Asignacion vendedorAInsertar = new Asignacion();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
         vendedorAInsertar.setPK_id_modulo(cbox_modulos.getSelectedItem().toString());
         vendedorAInsertar.setPK_id_aplicacion(Txt_Asignar.getText());
         vendedorDAO.insert(vendedorAInsertar);
+        AInsertar.setId_Usuario("Asignacion de Aplicacion a Modulos");
+                AInsertar.setAccion("Insertar");
+                AInsertar.setCodigoAplicacion(String.valueOf(codigoAplicacion));
+
+                try {
+                    BitacoraDAO.insert(AInsertar);
+                } catch (UnknownHostException ex) {
+                    //Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
     }//GEN-LAST:event_REGISTARActionPerformed
 
@@ -451,17 +450,33 @@ public class Asignacion_modulos extends javax.swing.JInternalFrame {
        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnAyuda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyuda2ActionPerformed
+        try {
+            if ((new File("src\\main\\java\\seguridad\\ayuda\\Asignacion.Aplicacion.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\Asignacion.Aplicacion.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAyuda2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BT_Agregar;
     private javax.swing.JButton REGISTAR;
     private javax.swing.JTextField TXT_NombreModulos;
     private javax.swing.JTextField Txt_Asignar;
+    public javax.swing.JButton btnAyuda2;
     private javax.swing.JComboBox<String> cbox_modulos;
     private javax.swing.JButton jButtoPASARUNO;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonAyuda;
     private javax.swing.JButton jButtonPASARTODO;
     private javax.swing.JButton jButtonQuitarTodo;
     private javax.swing.JButton jButtonQuitarUno;
