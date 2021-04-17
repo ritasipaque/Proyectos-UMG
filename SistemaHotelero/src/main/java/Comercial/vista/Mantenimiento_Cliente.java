@@ -31,13 +31,13 @@ public void llenadoDeTablas() {
  * creaccion de la tabla de de titulos  
  */
         DefaultTableModel modelo = new DefaultTableModel();
-       modelo.addColumn("ID Acreedores");
+       modelo.addColumn("ID Cliente");
         modelo.addColumn("Cliente");
-        modelo.addColumn("Monto");
-          modelo.addColumn("Estatus Cliente");
-          modelo.addColumn("Nit");
+        modelo.addColumn("Nit");
           modelo.addColumn("Telefono");
-           modelo.addColumn("Producto");
+          modelo.addColumn("Poducto");
+          modelo.addColumn("Estatis Cliente");
+           modelo.addColumn("Capital");
   
      ClienteDao  ventasDAO = new  ClienteDao();
   
@@ -50,10 +50,10 @@ public void llenadoDeTablas() {
             dato[0] = (ventas.get(i).getId_cliente());
             dato[1] = ventas.get(i).getCliente();
               dato[2] = ventas.get(i).getNit();
-            dato[3] = (ventas.get(i).getEstatus_Cliente());
-          dato[4] = (ventas.get(i).getMonto());
-            dato[5] = (ventas.get(i).getTelefono());
-            dato[6] = ventas.get(i).getProducto();
+            dato[3] = (ventas.get(i).getTelefono());
+          dato[4] = (ventas.get(i).getProducto());
+            dato[5] = (ventas.get(i).getEstatus_Cliente());
+            dato[6] = ventas.get(i).getMonto();
           
           
             System.out.println("vendedor:" + ventas);
@@ -216,10 +216,10 @@ producto.setText(Buscar.getProducto());
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel8))
-                                .addGap(10, 10, 10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -275,7 +275,7 @@ producto.setText(Buscar.getProducto());
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 16, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -290,7 +290,7 @@ producto.setText(Buscar.getProducto());
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -305,7 +305,7 @@ producto.setText(Buscar.getProducto());
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel8)
-                                    .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))

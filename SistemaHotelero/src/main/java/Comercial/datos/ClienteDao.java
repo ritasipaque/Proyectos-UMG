@@ -23,11 +23,11 @@ import Comercial.dominio.Deudores;
  */
 public class ClienteDao {
     
-        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Monto,Estatus_Cliente ,Nit,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
-    private static final String SQL_SELECT = "SELECT Id_cliente, cliente,Monto,Estatus_Cliente ,Nit,telefono,producto FROM tbl_cliente";
-    private static final String SQL_QUERY = "SELECT cliente,Monto,Estatus_Cliente ,Nit,telefono,producto,Id_cliente FROM tbl_cliente WHERE Id_cliente = ?";
+        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,Monto,Estatus_Cliente,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
+    private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,Monto,Estatus_Cliente,telefono,producto FROM tbl_cliente";
+    private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,Monto,Estatus_Cliente,telefono,producto FROM tbl_cliente WHERE Id_cliente = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_cliente  WHERE Id_cliente = ? ";
-     private static final String SQL_UPDATE = "UPDATE  tbl_cliente SET  Id_cliente  =  ?, cliente = ?, Nit= ?, Monto= ?, Estatus_Cliente=  ?,  telefono= ?, producto= ? WHERE Id_cliente";
+     private static final String SQL_UPDATE = "UPDATE  tbl_cliente SET  Id_cliente =? , cliente =?,Nit =?,Monto=?,Estatus_Cliente=?,telefono=?,producto =? WHERE Id_cliente";
   
       public int update(Cliente mod) {
         Connection conn = null;
@@ -38,13 +38,14 @@ public class ClienteDao {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1,   mod.getId_cliente());
-            stmt.setString(2,   mod.getCliente());       
-            stmt.setString(3,    mod.getNit());
-             stmt.setString(4,   mod.getMonto());
-             stmt.setString(5,   mod.getEstatus_Cliente());
-            stmt.setString(6,   mod.getTelefono());
-             stmt.setString(7,  mod.getProducto());
+           stmt.setString(1,  mod.getId_cliente());
+            stmt.setString(2,  mod.getCliente());       
+            stmt.setString(3,   mod.getNit());
+             stmt.setString(4,  mod.getMonto());
+               stmt.setString(5,  mod.getEstatus_Cliente());
+               stmt.setString(6,  mod.getTelefono());
+                stmt.setString(7,  mod.getProducto());
+
    rows = stmt.executeUpdate();
          
             System.out.println("Registros actualizado:" + rows);
@@ -195,9 +196,12 @@ public class ClienteDao {
             stmt.setString(2,  insertar.getCliente());       
             stmt.setString(3,   insertar.getNit());
              stmt.setString(4,  insertar.getMonto());
-                stmt.setString(5,  insertar.getEstatus_Cliente());
-            stmt.setString(6,  insertar.getTelefono());
-             stmt.setString(7,  insertar.getProducto());
+               stmt.setString(5,  insertar.getEstatus_Cliente());
+               stmt.setString(6,  insertar.getTelefono());
+                stmt.setString(7,  insertar.getProducto());
+           
+              
+           
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();

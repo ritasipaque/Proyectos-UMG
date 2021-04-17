@@ -31,9 +31,9 @@ public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Acreedores");
         modelo.addColumn("Acreedores");
-        modelo.addColumn("Estatus");
-          modelo.addColumn("Nit");
+        modelo.addColumn("Nit");
           modelo.addColumn("Monto");
+          modelo.addColumn("Estastus Deudor");
           modelo.addColumn("Telefono");
            modelo.addColumn("Producto");
        
@@ -129,7 +129,7 @@ producto.setText(Buscar.getProducto());
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Mantenimiento Acreecor\n");
+        setTitle("Mantenimiento Deudor\n");
 
         jButton1.setText("Ayuda");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

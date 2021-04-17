@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import seguridad.vista.FmrBitacora;
 
 /**
  *
@@ -243,7 +244,7 @@ MantenimientoProductos ventana = new MantenimientoProductos();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        FmrBitacora= new Comercial.vista.FmrBitacora();
+        FmrBitacora= new seguridad.vista.FmrBitacora();
         FmrBitacora.setVisible(true);
         jDesktopPane1.add(FmrBitacora);
 
