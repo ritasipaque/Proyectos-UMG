@@ -4,9 +4,16 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import seguridad.vista.FmrBitacora;
 
 /**
  *
@@ -15,7 +22,8 @@ import javax.swing.UIManager;
 public class MDIcomercial extends javax.swing.JFrame {
  private MantenimientoProductos formModulos;
   private Mantenimiento_Cliente Mantenimiento_Cliente ;
-  private Mantenimiento_Acreedor  Mantenimiento_Acreedor;
+  private Mantenimiento_Deudores  Mantenimiento_Acreedor;
+    private FmrBitacora  FmrBitacora;
     /**
      * Creates new form MDIcomercial
      */
@@ -32,7 +40,9 @@ public class MDIcomercial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane(){
+
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -45,7 +55,9 @@ public class MDIcomercial extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jMenu14 = new javax.swing.JMenu();
+        jMenu12 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
@@ -55,6 +67,7 @@ public class MDIcomercial extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 200, 23));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 204, 0));
+        jDesktopPane1.setForeground(new java.awt.Color(255, 204, 0));
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -90,7 +103,7 @@ public class MDIcomercial extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem3);
 
-        jMenuItem4.setText("Mantenimiento Acreedor");
+        jMenuItem4.setText("Mantenimiento Deudor");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -129,9 +142,22 @@ public class MDIcomercial extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Informes");
-        jMenu5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jMenuBar1.add(jMenu5);
+        jMenu14.setText("Informes");
+        jMenu14.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+
+        jMenu12.setText("Historial");
+
+        jMenuItem1.setText("Bitacora Comercial");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu12.add(jMenuItem1);
+
+        jMenu14.add(jMenu12);
+
+        jMenuBar1.add(jMenu14);
 
         jMenu6.setText("Herramientas");
         jMenu6.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -185,7 +211,7 @@ MantenimientoProductos ventana = new MantenimientoProductos();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        Mantenimiento_Acreedor= new Mantenimiento_Acreedor();
+        Mantenimiento_Acreedor= new Mantenimiento_Deudores();
         Mantenimiento_Acreedor.setVisible(true);
           jDesktopPane1.add(Mantenimiento_Acreedor);
 
@@ -216,6 +242,14 @@ MantenimientoProductos ventana = new MantenimientoProductos();
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        FmrBitacora= new seguridad.vista.FmrBitacora();
+        FmrBitacora.setVisible(true);
+        jDesktopPane1.add(FmrBitacora);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,15 +294,17 @@ MantenimientoProductos ventana = new MantenimientoProductos();
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

@@ -15,6 +15,8 @@ import Hoteleria.dominio.AmaDeLlaves;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -25,6 +27,7 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
     AmaDeLlavesDAO cargarCombobox = new AmaDeLlavesDAO();
     ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
+    DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
 
     /**
      * Creates new form MantenimientoAplicacion
@@ -53,6 +56,28 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
         modelo1.addColumn("Descripción");
         modelo1.addColumn("Estado");
         jTable.setModel(modelo1);
+
+        centro.setHorizontalAlignment(JLabel.CENTER);
+        jTable.getColumnModel().getColumn(0).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(1).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(2).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(3).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(4).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(5).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(6).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(7).setCellRenderer(centro);
+        jTable.getColumnModel().getColumn(8).setCellRenderer(centro);
+
+        jTable.getColumnModel().getColumn(0).setPreferredWidth(25);
+        jTable.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable.getColumnModel().getColumn(4).setPreferredWidth(50);
+        jTable.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+        jTable.getColumnModel().getColumn(7).setPreferredWidth(175);
+        jTable.getColumnModel().getColumn(8).setPreferredWidth(25);
+
         String datos[] = new String[9];
         AmaDeLlavesDAO ama_De_Llaves_DAO = new AmaDeLlavesDAO();
         List<AmaDeLlaves> ama_De_Llaves = ama_De_Llaves_DAO.select();
@@ -613,10 +638,10 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
 
         try {
-            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoAplicación.chm")).exists()) {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaMantenimientoAmaDeLlaves.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoAplicación.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaMantenimientoAmaDeLlaves.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
