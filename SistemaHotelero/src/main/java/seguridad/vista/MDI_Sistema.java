@@ -42,12 +42,12 @@ public class MDI_Sistema extends javax.swing.JFrame {
     public MDI_Sistema() throws UnknownHostException {
         initComponents();
 
-        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
-
-        var usuario = Login.usuarioSesion;
-        var modulo = "Seguridad";
-
-        generarPermisos.getPermisos(modulo, usuario);
+//        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
+//
+//        var usuario = Login.usuarioSesion;
+//        var modulo = "Seguridad";
+//
+//        generarPermisos.getPermisos(modulo, usuario);
     }
 
     /**
