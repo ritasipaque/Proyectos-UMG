@@ -57,7 +57,6 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_archivo = new javax.swing.JMenu();
         menu_catalogos = new javax.swing.JMenu();
-        menu_procesos = new javax.swing.JMenu();
         submenu_mantenimientos = new javax.swing.JMenu();
         mnt_amadellaves = new javax.swing.JMenuItem();
         mnt_habitaciones = new javax.swing.JMenuItem();
@@ -65,6 +64,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         mnt_huespedes = new javax.swing.JMenuItem();
         mnt_formasdepago = new javax.swing.JMenuItem();
         mnt_pisos = new javax.swing.JMenuItem();
+        menu_procesos = new javax.swing.JMenu();
         submenu_procesos = new javax.swing.JMenu();
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
@@ -94,10 +94,6 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
         menu_catalogos.setText("Catálogos");
         menu_catalogos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jMenuBar1.add(menu_catalogos);
-
-        menu_procesos.setText("Procesos");
-        menu_procesos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
         submenu_mantenimientos.setText("Mantenimientos");
 
@@ -149,7 +145,12 @@ public class MDIHoteleria extends javax.swing.JFrame {
         });
         submenu_mantenimientos.add(mnt_pisos);
 
-        menu_procesos.add(submenu_mantenimientos);
+        menu_catalogos.add(submenu_mantenimientos);
+
+        jMenuBar1.add(menu_catalogos);
+
+        menu_procesos.setText("Procesos");
+        menu_procesos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
         submenu_procesos.setText("Procesos");
         menu_procesos.add(submenu_procesos);

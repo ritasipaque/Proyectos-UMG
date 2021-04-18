@@ -15,6 +15,8 @@ import seguridad.datos.UsuarioDAO;
 import seguridad.dominio.Usuario;
 import seguridad.datos.Asignacion_Usuario_PerfilDAO;
 import seguridad.dominio.Asignacion_Usuario_Perfil;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 
 
 /**
