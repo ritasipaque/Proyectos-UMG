@@ -39,7 +39,7 @@ public class PeriodoFiscalDAO extends Conexion {
         PeriodoFiscal PF = null;
         List<PeriodoFiscal> PerFis = new ArrayList<PeriodoFiscal>();
         try {
-            conn = seguridad.datos.Conexion.getConnection();
+            conn = Finanzas.datos.Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_SELECT);
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -76,7 +76,7 @@ public class PeriodoFiscalDAO extends Conexion {
         int rows = 0;
 
         try {
-            conn = seguridad.datos.Conexion.getConnection();
+            conn = Finanzas.datos.Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setInt(1, PeriodoFiscal.getIDPerFis());
@@ -114,12 +114,10 @@ public class PeriodoFiscalDAO extends Conexion {
         int rows = 0;
 
         try {
-            conn = seguridad.datos.Conexion.getConnection();
-            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            conn = Finanzas.datos.Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_DELETE);
             stmt.setInt(1, PeriodoFiscal.getIDPerFis());
             rows = stmt.executeUpdate();
-            //System.out.println("Registros eliminados:" + rows);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -136,21 +134,19 @@ public class PeriodoFiscalDAO extends Conexion {
         int rows = 0;
 
         try {
-            conn = seguridad.datos.Conexion.getConnection();
-            //System.out.println("ejecutando query: " + SQL_UPDATE);
+            conn = Finanzas.datos.Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setInt(1, PeriodoFiscal.getIDPerFis());
             stmt.setString(2, PeriodoFiscal.getInicioAñoPerFis());
             stmt.setString(3, PeriodoFiscal.getFinAñoPerFis());
             stmt.setInt(4, PeriodoFiscal.getEstadoPerFis());
             rows = stmt.executeUpdate();
-            //System.out.println("Registros actualizado:" + rows);
 
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            seguridad.datos.Conexion.close(stmt);
-            seguridad.datos.Conexion.close(conn);
+            Finanzas.datos.Conexion.close(stmt);
+            Finanzas.datos.Conexion.close(conn);
         }
 
         return rows;
@@ -160,18 +156,18 @@ public class PeriodoFiscalDAO extends Conexion {
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
-            conn = seguridad.datos.Conexion.getConnection();
+            conn = Finanzas.datos.Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, PeriodoFiscal.getIDPerFis());
-            stmt.setString(2, PeriodoFiscal.getInicioAñoPerFis());
+            stmt.setString(2,PeriodoFiscal.getInicioAñoPerFis());
             stmt.setString(3, PeriodoFiscal.getFinAñoPerFis());
             stmt.setInt(4, PeriodoFiscal.getEstadoPerFis());
             stmt.executeUpdate();
         } catch (Exception ex) {
             System.err.println(ex);
         } finally {
-            seguridad.datos.Conexion.close(stmt);
-            seguridad.datos.Conexion.close(conn);
+            Finanzas.datos.Conexion.close(stmt);
+            Finanzas.datos.Conexion.close(conn);
         }
         return 1;
     }
