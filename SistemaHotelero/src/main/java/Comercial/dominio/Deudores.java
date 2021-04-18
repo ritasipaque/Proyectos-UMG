@@ -10,7 +10,7 @@ package Comercial.dominio;
  *
  * @author PERSONAL
  */
-public class Acreedores {
+public class Deudores {
      String   Id_Acreedores;
   String Acreedores;
 String Nit;  
