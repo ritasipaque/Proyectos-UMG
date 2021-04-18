@@ -28,6 +28,8 @@ public class HabitacionesDAO {
     public static final String SQL_QUERY = "SELECT PK_id_habitacion, descripcion_habitacion, precio_habitacion, piso_habitaciones, estado_habitacion, tipo_de_habitacion FROM tbl_mantenimiento_habitaciones WHERE PK_id_habitacion = ?";
 
     public static final String SQL_QUERY2 = "SELECT PK_numero_piso FROM tbl_piso_hotel";
+    
+     public static final String SQL_DELETE ="DELETE FROM tbl_mantenimiento_habitaciones WHERE PK_id_habitacion=?";
 
     public void query2(JComboBox cbxModulo) {
 
@@ -199,4 +201,26 @@ public class HabitacionesDAO {
         return habitacione;
     }
 
+     public int delete(Habitaciones habitaciones) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = ConexionHoteleria.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, habitaciones.getId_Habitaciones());
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros eliminados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+
+        return rows;
+    }
 }
