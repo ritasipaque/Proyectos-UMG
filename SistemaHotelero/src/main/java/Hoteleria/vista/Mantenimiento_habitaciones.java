@@ -15,6 +15,8 @@ import Hoteleria.dominio.Habitaciones;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
@@ -23,24 +25,49 @@ import java.util.Date;
 public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
 
     HabitacionesDAO cargarCombobox = new HabitacionesDAO();
-    ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
+    DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
 
     /**
      * Creates new form MantenimientoAplicacion
      */
     public Mantenimiento_habitaciones() {
         initComponents();
-        //cargarCombobox.query2(cbxModulo);
-      
+        tabla();
+        cargarCombobox.query2(cbxPiso);
     }
 
     public void tabla() {
-        
+
+        modelo1 = new DefaultTableModel();
+        modelo1.addColumn("ID");
+        modelo1.addColumn("Descripcion");
+        modelo1.addColumn("Precio Diario");
+        modelo1.addColumn("Piso");
+        modelo1.addColumn("Estado");
+        modelo1.addColumn("Tipo");
+
+        jTable.setModel(modelo1);
+
+        String datos[] = new String[6];
+        HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
+        List<Habitaciones> habitaciones = habitacionesDAO.select();
+        for (Habitaciones habitacion : habitaciones) {
+            datos[0] = String.valueOf(habitacion.getId_Habitaciones());
+            datos[1] = habitacion.getDescripcion();
+            datos[2] = String.valueOf(habitacion.getPrecio());
+            datos[3] = String.valueOf(habitacion.getPiso());
+            datos[4] = String.valueOf(habitacion.getEstado_Habitacion());
+            datos[5] = habitacion.getTipo_Habitacion();
+
+            modelo1.addRow(datos);
+            jTable.setModel(modelo1);
+
+        }
     }
 
     public void limpiar() {
-      
+
     }
 
     /**
@@ -61,6 +88,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -76,8 +104,9 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         btnModificar = new javax.swing.JButton();
         btnAyuda = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        btnTipo = new javax.swing.JComboBox<>();
-        cbxEstado = new javax.swing.JComboBox<>();
+        cbxTipo = new javax.swing.JComboBox<>();
+        jradioDisponible = new javax.swing.JRadioButton();
+        jradioOcupado = new javax.swing.JRadioButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -86,7 +115,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         setTitle("Mantenimiento Aplicaciones Hoteleria (GersonGomez)");
         setVisible(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Listado Ama de Llaves"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de Habitaciones"));
 
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -101,11 +130,25 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel2.setText("Buscar:");
 
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+
         btnBuscar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -116,27 +159,29 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("agregar habitaciones"));
@@ -177,8 +222,6 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel5.setText("Piso:");
 
-        cbxPiso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "1", "2", "3" }));
-
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel4.setText("Descripción:");
 
@@ -187,7 +230,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(txtDescripcion);
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel6.setText("Estado:");
+        jLabel6.setText("Tipo:");
 
         btnGuardar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
@@ -214,92 +257,88 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        jLabel8.setText("Tipo:");
+        jLabel8.setText("Estado:");
 
-        btnTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Individual", "Matrimonial", "Familiar" }));
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Individual", "Matrimonial", "Familiar" }));
 
-        cbxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponible", "Ocupado", "Mantenimiento" }));
+        jradioDisponible.setText("Disponible");
+
+        jradioOcupado.setText("Ocupado");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(92, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(25, 25, 25))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnModificar)
-                            .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(134, 134, 134))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnModificar)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jradioDisponible)
+                        .addGap(18, 18, 18)
+                        .addComponent(jradioOcupado))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(cbxTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 103, Short.MAX_VALUE)
+                        .addComponent(cbxPiso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(40, 40, 40))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(btnGuardar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(97, 97, 97)
-                                .addComponent(jLabel7)
-                                .addGap(34, 34, 34))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel7)
+                        .addGap(21, 21, 21)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(7, 7, 7)
-                .addComponent(cbxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
-                .addComponent(jLabel8)
-                .addGap(9, 9, 9)
-                .addComponent(btnTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificar)
+                    .addComponent(jLabel6)
+                    .addComponent(cbxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jradioDisponible)
+                        .addComponent(jradioOcupado)))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
+                    .addComponent(btnModificar)
                     .addComponent(btnAyuda))
-                .addGap(28, 28, 28))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -321,13 +360,11 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 .addComponent(lblModulo)
                 .addGap(292, 292, 292))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("Mantenimiento habitaciones");
@@ -337,80 +374,124 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
         Habitaciones habitaciones = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
-        
-        int id=Integer.parseInt(txtId.getText());
-        String desc=txtDescripcion.getText();
-        int precio=Integer.parseInt(txtPrecio.getText());
-        int piso=cbxPiso.getSelectedIndex();
-        String tipo=String.valueOf(btnTipo.getSelectedItem());
-        String estado=String.valueOf(cbxEstado.getSelectedItem());
-        
-        habitaciones.setId_Habitaciones(id);
-        habitaciones.setDescripcion(desc);
-        habitaciones.setPrecio(precio);
-        habitaciones.setPiso(piso);
-        habitaciones.setTipo_Habitacion(tipo);
-        habitaciones.setEstado_Habitacion(estado);
-        
-        habitacionesDAO.insert(habitaciones);
-        
-        JOptionPane.showMessageDialog(null, "Habitacion ingresada correctamente");
-        
+
+        String cbx_piso = cbxPiso.getSelectedItem().toString();
+        String cbx_tipo = cbxTipo.getSelectedItem().toString();
+        String tipo = String.valueOf(cbxTipo.getSelectedItem());
+
+        if (txtId.getText().length() != 0 && txtDescripcion.getText().length() != 0
+                && txtPrecio.getText().length() != 0
+                && cbx_piso != "Seleccionar..." && cbx_tipo != "Seleccionar..."
+                && jradioDisponible.isSelected() || jradioOcupado.isSelected()) {
+            int id = Integer.parseInt(txtId.getText());
+            String desc = txtDescripcion.getText();
+            int precio = Integer.parseInt(txtPrecio.getText());
+            int piso = cbxPiso.getSelectedIndex();
+            habitaciones.setId_Habitaciones(id);
+            habitaciones.setDescripcion(desc);
+            habitaciones.setPrecio(precio);
+            habitaciones.setPiso(Integer.parseInt(cbx_piso));
+            habitaciones.setPiso(piso);
+            habitaciones.setTipo_Habitacion(tipo);
+//        habitaciones.setEstado_Habitacion(estado);
+            if (jradioDisponible.isSelected()) {
+                habitaciones.setEstado_Habitacion(1);
+            }
+            if (jradioOcupado.isSelected()) {
+                habitaciones.setEstado_Habitacion(0);
+            }
+            habitacionesDAO.insert(habitaciones);
+            JOptionPane.showMessageDialog(null, "Habitacion ingresada correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
+        }
+        tabla();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-Habitaciones habitaciones_Modificar = new Habitaciones();
+        Habitaciones habitaciones_Modificar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
-        
-        int id=Integer.parseInt(txtId.getText());
-        String desc=txtDescripcion.getText();
-        int precio=Integer.parseInt(txtPrecio.getText());
-        int piso=cbxPiso.getSelectedIndex();
-        String tipo=String.valueOf(btnTipo.getSelectedItem());
-        String estado=String.valueOf(cbxEstado.getSelectedItem());
-       
-        habitaciones_Modificar.setId_Habitaciones(id);
-        habitaciones_Modificar.setDescripcion(desc);
-        habitaciones_Modificar.setPrecio(precio);
-        habitaciones_Modificar.setPiso(piso);
-        habitaciones_Modificar.setEstado_Habitacion(estado);
-        habitaciones_Modificar.setTipo_Habitacion(tipo);
-        
-        habitacionesDAO.update(habitaciones_Modificar);
-        
-        JOptionPane.showMessageDialog(null, "Habitacion Modificada correctamente");
+        String cbx_piso = cbxPiso.getSelectedItem().toString();
+        String cbx_tipo = cbxTipo.getSelectedItem().toString();
+
+        if (txtId.getText().length() != 0 && txtDescripcion.getText().length() != 0
+                && txtPrecio.getText().length() != 0
+                && cbx_piso != "Seleccionar..." && cbx_tipo != "Seleccionar..."
+                && jradioDisponible.isSelected() || jradioOcupado.isSelected()) {
+
+            int id = Integer.parseInt(txtId.getText());
+            String desc = txtDescripcion.getText();
+            int precio = Integer.parseInt(txtPrecio.getText());
+            int piso = cbxPiso.getSelectedIndex();
+            String tipo = String.valueOf(cbxTipo.getSelectedItem());
+            String estado = String.valueOf(cbxTipo.getSelectedItem());
+
+            habitaciones_Modificar.setId_Habitaciones(id);
+            habitaciones_Modificar.setDescripcion(desc);
+            habitaciones_Modificar.setPrecio(precio);
+            habitaciones_Modificar.setPiso(Integer.parseInt(cbx_piso));
+            habitaciones_Modificar.setTipo_Habitacion(tipo);
+            if (jradioDisponible.isSelected()) {
+                habitaciones_Modificar.setEstado_Habitacion(1);
+            }
+            if (jradioOcupado.isSelected()) {
+                habitaciones_Modificar.setEstado_Habitacion(0);
+            }
+            habitacionesDAO.update(habitaciones_Modificar);
+
+            JOptionPane.showMessageDialog(null, "Habitacion Modificada correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
+        }
+        tabla();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Habitaciones habitaciones_Buscar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
         habitaciones_Buscar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
-        habitaciones_Buscar=habitacionesDAO.query(habitaciones_Buscar);
-        
+        habitaciones_Buscar = habitacionesDAO.query(habitaciones_Buscar);
+
         txtId.setText(String.valueOf(habitaciones_Buscar.getId_Habitaciones()));
         txtDescripcion.setText(String.valueOf(habitaciones_Buscar.getDescripcion()));
         txtPrecio.setText(String.valueOf(habitaciones_Buscar.getPrecio()));
-        cbxPiso.setSelectedItem(String.valueOf(habitaciones_Buscar.getPiso()));
-        cbxEstado.setSelectedItem(String.valueOf(habitaciones_Buscar.getEstado_Habitacion()));
-        btnTipo.setSelectedItem(String.valueOf(habitaciones_Buscar.getTipo_Habitacion()));
-        
-       // habitacionesDAO.query(habitaciones_Buscar); 
-       
+        cbxPiso.setSelectedItem(habitaciones_Buscar.getPiso());
+        cbxTipo.setSelectedItem(String.valueOf(habitaciones_Buscar.getTipo_Habitacion()));
+        if (habitaciones_Buscar.getEstado_Habitacion() == 1) {
+            jradioDisponible.setSelected(true);
+        }
+        if (habitaciones_Buscar.getEstado_Habitacion() == 0) {
+            jradioOcupado.setSelected(true);
+        }
+
+        // habitacionesDAO.query(habitaciones_Buscar); 
+        tabla();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void txtIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdKeyTyped
-
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
     }//GEN-LAST:event_txtIdKeyTyped
 
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
 
-       
+
     }//GEN-LAST:event_btnAyudaActionPerformed
 
     private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
-
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
     private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
@@ -421,15 +502,35 @@ Habitaciones habitaciones_Modificar = new Habitaciones();
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel2AncestorMoved
 
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+Habitaciones habitaciones_Eliminar = new Habitaciones();
+        HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
+        
+        habitaciones_Eliminar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
+        habitacionesDAO.delete(habitaciones_Eliminar);
+        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
+        
+        tabla();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
-    private javax.swing.JComboBox<String> btnTipo;
-    private javax.swing.JComboBox<String> cbxEstado;
     private javax.swing.JComboBox<String> cbxPiso;
+    private javax.swing.JComboBox<String> cbxTipo;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -442,6 +543,8 @@ Habitaciones habitaciones_Modificar = new Habitaciones();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable;
+    private javax.swing.JRadioButton jradioDisponible;
+    private javax.swing.JRadioButton jradioOcupado;
     private javax.swing.JLabel lblModulo;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextArea txtDescripcion;
