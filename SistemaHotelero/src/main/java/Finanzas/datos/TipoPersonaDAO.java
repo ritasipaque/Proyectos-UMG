@@ -21,7 +21,7 @@ public class TipoPersonaDAO {
     
     private static final String SQL_SELECT = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM TipoPersona";
     private static final String SQL_INSERT = "INSERT INTO TipoPersona VALUES(?, ?)";
-    private static final String SQL_DELETE = "DELETE FROM TipoPersona WHERE Codigo_Moneda=?";
+    private static final String SQL_DELETE = "DELETE FROM TipoPersona WHERE Codigo_TipoPersona=?";
     private static final String SQL_UPDATE = "UPDATE TipoPersona SET Codigo_TipoPersona=?, TipoPersona_Nombres=? WHERE Codigo_TipoPersona = ?";
     private static final String SQL_QUERY = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM TipoPersona WHERE Codigo_TipoPersona = ?";
    
