@@ -23,6 +23,7 @@ public class FormasDePagoDAO {
     private static final String SQL_UPDATE = "UPDATE tbl_metodos_de_pago SET nombre_metodo=?, descripcion_metodo=?, estado_metodo=? WHERE PK_id_metodo=?";
     private static final String SQL_SELECT = "SELECT PK_id_metodo, nombre_metodo, descripcion_metodo, estado_metodo FROM tbl_metodos_de_pago";
     private static final String SQL_QUERY = "SELECT PK_id_metodo, nombre_metodo, descripcion_metodo, estado_metodo FROM tbl_metodos_de_pago WHERE PK_id_metodo = ?";
+    private static final String SQL_DELETE = "delete from tbl_metodos_de_pago where PK_id_metodo = ?";  
     
     public int insert(FormasDePago formasdepago) {
         Connection conn = null;
@@ -147,4 +148,24 @@ public class FormasDePagoDAO {
         }
         return formasdepago;
     }
+    public int delete(FormasDePago formasdepago){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConexionHoteleria.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setString(1, formasdepago.getId());
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros eliminados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+
+        return rows;
+    } 
 }
