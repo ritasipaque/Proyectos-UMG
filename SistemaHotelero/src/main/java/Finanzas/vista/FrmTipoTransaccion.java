@@ -100,10 +100,10 @@ public void buscarperfil(){
         setTitle("Mantenimiento TipoTransaccion\n");
         setVisible(true);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
         jPanel1.setToolTipText("");
 
-        label7.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label7.setText("Codigo:");
 
         TxtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -115,10 +115,10 @@ public void buscarperfil(){
             }
         });
 
-        label9.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label9.setText("Tipo De Transaccion:");
 
-        label8.setFont(new java.awt.Font("Eras Light ITC", 1, 14)); // NOI18N
+        label8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label8.setText("Efecto De Transaccion:");
 
         TxtTipo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -129,56 +129,56 @@ public void buscarperfil(){
         TxtEfecto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
         TxtEfecto.setOpaque(false);
 
-        btnEliminar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
 
-        btnLimpiar1.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnLimpiar1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnLimpiar1.setText("Buscar:");
-        btnLimpiar1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        btnLimpiar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiar1ActionPerformed(evt);
             }
         });
 
-        txtbuscado.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        txtbuscado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnModificar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnModificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnModificar.setText("Modificar");
-        btnModificar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        btnModificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnRegistrar.setText("Registrar");
-        btnRegistrar.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        btnRegistrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarActionPerformed(evt);
             }
         });
 
-        btnLimpiar2.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        btnLimpiar2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnLimpiar2.setText("Limpiar");
-        btnLimpiar2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        btnLimpiar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnLimpiar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiar2ActionPerformed(evt);
             }
         });
 
-        BtnAyuda.setFont(new java.awt.Font("Eras Light ITC", 1, 12)); // NOI18N
+        BtnAyuda.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         BtnAyuda.setText("Ayuda:");
-        BtnAyuda.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 153, 153)));
+        BtnAyuda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         BtnAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnAyudaActionPerformed(evt);
@@ -256,7 +256,7 @@ public void buscarperfil(){
                 .addGap(42, 42, 42))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
 
         JTableTransaccion.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         JTableTransaccion.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
@@ -311,7 +311,7 @@ public void buscarperfil(){
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
