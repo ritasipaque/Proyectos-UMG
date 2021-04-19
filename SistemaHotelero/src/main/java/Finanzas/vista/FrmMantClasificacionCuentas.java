@@ -6,6 +6,8 @@
 package Finanzas.vista;
 
 import Finanzas.dominio.ClasificacionCuenta;
+import java.io.File;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +21,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
      */
     public FrmMantClasificacionCuentas() {
         initComponents();
+        cargarTabla();
     }
 
     /**
@@ -41,6 +44,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JBtnModificar = new javax.swing.JButton();
         JBtnEliminar = new javax.swing.JButton();
         JBtnBuscar = new javax.swing.JButton();
+        JBtnAyuda = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTxtDescripcion = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -92,6 +96,13 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
             }
         });
 
+        JBtnAyuda.setText("?");
+        JBtnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnAyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -105,7 +116,9 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
                 .addComponent(JBtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JBtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JBtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +128,8 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
                     .addComponent(JBtnIngresar)
                     .addComponent(JBtnEliminar)
                     .addComponent(JBtnModificar)
-                    .addComponent(JBtnBuscar))
+                    .addComponent(JBtnBuscar)
+                    .addComponent(JBtnAyuda))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -130,19 +144,18 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(JTxtCodigo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
-                            .addComponent(JTxtClasificacion))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(JTxtClasificacion)
+                            .addComponent(JTxtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -173,6 +186,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
                 "Código de Clasificación", "Clasificación de Cuenta", "Descripción de la Cuenta"
             }
         ));
+        JTableClasificacion.setToolTipText("");
         jScrollPane1.setViewportView(JTableClasificacion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -181,10 +195,10 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,18 +212,38 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
-    /*private void cargarTabla() {
-       for(int i=0; i<objClasificarCuenta.getTablaRegistros().length; i++){
-            for(int j=0; j<3; j++){
-                JTableClasificacion.setValueAt(objClasificarCuenta.getTablaRegistros()[i][j], i, j);
+
+    private void cargarTabla() {
+
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+
+        objClasificarCuenta.getTablaRegistros();
+
+        int contI = 0;
+        contI = objClasificarCuenta.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][3];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrixData[i][j] = objClasificarCuenta.getTablaRegistros()[i][j];
             }
         }
-    }*/
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) JTableClasificacion.getModel();
+        modeloTabla.setRowCount(contI);
+        modeloTabla.setColumnCount(3);
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 3; j++) {
+                JTableClasificacion.setValueAt(matrixData[i][j], i, j);;
+            }
+        }
+    }
 
     private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
-        
+
         var codigoClasificacion = JTxtCodigo.getText();
         var clasificacionCuenta = JTxtClasificacion.getText();
         var descripcionCuenta = JTxtDescripcion.getText();
@@ -220,27 +254,34 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         objClasificarCuenta.Insertar(objClasificarCuenta);
 
+        cargarTabla();
+        JTxtCodigo.setText("");
+        JTxtClasificacion.setText("");
+        JTxtDescripcion.setText("");
+        JTxtCodigo.requestFocus();
+
     }//GEN-LAST:event_JBtnIngresarActionPerformed
 
     private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
-        
+
         var codigoClasificacion = JTxtCodigo.getText();
 
         objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
 
         objClasificarCuenta.Buscar(objClasificarCuenta);
-        
-        JTxtCodigo.setText(objClasificarCuenta.Buscar(objClasificarCuenta).getCodigoClasificacion());
-        JTxtClasificacion.setText(objClasificarCuenta.Buscar(objClasificarCuenta).getClasificacionCuenta());
-        JTxtDescripcion.setText(objClasificarCuenta.Buscar(objClasificarCuenta).getDescripcionClasificacion());
-        
-        
+
+        JTxtCodigo.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[0]);
+        JTxtClasificacion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[1]);
+        JTxtDescripcion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[2]);
+        cargarTabla();
+
+
     }//GEN-LAST:event_JBtnBuscarActionPerformed
 
     private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
-        
+
         var codigoClasificacion = JTxtCodigo.getText();
         var clasificacionCuenta = JTxtClasificacion.getText();
         var descripcionCuenta = JTxtDescripcion.getText();
@@ -250,20 +291,39 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Actualizar(objClasificarCuenta);
+        cargarTabla();
     }//GEN-LAST:event_JBtnModificarActionPerformed
 
     private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
-        
+
         var codigoClasificacion = JTxtCodigo.getText();
 
         objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
 
         objClasificarCuenta.Eliminar(objClasificarCuenta);
+        cargarTabla();
     }//GEN-LAST:event_JBtnEliminarActionPerformed
+
+    private void JBtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnAyudaActionPerformed
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaClasificacion")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaClasificacion.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_JBtnAyudaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBtnAyuda;
     private javax.swing.JButton JBtnBuscar;
     private javax.swing.JButton JBtnEliminar;
     private javax.swing.JButton JBtnIngresar;
