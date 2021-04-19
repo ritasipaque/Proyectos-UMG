@@ -2,13 +2,13 @@ package Comercial.datos;
 
 
 import Comercial.dominio.Cliente;
+import Comercial.dominio.Deudores;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import seguridad.datos.Conexion;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,10 +22,10 @@ import seguridad.datos.Conexion;
  */
 public class ClienteDao {
     
-        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Monto,Estatus_Cliente ,Nit,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
-    private static final String SQL_SELECT = "SELECT Id_cliente, cliente,Monto,Estatus_Cliente ,Nit,telefono,producto FROM tbl_cliente";
-    private static final String SQL_QUERY = "SELECT cliente,Monto,Estatus_Cliente ,Nit,telefono,producto,Id_cliente FROM tbl_cliente WHERE Id_cliente = ?";
-  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente =  ?, cliente= ?, Nit= ?, Monto= ?, Estatus_Cliente=  ?,  telefono= ?, producto= ? WHERE Id_cliente";
+        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto) VALUES(?, ?,?, ?,?, ?,?)";
+    private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto FROM tbl_cliente";
+    private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto FROM tbl_cliente WHERE Id_cliente = ?";
+  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente = ?,cliente =?,Nit= ? , telefono = ? ,producto = ? , Estatus_Cliente = ? , Monto = ? WHERE Id_cliente";
     private static final String SQL_DELETE = "DELETE FROM tbl_cliente  WHERE Id_cliente = ? ";
   
      public List<Cliente> select() {
@@ -159,11 +159,12 @@ public class ClienteDao {
             stmt.setString(1,  insertar.getId_cliente());
             stmt.setString(2,  insertar.getCliente());       
             stmt.setString(3,   insertar.getNit());
-             stmt.setString(4,  insertar.getMonto());
-                stmt.setString(5,  insertar.getEstatus_Cliente());
-            stmt.setString(6,  insertar.getTelefono());
-             stmt.setString(7,  insertar.getProducto());
-
+              stmt.setString(4,  insertar.getTelefono());
+               stmt.setString(5,  insertar.getProducto());
+                stmt.setString(6,  insertar.getEstatus_Cliente());
+       
+        
+    stmt.setString(7,  insertar.getMonto());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -177,7 +178,7 @@ public class ClienteDao {
 
         return rows;
     }
-       public int update(Cliente mod) {
+        public int update(Cliente mod) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;

@@ -1,14 +1,14 @@
 package Comercial.datos;
 
 
-import Comercial.dominio.Acreedores;
+import Comercial.dominio.Deudores;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import seguridad.datos.Conexion;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,19 +20,19 @@ import seguridad.datos.Conexion;
  *
  * @author Carlos Flores
  */
-public class AcreedoresDAO {
-        private static final String SQL_INSERT = "INSERT INTO  tbl_acreedores(Id_acreedores ,acreedores,Monto,Estatus_Cliente ,Nit,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
-    private static final String SQL_SELECT = "SELECT Id_acreedores , acreedores,Monto,Estatus_Cliente ,Nit,telefono,producto FROM  tbl_acreedores";
-    private static final String SQL_QUERY = "SELECT acreedores,Monto,Estatus_Cliente ,Nit,telefono,producto,Id_acreedores FROM  tbl_acreedores WHERE Id_acreedores  = ?";
-  private static final String SQL_UPDATE = "UPDATE  tbl_acreedores SET  Id_acreedores  =  ?, acreedores= ?, Nit= ?, Monto= ?, Estatus_Cliente=  ?,  telefono= ?, producto= ? WHERE Id_acreedores ";
+public class DeudoresDAO {
+        private static final String SQL_INSERT = "INSERT INTO  tbl_acreedores(Id_acreedores ,acreedores,Nit,Monto,Estatus_Cliente ,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
+    private static final String SQL_SELECT = "SELECT Id_acreedores ,acreedores,Nit,Monto,Estatus_Cliente ,telefono,producto FROM  tbl_acreedores";
+    private static final String SQL_QUERY = "SELECT Id_acreedores ,acreedores,Nit,Monto,Estatus_Cliente ,telefono,producto FROM  tbl_acreedores WHERE Id_acreedores  = ?";
+  private static final String SQL_UPDATE = "UPDATE  tbl_acreedores SET  Id_acreedores =? ,acreedores=?,Nit=?,Monto=?,Estatus_Cliente=? ,telefono=?,producto = ? WHERE Id_acreedores ";
      private static final String SQL_DELETE = "DELETE FROM tbl_acreedores  WHERE Id_acreedores = ? ";
   
-     public List<Acreedores> select() {
+     public List<Deudores> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Acreedores venta = null;
-        List<Acreedores> ventas = new ArrayList<Acreedores>();
+        Deudores venta = null;
+        List<Deudores> ventas = new ArrayList<Deudores>();
         try {
             /**
              *
@@ -60,7 +60,7 @@ public class AcreedoresDAO {
                  */
               
 
-                  venta = new Acreedores();
+                  venta = new Deudores();
                   venta.setAcreedores(acreedores);
                     venta.setId_Acreedores(id_acreedores);
                  venta.setNit(nit);
@@ -82,7 +82,7 @@ public class AcreedoresDAO {
 
        
     }
-  public  Acreedores query(Acreedores venta){
+  public  Deudores query(Deudores venta){
         /**
          *
          * conexion de base de datos
@@ -90,7 +90,7 @@ public class AcreedoresDAO {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Acreedores> ventas = new ArrayList<Acreedores>();
+        List<Deudores> ventas = new ArrayList<Deudores>();
         int rows = 0;
 
         try {
@@ -115,7 +115,7 @@ public class AcreedoresDAO {
                  */
               
 
-                  venta = new Acreedores();
+                  venta = new Deudores();
                   venta.setAcreedores(acreedores);
               venta.setId_Acreedores(id);
                  venta.setNit(nit);
@@ -145,7 +145,7 @@ public class AcreedoresDAO {
     
      }
 //  insertat los carmpos  de  acreedores
-     public int insert(Acreedores insertar)  {
+     public int insert(Deudores insertar)  {
          ResultSet rs = null;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -177,7 +177,7 @@ public class AcreedoresDAO {
         return rows;
     }
 //     Modificar las variables de  de acreedores
-       public int update(Acreedores mod) {
+       public int update(Deudores mod) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -207,7 +207,7 @@ public class AcreedoresDAO {
         return rows;
     }
 
-        public int delete(Acreedores eliminar) {
+        public int delete(Deudores eliminar) {
         
         Connection conn = null;
         PreparedStatement stmt = null;

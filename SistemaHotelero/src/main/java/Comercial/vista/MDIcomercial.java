@@ -8,6 +8,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+
 /**
  *
  * @author SIPAQUE.RITA
@@ -15,7 +16,8 @@ import javax.swing.UIManager;
 public class MDIcomercial extends javax.swing.JFrame {
  private MantenimientoProductos formModulos;
   private Mantenimiento_Cliente Mantenimiento_Cliente ;
-  private Mantenimiento_Acreedor  Mantenimiento_Acreedor;
+  private Mantenimiento_Deudores  Mantenimiento_Acreedor;
+    private  FmrBitacora FmrBitacora;
     /**
      * Creates new form MDIcomercial
      */
@@ -45,7 +47,9 @@ public class MDIcomercial extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        jMenu12 = new javax.swing.JMenu();
+        jMenu13 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
@@ -90,7 +94,7 @@ public class MDIcomercial extends javax.swing.JFrame {
         });
         jMenu8.add(jMenuItem3);
 
-        jMenuItem4.setText("Mantenimiento Acreedor");
+        jMenuItem4.setText("Mantenimiento Deudor");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
@@ -129,9 +133,22 @@ public class MDIcomercial extends javax.swing.JFrame {
         jMenu4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Informes");
-        jMenu5.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jMenuBar1.add(jMenu5);
+        jMenu12.setText("Informes");
+        jMenu12.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+
+        jMenu13.setText("Historial");
+
+        jMenuItem1.setText("Bitacora Comercial");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu13.add(jMenuItem1);
+
+        jMenu12.add(jMenu13);
+
+        jMenuBar1.add(jMenu12);
 
         jMenu6.setText("Herramientas");
         jMenu6.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -185,7 +202,7 @@ MantenimientoProductos ventana = new MantenimientoProductos();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        Mantenimiento_Acreedor= new Mantenimiento_Acreedor();
+        Mantenimiento_Acreedor= new Mantenimiento_Deudores();
         Mantenimiento_Acreedor.setVisible(true);
           jDesktopPane1.add(Mantenimiento_Acreedor);
 
@@ -217,6 +234,15 @@ MantenimientoProductos ventana = new MantenimientoProductos();
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         FmrBitacora = new FmrBitacora();
+        FmrBitacora.setVisible(true);
+      
+        jDesktopPane1.add(FmrBitacora );
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -246,6 +272,10 @@ MantenimientoProductos ventana = new MantenimientoProductos();
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -260,15 +290,17 @@ MantenimientoProductos ventana = new MantenimientoProductos();
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
+    private javax.swing.JMenu jMenu12;
+    private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
