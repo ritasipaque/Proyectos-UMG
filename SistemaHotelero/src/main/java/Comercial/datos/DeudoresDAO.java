@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import Comercial.datos.Conexion;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,7 +24,7 @@ public class DeudoresDAO {
         private static final String SQL_INSERT = "INSERT INTO  tbl_acreedores(Id_acreedores ,acreedores,Nit,Monto,Estatus_Cliente ,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
     private static final String SQL_SELECT = "SELECT Id_acreedores ,acreedores,Nit,Monto,Estatus_Cliente ,telefono,producto FROM  tbl_acreedores";
     private static final String SQL_QUERY = "SELECT Id_acreedores ,acreedores,Nit,Monto,Estatus_Cliente ,telefono,producto FROM  tbl_acreedores WHERE Id_acreedores  = ?";
-  private static final String SQL_UPDATE = "UPDATE  tbl_acreedores SET Id_acreedores =? ,acreedores=?,Nit=?,Monto=?,Estatus_Cliente =?,telefono=?,producto=? WHERE Id_acreedores ";
+  private static final String SQL_UPDATE = "UPDATE  tbl_acreedores SET  Id_acreedores =? ,acreedores=?,Nit=?,Monto=?,Estatus_Cliente=? ,telefono=?,producto = ? WHERE Id_acreedores ";
      private static final String SQL_DELETE = "DELETE FROM tbl_acreedores  WHERE Id_acreedores = ? ";
   
      public List<Deudores> select() {
@@ -145,7 +145,7 @@ public class DeudoresDAO {
     
      }
 //  insertat los carmpos  de  acreedores
-     public int insert(Deudores mod)  {
+     public int insert(Deudores insertar)  {
          ResultSet rs = null;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -155,13 +155,13 @@ public class DeudoresDAO {
          
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-             stmt.setString(1,  mod.getId_Acreedores());
-            stmt.setString(2,  mod.getAcreedores());       
-            stmt.setString(3,   mod.getNit());
-             stmt.setString(4,  mod.getMonto());
-               stmt.setString(5,  mod.getEstatus_Cliente());
-               stmt.setString(6,  mod.getTelefono());
-                stmt.setString(7,  mod.getProducto());
+            stmt.setString(1,  insertar.getId_Acreedores());
+            stmt.setString(2,  insertar.getAcreedores());       
+            stmt.setString(3,   insertar.getNit());
+             stmt.setString(4,  insertar.getMonto());
+                stmt.setString(5,  insertar.getEstatus_Cliente());
+            stmt.setString(6,  insertar.getTelefono());
+             stmt.setString(7,  insertar.getProducto());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -186,13 +186,13 @@ public class DeudoresDAO {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-        stmt.setString(1,  mod.getId_Acreedores());
-            stmt.setString(2,  mod.getAcreedores());       
-            stmt.setString(3,   mod.getNit());
-             stmt.setString(4,  mod.getMonto());
-               stmt.setString(5,  mod.getEstatus_Cliente());
-               stmt.setString(6,  mod.getTelefono());
-                stmt.setString(7,  mod.getProducto());
+            stmt.setString(1,   mod.getId_Acreedores());
+            stmt.setString(2,   mod.getAcreedores());       
+            stmt.setString(3,    mod.getNit());
+             stmt.setString(4,   mod.getMonto());
+             stmt.setString(5,   mod.getEstatus_Cliente());
+            stmt.setString(6,   mod.getTelefono());
+             stmt.setString(7,  mod.getProducto());
    rows = stmt.executeUpdate();
          
             System.out.println("Registros actualizado:" + rows);
