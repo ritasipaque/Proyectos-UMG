@@ -7,6 +7,7 @@ package Hoteleria.vista;
 
 import Hoteleria.datos.FormasDePagoDAO;
 import Hoteleria.dominio.FormasDePago;
+import java.io.File;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -96,6 +97,8 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         btn_cancelar = new javax.swing.JButton();
         btn_buscar = new javax.swing.JButton();
         limpio = new javax.swing.JRadioButton();
+        btn_eliminar = new javax.swing.JButton();
+        btn_ayuda = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -157,6 +160,20 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
 
         buttonGroup1.add(limpio);
 
+        btn_eliminar.setText("ELIMINAR");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
+
+        btn_ayuda.setText("AYUDA");
+        btn_ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ayudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -177,13 +194,6 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                                 .addComponent(btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))))
                     .addComponent(jScrollPane2)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_guardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_modificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_cancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -194,7 +204,18 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                                 .addComponent(inactivo)
                                 .addGap(129, 129, 129)
                                 .addComponent(limpio)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_guardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_modificar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_eliminar)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_cancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -222,10 +243,13 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                             .addComponent(inactivo)))
                     .addComponent(limpio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_ayuda)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_guardar)
                     .addComponent(btn_modificar)
-                    .addComponent(btn_cancelar))
+                    .addComponent(btn_cancelar)
+                    .addComponent(btn_eliminar))
                 .addContainerGap())
         );
 
@@ -252,7 +276,7 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -356,11 +380,43 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+     if (Mantenimiento_FormasDePago.isNumeric(txt_codigo.getText())) {
+        FormasDePagoDAO formasdepagodao = new FormasDePagoDAO();
+        FormasDePago eliminarmetodo = new FormasDePago();
+        eliminarmetodo.setId(txt_codigo.getText());
+        formasdepagodao.delete(eliminarmetodo);
+        JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
+        actualizartabla();
+        limpiar();
+     }else{
+         JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
+     }
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
+try {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaFormasDePago.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaFormasDePago.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ayudaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton activo;
+    private javax.swing.JButton btn_ayuda;
     private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_modificar;
     private javax.swing.ButtonGroup buttonGroup1;

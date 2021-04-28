@@ -54,7 +54,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         RBPrueba.setSelected(true);
     }
     //Codigo de aplicacion 
-     int CodigoAplicacion = 10;
+     int CodigoAplicacion = 1001;
      
      
     /**
@@ -83,8 +83,8 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         FinDC = new com.toedter.calendar.JDateChooser();
         BtnAgregar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnEliminar = new javax.swing.JButton();
+        BtnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -92,12 +92,13 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         RBPF0 = new javax.swing.JRadioButton();
         RBPrueba = new javax.swing.JRadioButton();
         BtnModificar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Año Periodo Fiscal");
+        setTitle("Periodo Fiscal");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Periodo Fiscal"));
         jPanel1.setToolTipText("");
@@ -153,17 +154,17 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Eliminar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnEliminarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BtnBuscarActionPerformed(evt);
             }
         });
 
@@ -225,6 +226,8 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("?");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -239,13 +242,14 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -258,15 +262,16 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAgregar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(BtnModificar))
+                    .addComponent(BtnEliminar)
+                    .addComponent(BtnBuscar)
+                    .addComponent(BtnModificar)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnAgregar, BtnModificar, jButton2, jButton3});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnAgregar, BtnBuscar, BtnEliminar, BtnModificar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -289,11 +294,11 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                     PFInsertar.setEstadoPerFis(0);
                 }
                 {
-                    JOptionPane.showMessageDialog(null, "Usuario registrado Exitosamente");
+                    JOptionPane.showMessageDialog(null, "Periodo registrado Exitosamente");
                 }
                 limpiar();
-                llenadoDeTablas();
                 PFDAO.insert(PFInsertar);
+                llenadoDeTablas();
             }
         } else {
             JOptionPane.showMessageDialog(null, "Los campos estan vacios");
@@ -307,7 +312,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
         String Inicio = new SimpleDateFormat("dd/MM/yyyy").format(InicioDC.getDate());
         String Fin = new SimpleDateFormat("dd/MM/yyyy").format(FinDC.getDate());
-        PFMod.setIDPerFis(Integer.parseInt(txtID.getText()));
+        
         PFMod.setInicioAñoPerFis(Inicio);
         PFMod.setFinAñoPerFis(Fin);
 
@@ -317,29 +322,37 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         if (RBPF0.isSelected()) {
             PFMod.setEstadoPerFis(0);
         }
+        PFMod.setIDPerFis(Integer.parseInt(txtID.getText()));
         
         PFDAO.update(PFMod);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         llenadoDeTablas();
     }//GEN-LAST:event_BtnModificarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
         PeriodoFiscal PFDel = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
 
         PFDel.setIDPerFis(Integer.parseInt(txtID.getText()));
-        PFDAO.delete(PFDel);
-        JOptionPane.showMessageDialog(null, "Año Fiscal Eliminado.");
+        int salida = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar?", "Advertencia de eliminacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+        System.out.println(salida);
+        if (salida == 0) {
+            PFDAO.delete(PFDel);
+            JOptionPane.showMessageDialog(null, "Año Fiscal Eliminado.");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "El registro no se ha eliminado");
+        }
         llenadoDeTablas();
         limpiar();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnEliminarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
         PeriodoFiscal PFBuscar = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
         PFBuscar.setIDPerFis(Integer.parseInt(txtID.getText()));
-        String Inicio = new SimpleDateFormat("dd/MM/yyyy").format(InicioDC.getDate());
-        String Fin = new SimpleDateFormat("dd/MM/yyyy").format(FinDC.getDate());
+        
         PFBuscar = PFDAO.query(PFBuscar);
         
         txtID.setText(String.valueOf(PFBuscar.getIDPerFis()));
@@ -351,7 +364,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         } catch (ParseException e) {
             e.printStackTrace(System.out);
         }
-        String fin = String.valueOf(PFBuscar.getInicioAñoPerFis());
+        String fin = String.valueOf(PFBuscar.getFinAñoPerFis());
         try {
             Date finPF = modelo.parse(fin);
             FinDC.setDate(finPF);
@@ -370,11 +383,13 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Registro encontrado");
         }
         llenadoDeTablas();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BtnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregar;
+    private javax.swing.JButton BtnBuscar;
+    private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnModificar;
     private com.toedter.calendar.JDateChooser FinDC;
     private com.toedter.calendar.JDateChooser InicioDC;
@@ -383,8 +398,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton RBPrueba;
     private javax.swing.JTable Tabla;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

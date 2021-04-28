@@ -22,6 +22,7 @@ public class ServiciosDAO {
     private static final String SQL_UPDATE = "UPDATE tbl_servicios SET nombre_servicio=?, descripcion_servicio=?, tipo_servicio=?, estado_servicio=? WHERE PK_id_servicio=?";
     private static final String SQL_SELECT = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, tipo_servicio, estado_servicio FROM tbl_servicios";
     private static final String SQL_QUERY = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, tipo_servicio, estado_servicio FROM tbl_servicios WHERE PK_id_servicio = ?";
+    private static final String SQL_DELETE = "delete from tbl_servicios where PK_id_servicio = ?";  
     
     public int insert(Servicios servicios) {
         Connection conn = null;
@@ -151,4 +152,24 @@ public class ServiciosDAO {
         }
         return servicios;
     }
+    public int delete(Servicios servicios){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConexionHoteleria.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setString(1, servicios.getId());
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros eliminados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+
+        return rows;
+    } 
 }

@@ -22,6 +22,7 @@ public class HuespedesDAO {
     private static final String SQL_UPDATE = "UPDATE tbl_huespedes SET nombre_huesped=?, apellido_huesped=?, nacionalidad_huesped=?, direccion_huesped=?, frecuencia_huesped=?, telefono_huesped=?, nit_huesped=? WHERE PK_no_identificacion=?";
     private static final String SQL_SELECT = "SELECT PK_no_identificacion, nombre_huesped, nombre_huesped, apellido_huesped, nacionalidad_huesped, direccion_huesped, frecuencia_huesped, telefono_huesped, nit_huesped FROM tbl_huespedes";
     private static final String SQL_QUERY = "SELECT PK_no_identificacion, nombre_huesped, nombre_huesped, apellido_huesped, nacionalidad_huesped, direccion_huesped, frecuencia_huesped, telefono_huesped, nit_huesped FROM tbl_huespedes WHERE PK_no_identificacion = ?";
+     private static final String SQL_DELETE = "delete from tbl_huespedes where PK_no_identificacion = ?";
     
     public int insert(Huespedes huespedes) {
         Connection conn = null;
@@ -171,5 +172,25 @@ public class HuespedesDAO {
             ConexionHoteleria.close(conn);
         }
         return huespedes;
+    }
+    public int delete(Huespedes modulos){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConexionHoteleria.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setString(1, modulos.getCodigo());
+            rows = stmt.executeUpdate();
+            System.out.println("Registros eliminados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+
+        return rows;
     }
 }

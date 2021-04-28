@@ -47,7 +47,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         TipoPersonaDAO tipoPersonaDAO = new TipoPersonaDAO();
         List<TipoPersona> tipoPersona = tipoPersonaDAO.listar();
         Tabla_TipoPersona.setModel(modelo);
-        String[] dato = new String[3];
+        String[] dato = new String[2];
         for (int i = 0; i < tipoPersona.size(); i++) {
             dato[0] = tipoPersona.get(i).getCodigo_TipoPersona();
             dato[1] = tipoPersona.get(i).getTipoPersona_Nombres();  
@@ -91,40 +91,45 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nombre Tipo de Persona:");
 
-        Boton_Guardar.setForeground(new java.awt.Color(0, 204, 204));
+        Boton_Guardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         Boton_Guardar.setText("Guardar");
+        Boton_Guardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_GuardarActionPerformed(evt);
             }
         });
 
-        Boton_Modificar.setForeground(new java.awt.Color(0, 204, 204));
+        Boton_Modificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         Boton_Modificar.setText("Modificar");
+        Boton_Modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Boton_Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_ModificarActionPerformed(evt);
             }
         });
 
-        Boton_Eliminar.setForeground(new java.awt.Color(0, 204, 204));
+        Boton_Eliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         Boton_Eliminar.setText("Eliminar");
+        Boton_Eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Boton_Eliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_EliminarActionPerformed(evt);
             }
         });
 
-        Boton_Buscar.setForeground(new java.awt.Color(0, 204, 204));
+        Boton_Buscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         Boton_Buscar.setText("Buscar");
+        Boton_Buscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Boton_Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_BuscarActionPerformed(evt);
             }
         });
 
-        Boton_Ayuda.setForeground(new java.awt.Color(0, 204, 204));
+        Boton_Ayuda.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         Boton_Ayuda.setText("Ayuda");
+        Boton_Ayuda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Boton_Ayuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boton_AyudaActionPerformed(evt);
@@ -137,27 +142,32 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
-                        .addGap(92, 92, 92)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_NombreTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_CodigoTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(92, 92, 92))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Boton_Guardar)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(Boton_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Boton_Guardar, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Boton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_NombreTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_CodigoTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(Boton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Boton_Modificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(Boton_Eliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(Boton_Buscar)
-                        .addGap(38, 38, 38)
-                        .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(Boton_Ayuda, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                        .addComponent(Boton_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,15 +180,16 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_NombreTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(Boton_Ayuda)
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Boton_Buscar)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Boton_Guardar)
                     .addComponent(Boton_Modificar)
                     .addComponent(Boton_Eliminar)
-                    .addComponent(Boton_Buscar)
-                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Boton_Ayuda))
                 .addGap(17, 17, 17))
         );
 
@@ -226,7 +237,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -242,10 +253,11 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         tipoPersonaInsertar.setTipoPersona_Nombres(txt_NombreTipoPersona.getText());
         {
             JOptionPane.showMessageDialog(null, "Tipo Persona registrada Exitosamente"); 
-            limpiar();
             tipoPersonaDAO.insert(tipoPersonaInsertar);
+            llenadodetablas(); 
+            limpiar();
         }                  
-        llenadodetablas();      
+             
     }//GEN-LAST:event_Boton_GuardarActionPerformed
 
     private void Boton_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ModificarActionPerformed
@@ -267,8 +279,8 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         tipoPersonaEliminar.setCodigo_TipoPersona(txt_CodigoTipoPersona.getText());
         tipoPersonaDAO.delete(tipoPersonaEliminar);
         JOptionPane.showMessageDialog(null, "Tipo Persona Eliminada.");
-        limpiar();
         llenadodetablas();
+        limpiar();
     }//GEN-LAST:event_Boton_EliminarActionPerformed
 
     private void Boton_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_BuscarActionPerformed
@@ -277,11 +289,11 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
 
     private void Boton_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AyudaActionPerformed
         /// metodo para ejecutar la ayuda que es una guia para el mantenimiento Tipo Persona
-        try {
-            if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoPerfil.chm")).exists()) {
+          try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoTipoPersona.chm")).exists()) {
                 Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoPerfil.chm");
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoTipoPersona.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -289,7 +301,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
             //System.out.println("Correcto");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
+        }    
     }//GEN-LAST:event_Boton_AyudaActionPerformed
 
 
