@@ -232,6 +232,7 @@ seguridad\vista\Mantenimiento_Modulos$4.class
 Hoteleria\datos\HuespedesDAO.class
 seguridad\datos\UsuarioDAO.class
 seguridad\vista\Asignacion_de_aplicacion_a_usuario$10.class
+Finanzas\vista\Mantenimiento_TipoAsiento$5.class
 Finanzas\vista\Mantenimiento_TipoAsiento.class
 Hoteleria\vista\Mantenimiento_Pisos$6.class
 Comercial\vista\Mantenimiento_Deudores.class
