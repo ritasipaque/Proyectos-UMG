@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author Nay Ale
  */
-public class TipoPersonaDAO {
+public class TipoPersonaDAO extends Conexion {
     
     private static final String SQL_SELECT = "SELECT Codigo_TipoPersona, TipoPersona_Nombres FROM TipoPersona";
     private static final String SQL_INSERT = "INSERT INTO TipoPersona VALUES(?, ?)";
