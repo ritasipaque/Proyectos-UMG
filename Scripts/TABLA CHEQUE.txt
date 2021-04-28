@@ -1,0 +1,12 @@
+--
+-- Estructura de tabla para la tabla `cheque`
+--
+
+CREATE TABLE `cheque` (
+  `Num_Cheque` varchar(255) NOT NULL,
+  `Fecha_Cheque` date NOT NULL,
+  `FK_Banco` varchar(255) NOT NULL,
+  `FK_Cuenta` varchar(255) NOT NULL,
+  `FK_Cuentahabiente` varchar(255) NOT NULL,
+  `Monto_Cheque` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
