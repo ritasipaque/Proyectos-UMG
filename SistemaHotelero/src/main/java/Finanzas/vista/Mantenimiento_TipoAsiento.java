@@ -8,6 +8,7 @@ import Finanzas.dominio.TipoAsiento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Finanzas.datos.TipoAsientoDAO;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -68,6 +69,7 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         BtnBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -84,7 +86,7 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
@@ -146,13 +148,20 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(Tabla);
 
+        jButton1.setText("?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(BtnAgregar)
@@ -161,9 +170,12 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBuscar))
+                        .addComponent(BtnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnAgregar, BtnBuscar, BtnEliminar, BtnModificar});
@@ -173,14 +185,15 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAgregar)
                     .addComponent(BtnModificar)
                     .addComponent(BtnEliminar)
-                    .addComponent(BtnBuscar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnBuscar)
+                    .addComponent(jButton1))
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -195,7 +208,7 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
                 TAInsertar.setIDTA(txtID.getText());
                 TAInsertar.setTipo(txtTipo.getText());
                 {
-                    JOptionPane.showMessageDialog(null, "Usuario registrado Exitosamente");
+                    JOptionPane.showMessageDialog(null, "Tipo de Asiento registrado Exitosamente");
                 }
                 limpiar();
                 TADAO.insert(TAInsertar);
@@ -209,30 +222,44 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+        if ( txtID.getText().length()!=0 && txtTipo.getText().length()!=0){
         TipoAsiento TAMod = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
         TAMod.setIDTA(txtID.getText());
         TAMod.setTipo(txtTipo.getText());
-        
         TADAO.update(TAMod);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         llenadoDeTablas();
-
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No se ha podido modificar");
+        }
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        if ( txtID.getText().length()!=0 ){
         TipoAsiento TADEL = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
 
         TADEL.setIDTA(txtID.getText());
         TADAO.delete(TADEL);
-        JOptionPane.showMessageDialog(null, "Tipo Asiento Eliminado.");
+        int salida = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar?", "Advertencia de eliminacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+        System.out.println(salida);
+        if (salida == 0) {
+            TADAO.delete(TADEL);
+            JOptionPane.showMessageDialog(null, "Tipo Asiento Eliminado.");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "El registro no se ha eliminado");
+        }
         llenadoDeTablas();
         limpiar();
-
+    }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        if (txtID.getText().length()!=0){
         TipoAsiento TABUS = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
         TABUS.setIDTA(txtID.getText());
@@ -240,12 +267,33 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         
         txtID.setText(TABUS.getIDTA());
         txtTipo.setText(TABUS.getTipo());
-
+        JOptionPane.showMessageDialog(null, "Registro encontrado");
+        llenadoDeTablas();
+        }
+        else
         {
-            JOptionPane.showMessageDialog(null, "Registro encontrado");
+            JOptionPane.showMessageDialog(null, "Registro no encontrado");
+            llenadoDeTablas();
         }
         llenadoDeTablas();
     }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTipoAsiento.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTipoAsiento.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -254,6 +302,7 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnEliminar;
     private javax.swing.JButton BtnModificar;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
