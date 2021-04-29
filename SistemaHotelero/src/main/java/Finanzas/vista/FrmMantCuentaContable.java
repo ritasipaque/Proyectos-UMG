@@ -5,6 +5,11 @@
  */
 package Finanzas.vista;
 
+import Finanzas.dominio.ClasificacionCuenta;
+import Finanzas.dominio.CuentaContable;
+import javax.swing.ComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego Vásquez
@@ -14,8 +19,62 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmMantCuentaContable
      */
+    private void comboBox() {
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+
+        objClasificarCuenta.getTablaRegistros();
+
+        int contI = 0;
+        contI = objClasificarCuenta.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][3];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrixData[i][j] = objClasificarCuenta.getTablaRegistros()[i][j];
+            }
+        }
+        
+
+        for (int i = 0; i < contI; i++) {
+            JCmbClasificacion.addItem(matrixData[i][0]);
+        }
+
+        
+    }
+
+    private void cargarTabla() {
+
+        CuentaContable objCuenta = new CuentaContable();
+
+        objCuenta.getTablaRegistros();
+
+        int contI = 0;
+        contI = objCuenta.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][4];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrixData[i][j] = objCuenta.getTablaRegistros()[i][j];
+            }
+        }
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) JTableRegistros.getModel();
+        modeloTabla.setRowCount(contI);
+        modeloTabla.setColumnCount(4);
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                JTableRegistros.setValueAt(matrixData[i][j], i, j);;
+            }
+        }
+    }
+
     public FrmMantCuentaContable() {
         initComponents();
+        cargarTabla();
+        comboBox();
     }
 
     /**
@@ -35,7 +94,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         JTxtCodigoCuenta = new javax.swing.JTextField();
         JTxtNombre = new javax.swing.JTextField();
         JCmbClasificacion = new javax.swing.JComboBox<>();
-        JCmbCuenta = new javax.swing.JComboBox<>();
+        JCmbEstado = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         JBtnIngresar = new javax.swing.JButton();
         JBtnModificar = new javax.swing.JButton();
@@ -43,7 +102,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         JBtnBuscar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTableRegistros = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("Mantenimiento de Cuenta Contable");
@@ -59,7 +118,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Estado Cuenta Contable:");
 
-        JCmbCuenta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+        JCmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -73,6 +132,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         JBtnModificar.setText("Modificar");
 
         JBtnEliminar.setText("Eliminar");
+        JBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnEliminarActionPerformed(evt);
+            }
+        });
 
         JBtnBuscar.setText("Buscar");
 
@@ -127,7 +191,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                             .addComponent(JTxtCodigoCuenta)
                             .addComponent(JTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(JCmbClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JCmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JCmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -147,14 +211,14 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                     .addComponent(JCmbClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JCmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTableRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -162,7 +226,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                 "Código de Cuenta", "Nombre de Cuenta Contable", "Clasificación de Cuenta Contable", "Estado de Cuenta Contable"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTableRegistros);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,8 +253,35 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
-        // TODO add your handling code here:
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoClasificacion = JTxtCodigoCuenta.getText();
+        var nombreCuenta = JTxtNombre.getText();
+        var descripcionCuenta = JCmbClasificacion.getSelectedItem().toString();
+        var estadoCuenta = JCmbEstado.getSelectedItem().toString();
+
+        objCuenta.setCodigoCuentaContable(codigoClasificacion);
+        objCuenta.setNombreCuentaContable(nombreCuenta);
+        objCuenta.setClasificacionCuentaContable(descripcionCuenta);
+        objCuenta.setEstadoCuentaContable(estadoCuenta);
+        objCuenta.Insertar(objCuenta);
+
+        cargarTabla();
+        JTxtCodigoCuenta.setText("");
+        JTxtNombre.setText("");
+        JTxtCodigoCuenta.requestFocus();
     }//GEN-LAST:event_JBtnIngresarActionPerformed
+
+    private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoCuenta = JTxtCodigoCuenta.getText();
+
+        objCuenta.setCodigoCuentaContable(codigoCuenta);
+
+        objCuenta.Eliminar(objCuenta);
+        cargarTabla();
+    }//GEN-LAST:event_JBtnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -199,7 +290,8 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     private javax.swing.JButton JBtnIngresar;
     private javax.swing.JButton JBtnModificar;
     private javax.swing.JComboBox<String> JCmbClasificacion;
-    private javax.swing.JComboBox<String> JCmbCuenta;
+    private javax.swing.JComboBox<String> JCmbEstado;
+    private javax.swing.JTable JTableRegistros;
     private javax.swing.JTextField JTxtCodigoCuenta;
     private javax.swing.JTextField JTxtNombre;
     private javax.swing.JButton jButton5;
@@ -210,6 +302,5 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
