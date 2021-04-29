@@ -19,6 +19,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
   private Mantenimiento_Moneda formMantenimiento_Moneda;//llamado a la ventana Mantenimiento Moneda 
   private FrmCuentaBancaria FrmBancaria;
   private FrmCuentaHabiente FrmHabiente;
+  private Mantenimiento_TipoAsiento FrmTipoAsiento;
  
     public MDIFinanzas() {
         initComponents();
@@ -101,6 +102,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuCatalogoContabilidad.add(jMenuItem2);
 
         jMenuItem4.setText("Mantenimiento de Tipo de Asiento Contable");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         JMenuCatalogoContabilidad.add(jMenuItem4);
 
         JMenuCatalogos.add(JMenuCatalogoContabilidad);
@@ -206,19 +212,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         frmMantClasificacionCuentas.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
-        frm_mantPerFis.setVisible(true);
-        JDesktopFinanzas.add(frm_mantPerFis);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
                 fmTipo = new FrmTipoTransaccion();
         JDesktopFinanzas.add(fmTipo);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
-
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
     //Banco
@@ -257,6 +255,19 @@ public class MDIFinanzas extends javax.swing.JFrame {
       }
         JDesktopFinanzas.add(FrmHabiente);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Mantenimiento_TipoAsiento FrmTipoAsiento = new Mantenimiento_TipoAsiento();
+        FrmTipoAsiento.setVisible(true);
+        JDesktopFinanzas.add(FrmTipoAsiento);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
+        frm_mantPerFis.setVisible(true);
+        JDesktopFinanzas.add(frm_mantPerFis);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
 
     public static void main(String args[]) {

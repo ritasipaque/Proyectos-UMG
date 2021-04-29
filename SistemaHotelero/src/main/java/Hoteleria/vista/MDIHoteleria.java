@@ -9,6 +9,9 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
@@ -33,15 +36,24 @@ public class MDIHoteleria extends javax.swing.JFrame {
      */
     public MDIHoteleria() throws UnknownHostException {
         initComponents();
-         MDI_Components mdi_components = new MDI_Components();
+        logo(); 
         GenerarPermisos generarPermisos = new GenerarPermisos();
         
-        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_components.getIp() + "]");
+        
 
         var usuario = Login.usuarioSesion;
         var modulo = "Hoteleria";
 
         generarPermisos.getPermisos(modulo, usuario);
+    }
+    public void logo(){
+        Icon icon = new ImageIcon("C:src/main/java/Hoteleria/reportes/Imagen1.png");                
+        if(icon != null){
+            //Agrega Icono
+            logo.setIcon(icon);
+        }else{
+            //No existe imagen.
+        }
     }
 
     /**
@@ -54,10 +66,10 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private void initComponents() {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        logo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menu_archivo = new javax.swing.JMenu();
         menu_catalogos = new javax.swing.JMenu();
-        menu_procesos = new javax.swing.JMenu();
         submenu_mantenimientos = new javax.swing.JMenu();
         mnt_amadellaves = new javax.swing.JMenuItem();
         mnt_habitaciones = new javax.swing.JMenuItem();
@@ -65,25 +77,33 @@ public class MDIHoteleria extends javax.swing.JFrame {
         mnt_huespedes = new javax.swing.JMenuItem();
         mnt_formasdepago = new javax.swing.JMenuItem();
         mnt_pisos = new javax.swing.JMenuItem();
+        menu_procesos = new javax.swing.JMenu();
         submenu_procesos = new javax.swing.JMenu();
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo de Hotelería [ip] [user]");
 
         jDesktopPane1.setBackground(new java.awt.Color(228, 68, 68));
 
+        jDesktopPane1.setLayer(logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1350, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 1050, Short.MAX_VALUE)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addGap(0, 401, Short.MAX_VALUE)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenuBar1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
@@ -94,10 +114,6 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
         menu_catalogos.setText("Catálogos");
         menu_catalogos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jMenuBar1.add(menu_catalogos);
-
-        menu_procesos.setText("Procesos");
-        menu_procesos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
         submenu_mantenimientos.setText("Mantenimientos");
 
@@ -149,7 +165,12 @@ public class MDIHoteleria extends javax.swing.JFrame {
         });
         submenu_mantenimientos.add(mnt_pisos);
 
-        menu_procesos.add(submenu_mantenimientos);
+        menu_catalogos.add(submenu_mantenimientos);
+
+        jMenuBar1.add(menu_catalogos);
+
+        menu_procesos.setText("Procesos");
+        menu_procesos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
         submenu_procesos.setText("Procesos");
         menu_procesos.add(submenu_procesos);
@@ -167,6 +188,15 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_ayuda.setText("Ayuda");
         menu_ayuda.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jMenuBar1.add(menu_ayuda);
+
+        jMenu1.setText("Cerrar Sesión");
+        jMenu1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -221,6 +251,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jDesktopPane1.add(formMantenimiento_Pisos);
     }//GEN-LAST:event_mnt_pisosActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta_cs == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -246,7 +284,9 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    public static javax.swing.JLabel logo;
     private javax.swing.JMenu menu_archivo;
     private javax.swing.JMenu menu_ayuda;
     private javax.swing.JMenu menu_catalogos;
