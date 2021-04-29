@@ -9,6 +9,7 @@ import Finanzas.dominio.PeriodoFiscal;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Finanzas.datos.PeriodoFiscalDAO;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.sql.*;
@@ -227,6 +228,11 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -384,6 +390,23 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         }
         llenadoDeTablas();
     }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoPeriodoFiscal.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoPeriodoFiscal.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
