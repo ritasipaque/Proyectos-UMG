@@ -9,6 +9,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
@@ -69,6 +70,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modulo de Hotelería [ip] [user]");
@@ -169,6 +171,15 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_ayuda.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jMenuBar1.add(menu_ayuda);
 
+        jMenu1.setText("Cerrar Sesión");
+        jMenu1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -222,6 +233,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jDesktopPane1.add(formMantenimiento_Pisos);
     }//GEN-LAST:event_mnt_pisosActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+
+        if (respuesta_cs == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_jMenu1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +266,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menu_archivo;
     private javax.swing.JMenu menu_ayuda;
