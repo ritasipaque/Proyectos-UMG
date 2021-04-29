@@ -57,40 +57,34 @@ public class GenerarPermisos {
 
             }
             if (modulo == "Hotelero") {
-                
-                MDIHoteleria.mnt_amadellaves.setVisible(false);
-                MDIHoteleria.mnt_habitaciones.setVisible(false);
-                MDIHoteleria.mnt_servicios.setVisible(false);
-                MDIHoteleria.mnt_huespedes.setVisible(false);
-                MDIHoteleria.mnt_formasdepago.setVisible(false);
-                MDIHoteleria.mnt_pisos.setVisible(false);
+                MDIHoteleria.menu_archivo.setVisible(false);
+                MDIHoteleria.menu_ayuda.setVisible(false);
+                MDIHoteleria.menu_catalogos.setVisible(false);
+                MDIHoteleria.menu_herramientas.setVisible(false);
+                MDIHoteleria.menu_informes.setVisible(false);
+                MDIHoteleria.menu_procesos.setVisible(false);
+                MDIHoteleria.jMenu1.setVisible(true);
                 ejecutarPermisos.ejecutarBusqueda(usuario);
-                
+                System.out.println(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
-                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
-                    if (varApp >= 2001 && varApp <= 2201) {
-                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
-                        MDIHoteleria.submenu_procesos.setVisible(false);
+                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);System.out.println(varApp);
+                    if (varApp >= 2001 && varApp <= 2200) {
+                        MDIHoteleria.menu_catalogos.setVisible(true);
                         switch (varApp) {
                             case 2001:
-                                MDIHoteleria.mnt_amadellaves.setVisible(true);
-                                MDIHoteleria.mnt_habitaciones.setVisible(true);
-                                break;
-                            case 2101:
-                                MDIHoteleria.mnt_servicios.setVisible(true);
-                                MDIHoteleria.mnt_huespedes.setVisible(true);
+                            case 2100:
+                            case 2200:
+                                MDIHoteleria.submenu_mantenimientos.setVisible(true);
                                 break;
                         }
                     }
-                    if (varApp >= 2202 && varApp <= 2400) {
-                        MDIHoteleria.submenu_procesos.setVisible(true);
-                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
+                    if (varApp >= 2201 && varApp <= 2400) {
+                        MDIHoteleria.menu_procesos.setVisible(true);
                         switch (varApp) {
-                            case 2202:
-                                MDIHoteleria.mnt_formasdepago.setVisible(true);
-                                break;
+                            case 2201:
+                            case 2300:
                             case 2400:
-                                MDIHoteleria.mnt_pisos.setVisible(true);
+                                MDIHoteleria.submenu_procesos.setVisible(true);
                                 break;
                         }
                     }
