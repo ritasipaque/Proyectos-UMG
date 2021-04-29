@@ -17,15 +17,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `umg` DEFAULT CHARACTER SET utf8 ;
 USE `umg` ;
 
-CREATE TABLE IF NOT EXISTS `umg`.`tbl_login` (
-  `PK_id_usuario` INT NOT NULL AUTO_INCREMENT,
-  `username_login` VARCHAR(60) NOT NULL,
-  `password_login` VARCHAR(25)NOT NULL,
-  PRIMARY KEY (`PK_id_usuario`) )
-ENGINE = InnoDB CHARACTER SET = latin1;
-INSERT INTO `umg`.`tbl_login` (`PK_id_usuario`, `username_login`, `password_login`) VALUES ('1', 'admin', '12345');
-
-
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_modulo`
 -- -----------------------------------------------------
