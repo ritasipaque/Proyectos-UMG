@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class CuentaContableDAO {
 
     private String SQL_INSERT = "INSERT INTO CuentaContable (Codigo_CuentaContable, Nombre_CuentaContable, Clasificacion_CuentaContable, Estado_CuentaContable, Monto_CuentaContable) VALUES(?,?,?,?,?)";
-    private String SQL_UPDATE = "UPDATE ClasificacionCuenta SET Codigo_CuentaContable = ?, Nombre_CuentaContable = ?, Clasificacion_CuentaContable = ? WHERE Codigo_CuentaContable = ?";
+    private String SQL_UPDATE = "UPDATE CuentaContable SET Nombre_CuentaContable = ?, Estado_CuentaContable = ? WHERE Codigo_CuentaContable = ?";
     private String SQL_QUERY = "SELECT * FROM CuentaContable WHERE Codigo_CuentaContable = ?";
     private String SQL_DELETE = "DELETE FROM CuentaContable WHERE Codigo_CuentaContable = ?";
     private String SQL_SELECT = "SELECT * FROM CuentaContable";
@@ -67,10 +67,9 @@ public class CuentaContableDAO {
         try {
             con = Conexion.getConnection();
             stmt = con.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, objCuenta.getCodigoCuentaContable());
-            stmt.setString(2, objCuenta.getNombreCuentaContable());
-            stmt.setString(3, objCuenta.getClasificacionCuentaContable());
-            stmt.setString(4, objCuenta.getEstadoCuentaContable());
+            stmt.setString(1, objCuenta.getNombreCuentaContable());
+            stmt.setString(2, objCuenta.getEstadoCuentaContable());
+            stmt.setString(3, objCuenta.getCodigoCuentaContable());
             row = stmt.executeUpdate();
 
             if (row >= 1) {

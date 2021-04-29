@@ -130,6 +130,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         });
 
         JBtnModificar.setText("Modificar");
+        JBtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnModificarActionPerformed(evt);
+            }
+        });
 
         JBtnEliminar.setText("Eliminar");
         JBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +144,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         });
 
         JBtnBuscar.setText("Buscar");
+        JBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnBuscarActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("?");
 
@@ -275,13 +285,46 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
         CuentaContable objCuenta = new CuentaContable();
 
-        var codigoCuenta = JTxtCodigoCuenta.getText();
+        String codigoCuenta = JTxtCodigoCuenta.getText();
 
         objCuenta.setCodigoCuentaContable(codigoCuenta);
 
         objCuenta.Eliminar(objCuenta);
         cargarTabla();
     }//GEN-LAST:event_JBtnEliminarActionPerformed
+
+    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoClasificacion = JTxtCodigoCuenta.getText();
+        var nombreCuenta = JTxtNombre.getText();
+        var descripcionCuenta = JCmbClasificacion.getSelectedItem().toString();
+        var estadoCuenta = JCmbEstado.getSelectedItem().toString();
+
+        objCuenta.setCodigoCuentaContable(codigoClasificacion);
+        objCuenta.setNombreCuentaContable(nombreCuenta);
+        objCuenta.setClasificacionCuentaContable(descripcionCuenta);
+        objCuenta.setEstadoCuentaContable(estadoCuenta);
+        objCuenta.Actualizar(objCuenta);
+
+        cargarTabla();
+    }//GEN-LAST:event_JBtnModificarActionPerformed
+
+    private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoClasificacion = JTxtCodigoCuenta.getText();
+
+        objCuenta.setCodigoCuentaContable(codigoClasificacion);
+
+        objCuenta.Buscar(objCuenta);
+
+        JTxtCodigoCuenta.setText(objCuenta.Buscar(objCuenta)[0]);
+        JTxtNombre.setText(objCuenta.Buscar(objCuenta)[1]);
+        JCmbClasificacion.setSelectedItem(objCuenta.Buscar(objCuenta)[2]);
+        JCmbEstado.setSelectedItem(objCuenta.Buscar(objCuenta)[4]);
+        cargarTabla();
+    }//GEN-LAST:event_JBtnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
