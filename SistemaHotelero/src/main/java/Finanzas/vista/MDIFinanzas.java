@@ -218,8 +218,6 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(fmTipo);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-
-
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
     //Banco
         formMantenimiento_Banco = new Mantenimiento_Banco();
