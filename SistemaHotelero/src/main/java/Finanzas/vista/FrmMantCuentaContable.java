@@ -5,6 +5,11 @@
  */
 package Finanzas.vista;
 
+import Finanzas.dominio.ClasificacionCuenta;
+import Finanzas.dominio.CuentaContable;
+import javax.swing.ComboBoxModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego Vásquez
@@ -14,8 +19,62 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmMantCuentaContable
      */
+    private void comboBox() {
+        ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
+
+        objClasificarCuenta.getTablaRegistros();
+
+        int contI = 0;
+        contI = objClasificarCuenta.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][3];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrixData[i][j] = objClasificarCuenta.getTablaRegistros()[i][j];
+            }
+        }
+        
+
+        for (int i = 0; i < contI; i++) {
+            JCmbClasificacion.addItem(matrixData[i][0]);
+        }
+
+        
+    }
+
+    private void cargarTabla() {
+
+        CuentaContable objCuenta = new CuentaContable();
+
+        objCuenta.getTablaRegistros();
+
+        int contI = 0;
+        contI = objCuenta.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][4];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrixData[i][j] = objCuenta.getTablaRegistros()[i][j];
+            }
+        }
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) JTableRegistros.getModel();
+        modeloTabla.setRowCount(contI);
+        modeloTabla.setColumnCount(4);
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                JTableRegistros.setValueAt(matrixData[i][j], i, j);;
+            }
+        }
+    }
+
     public FrmMantCuentaContable() {
         initComponents();
+        cargarTabla();
+        comboBox();
     }
 
     /**
@@ -32,17 +91,18 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        JTxtCodigoCuenta = new javax.swing.JTextField();
+        JTxtNombre = new javax.swing.JTextField();
+        JCmbClasificacion = new javax.swing.JComboBox<>();
+        JCmbEstado = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        JBtnIngresar = new javax.swing.JButton();
+        JBtnModificar = new javax.swing.JButton();
+        JBtnEliminar = new javax.swing.JButton();
+        JBtnBuscar = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTableRegistros = new javax.swing.JTable();
 
         setClosable(true);
         setTitle("Mantenimiento de Cuenta Contable");
@@ -58,15 +118,39 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Estado Cuenta Contable:");
 
+        JCmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "I" }));
+
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton1.setText("Ingresar");
+        JBtnIngresar.setText("Ingresar");
+        JBtnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnIngresarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Modificar");
+        JBtnModificar.setText("Modificar");
+        JBtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnModificarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Eliminar");
+        JBtnEliminar.setText("Eliminar");
+        JBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnEliminarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Buscar");
+        JBtnBuscar.setText("Buscar");
+        JBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBtnBuscarActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("?");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -74,13 +158,15 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBtnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JBtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -88,10 +174,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(JBtnIngresar)
+                    .addComponent(JBtnEliminar)
+                    .addComponent(JBtnModificar)
+                    .addComponent(JBtnBuscar)
+                    .addComponent(jButton5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -111,10 +198,10 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JTxtCodigoCuenta)
+                            .addComponent(JTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JCmbClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(JCmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -123,25 +210,25 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTxtCodigoCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTxtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JCmbClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JCmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTableRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -149,7 +236,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                 "Código de Cuenta", "Nombre de Cuenta Contable", "Clasificación de Cuenta Contable", "Estado de Cuenta Contable"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(JTableRegistros);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,8 +244,8 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -175,14 +262,82 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoClasificacion = JTxtCodigoCuenta.getText();
+        var nombreCuenta = JTxtNombre.getText();
+        var descripcionCuenta = JCmbClasificacion.getSelectedItem().toString();
+        var estadoCuenta = JCmbEstado.getSelectedItem().toString();
+
+        objCuenta.setCodigoCuentaContable(codigoClasificacion);
+        objCuenta.setNombreCuentaContable(nombreCuenta);
+        objCuenta.setClasificacionCuentaContable(descripcionCuenta);
+        objCuenta.setEstadoCuentaContable(estadoCuenta);
+        objCuenta.Insertar(objCuenta);
+
+        cargarTabla();
+        JTxtCodigoCuenta.setText("");
+        JTxtNombre.setText("");
+        JTxtCodigoCuenta.requestFocus();
+    }//GEN-LAST:event_JBtnIngresarActionPerformed
+
+    private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        String codigoCuenta = JTxtCodigoCuenta.getText();
+
+        objCuenta.setCodigoCuentaContable(codigoCuenta);
+
+        objCuenta.Eliminar(objCuenta);
+        cargarTabla();
+    }//GEN-LAST:event_JBtnEliminarActionPerformed
+
+    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoClasificacion = JTxtCodigoCuenta.getText();
+        var nombreCuenta = JTxtNombre.getText();
+        var descripcionCuenta = JCmbClasificacion.getSelectedItem().toString();
+        var estadoCuenta = JCmbEstado.getSelectedItem().toString();
+
+        objCuenta.setCodigoCuentaContable(codigoClasificacion);
+        objCuenta.setNombreCuentaContable(nombreCuenta);
+        objCuenta.setClasificacionCuentaContable(descripcionCuenta);
+        objCuenta.setEstadoCuentaContable(estadoCuenta);
+        objCuenta.Actualizar(objCuenta);
+
+        cargarTabla();
+    }//GEN-LAST:event_JBtnModificarActionPerformed
+
+    private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
+        CuentaContable objCuenta = new CuentaContable();
+
+        var codigoClasificacion = JTxtCodigoCuenta.getText();
+
+        objCuenta.setCodigoCuentaContable(codigoClasificacion);
+
+        objCuenta.Buscar(objCuenta);
+
+        JTxtCodigoCuenta.setText(objCuenta.Buscar(objCuenta)[0]);
+        JTxtNombre.setText(objCuenta.Buscar(objCuenta)[1]);
+        JCmbClasificacion.setSelectedItem(objCuenta.Buscar(objCuenta)[2]);
+        JCmbEstado.setSelectedItem(objCuenta.Buscar(objCuenta)[4]);
+        cargarTabla();
+    }//GEN-LAST:event_JBtnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton JBtnBuscar;
+    private javax.swing.JButton JBtnEliminar;
+    private javax.swing.JButton JBtnIngresar;
+    private javax.swing.JButton JBtnModificar;
+    private javax.swing.JComboBox<String> JCmbClasificacion;
+    private javax.swing.JComboBox<String> JCmbEstado;
+    private javax.swing.JTable JTableRegistros;
+    private javax.swing.JTextField JTxtCodigoCuenta;
+    private javax.swing.JTextField JTxtNombre;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -190,8 +345,5 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
