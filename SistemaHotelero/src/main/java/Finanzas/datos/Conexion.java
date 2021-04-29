@@ -11,12 +11,6 @@ public class Conexion {
     private static final String JDBC_URL = "jdbc:mysql://localhost/finanzas?useSSL=false&serverTimezone=UTC";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASS = "";
-<<<<<<< HEAD
-=======
-
->>>>>>> f3fd6a2dbfbe6ee5ab0aaf520a13a710ce97d149
-
-
 
 
     public static Connection getConnection() throws SQLException {
