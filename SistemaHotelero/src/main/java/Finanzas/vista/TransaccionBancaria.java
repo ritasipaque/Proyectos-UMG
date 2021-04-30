@@ -10,6 +10,8 @@ package Finanzas.vista;
  * @author Santiago Martinez Diaz
  */
 public class TransaccionBancaria extends javax.swing.JInternalFrame {
+    
+  
 
     /**
      * Creates new form TransaccionBancaria
