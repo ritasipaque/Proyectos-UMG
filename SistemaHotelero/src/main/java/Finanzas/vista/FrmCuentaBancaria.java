@@ -15,13 +15,16 @@ import Finanzas.datos.CuentaHabienteDAO;
 import Finanzas.dominio.Banco;
 import Finanzas.datos.BancoDAO;
 import com.mysql.cj.Query;
+import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 /**
  *
  * @author Santiago Martinez Diaz 9959-19-13847
  */
 public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
-    
+    int codigoAplicacion = 1006;
         //Metodo Llenado de Combos consulta los dominios y datos MonedaDAO y Moneda para obetner el codigo en el combobox
    public void llenadoDeCombos()  {
        MonedaDAO monedaDao = new MonedaDAO();
@@ -389,6 +392,19 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
            
           //LLena La jtable con los datos ya ingresados en db
            llenadoDeTablas();
+           
+            BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmCuentaBancaria");
+        AInsertar.setAccion("Registrar");
+        AInsertar.setCodigoAplicacion("1006");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaBancaria.class.getName()).log(Level.SEVERE, null, ex);
+          }
+           
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -399,6 +415,18 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         cuentadao.delete(cuentaeliminar);
      
            llenadoDeTablas();
+           
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmCuentaBancaria");
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1006");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaBancaria.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void Cbox_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_CuentaActionPerformed
