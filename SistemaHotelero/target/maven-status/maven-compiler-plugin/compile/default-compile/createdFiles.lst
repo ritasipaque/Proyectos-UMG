@@ -2,7 +2,6 @@ seguridad\vista\Asignacion_usuario_Perfil1$2.class
 seguridad\dominio\Bitacora.class
 Finanzas\datos\MonedaDAO.class
 Comercial\dominio\Bitacora.class
-Finanzas\vista\Login.class
 Finanzas\vista\FrmTipoTransaccion$5.class
 Hoteleria\vista\Mantenimiento_FormasDePago$4.class
 seguridad\vista\Asignacion_modulos$9.class
@@ -40,7 +39,6 @@ Finanzas\vista\EmisionCheque$3.class
 Comercial\dominio\Proveedor.class
 Comercial\vista\Mantenimiento_Cliente$4.class
 seguridad\vista\Aplicacion_Perfil$6.class
-Finanzas\vista\Login$5.class
 seguridad\vista\Asignacion_modulos$4.class
 Finanzas\vista\FrmMantCuentaContable$2.class
 seguridad\datos\Asignacion_Aplicacion_UsuarioDAO.class
@@ -111,7 +109,6 @@ Hoteleria\vista\MDIHoteleria$6.class
 Comercial\vista\MantenimientoProductos$3.class
 Hoteleria\vista\Mantenimiento_FormasDePago$1.class
 seguridad\vista\CambioC$1.class
-Finanzas\vista\Login$3.class
 seguridad\vista\Login$1.class
 Finanzas\vista\FrmCuentaBancaria$6.class
 seguridad\dominio\Asignacion_Aplicacion_Perfil.class
@@ -124,7 +121,6 @@ seguridad\vista\MDI_Sistema$3.class
 Finanzas\dominio\PeriodoFiscal.class
 Hoteleria\vista\MDIHoteleria$5.class
 Comercial\vista\MantenimientoProductos$2.class
-Finanzas\vista\Login$4.class
 Hoteleria\vista\Mantenimiento_AmaDeLlaves$8.class
 seguridad\datos\Asignacion_Aplicacion_PerfilDAO.class
 Finanzas\vista\FrmCuentaBancaria$7.class
@@ -148,7 +144,6 @@ Finanzas\vista\FrmTipoTransaccion$8.class
 Hoteleria\vista\Mantenimiento_AmaDeLlaves$7.class
 Finanzas\datos\TipoTransaccionDAO.class
 Finanzas\vista\FrmCuentaBancaria$5.class
-Finanzas\vista\Login$2.class
 seguridad\vista\Aplicacion_Perfil$7.class
 Finanzas\vista\Mantenimiento_TipoPersona$1.class
 seguridad\vista\MDI_Sistema$5.class
@@ -189,7 +184,6 @@ seguridad\vista\Login$2.class
 Finanzas\datos\EmisionChequeDAO.class
 Comercial\dominio\Cliente.class
 seguridad\vista\Mantenimiento_Aplicacion$1.class
-Finanzas\vista\Login$1.class
 Comercial\vista\MantenimientoProveedor$5.class
 Hoteleria\dominio\Habitaciones.class
 Hoteleria\vista\MDIHoteleria$7.class
@@ -243,7 +237,6 @@ seguridad\vista\Asignacion_modulos.class
 seguridad\vista\Mantenimiento_Perfil$3.class
 Finanzas\vista\FrmNuevoEncabezadoAsiento.class
 Finanzas\vista\FrmCuentaBancaria$8.class
-Finanzas\vista\CambioC$2.class
 Hoteleria\dominio\FormasDePago.class
 Hoteleria\vista\Mantenimiento_Pisos$7.class
 Comercial\vista\MantenimientoProductos$4.class
@@ -309,7 +302,6 @@ seguridad\vista\MDI_Sistema.class
 Hoteleria\vista\Mantenimiento_AmaDeLlaves$2.class
 Comercial\vista\MDIcomercial$4.class
 seguridad\vista\Mantenimiento_Modulos$3.class
-Finanzas\vista\CambioC$1.class
 Comercial\vista\Mantenimiento_Cliente$6.class
 Finanzas\vista\FrmNuevoEncabezadoAsiento$1.class
 Hoteleria\vista\Mantenimiento_habitaciones$6.class
@@ -325,7 +317,6 @@ Hoteleria\vista\Mantenimiento_Pisos.class
 Hoteleria\vista\Mantenimiento_habitaciones$7.class
 Finanzas\vista\FrmCuentaHabiente$1.class
 seguridad\dominio\Asignacion_Usuario_Perfil.class
-Finanzas\vista\CambioC.class
 Finanzas\vista\MDIFinanzas$1.class
 seguridad\vista\Mantenimiento_Modulos$4.class
 Hoteleria\datos\HuespedesDAO.class
