@@ -97,7 +97,6 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Periodo Fiscal");
 
