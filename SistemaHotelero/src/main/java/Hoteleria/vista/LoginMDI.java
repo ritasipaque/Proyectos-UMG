@@ -7,13 +7,15 @@ package Hoteleria.vista;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author leone
  */
-public class MDI_Components {
-       public String getIp() throws UnknownHostException {
+public class LoginMDI {
+    
+    public static String getIp() throws UnknownHostException {
         InetAddress address = InetAddress.getLocalHost();
         return address.getHostAddress();
     }
