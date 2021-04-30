@@ -6,11 +6,16 @@
 
 package seguridad.vista;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Modulos;
 import seguridad.datos.ModulosDAO;
+import seguridad.dominio.Bitacora;
 
 /**
  * /**
@@ -19,6 +24,7 @@ import seguridad.datos.ModulosDAO;
  */
 public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1; 
+    String codigoAplicacion = "40";
     /**
      * Creates new form Mantenimiento_Modulos
      */
@@ -53,7 +59,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         txt_Descripcion_Modulo.setText("");
         limpio.setSelected(true);
     }
-     private static boolean isNumeric(String cadena){
+    private static boolean isNumeric(String cadena){
         try {
                 Integer.parseInt(cadena);
                 return true;
@@ -61,7 +67,34 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 return false;
         }
     }
-
+    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario){
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        boolean estado=false;
+        switch(accion){
+            case "Insertar":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Inserción");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+                break;
+            case "Modificacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Modificación");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+                break;
+            case "Eliminacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Eliminar");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+        }
+        if (estado==true) {
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }         
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -316,6 +349,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
                 limpiar();
                 actualizartabla();
+                GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioSesion);
         }else{
                 JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
@@ -341,6 +375,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Modulo actualizado correctamente");
                 limpiar();
                 actualizartabla();
+                GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
@@ -355,6 +390,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
             moduloEliminar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
             modulosDAO.delete(moduloEliminar);   
             JOptionPane.showMessageDialog(null, "Modulo eliminado correctamente");
+            GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
