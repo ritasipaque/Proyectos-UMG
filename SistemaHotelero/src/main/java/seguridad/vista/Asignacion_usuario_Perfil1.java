@@ -6,7 +6,10 @@
 package seguridad.vista;
 import java.awt.event.MouseAdapter;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import seguridad.datos.PerfilDAO;
@@ -19,13 +22,14 @@ import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 
 
+
 /**
  *
  * @author Santiago Martinez
  */
 public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
-    
+      int codigoAplicacion = 120;
     //Metodo Llenado de Combos consulta los dominios y datos PerfilDAO y Perfi para obetner la id perfil en el combobox
       public void llenadoDeCombos() {
        PerfilDAO asignaciondao = new PerfilDAO();
@@ -399,7 +403,17 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         Asignacion_Usuario_Perfil AsignacionINsertar = new Asignacion_Usuario_Perfil();
         AsignacionINsertar.setPK_id_perfil(cbox_perfiles.getSelectedItem().toString());
         AsignacionINsertar.setPK_id_usuario(TxtAñadir.getText());
-        
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("AsignacionPerfilUsuario");
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("120");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Asignacion_usuario_Perfil1.class.getName()).log(Level.SEVERE, null, ex);
+          }
         Asignacion.insert(AsignacionINsertar);
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
@@ -427,7 +441,17 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         for (int i = eliminar; i >= 0; i--) {          
         tb.removeRow(tb.getRowCount()-1);
         }
-     
+       BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora Eliminar = new Bitacora();
+        Eliminar.setId_Usuario("AsignacionPerfilUsuario");
+        Eliminar.setAccion("eliminar");
+        Eliminar.setCodigoAplicacion("120");
+        try{
+            BitacoraDAO.insert(Eliminar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Asignacion_usuario_Perfil1.class.getName()).log(Level.SEVERE, null, ex);
+          }
     
     }//GEN-LAST:event_btnEliminarActionPerformed
 

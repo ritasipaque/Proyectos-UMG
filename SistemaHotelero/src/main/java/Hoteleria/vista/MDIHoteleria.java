@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
-import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -37,13 +36,12 @@ public class MDIHoteleria extends javax.swing.JFrame {
     public MDIHoteleria() throws UnknownHostException {
         initComponents();
         logo(); 
+        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + LoginMDI.getIp() + "]");
+        
         GenerarPermisos generarPermisos = new GenerarPermisos();
         
-        
-
         var usuario = Login.usuarioSesion;
         var modulo = "Hoteleria";
-
         generarPermisos.getPermisos(modulo, usuario);
     }
     public void logo(){
@@ -85,7 +83,6 @@ public class MDIHoteleria extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Modulo de Hotelería [ip] [user]");
 
         jDesktopPane1.setBackground(new java.awt.Color(228, 68, 68));
 
@@ -284,15 +281,15 @@ public class MDIHoteleria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
+    public static javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JLabel logo;
-    private javax.swing.JMenu menu_archivo;
-    private javax.swing.JMenu menu_ayuda;
-    private javax.swing.JMenu menu_catalogos;
-    private javax.swing.JMenu menu_herramientas;
-    private javax.swing.JMenu menu_informes;
-    private javax.swing.JMenu menu_procesos;
+    public static javax.swing.JMenu menu_archivo;
+    public static javax.swing.JMenu menu_ayuda;
+    public static javax.swing.JMenu menu_catalogos;
+    public static javax.swing.JMenu menu_herramientas;
+    public static javax.swing.JMenu menu_informes;
+    public static javax.swing.JMenu menu_procesos;
     public static javax.swing.JMenuItem mnt_amadellaves;
     public static javax.swing.JMenuItem mnt_formasdepago;
     public static javax.swing.JMenuItem mnt_habitaciones;
