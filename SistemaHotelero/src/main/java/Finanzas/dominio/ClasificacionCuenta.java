@@ -105,34 +105,31 @@ public class ClasificacionCuenta {
         }
     }
 
-    public ClasificacionCuenta Buscar(ClasificacionCuenta objClasificacion) {
+    public String[] Buscar(ClasificacionCuenta objClasificacion) {
+
+        String[] vectorObj = new String[3];
+
         if (objClasificacion.getCodigoClasificacion().equals("")) {
 
             JOptionPane.showMessageDialog(null, "¡CAMPO CÓDIGO NO PUEDE ESTAR VACÍO!", "ERROR", JOptionPane.ERROR_MESSAGE);
 
         } else {
-            objClasificacion = new ClasificacionCuenta();
-            clasificarDAO.Buscar(objClasificacion);
-            
-            objClasificacion.setCodigoClasificacion(clasificarDAO.Buscar(objClasificacion).getCodigoClasificacion());
-            objClasificacion.setClasificacionCuenta(clasificarDAO.Buscar(objClasificacion).getClasificacionCuenta());
-            objClasificacion.setDescripcionClasificacion(clasificarDAO.Buscar(objClasificacion).getDescripcionClasificacion());
 
-            if (objClasificacion.getCodigoClasificacion().equals("") || objClasificacion.getClasificacionCuenta().equals("") || objClasificacion.getDescripcionClasificacion().equals("")) {
-                
-                JOptionPane.showMessageDialog(null, "¡REGISTRO NO ENCONTRADO!", "ERROR", JOptionPane.ERROR_MESSAGE);
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "¡REGISTRO ENCONTRADO!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-            }
+            clasificarDAO.Buscar(objClasificacion);
+
+            vectorObj[0] = clasificarDAO.Buscar(objClasificacion).getCodigoClasificacion();
+            vectorObj[1] = clasificarDAO.Buscar(objClasificacion).getClasificacionCuenta();
+            vectorObj[2] = clasificarDAO.Buscar(objClasificacion).getDescripcionClasificacion();
         }
 
-        return objClasificacion;
+        return vectorObj;
     }
 
-    /*public String[][] getTablaRegistros() {
+    public String[][] getTablaRegistros() {
         String[][] matrixRegistros;
+        
         clasificarDAO.TablaDespliegue();
+        
         matrixRegistros = new String[clasificarDAO.TablaDespliegue().length][3];
 
         for (int i = 0; i < clasificarDAO.TablaDespliegue().length; i++) {
@@ -141,5 +138,5 @@ public class ClasificacionCuenta {
             }
         }
         return matrixRegistros;
-    }*/
+    }
 }

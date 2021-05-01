@@ -2,14 +2,13 @@ package Comercial.datos;
 
 
 import Comercial.dominio.Cliente;
+import Comercial.dominio.Deudores;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import Comercial.datos.Conexion;
-import Comercial.dominio.Deudores;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,47 +22,12 @@ import Comercial.dominio.Deudores;
  */
 public class ClienteDao {
     
-        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,Monto,Estatus_Cliente,telefono,producto) VALUES(?, ?,?, ?,?, ?,?)";
-    private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,Monto,Estatus_Cliente,telefono,producto FROM tbl_cliente";
-    private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,Monto,Estatus_Cliente,telefono,producto FROM tbl_cliente WHERE Id_cliente = ?";
+        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto) VALUES(?, ?,?, ?,?, ?,?)";
+    private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto FROM tbl_cliente";
+    private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto FROM tbl_cliente WHERE Id_cliente = ?";
+  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente = ?,cliente =?,Nit= ? , telefono = ? ,producto = ? , Estatus_Cliente = ? , Monto = ? WHERE Id_cliente";
     private static final String SQL_DELETE = "DELETE FROM tbl_cliente  WHERE Id_cliente = ? ";
-     private static final String SQL_UPDATE = "UPDATE  tbl_cliente SET  Id_cliente =? , cliente =?,Nit =?,Monto=?,Estatus_Cliente=?,telefono=?,producto =? WHERE Id_cliente";
   
-      public int update(Cliente mod) {
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        int rows = 0;
-
-        try {
-            conn = Conexion.getConnection();
-            System.out.println("ejecutando query: " + SQL_UPDATE);
-            stmt = conn.prepareStatement(SQL_UPDATE);
-           stmt.setString(1,  mod.getId_cliente());
-            stmt.setString(2,  mod.getCliente());       
-            stmt.setString(3,   mod.getNit());
-             stmt.setString(4,  mod.getMonto());
-               stmt.setString(5,  mod.getEstatus_Cliente());
-               stmt.setString(6,  mod.getTelefono());
-                stmt.setString(7,  mod.getProducto());
-
-   rows = stmt.executeUpdate();
-         
-            System.out.println("Registros actualizado:" + rows);
-
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-
-        return rows;
-    }
-    
-    
-    
-    
-    
      public List<Cliente> select() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -195,14 +159,12 @@ public class ClienteDao {
             stmt.setString(1,  insertar.getId_cliente());
             stmt.setString(2,  insertar.getCliente());       
             stmt.setString(3,   insertar.getNit());
-             stmt.setString(4,  insertar.getMonto());
-               stmt.setString(5,  insertar.getEstatus_Cliente());
-               stmt.setString(6,  insertar.getTelefono());
-                stmt.setString(7,  insertar.getProducto());
-           
-              
-           
-
+              stmt.setString(4,  insertar.getTelefono());
+               stmt.setString(5,  insertar.getProducto());
+                stmt.setString(6,  insertar.getEstatus_Cliente());
+       
+        
+    stmt.setString(7,  insertar.getMonto());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -216,7 +178,36 @@ public class ClienteDao {
 
         return rows;
     }
-    
+        public int update(Cliente mod) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            System.out.println("ejecutando query: " + SQL_UPDATE);
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1,   mod.getId_cliente());
+            stmt.setString(2,   mod.getCliente());       
+            stmt.setString(3,    mod.getNit());
+             stmt.setString(4,   mod.getMonto());
+             stmt.setString(5,   mod.getEstatus_Cliente());
+            stmt.setString(6,   mod.getTelefono());
+             stmt.setString(7,  mod.getProducto());
+   rows = stmt.executeUpdate();
+         
+            System.out.println("Registros actualizado:" + rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+
        public int delete(Cliente eliminar) {
         
         Connection conn = null;
@@ -242,8 +233,6 @@ public class ClienteDao {
 
         return rows;
     }
-     
-       
      
     
 }

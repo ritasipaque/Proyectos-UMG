@@ -7,11 +7,19 @@ package Hoteleria.vista;
 
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Servicios;
+import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.Login;
 
 /**
  *
@@ -20,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
+    String codigoAplicacion="2200";
     /**
      * Creates new form Mantenimiento_Servicios
      */
@@ -78,6 +87,35 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                tabla.setModel(modelo1);
         }
     }
+    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario){
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        boolean estado=false;
+        switch(accion){
+            case "Insertar":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Inserción");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+                break;
+            case "Modificacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Modificación");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+                break;
+            case "Eliminacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Eliminar");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+        }
+        if (estado==true) {
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }         
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,15 +130,15 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txt_id = new javax.swing.JTextField();
-        btn_buscar = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_descripcion = new javax.swing.JTextArea();
         btn_cancelar = new javax.swing.JButton();
-        btn_modificar = new javax.swing.JButton();
-        btn_guardar = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txt_activo = new javax.swing.JRadioButton();
         txt_inactivo = new javax.swing.JRadioButton();
@@ -109,6 +147,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         txt_basico = new javax.swing.JRadioButton();
         txt_adicional = new javax.swing.JRadioButton();
         aux_tipo = new javax.swing.JRadioButton();
+        BtnElim = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -124,10 +164,10 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 
         jLabel1.setText("ID:");
 
-        btn_buscar.setText("BUSCAR");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("BUSCAR");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -146,17 +186,17 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_modificar.setText("MODIFICAR");
-        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("MODIFICAR");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_modificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        btn_guardar.setText("GUARDAR");
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("GUARDAR");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
@@ -180,6 +220,20 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 
         TIPO.add(aux_tipo);
 
+        BtnElim.setText("ELIMINAR");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnElimActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("AYUDA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -188,37 +242,6 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btn_guardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_modificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_cancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txt_basico))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_activo)))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txt_inactivo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(aux_estado))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txt_adicional)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(aux_tipo)))))
-                        .addGap(0, 3, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -228,8 +251,42 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txt_id)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_buscar))
-                            .addComponent(txt_nombre))))
+                                .addComponent(BtnBus))
+                            .addComponent(txt_nombre)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addComponent(txt_basico))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_activo)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_inactivo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(aux_estado))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_adicional)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(aux_tipo))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnIng, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BtnMod)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -239,7 +296,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_buscar))
+                    .addComponent(BtnBus))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -257,17 +314,22 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                             .addComponent(txt_adicional)))
                     .addComponent(aux_tipo))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_activo)
-                    .addComponent(txt_inactivo)
-                    .addComponent(aux_estado))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aux_estado, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txt_activo)
+                        .addComponent(txt_inactivo)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnIng)
                     .addComponent(btn_cancelar)
-                    .addComponent(btn_modificar)
-                    .addComponent(btn_guardar))
-                .addContainerGap())
+                    .addComponent(BtnMod))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnElim)
+                    .addComponent(jButton2))
+                .addGap(13, 13, 13))
         );
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -286,14 +348,14 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -321,7 +383,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
     if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
         if (txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&txt_id.getText().length()!=0&&(
             txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())) {
@@ -345,15 +407,16 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             serviciosdao.insert(servicios);
             JOptionPane.showMessageDialog(null, "Servicio agregado correctamente");
             limpiar();actualizartabla();
+           GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
         }
     }else{
         JOptionPane.showMessageDialog(null, "El ID del servicio solo lleva números, intentelo nuevamente");
     }
-    }//GEN-LAST:event_btn_guardarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
     if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
         if (txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&txt_id.getText().length()!=0&&(
             txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())) {
@@ -377,19 +440,20 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 serviciosdao.update(servicios);
                 JOptionPane.showMessageDialog(null, "Servicio modificado correctamente");
                 limpiar();actualizartabla();
+                GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
         }
     }else{
         JOptionPane.showMessageDialog(null, "El ID del servicio solo lleva números, intentelo nuevamente");
     }
-    }//GEN-LAST:event_btn_modificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         limpiar();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
     if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
         ServiciosDAO formasdepagodao = new ServiciosDAO();
         Servicios buscarmetodo = new Servicios();
@@ -410,18 +474,52 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             }
         
     }
-    }//GEN-LAST:event_btn_buscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
+
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
+    if (Mantenimiento_Servicios.isNumeric(txt_id.getText())) {
+        ServiciosDAO serviciosdao = new ServiciosDAO();
+        Servicios eliminarservicio = new Servicios();
+        eliminarservicio.setId(txt_id.getText());
+        serviciosdao.delete(eliminarservicio);
+        
+        JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
+        actualizartabla();
+        limpiar();
+        GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioSesion);
+     }else{
+         JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
+     }
+    }//GEN-LAST:event_BtnElimActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    try {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaServicios.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaServicios.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.ButtonGroup ESTADO;
     private javax.swing.ButtonGroup TIPO;
     private javax.swing.JRadioButton aux_estado;
     private javax.swing.JRadioButton aux_tipo;
-    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_guardar;
-    private javax.swing.JButton btn_modificar;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
