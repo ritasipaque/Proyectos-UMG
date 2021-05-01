@@ -1,15 +1,21 @@
 
 package seguridad.vista;
 import java.io.File;
+import java.net.UnknownHostException;
 import seguridad.datos.PerfilDAO;
 import seguridad.dominio.Perfil;
 import java.sql.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Asignacion;
+import seguridad.dominio.Bitacora;
 /**
 /**
  *
@@ -17,13 +23,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Mantenimiento_Perfil extends javax.swing.JInternalFrame {
     ButtonGroup RadiosGrupo;
-
+    int codigoAplicacion = 30;
     /**
      * Creates new form Mantenimiento_Perfil
      */
     public Mantenimiento_Perfil() {
         initComponents();
         llenadodetablas();
+        int codigoAplicacion = 30; // numero de asignacion para perfiles.
         RadiosGrupo = new ButtonGroup();
         RadiosGrupo.add(RBEP1);
         RadiosGrupo.add(RBEP0);
@@ -340,8 +347,20 @@ public void llenadodetablas(){
             JOptionPane.showMessageDialog(null, "Perfil registrado Exitosamente");
             RBEPvacio.setSelected(true);
             limpiar();
-            perfilDAO.insert(perfilesInsertar);
-        }           
+           // perfilDAO.insert(perfilesInsertar);
+        }
+         //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoPerfil");
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("30");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+          }
+         perfilDAO.insert(perfilesInsertar);
         }
         llenadodetablas();
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -363,6 +382,17 @@ public void llenadodetablas(){
         perfilesModificar.setEstado_perfil(0);
         }        
         RBEPvacio.setSelected(true);
+         //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("Perfil");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("30");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+          }
         perfilDAO.update(perfilesModificar);
         JOptionPane.showMessageDialog(null, "Perfil Modificado Exitosamente");
         llenadodetablas();
@@ -374,6 +404,17 @@ public void llenadodetablas(){
         PerfilDAO perfilDAO = new PerfilDAO();
         //Prueba delete
         perfilEliminar.setPk_id_perfil(Integer.parseInt(txt_IdPerfil.getText()));
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("Perfil");
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("30");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+          }
         perfilDAO.delete(perfilEliminar);
         JOptionPane.showMessageDialog(null, "Perfil Eliminado.");
         limpiar();
