@@ -47,6 +47,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         JMenuProcesos = new javax.swing.JMenu();
+        JMenuItemAsientoContable = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
         JMenuAyuda = new javax.swing.JMenu();
@@ -167,6 +168,15 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
         JMenuProcesos.setText("Procesos");
         JMenuProcesos.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+
+        JMenuItemAsientoContable.setText("Asiento Contable");
+        JMenuItemAsientoContable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuItemAsientoContableActionPerformed(evt);
+            }
+        });
+        JMenuProcesos.add(JMenuItemAsientoContable);
+
         JMenuBarFinanzas.add(JMenuProcesos);
 
         JMenuInformes.setText("Informes");
@@ -218,8 +228,6 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(fmTipo);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-
-
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
     //Banco
         formMantenimiento_Banco = new Mantenimiento_Banco();
@@ -270,6 +278,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(frm_mantPerFis);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void JMenuItemAsientoContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemAsientoContableActionPerformed
+        FrmEncabezadoAsiento frmEncabezadoAsiento = new FrmEncabezadoAsiento();
+        frmEncabezadoAsiento.setVisible(true);
+    }//GEN-LAST:event_JMenuItemAsientoContableActionPerformed
+
 
 
     public static void main(String args[]) {
@@ -298,6 +311,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     private javax.swing.JMenu JMenuCatalogos;
     private javax.swing.JMenu JMenuHerramientas;
     private javax.swing.JMenu JMenuInformes;
+    private javax.swing.JMenuItem JMenuItemAsientoContable;
     private javax.swing.JMenu JMenuProcesos;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;

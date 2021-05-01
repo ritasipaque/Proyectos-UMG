@@ -22,7 +22,7 @@ public class TipoAsientoDAO extends Conexion {
     private static final String SQL_INSERT = "INSERT INTO Tipo_Asiento(Codigo_TipoAsiento, Tipo_AsientoDesc) VALUES(?, ?)";
     private static final String SQL_UPDATE = "UPDATE Tipo_Asiento SET Codigo_TipoAsiento=?, Tipo_AsientoDesc=? WHERE Codigo_TipoAsiento = ?";
     private static final String SQL_DELETE = "DELETE FROM Tipo_Asiento WHERE Codigo_TipoAsiento=?";
-    private static final String SQL_QUERY = "SELECT Codigo_TipoAsiento, Tipo_AsientoDesc WHERE Codigo_TipoAsiento = ?";
+    private static final String SQL_QUERY = "SELECT Codigo_TipoAsiento, Tipo_AsientoDesc FROM Tipo_Asiento WHERE Codigo_TipoAsiento = ?";
 
     Finanzas.datos.Conexion conectar = new Finanzas.datos.Conexion();
     Connection conn = null;
@@ -131,6 +131,7 @@ public class TipoAsientoDAO extends Conexion {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, TipoAsiento.getIDTA());
             stmt.setString(2, TipoAsiento.getTipo());
+            stmt.setString(3, TipoAsiento.getIDTA());
             rows = stmt.executeUpdate();
 
         } catch (SQLException ex) {

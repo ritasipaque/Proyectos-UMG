@@ -85,7 +85,7 @@ public class UsuarioDAO extends Conexion {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
+            //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, usuario.getUser_usuario());
             rs = stmt.executeQuery();
@@ -113,7 +113,7 @@ public class UsuarioDAO extends Conexion {
 
                 rows++;
             }
-            System.out.println("Registros buscado:" + usuario);
+            //System.out.println("Registros buscado:" + usuario);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
