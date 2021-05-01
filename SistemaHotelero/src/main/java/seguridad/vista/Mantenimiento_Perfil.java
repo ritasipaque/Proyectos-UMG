@@ -30,7 +30,7 @@ public class Mantenimiento_Perfil extends javax.swing.JInternalFrame {
     public Mantenimiento_Perfil() {
         initComponents();
         llenadodetablas();
-        int codigoAplicacion = 30; // numero de asignacion para perfiles.
+        int codigoAplicacion = 30; // numero de asignacion para perfiles para bitacora.
         RadiosGrupo = new ButtonGroup();
         RadiosGrupo.add(RBEP1);
         RadiosGrupo.add(RBEP0);
