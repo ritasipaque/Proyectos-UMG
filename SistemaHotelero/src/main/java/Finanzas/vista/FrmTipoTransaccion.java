@@ -12,13 +12,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import Finanzas.dominio.TipoTransaccion;
 import Finanzas.datos.TipoTransaccionDAO;
+import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 /**
  *
  * @author Santiago Martinez Diaz
  */
 public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
-    
+    int codigoAplicacion = 1002;
     // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
  public void llenadoDeTablas() {
       try {
@@ -328,6 +331,17 @@ public void buscarperfil(){
         tipoEliminar.setCodigo_TipoTransaccion((txtbuscado.getText()));
         tipodAO.delete(tipoEliminar);
         llenadoDeTablas();
+           BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("Elimiar");
+        AInsertar.setCodigoAplicacion("1002");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -344,6 +358,18 @@ public void buscarperfil(){
         tipodao.update(tipomodificar);
         JOptionPane.showMessageDialog(null, " Modificado Exitosamente");
         llenadoDeTablas();
+        
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1002");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+          }
     
    
     }//GEN-LAST:event_btnModificarActionPerformed
@@ -354,7 +380,17 @@ public void buscarperfil(){
         insertartipo.setCodigo_TipoTransaccion(TxtCodigo.getText());
         insertartipo.setTransaccion_Tipo(TxtTipo.getText());
          insertartipo.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
-
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("Registrar");
+        AInsertar.setCodigoAplicacion("1002");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+          }
         tipodao.insert(insertartipo);
         llenadoDeTablas();
     }//GEN-LAST:event_btnRegistrarActionPerformed
@@ -379,7 +415,17 @@ public void buscarperfil(){
     private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
         // TODO add your handling code here:
     buscarperfil();
-  
+      BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("buscar");
+        AInsertar.setCodigoAplicacion("1002");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+          }
         
     }//GEN-LAST:event_btnLimpiar1ActionPerformed
 
@@ -398,6 +444,8 @@ public void buscarperfil(){
         btnRegistrar.setEnabled(true);
         btnModificar.setEnabled(true);
         btnEliminar.setEnabled(true);
+        
+    
     }//GEN-LAST:event_btnLimpiar2ActionPerformed
 
 

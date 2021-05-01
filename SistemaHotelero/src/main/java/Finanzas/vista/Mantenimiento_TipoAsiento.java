@@ -8,6 +8,7 @@ import Finanzas.dominio.TipoAsiento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Finanzas.datos.TipoAsientoDAO;
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -221,30 +222,44 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+        if ( txtID.getText().length()!=0 && txtTipo.getText().length()!=0){
         TipoAsiento TAMod = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
         TAMod.setIDTA(txtID.getText());
         TAMod.setTipo(txtTipo.getText());
-        
         TADAO.update(TAMod);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         llenadoDeTablas();
-
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "No se ha podido modificar");
+        }
     }//GEN-LAST:event_BtnModificarActionPerformed
 
     private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        if ( txtID.getText().length()!=0 ){
         TipoAsiento TADEL = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
 
         TADEL.setIDTA(txtID.getText());
         TADAO.delete(TADEL);
-        JOptionPane.showMessageDialog(null, "Tipo Asiento Eliminado.");
+        int salida = JOptionPane.showConfirmDialog(null, "Seguro que quieres eliminar?", "Advertencia de eliminacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+        System.out.println(salida);
+        if (salida == 0) {
+            TADAO.delete(TADEL);
+            JOptionPane.showMessageDialog(null, "Tipo Asiento Eliminado.");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "El registro no se ha eliminado");
+        }
         llenadoDeTablas();
         limpiar();
-
+    }
     }//GEN-LAST:event_BtnEliminarActionPerformed
 
     private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        if (txtID.getText().length()!=0){
         TipoAsiento TABUS = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
         TABUS.setIDTA(txtID.getText());
@@ -252,15 +267,32 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         
         txtID.setText(TABUS.getIDTA());
         txtTipo.setText(TABUS.getTipo());
-
+        JOptionPane.showMessageDialog(null, "Registro encontrado");
+        llenadoDeTablas();
+        }
+        else
         {
-            JOptionPane.showMessageDialog(null, "Registro encontrado");
+            JOptionPane.showMessageDialog(null, "Registro no encontrado");
+            llenadoDeTablas();
         }
         llenadoDeTablas();
     }//GEN-LAST:event_BtnBuscarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTipoAsiento.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTipoAsiento.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
