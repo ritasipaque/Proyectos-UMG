@@ -8,21 +8,27 @@ package Finanzas.vista;
 import Finanzas.datos.BancoDAO;
 import Finanzas.dominio.Banco;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 
 /**
  *
  * @author Nay Ale
  */
 public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
-
+int codigoAplicacion = 1008;
     /**
      * Creates new form Mantenimiento_Banco
      */
     public Mantenimiento_Banco() {
         initComponents();
+        int codigoAplicacion = 1008; // numero de asignacion para perfiles para bitacora.
         llenadodetablas();    // metodo para el llenado de la tabla con los datos automaticamente
     }
   public void limpiar() {   //metodo de Limpiar automaticamente las cajas de textos y radio boton
@@ -72,11 +78,11 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_CodigoBanco = new javax.swing.JTextField();
         txt_NombreBanco = new javax.swing.JTextField();
-        Boton_Guardar = new javax.swing.JButton();
-        Boton_Modificar = new javax.swing.JButton();
-        Boton_Eliminar = new javax.swing.JButton();
-        Boton_Buscar = new javax.swing.JButton();
-        Boton_Ayuda = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
+        BtnAyu = new javax.swing.JButton();
         txt_Buscar = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txt_TelefonoBanco = new javax.swing.JTextField();
@@ -103,48 +109,48 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Clave Banco:");
 
-        Boton_Guardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Guardar.setText("Guardar");
-        Boton_Guardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnIng.setText("Guardar");
+        BtnIng.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_GuardarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        Boton_Modificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Modificar.setText("Modificar");
-        Boton_Modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Modificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnMod.setText("Modificar");
+        BtnMod.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_ModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        Boton_Eliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Eliminar.setText("Eliminar");
-        Boton_Eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnElim.setText("Eliminar");
+        BtnElim.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_EliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        Boton_Buscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Buscar.setText("Buscar");
-        Boton_Buscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Buscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnBus.setText("Buscar");
+        BtnBus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_BuscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
-        Boton_Ayuda.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Ayuda.setText("Ayuda");
-        Boton_Ayuda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+        BtnAyu.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnAyu.setText("Ayuda");
+        BtnAyu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnAyu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_AyudaActionPerformed(evt);
+                BtnAyuActionPerformed(evt);
             }
         });
 
@@ -169,7 +175,7 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
                                     .addComponent(txt_NombreBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_CodigoBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(Boton_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnBus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(187, 187, 187))
@@ -181,13 +187,13 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
                                     .addComponent(txt_ClaveBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(Boton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Boton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
-                        .addComponent(Boton_Eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                        .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                         .addGap(30, 30, 30)
-                        .addComponent(Boton_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnAyu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -217,14 +223,14 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
                     .addComponent(txt_TelefonoBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton_Buscar)
+                    .addComponent(BtnBus)
                     .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton_Guardar)
-                    .addComponent(Boton_Modificar)
-                    .addComponent(Boton_Eliminar)
-                    .addComponent(Boton_Ayuda))
+                    .addComponent(BtnIng)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnAyu))
                 .addGap(29, 29, 29))
         );
 
@@ -280,7 +286,7 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
      Banco bancosInsertar = new Banco();
      BancoDAO bancoDAO = new BancoDAO();
         // Prueba insert
@@ -288,16 +294,26 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
         bancosInsertar.setNombre_Banco(txt_NombreBanco.getText());
         bancosInsertar.setClave_Banco(txt_ClaveBanco.getText()); 
         bancosInsertar.setTelefono_Banco(txt_TelefonoBanco.getText());
-        {
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoBanco");
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("1008");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        }   catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Banco.class.getName()).log(Level.SEVERE, null, ex);
+        }
             JOptionPane.showMessageDialog(null, "Banco registrado Exitosamente"); 
             bancoDAO.insert(bancosInsertar);
             llenadodetablas();
             limpiar();
-        }                  
+                          
         
-    }//GEN-LAST:event_Boton_GuardarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void Boton_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         BancoDAO bancoDAO = new BancoDAO();
         Banco bancosModificar = new Banco();
         //BANCO modificar
@@ -305,28 +321,50 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
         bancosModificar.setNombre_Banco(txt_NombreBanco.getText());
         bancosModificar.setClave_Banco(txt_ClaveBanco.getText()); 
         bancosModificar.setTelefono_Banco(txt_TelefonoBanco.getText());
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoBanco");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1008");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        }   catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Banco.class.getName()).log(Level.SEVERE, null, ex);
+        }
         bancoDAO.update(bancosModificar);
         JOptionPane.showMessageDialog(null, "Banco Modificado Exitosamente");
         llenadodetablas();
         limpiar();            
-    }//GEN-LAST:event_Boton_ModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void Boton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_EliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         Banco bancoEliminar = new Banco();
         BancoDAO bancoDAO = new BancoDAO();
         //Prueba delete
         bancoEliminar.setCodigo_Banco(txt_CodigoBanco.getText());
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoBanco");
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1008");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        }   catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Banco.class.getName()).log(Level.SEVERE, null, ex);
+        }
         bancoDAO.delete(bancoEliminar);
         JOptionPane.showMessageDialog(null, "Banco Eliminado.");
         llenadodetablas();
         limpiar();
-    }//GEN-LAST:event_Boton_EliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void Boton_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_BuscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
          buscarbanco();    //metodo que busca el BANCO ingresado en la base de datos
-    }//GEN-LAST:event_Boton_BuscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void Boton_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AyudaActionPerformed
+    private void BtnAyuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyuActionPerformed
         /// metodo para ejecutar la ayuda que es una guia para el mantenimiento BANCO
          try {
             if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoBanco.chm")).exists()) {
@@ -341,15 +379,15 @@ public class Mantenimiento_Banco extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }    
-    }//GEN-LAST:event_Boton_AyudaActionPerformed
+    }//GEN-LAST:event_BtnAyuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_Ayuda;
-    private javax.swing.JButton Boton_Buscar;
-    private javax.swing.JButton Boton_Eliminar;
-    private javax.swing.JButton Boton_Guardar;
-    private javax.swing.JButton Boton_Modificar;
+    private javax.swing.JButton BtnAyu;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JTable Tabla_Banco;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
