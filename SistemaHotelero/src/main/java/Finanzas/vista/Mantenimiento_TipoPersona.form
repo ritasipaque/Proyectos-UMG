@@ -74,12 +74,12 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="Boton_Buscar" max="32767" attributes="0"/>
-                              <Component id="Boton_Guardar" pref="92" max="32767" attributes="0"/>
+                              <Component id="BtnBus" max="32767" attributes="0"/>
+                              <Component id="BtnIng" pref="92" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="11" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="Boton_Modificar" min="-2" pref="89" max="-2" attributes="0"/>
+                              <Component id="BtnMod" min="-2" pref="89" max="-2" attributes="0"/>
                               <Component id="txt_Buscar" min="-2" pref="75" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -94,9 +94,9 @@
                           <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="Boton_Eliminar" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="BtnElim" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="Boton_Ayuda" min="-2" pref="90" max="-2" attributes="0"/>
+                          <Component id="BtnAyu" min="-2" pref="90" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -118,15 +118,15 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Boton_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnBus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txt_Buscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Boton_Guardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Boton_Modificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Boton_Eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Boton_Ayuda" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnIng" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnMod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnElim" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnAyu" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
@@ -148,7 +148,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txt_NombreTipoPersona">
         </Component>
-        <Component class="javax.swing.JButton" name="Boton_Guardar">
+        <Component class="javax.swing.JButton" name="BtnIng">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -161,10 +161,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_GuardarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnIngActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Boton_Modificar">
+        <Component class="javax.swing.JButton" name="BtnMod">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -177,10 +177,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_ModificarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnModActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Boton_Eliminar">
+        <Component class="javax.swing.JButton" name="BtnElim">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -193,10 +193,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_EliminarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnElimActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Boton_Buscar">
+        <Component class="javax.swing.JButton" name="BtnBus">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -209,10 +209,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_BuscarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBusActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Boton_Ayuda">
+        <Component class="javax.swing.JButton" name="BtnAyu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -225,7 +225,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_AyudaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAyuActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_Buscar">
