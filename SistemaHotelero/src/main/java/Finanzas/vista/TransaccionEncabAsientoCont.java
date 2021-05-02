@@ -61,6 +61,7 @@ public class TransaccionEncabAsientoCont extends javax.swing.JInternalFrame {
         jLabel1.setText("ID:");
 
         jLabel2.setText("Nombre:");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel3.setText("Fecha:");
 
