@@ -86,8 +86,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
         cbox_perfiles = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
-        btnRegistrar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
         BtnAyuda = new javax.swing.JButton();
         TxtAñadir = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -124,21 +124,21 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        btnRegistrar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        BtnIng.setText("Registrar");
+        BtnIng.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        btnEliminar.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 14)); // NOI18N
+        BtnElim.setText("Eliminar");
+        BtnElim.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
@@ -162,9 +162,9 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -184,9 +184,9 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -398,7 +398,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbox_perfilesActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         Asignacion_Usuario_PerfilDAO Asignacion = new Asignacion_Usuario_PerfilDAO();
         Asignacion_Usuario_Perfil AsignacionINsertar = new Asignacion_Usuario_Perfil();
         AsignacionINsertar.setPK_id_perfil(cbox_perfiles.getSelectedItem().toString());
@@ -415,7 +415,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
               Logger.getLogger(Asignacion_usuario_Perfil1.class.getName()).log(Level.SEVERE, null, ex);
           }
         Asignacion.insert(AsignacionINsertar);
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
         // TODO add your handling code here:
@@ -434,7 +434,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
         }    
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
     
     DefaultTableModel tb = (DefaultTableModel) TablaAsignacion.getModel();
         int eliminar = TablaAsignacion.getRowCount()-1;
@@ -453,7 +453,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
               Logger.getLogger(Asignacion_usuario_Perfil1.class.getName()).log(Level.SEVERE, null, ex);
           }
     
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
     private void BotonConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConsultarActionPerformed
         // TODO add your handling code here:
@@ -542,6 +542,8 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonConsultar;
     private javax.swing.JButton BtnAyuda;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMoveruna;
     private javax.swing.JButton BtnMovervarias;
     private javax.swing.JButton Btnquitar;
@@ -549,9 +551,7 @@ public class Asignacion_usuario_Perfil1 extends javax.swing.JInternalFrame {
     private javax.swing.JTable TablaPerfiles;
     private javax.swing.JTextField TxtAñadir;
     private javax.swing.JTextField TxtConsulta;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnQuitarVarias;
-    private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbox_perfiles;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
