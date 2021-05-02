@@ -175,15 +175,15 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JBtnIngresar" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="BtnIng" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JBtnEliminar" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="BtnElim" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JBtnModificar" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="BtnMod" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JBtnBuscar" min="-2" pref="95" max="-2" attributes="0"/>
+                      <Component id="BtnBus" min="-2" pref="95" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnAyuda" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -193,11 +193,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JBtnIngresar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JBtnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JBtnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="JBtnBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnIng" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnElim" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnMod" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnBus" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnAyuda" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -205,42 +205,45 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="JBtnIngresar">
+            <Component class="javax.swing.JButton" name="BtnIng">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ingresar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBtnIngresarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnIngActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="JBtnModificar">
+            <Component class="javax.swing.JButton" name="BtnMod">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBtnModificarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnModActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="JBtnEliminar">
+            <Component class="javax.swing.JButton" name="BtnElim">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBtnEliminarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnElimActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="JBtnBuscar">
+            <Component class="javax.swing.JButton" name="BtnBus">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBtnBuscarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnBusActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="BtnAyuda">
               <Properties>
                 <Property name="text" type="java.lang.String" value="?"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAyudaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

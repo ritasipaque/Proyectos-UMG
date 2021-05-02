@@ -29,11 +29,13 @@ public class MDIFinanzas extends javax.swing.JFrame {
     GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
 
+    
+    
     public MDIFinanzas() throws UnknownHostException {
         var modulo_nombre = "Finanzas";
         initComponents();
         this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_Components.getIp() + "]");
-        permisos.getPermisos(modulo_nombre, Login.usuarioSesion);
+        //permisos.getPermisos(modulo_nombre, Login.usuarioSesion);
     }
 
     @SuppressWarnings("unchecked")
