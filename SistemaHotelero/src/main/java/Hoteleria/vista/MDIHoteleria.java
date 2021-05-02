@@ -18,7 +18,7 @@ import seguridad.vista.Login;
 
 /**
  *
- * @author Herbert Leonel Dominguez Chavez      9959-19-5644
+ * @author Herbert Leonel Dominguez Chavez 9959-19-5644
  */
 public class MDIHoteleria extends javax.swing.JFrame {
 
@@ -28,28 +28,29 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private Mantenimiento_Servicios formMantenimiento_Servicios;
     private Mantenimiento_Huespedes formMantenimiento_Huespedes;
     private Mantenimiento_Pisos formMantenimiento_Pisos;
-    
-   
+    private Asignaciones_Habitaciones fromHabitaciones;
+
     /**
      * Creates new form MDIHoteleria
      */
     public MDIHoteleria() throws UnknownHostException {
         initComponents();
-        logo(); 
+        logo();
         this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + LoginMDI.getIp() + "]");
-        
+
         GenerarPermisos generarPermisos = new GenerarPermisos();
-        
+
         var usuario = Login.usuarioSesion;
         var modulo = "Hoteleria";
         generarPermisos.getPermisos(modulo, usuario);
     }
-    public void logo(){
-        Icon icon = new ImageIcon("C:src/main/java/Hoteleria/reportes/Imagen1.png");                
-        if(icon != null){
+
+    public void logo() {
+        Icon icon = new ImageIcon("C:src/main/java/Hoteleria/reportes/Imagen1.png");
+        if (icon != null) {
             //Agrega Icono
             logo.setIcon(icon);
-        }else{
+        } else {
             //No existe imagen.
         }
     }
@@ -77,6 +78,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         mnt_pisos = new javax.swing.JMenuItem();
         menu_procesos = new javax.swing.JMenu();
         submenu_procesos = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
@@ -170,6 +172,15 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_procesos.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
         submenu_procesos.setText("Procesos");
+
+        jMenuItem1.setText("asignacion de habitaciones");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        submenu_procesos.add(jMenuItem1);
+
         menu_procesos.add(submenu_procesos);
 
         jMenuBar1.add(menu_procesos);
@@ -249,12 +260,18 @@ public class MDIHoteleria extends javax.swing.JFrame {
     }//GEN-LAST:event_mnt_pisosActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-    int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
 
         if (respuesta_cs == 0) {
             this.dispose();
         }
     }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        fromHabitaciones = new Asignaciones_Habitaciones();
+        fromHabitaciones.setVisible(true);
+        jDesktopPane1.add(formMantenimiento_habitaciones);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +300,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     public static javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     public static javax.swing.JLabel logo;
     public static javax.swing.JMenu menu_archivo;
     public static javax.swing.JMenu menu_ayuda;
