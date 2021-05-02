@@ -9,6 +9,8 @@ import Finanzas.dominio.ClasificacionCuenta;
 import Finanzas.dominio.CuentaContable;
 import javax.swing.ComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 /**
  *
@@ -19,6 +21,38 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     /**
      * Creates new form FrmMantCuentaContable
      */
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 10;
+        var usuario = Login.usuarioSesion;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
+    
     private void comboBox() {
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
 
@@ -75,6 +109,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla();
         comboBox();
+        habilitarAcciones();
     }
 
     /**
@@ -96,11 +131,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         JCmbClasificacion = new javax.swing.JComboBox<>();
         JCmbEstado = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
-        JBtnIngresar = new javax.swing.JButton();
-        JBtnModificar = new javax.swing.JButton();
-        JBtnEliminar = new javax.swing.JButton();
-        JBtnBuscar = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
+        BtnAyuda = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableRegistros = new javax.swing.JTable();
 
@@ -122,35 +157,40 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        JBtnIngresar.setText("Ingresar");
-        JBtnIngresar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("Ingresar");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnIngresarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        JBtnModificar.setText("Modificar");
-        JBtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("Modificar");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        JBtnEliminar.setText("Eliminar");
-        JBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("Eliminar");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        JBtnBuscar.setText("Buscar");
-        JBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("Buscar");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnBuscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
-        jButton5.setText("?");
+        BtnAyuda.setText("?");
+        BtnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAyudaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -158,15 +198,15 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JBtnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JBtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JBtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JBtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(BtnAyuda)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -174,11 +214,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBtnIngresar)
-                    .addComponent(JBtnEliminar)
-                    .addComponent(JBtnModificar)
-                    .addComponent(JBtnBuscar)
-                    .addComponent(jButton5))
+                    .addComponent(BtnIng)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnBus)
+                    .addComponent(BtnAyuda))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -262,7 +302,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         CuentaContable objCuenta = new CuentaContable();
 
         var codigoClasificacion = JTxtCodigoCuenta.getText();
@@ -280,9 +320,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         JTxtCodigoCuenta.setText("");
         JTxtNombre.setText("");
         JTxtCodigoCuenta.requestFocus();
-    }//GEN-LAST:event_JBtnIngresarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         CuentaContable objCuenta = new CuentaContable();
 
         String codigoCuenta = JTxtCodigoCuenta.getText();
@@ -291,9 +331,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
 
         objCuenta.Eliminar(objCuenta);
         cargarTabla();
-    }//GEN-LAST:event_JBtnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         CuentaContable objCuenta = new CuentaContable();
 
         var codigoClasificacion = JTxtCodigoCuenta.getText();
@@ -308,9 +348,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         objCuenta.Actualizar(objCuenta);
 
         cargarTabla();
-    }//GEN-LAST:event_JBtnModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         CuentaContable objCuenta = new CuentaContable();
 
         var codigoClasificacion = JTxtCodigoCuenta.getText();
@@ -324,20 +364,24 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         JCmbClasificacion.setSelectedItem(objCuenta.Buscar(objCuenta)[2]);
         JCmbEstado.setSelectedItem(objCuenta.Buscar(objCuenta)[4]);
         cargarTabla();
-    }//GEN-LAST:event_JBtnBuscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
+
+    private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAyudaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JBtnBuscar;
-    private javax.swing.JButton JBtnEliminar;
-    private javax.swing.JButton JBtnIngresar;
-    private javax.swing.JButton JBtnModificar;
+    private javax.swing.JButton BtnAyuda;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JComboBox<String> JCmbClasificacion;
     private javax.swing.JComboBox<String> JCmbEstado;
     private javax.swing.JTable JTableRegistros;
     private javax.swing.JTextField JTxtCodigoCuenta;
     private javax.swing.JTextField JTxtNombre;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
