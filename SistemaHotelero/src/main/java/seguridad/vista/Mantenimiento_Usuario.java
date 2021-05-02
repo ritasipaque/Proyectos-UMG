@@ -98,7 +98,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
 
     public Mantenimiento_Usuario() {
         initComponents();
-        habilitarAcciones();
+       // habilitarAcciones();
         llenadoDeTablas();
     }
 
