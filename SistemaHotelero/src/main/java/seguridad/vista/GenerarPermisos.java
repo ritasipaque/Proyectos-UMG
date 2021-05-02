@@ -10,8 +10,9 @@ import seguridad.dominio.Permisos;
  *
  * @author Diego Vásquez
  */
+
 public class GenerarPermisos {
- 
+
     Permisos ejecutarPermisos = new Permisos();
 
     public void getPermisos(String modulo, String usuario) {
@@ -53,8 +54,56 @@ public class GenerarPermisos {
 
                 }
             }
-            if (modulo == "Financiero") {
+            if (modulo == "Finanzas") {
 
+                MDIFinanzas.JMenuCatalogos.setEnabled(false);
+                MDIFinanzas.JMenuProcesos.setEnabled(false);
+                MDIFinanzas.JMenuInformes.setEnabled(false);
+                
+                MDIFinanzas.JMenuClasificacionCuentas.setEnabled(false);
+                ejecutarPermisos.ejecutarBusqueda(usuario);
+
+                for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
+
+                    MDIFinanzas.JMenuCatalogos.setEnabled(false);
+                    MDIFinanzas.JMenuProcesos.setEnabled(false);
+
+                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
+
+                    if (varApp >= 1000 && varApp <= 1100) {
+                        MDIFinanzas.JMenuCatalogos.setEnabled(true);
+                        switch (varApp) {
+                            case 1000:
+                                MDIFinanzas.JMenuClasificacionCuentas.setEnabled(true);
+                            case 1001:
+                                MDIFinanzas.JMenuPeriodoFiscal.setEnabled(true);
+                            case 1002:
+                                MDIFinanzas.JMenuTipoTransaccion.setEnabled(true);
+                            case 1003:
+                                MDIFinanzas.JMenuCuentasContables.setEnabled(true);
+                            case 1004:
+                                MDIFinanzas.JMenuTipoAsientoContable.setEnabled(true);
+                            case 1005:
+                                MDIFinanzas.JMenuDivisas.setEnabled(true);
+                            case 1006:
+                                MDIFinanzas.JMenuCuentaBancaria.setEnabled(true);
+                            case 1007:
+                                MDIFinanzas.JMenuPersonaBancaria.setEnabled(true);
+                            case 1008:
+                                MDIFinanzas.JMenuBancos.setEnabled(true);
+                            case 1009:
+                                MDIFinanzas.JMenuCuentahabiente.setEnabled(true);
+                        }
+                    }
+                    if (varApp >= 1101 && varApp <= 1200) {
+                        MDIFinanzas.JMenuProcesos.setEnabled(true);
+                        //PENDIENTE PARA TRANSACCIONALES
+                    }
+                    if (varApp >= 1201 && varApp <= 1300) {
+                        MDIFinanzas.JMenuInformes.setEnabled(false);
+                        //PENDIENTE PARA REPORTERÍA
+                    }
+                }
             }
             if (modulo == "Hotelero") {
                 MDIHoteleria.menu_archivo.setVisible(false);
@@ -67,7 +116,8 @@ public class GenerarPermisos {
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 System.out.println(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
-                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);System.out.println(varApp);
+                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
+                    System.out.println(varApp);
                     if (varApp >= 2001 && varApp <= 2200) {
                         MDIHoteleria.menu_catalogos.setVisible(true);
                         switch (varApp) {
