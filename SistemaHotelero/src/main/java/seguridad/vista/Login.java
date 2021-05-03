@@ -9,6 +9,7 @@ import Comercial.vista.MDIcomercial;
 import Finanzas.vista.MDIFinanzas;
 import Hoteleria.vista.MDIHoteleria;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import seguridad.datos.UsuarioDAO;
 import java.awt.HeadlessException;
 import java.net.UnknownHostException;
@@ -225,6 +226,7 @@ public class Login extends javax.swing.JFrame {
                         case "Area Hoteleria":
                                 try {
                             usuarioHoteleria = txtUsuario.getText();
+                            UIManager.setLookAndFeel(new FlatLightLaf());
                             MDIHoteleria menuHoteleria = new MDIHoteleria();
                             menuHoteleria.setVisible(true);
                             this.dispose();
@@ -234,14 +236,14 @@ public class Login extends javax.swing.JFrame {
                         break;
 
                         case "Area Finanzas":
-                                try {
-                            usuarioFianzas = txtUsuario.getText();
-                            MDIFinanzas menuFinanzas = new MDIFinanzas();
-                            menuFinanzas.setVisible(true);
+                                 try {
+                            usuarioHoteleria = txtUsuario.getText();
+                            MDIHoteleria menuHoteleria = new MDIHoteleria();
+                            menuHoteleria.setVisible(true);
                             this.dispose();
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
                         break;
 
                         case "Area Comercial":
