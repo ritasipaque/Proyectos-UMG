@@ -7,7 +7,9 @@ package Finanzas.vista;
 
 import Finanzas.dominio.ClasificacionCuenta;
 import Finanzas.dominio.CuentaContable;
+import java.io.File;
 import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
@@ -109,7 +111,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla();
         comboBox();
-        habilitarAcciones();
+        //habilitarAcciones();
     }
 
     /**
@@ -367,7 +369,19 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnBusActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
-        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\Ayuda_Mantenimiento_Clasificacion_Cuenta.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\Ayuda_Mantenimiento_Clasificacion_Cuenta.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
 
