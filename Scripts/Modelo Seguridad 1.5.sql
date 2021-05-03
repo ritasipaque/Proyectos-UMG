@@ -43,7 +43,12 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion` (
   PRIMARY KEY (`PK_id_aplicacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('1', 'Contabilidad', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('1', 'Prueba1', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2', 'Prueba2', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('3', 'Prueba3', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('4', 'Prueba4', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('5', 'Prueba5', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
+INSERT INTO `umg`.`tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('6', 'Prueba6', 'Lleva el registro financiero de los ingresos y egresos de la empresa.', '1', '1');
 
 
 -- -----------------------------------------------------
@@ -62,8 +67,12 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario` (
   PRIMARY KEY (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'prueba1', 'prueba2', 'prueba', '12345', 'prueba@gmail.com', '1', '1', '2021-03-23 23:59:59');
-
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'prueba1', 'prueba11', 'admin', '12345', 'prueba@gmail.com', '1', '1', '2021-03-23 23:59:59');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('2', 'esduardo', 'delguila', 'esduardo10', '123', 'esduardo@gmail.com', '1', '1', '2021-05-02 21:00:48');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('3', 'prueba2', 'prueba22', 'admin2', '12345', 'prueba@gmail.com', '1', '1', '2021-03-23 23:59:59');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('4', 'prueba3', 'prueba33', 'admin3', '12345', 'esduardo@gmail.com', '1', '1', '2021-05-02 21:00:48');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('5', 'prueba4', 'prueba44', 'admin4', '12345', 'prueba@gmail.com', '1', '1', '2021-03-23 23:59:59');
+INSERT INTO `umg`.`tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('6', 'prueba5', 'prueba55', 'admin5', '12345', 'esduardo@gmail.com', '1', '1', '2021-05-02 21:00:48');
 
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_bitacora`
@@ -138,6 +147,12 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario_aplicacion` (
     REFERENCES `umg`.`tbl_usuario` (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `umg`.`tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('1', '2001', '1', '1', '0', '1', '1');
+INSERT INTO `umg`.`tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '2002', '1', '1', '1', '0', '1');
+INSERT INTO `umg`.`tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('3', '2003', '1', '1', '0', '0', '1');
+INSERT INTO `umg`.`tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('4', '2004', '0', '1', '0', '0', '1');
+INSERT INTO `umg`.`tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('5', '2005', '0', '0', '0', '0', '1');
+INSERT INTO `umg`.`tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('6', '2006', '1', '1', '1', '0', '1');
 
 
 -- -----------------------------------------------------
