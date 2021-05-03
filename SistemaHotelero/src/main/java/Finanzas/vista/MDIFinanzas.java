@@ -34,8 +34,8 @@ public class MDIFinanzas extends javax.swing.JFrame {
     public MDIFinanzas() throws UnknownHostException {
         var modulo_nombre = "Finanzas";
         initComponents();
-        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + mdi_Components.getIp() + "]");
-        //permisos.getPermisos(modulo_nombre, Login.usuarioSesion);
+        this.setTitle("Usuario: " + "[" + Login.usuarioFianzas + "]" + " \t" + "IP: [" + mdi_Components.getIp() + "]");
+        permisos.getPermisos(modulo_nombre, Login.usuarioFianzas);
     }
 
     @SuppressWarnings("unchecked")
@@ -309,11 +309,12 @@ public class MDIFinanzas extends javax.swing.JFrame {
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
        /*===== OPERACIÓN CERRAR SESIÓN ====
           Variable entera respuesta_cs*/
-
+       Login frmLogin = new Login();
         int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
 
         if (respuesta_cs == 0) {
             this.dispose();
+            frmLogin.setVisible(true);
         }
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
 

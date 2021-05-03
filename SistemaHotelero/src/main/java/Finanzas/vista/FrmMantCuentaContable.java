@@ -25,8 +25,8 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
      */
     void habilitarAcciones() {
 
-        var codigoAplicacion = 10;
-        var usuario = Login.usuarioSesion;
+        var codigoAplicacion = 1003;
+        var usuario = Login.usuarioFianzas;
 
         BtnIng.setEnabled(false);
         BtnMod.setEnabled(false);
@@ -111,7 +111,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla();
         comboBox();
-        //habilitarAcciones();
+        habilitarAcciones();
     }
 
     /**

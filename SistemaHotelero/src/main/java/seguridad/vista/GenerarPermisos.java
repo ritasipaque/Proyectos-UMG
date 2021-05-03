@@ -10,7 +10,6 @@ import seguridad.dominio.Permisos;
  *
  * @author Diego Vásquez
  */
-
 public class GenerarPermisos {
 
     Permisos ejecutarPermisos = new Permisos();
@@ -59,14 +58,20 @@ public class GenerarPermisos {
                 MDIFinanzas.JMenuCatalogos.setEnabled(false);
                 MDIFinanzas.JMenuProcesos.setEnabled(false);
                 MDIFinanzas.JMenuInformes.setEnabled(false);
-                
                 MDIFinanzas.JMenuClasificacionCuentas.setEnabled(false);
+                MDIFinanzas.JMenuPeriodoFiscal.setEnabled(false);
+                MDIFinanzas.JMenuTipoTransaccion.setEnabled(false);
+                MDIFinanzas.JMenuCuentasContables.setEnabled(false);
+                MDIFinanzas.JMenuTipoAsientoContable.setEnabled(false);
+                MDIFinanzas.JMenuDivisas.setEnabled(false);
+                MDIFinanzas.JMenuCuentaBancaria.setEnabled(false);
+                MDIFinanzas.JMenuPersonaBancaria.setEnabled(false);
+                MDIFinanzas.JMenuBancos.setEnabled(false);
+                MDIFinanzas.JMenuCuentahabiente.setEnabled(false);
+
                 ejecutarPermisos.ejecutarBusqueda(usuario);
 
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
-
-                    MDIFinanzas.JMenuCatalogos.setEnabled(false);
-                    MDIFinanzas.JMenuProcesos.setEnabled(false);
 
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
 
@@ -75,24 +80,34 @@ public class GenerarPermisos {
                         switch (varApp) {
                             case 1000:
                                 MDIFinanzas.JMenuClasificacionCuentas.setEnabled(true);
+                                break;
                             case 1001:
                                 MDIFinanzas.JMenuPeriodoFiscal.setEnabled(true);
+                                break;
                             case 1002:
                                 MDIFinanzas.JMenuTipoTransaccion.setEnabled(true);
+                                break;
                             case 1003:
                                 MDIFinanzas.JMenuCuentasContables.setEnabled(true);
+                                break;
                             case 1004:
                                 MDIFinanzas.JMenuTipoAsientoContable.setEnabled(true);
+                                break;
                             case 1005:
                                 MDIFinanzas.JMenuDivisas.setEnabled(true);
+                                break;
                             case 1006:
                                 MDIFinanzas.JMenuCuentaBancaria.setEnabled(true);
+                                break;
                             case 1007:
                                 MDIFinanzas.JMenuPersonaBancaria.setEnabled(true);
+                                break;
                             case 1008:
                                 MDIFinanzas.JMenuBancos.setEnabled(true);
+                                break;
                             case 1009:
                                 MDIFinanzas.JMenuCuentahabiente.setEnabled(true);
+                                break;
                         }
                     }
                     if (varApp >= 1101 && varApp <= 1200) {
