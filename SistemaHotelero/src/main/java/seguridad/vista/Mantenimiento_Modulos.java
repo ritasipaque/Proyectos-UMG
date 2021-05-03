@@ -6,11 +6,16 @@
 
 package seguridad.vista;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Modulos;
 import seguridad.datos.ModulosDAO;
+import seguridad.dominio.Bitacora;
 
 /**
  * /**
@@ -19,6 +24,7 @@ import seguridad.datos.ModulosDAO;
  */
 public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1; 
+    String codigoAplicacion = "40";
     /**
      * Creates new form Mantenimiento_Modulos
      */
@@ -53,7 +59,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         txt_Descripcion_Modulo.setText("");
         limpio.setSelected(true);
     }
-     private static boolean isNumeric(String cadena){
+    private static boolean isNumeric(String cadena){
         try {
                 Integer.parseInt(cadena);
                 return true;
@@ -61,7 +67,34 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 return false;
         }
     }
-
+    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario){
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        boolean estado=false;
+        switch(accion){
+            case "Insertar":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Inserción");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+                break;
+            case "Modificacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Modificación");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+                break;
+            case "Eliminacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Eliminar");
+                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
+        }
+        if (estado==true) {
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }         
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,16 +111,16 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_Codigo_Modulo = new javax.swing.JTextField();
         txt_Nombre_Modulo = new javax.swing.JTextField();
-        btn_buscar = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_Descripcion_Modulo = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         activo = new javax.swing.JRadioButton();
         inactivo = new javax.swing.JRadioButton();
         limpio = new javax.swing.JRadioButton();
-        btn_guardar = new javax.swing.JButton();
-        btn_modificar = new javax.swing.JButton();
-        btn_eliminar = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
         btn_limpiar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -111,10 +144,10 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
 
         jLabel3.setText("DESCRIPCIÓN:");
 
-        btn_buscar.setText("BUSCAR");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("BUSCAR");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -133,24 +166,24 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         ESTADO.add(limpio);
         limpio.setEnabled(false);
 
-        btn_guardar.setText("GUARDAR");
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("GUARDAR");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        btn_modificar.setText("MODIFICAR");
-        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("MODIFICAR");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_modificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        btn_eliminar.setText("ELIMINAR");
-        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("ELIMINAR");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_eliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
@@ -199,10 +232,10 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(CajaInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_guardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_modificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btn_eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnIng, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnBus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_limpiar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44))
@@ -230,13 +263,13 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addContainerGap(23, Short.MAX_VALUE))
             .addGroup(CajaInformacionLayout.createSequentialGroup()
-                .addComponent(btn_buscar)
+                .addComponent(BtnBus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_guardar)
+                .addComponent(BtnIng)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn_modificar)
+                .addComponent(BtnMod)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btn_eliminar)
+                .addComponent(BtnElim)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_limpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -276,7 +309,7 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&&txt_Codigo_Modulo.getText().length()!=0) {
             
     ModulosDAO moduloDAO = new ModulosDAO();
@@ -296,9 +329,9 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
              JOptionPane.showMessageDialog(null, "Los codigos son solamente números, no incluyen ninguna letra o el campo esta vacio");
             //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
-    }//GEN-LAST:event_btn_buscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&& txt_Codigo_Modulo.getText().length()!=0 
             && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0 && limpio.isSelected()==false) {
                 ModulosDAO modulosDAO = new ModulosDAO();
@@ -316,13 +349,14 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
                 limpiar();
                 actualizartabla();
+                GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioSesion);
         }else{
                 JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
-    }//GEN-LAST:event_btn_guardarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&& txt_Codigo_Modulo.getText().length()!=0 
             && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0 && limpio.isSelected()==false) {
              ModulosDAO modulosDAO = new ModulosDAO();
@@ -341,13 +375,14 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Modulo actualizado correctamente");
                 limpiar();
                 actualizartabla();
+                GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
-    }//GEN-LAST:event_btn_modificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         if (Mantenimiento_Modulos.isNumeric(txt_Codigo_Modulo.getText())&& txt_Codigo_Modulo.getText().length()!=0 
             && txt_Nombre_Modulo.getText().length() != 0 && txt_Descripcion_Modulo.getText().length() != 0 && limpio.isSelected()==false) {
             ModulosDAO modulosDAO = new ModulosDAO();
@@ -355,13 +390,14 @@ public class Mantenimiento_Modulos extends javax.swing.JInternalFrame {
             moduloEliminar.setCodigo_modulo(Integer.parseInt(txt_Codigo_Modulo.getText()));
             modulosDAO.delete(moduloEliminar);   
             JOptionPane.showMessageDialog(null, "Modulo eliminado correctamente");
+            GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "existe campos vacios y/o el codigo no debe de llevar números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
             limpiar();
             actualizartabla();
-    }//GEN-LAST:event_btn_eliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
     private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
     limpiar();
@@ -385,14 +421,14 @@ try {
                                        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JPanel CajaInformacion;
     private javax.swing.ButtonGroup ESTADO;
     private javax.swing.JRadioButton activo;
-    private javax.swing.JButton btn_buscar;
-    private javax.swing.JButton btn_eliminar;
-    private javax.swing.JButton btn_guardar;
     private javax.swing.JButton btn_limpiar;
-    private javax.swing.JButton btn_modificar;
     private javax.swing.JRadioButton inactivo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

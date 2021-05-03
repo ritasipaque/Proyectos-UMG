@@ -12,11 +12,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.dominio.Habitaciones;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.Login;
 
 /**
  *
@@ -27,6 +34,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     HabitacionesDAO cargarCombobox = new HabitacionesDAO();
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    String codigoAplicacion = "2300";
 
     /**
      * Creates new form MantenimientoAplicacion
@@ -66,8 +74,36 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         }
     }
 
-    public void limpiar() {
-
+    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario) {
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        boolean estado = false;
+        switch (accion) {
+            case "Insertar":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Inserción");
+                AInsertar.setCodigoAplicacion(codigoModulo);
+                estado = true;
+                break;
+            case "Modificacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Modificación");
+                AInsertar.setCodigoAplicacion(codigoModulo);
+                estado = true;
+                break;
+            case "Eliminacion":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Eliminar");
+                AInsertar.setCodigoAplicacion(codigoModulo);
+                estado = true;
+        }
+        if (estado == true) {
+            try {
+                BitacoraDAO.insert(AInsertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -158,17 +194,15 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 749, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnBuscar)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(324, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,8 +214,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                     .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("agregar habitaciones"));
@@ -270,15 +303,21 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(40, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnModificar)
@@ -296,10 +335,6 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                         .addComponent(cbxTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, 103, Short.MAX_VALUE)
                         .addComponent(cbxPiso, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(40, 40, 40))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnGuardar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -333,12 +368,12 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jradioDisponible)
                         .addComponent(jradioOcupado)))
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnModificar)
                     .addComponent(btnAyuda))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -361,10 +396,9 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 .addGap(292, 292, 292))
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("Mantenimiento habitaciones");
@@ -404,6 +438,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 habitaciones.setEstado_Habitacion(0);
             }
             habitacionesDAO.insert(habitaciones);
+            GuardarEnBitacora("Insertar", codigoAplicacion, Login.usuarioSesion);
             JOptionPane.showMessageDialog(null, "Habitacion ingresada correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
@@ -441,7 +476,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
                 habitaciones_Modificar.setEstado_Habitacion(0);
             }
             habitacionesDAO.update(habitaciones_Modificar);
-
+            GuardarEnBitacora("Modificacion", codigoAplicacion, Login.usuarioSesion);
             JOptionPane.showMessageDialog(null, "Habitacion Modificada correctamente");
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.");
@@ -512,13 +547,13 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtBuscarKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-Habitaciones habitaciones_Eliminar = new Habitaciones();
+        Habitaciones habitaciones_Eliminar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
-        
+
         habitaciones_Eliminar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
         habitacionesDAO.delete(habitaciones_Eliminar);
+        GuardarEnBitacora("Eliminacion", codigoAplicacion, Login.usuarioSesion);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
-        
         tabla();
     }//GEN-LAST:event_jButton1ActionPerformed
 

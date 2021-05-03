@@ -210,7 +210,7 @@ public class BitacoraDao extends Conexion {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setString(1,  insertar.getId_Bitacora());
-            stmt.setString(2,  insertar.getId_Usuario());
+            stmt.setString(2,  insertar.getId_Usuario());System.out.println(insertar.getId_Usuario());
             stmt.setString(3,  insertar.getFecha());
             stmt.setString(4,   insertar.getHora());
              stmt.setString(5,  insertar.getHost());
