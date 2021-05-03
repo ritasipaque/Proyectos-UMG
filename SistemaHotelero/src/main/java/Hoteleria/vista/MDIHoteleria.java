@@ -31,6 +31,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private Mantenimiento_Huespedes formMantenimiento_Huespedes;
     private Mantenimiento_Pisos formMantenimiento_Pisos;
     private Asignaciones_Habitaciones fromHabitaciones;
+    private ReservaDeHabitacion fromReservaDeHabitacion;
     public static JLabel logo = new JLabel();
     /**
      * Creates new form MDIHoteleria
@@ -83,6 +84,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_procesos = new javax.swing.JMenu();
         submenu_procesos = new javax.swing.JMenu();
         entrega_de_habitacion_hc = new javax.swing.JMenuItem();
+        reserva_de_habitacion = new javax.swing.JMenuItem();
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
@@ -178,6 +180,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
             }
         });
         submenu_procesos.add(entrega_de_habitacion_hc);
+
+        reserva_de_habitacion.setText("Reserva de Habitacion");
+        reserva_de_habitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reserva_de_habitacionActionPerformed(evt);
+            }
+        });
+        submenu_procesos.add(reserva_de_habitacion);
 
         menu_procesos.add(submenu_procesos);
 
@@ -307,6 +317,17 @@ public class MDIHoteleria extends javax.swing.JFrame {
         logo.setVisible(false);
     }//GEN-LAST:event_entrega_de_habitacion_hcActionPerformed
 
+    private void reserva_de_habitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reserva_de_habitacionActionPerformed
+        fromReservaDeHabitacion = new ReservaDeHabitacion();
+        
+        jDesktopPane1.add(fromReservaDeHabitacion);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = fromReservaDeHabitacion.getSize();
+        fromReservaDeHabitacion.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        fromReservaDeHabitacion.setVisible(true);
+        logo.setVisible(false);
+    }//GEN-LAST:event_reserva_de_habitacionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -347,6 +368,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     public static javax.swing.JMenuItem mnt_huespedes;
     public static javax.swing.JMenuItem mnt_pisos;
     public static javax.swing.JMenuItem mnt_servicios;
+    private javax.swing.JMenuItem reserva_de_habitacion;
     public static javax.swing.JMenu submenu_mantenimientos;
     public static javax.swing.JMenu submenu_procesos;
     // End of variables declaration//GEN-END:variables
