@@ -226,6 +226,7 @@ public class Login extends javax.swing.JFrame {
                         case "Area Hoteleria":
                                 try {
                             usuarioHoteleria = txtUsuario.getText();
+                            UIManager.setLookAndFeel(new FlatLightLaf());
                             MDIHoteleria menuHoteleria = new MDIHoteleria();
                             menuHoteleria.setVisible(true);
                             this.dispose();
@@ -238,7 +239,6 @@ public class Login extends javax.swing.JFrame {
                                  try {
                             usuarioHoteleria = txtUsuario.getText();
                             MDIHoteleria menuHoteleria = new MDIHoteleria();
-                            UIManager.setLookAndFeel(new FlatLightLaf());
                             menuHoteleria.setVisible(true);
                             this.dispose();
                             } catch (Exception e) {
