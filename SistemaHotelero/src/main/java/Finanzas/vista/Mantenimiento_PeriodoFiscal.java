@@ -15,6 +15,8 @@ import java.util.Date;
 import java.sql.*;
 import java.text.ParseException;
 import javax.swing.JOptionPane;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 
 
@@ -25,6 +27,37 @@ import javax.swing.JOptionPane;
  */
 public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
 
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 1000;
+        var usuario = Login.usuarioFianzas;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
         
      public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -64,6 +97,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
     public Mantenimiento_PeriodoFiscal() {
         initComponents();
         llenadoDeTablas();
+        habilitarAcciones();
     }
 
     /**
@@ -83,16 +117,16 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         InicioDC = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
         FinDC = new com.toedter.calendar.JDateChooser();
-        BtnAgregar = new javax.swing.JButton();
-        BtnEliminar = new javax.swing.JButton();
-        BtnBuscar = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         RBPF1 = new javax.swing.JRadioButton();
         RBPF0 = new javax.swing.JRadioButton();
         RBPrueba = new javax.swing.JRadioButton();
-        BtnModificar = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setClosable(true);
@@ -147,24 +181,24 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        BtnAgregar.setText("Agregar");
-        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("Agregar");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAgregarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        BtnEliminar.setText("Eliminar");
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("Eliminar");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        BtnBuscar.setText("Buscar");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("Buscar");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -219,10 +253,10 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BtnModificar.setText("Modificar");
-        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("Modificar");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
@@ -246,13 +280,13 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BtnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -266,23 +300,23 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnAgregar)
-                    .addComponent(BtnEliminar)
-                    .addComponent(BtnBuscar)
-                    .addComponent(BtnModificar)
+                    .addComponent(BtnIng)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnBus)
+                    .addComponent(BtnMod)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnAgregar, BtnBuscar, BtnEliminar, BtnModificar});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BtnBus, BtnElim, BtnIng, BtnMod});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         PeriodoFiscal PFInsertar = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
         if (txtID.getText().length() != 0 && RBPF1.isSelected() || RBPF0.isSelected()) {
@@ -310,9 +344,9 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
             llenadoDeTablas();
         }
         llenadoDeTablas();
-    }//GEN-LAST:event_BtnAgregarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         PeriodoFiscal PFMod = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
         String Inicio = new SimpleDateFormat("dd/MM/yyyy").format(InicioDC.getDate());
@@ -332,9 +366,9 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         PFDAO.update(PFMod);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa");
         llenadoDeTablas();
-    }//GEN-LAST:event_BtnModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         PeriodoFiscal PFDel = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
 
@@ -351,9 +385,9 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
         }
         llenadoDeTablas();
         limpiar();
-    }//GEN-LAST:event_BtnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         PeriodoFiscal PFBuscar = new PeriodoFiscal();
         PeriodoFiscalDAO PFDAO = new PeriodoFiscalDAO();
         PFBuscar.setIDPerFis(Integer.parseInt(txtID.getText()));
@@ -388,7 +422,7 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Registro encontrado");
         }
         llenadoDeTablas();
-    }//GEN-LAST:event_BtnBuscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
@@ -409,10 +443,10 @@ public class Mantenimiento_PeriodoFiscal extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAgregar;
-    private javax.swing.JButton BtnBuscar;
-    private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton BtnModificar;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private com.toedter.calendar.JDateChooser FinDC;
     private com.toedter.calendar.JDateChooser InicioDC;
     private javax.swing.JRadioButton RBPF0;

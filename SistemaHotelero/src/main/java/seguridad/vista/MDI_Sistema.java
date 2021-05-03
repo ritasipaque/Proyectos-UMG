@@ -47,7 +47,7 @@ public class MDI_Sistema extends javax.swing.JFrame {
         var usuario = Login.usuarioSesion;
         var modulo = "Seguridad";
 
-        generarPermisos.getPermisos(modulo, usuario);
+        //generarPermisos.getPermisos(modulo, usuario);
     }
 
     /**

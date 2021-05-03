@@ -8,22 +8,28 @@ package Finanzas.vista;
 import Finanzas.datos.TipoPersonaDAO;
 import Finanzas.dominio.TipoPersona;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 
 /**
  *
  * @author Nay Ale
  */
 public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
-
+   int codigoAplicacion = 1007;
     /**
      * Creates new form Mantenimiento_TipoPersona
      */
     public Mantenimiento_TipoPersona() {
         initComponents();
-        llenadodetablas();
+        int codigoAplicacion = 1007; // numero de asignacion para perfiles para bitacora.
+        llenadodetablas();// metodo para el llenado de la tabla con los datos automaticamente
     }
          public void limpiar() {   //metodo de Limpiar automaticamente las cajas de textos 
         txt_CodigoTipoPersona.setText("");
@@ -64,11 +70,11 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_CodigoTipoPersona = new javax.swing.JTextField();
         txt_NombreTipoPersona = new javax.swing.JTextField();
-        Boton_Guardar = new javax.swing.JButton();
-        Boton_Modificar = new javax.swing.JButton();
-        Boton_Eliminar = new javax.swing.JButton();
-        Boton_Buscar = new javax.swing.JButton();
-        Boton_Ayuda = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
+        BtnAyu = new javax.swing.JButton();
         txt_Buscar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -91,48 +97,48 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nombre Tipo de Persona:");
 
-        Boton_Guardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Guardar.setText("Guardar");
-        Boton_Guardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnIng.setText("Guardar");
+        BtnIng.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_GuardarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        Boton_Modificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Modificar.setText("Modificar");
-        Boton_Modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Modificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnMod.setText("Modificar");
+        BtnMod.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_ModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        Boton_Eliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Eliminar.setText("Eliminar");
-        Boton_Eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnElim.setText("Eliminar");
+        BtnElim.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_EliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        Boton_Buscar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Buscar.setText("Buscar");
-        Boton_Buscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Buscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnBus.setText("Buscar");
+        BtnBus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_BuscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
-        Boton_Ayuda.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Ayuda.setText("Ayuda");
-        Boton_Ayuda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+        BtnAyu.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnAyu.setText("Ayuda");
+        BtnAyu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnAyu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_AyudaActionPerformed(evt);
+                BtnAyuActionPerformed(evt);
             }
         });
 
@@ -150,11 +156,11 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
                         .addGap(92, 92, 92))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(Boton_Buscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(Boton_Guardar, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                            .addComponent(BtnBus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnIng, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Boton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -164,9 +170,9 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
                             .addComponent(txt_CodigoTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(Boton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(Boton_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnAyu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -182,14 +188,14 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
                     .addComponent(txt_NombreTipoPersona, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton_Buscar)
+                    .addComponent(BtnBus)
                     .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton_Guardar)
-                    .addComponent(Boton_Modificar)
-                    .addComponent(Boton_Eliminar)
-                    .addComponent(Boton_Ayuda))
+                    .addComponent(BtnIng)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnAyu))
                 .addGap(17, 17, 17))
         );
 
@@ -245,49 +251,82 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         TipoPersona tipoPersonaInsertar = new TipoPersona();
         TipoPersonaDAO tipoPersonaDAO = new TipoPersonaDAO();
         // Prueba insert
         tipoPersonaInsertar.setCodigo_TipoPersona(txt_CodigoTipoPersona.getText());
         tipoPersonaInsertar.setTipoPersona_Nombres(txt_NombreTipoPersona.getText());
-        {
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoTipoPersona");
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("1007");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        }   catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_TipoPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
             JOptionPane.showMessageDialog(null, "Tipo Persona registrada Exitosamente"); 
             tipoPersonaDAO.insert(tipoPersonaInsertar);
             llenadodetablas(); 
             limpiar();
-        }                  
+                          
              
-    }//GEN-LAST:event_Boton_GuardarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void Boton_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         TipoPersonaDAO tipoPersonaDAO = new TipoPersonaDAO();
         TipoPersona tipoPersonaModificar = new TipoPersona();
         //MONEDA modificar
         tipoPersonaModificar.setCodigo_TipoPersona(txt_CodigoTipoPersona.getText());
         tipoPersonaModificar.setTipoPersona_Nombres(txt_NombreTipoPersona.getText());
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoTipoPersona");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1007");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        }   catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_TipoPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tipoPersonaDAO.update(tipoPersonaModificar);
         JOptionPane.showMessageDialog(null, "Tipo Persona Modificada Exitosamente");
         llenadodetablas();
         limpiar();
-    }//GEN-LAST:event_Boton_ModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void Boton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_EliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         TipoPersona tipoPersonaEliminar = new TipoPersona();
         TipoPersonaDAO tipoPersonaDAO = new TipoPersonaDAO();
         //Prueba delete
         tipoPersonaEliminar.setCodigo_TipoPersona(txt_CodigoTipoPersona.getText());
+        //bitacora
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("MantenimientoTipoPersona");
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1007");
+        try{
+            BitacoraDAO.insert(AInsertar);   
+        }   catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_TipoPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tipoPersonaDAO.delete(tipoPersonaEliminar);
         JOptionPane.showMessageDialog(null, "Tipo Persona Eliminada.");
         llenadodetablas();
         limpiar();
-    }//GEN-LAST:event_Boton_EliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void Boton_BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_BuscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         buscarTipoPersona();    //metodo que busca Tipo Persona ingresada en la base de datos
-    }//GEN-LAST:event_Boton_BuscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void Boton_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AyudaActionPerformed
+    private void BtnAyuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyuActionPerformed
         /// metodo para ejecutar la ayuda que es una guia para el mantenimiento Tipo Persona
           try {
             if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoTipoPersona.chm")).exists()) {
@@ -302,15 +341,15 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }    
-    }//GEN-LAST:event_Boton_AyudaActionPerformed
+    }//GEN-LAST:event_BtnAyuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_Ayuda;
-    private javax.swing.JButton Boton_Buscar;
-    private javax.swing.JButton Boton_Eliminar;
-    private javax.swing.JButton Boton_Guardar;
-    private javax.swing.JButton Boton_Modificar;
+    private javax.swing.JButton BtnAyu;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JTable Tabla_TipoPersona;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

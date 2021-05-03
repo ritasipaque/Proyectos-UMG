@@ -6,19 +6,24 @@
 package seguridad.vista;
 
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.Objects;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Usuario;
 import seguridad.datos.UsuarioDAO;
 import seguridad.datos.Hash;
 import static seguridad.datos.Hash.getHash;
+import seguridad.dominio.Bitacora;
 
 /**
  *
@@ -93,7 +98,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
 
     public Mantenimiento_Usuario() {
         initComponents();
-        habilitarAcciones();
+       // habilitarAcciones();
         llenadoDeTablas();
     }
 
@@ -405,13 +410,25 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     Date date = new Date();
     DateFormat fechaHora = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        
+        AInsertar.setId_Usuario("Usuario");
+        AInsertar.setAccion("Buscar");
+        AInsertar.setCodigoAplicacion("10");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         Usuario usuarioBuscar = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         String ID = txtID.getText();
         int IntID = Integer.parseInt(ID);
         usuarioBuscar.setId_usuario(IntID);
 
-        usuarioBuscar = usuarioDAO.query(usuarioBuscar);
+        usuarioBuscar = usuarioDAO.query2(usuarioBuscar);
 
         txtID.setText(String.valueOf(usuarioBuscar.getId_usuario()));
         txtNom.setText(String.valueOf(usuarioBuscar.getNombre_usuario()));
@@ -439,6 +456,18 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnBusActionPerformed
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        
+        AInsertar.setId_Usuario("Usuario");
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("10");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         Usuario usuarioEliminar = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
 
@@ -452,6 +481,18 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        
+        AInsertar.setId_Usuario("Usuario");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("10");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         Usuario usuarioMod = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         String ID = txtID.getText();
@@ -484,7 +525,17 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnModActionPerformed
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
-
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        
+        AInsertar.setId_Usuario("Usuario");
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("10");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Usuario usuarioInsertar = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
 

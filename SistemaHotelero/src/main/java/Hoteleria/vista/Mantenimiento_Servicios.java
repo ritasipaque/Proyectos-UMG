@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
 
 /**
@@ -28,12 +29,44 @@ import seguridad.vista.Login;
 public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
-    String codigoAplicacion="2200";
+    String codigoAplicacion="2006";
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2006;
+        var usuario = Login.usuarioHoteleria;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
     /**
      * Creates new form Mantenimiento_Servicios
      */
     public Mantenimiento_Servicios() {
         initComponents();
+        habilitarAcciones();
         aux_tipo.setVisible(false);
         aux_estado.setVisible(false);
         actualizartabla();
