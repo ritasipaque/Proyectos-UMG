@@ -88,7 +88,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
+        cerrar_sesion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,14 +205,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
         menu_ayuda.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jMenuBar1.add(menu_ayuda);
 
-        jMenu1.setText("Cerrar Sesión");
-        jMenu1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        cerrar_sesion.setText("Cerrar Sesión");
+        cerrar_sesion.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cerrar_sesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                cerrar_sesionMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(cerrar_sesion);
 
         setJMenuBar(jMenuBar1);
 
@@ -298,13 +298,13 @@ public class MDIHoteleria extends javax.swing.JFrame {
         logo.setVisible(false);
     }//GEN-LAST:event_mnt_pisosActionPerformed
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    private void cerrar_sesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrar_sesionMouseClicked
         int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
 
         if (respuesta_cs == 0) {
             this.dispose();
         }
-    }//GEN-LAST:event_jMenu1MouseClicked
+    }//GEN-LAST:event_cerrar_sesionMouseClicked
 
     private void entrega_de_habitacion_hcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrega_de_habitacion_hcActionPerformed
         fromHabitaciones = new Asignaciones_Habitaciones();
@@ -352,9 +352,9 @@ public class MDIHoteleria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JMenu cerrar_sesion;
     private javax.swing.JMenuItem entrega_de_habitacion_hc;
     public static javax.swing.JDesktopPane jDesktopPane1;
-    public static javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JMenu menu_archivo;
     public static javax.swing.JMenu menu_ayuda;
