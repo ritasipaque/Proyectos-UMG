@@ -27,7 +27,7 @@ public class TransaccionBancariaDAO {
     private static final String sql_delete = "DELETE FROM TransaccionBancaria WHERE Codigo_Transaccion=?";
     private static final String sql_query = "SELECT Codigo_Transaccion, Fecha_Transaccion, Beneficiario,Cuenta_Bancaria,Tipo_Transaccion,Monto_Transaccion,Concepto_Transaccion  FROM TransaccionBancaria WHERE Codigo_Transaccion=?";
 
-    public List<TransaccionBancaria> select() throws SQLException {
+    public List<TransaccionBancaria> listar(){
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -81,12 +81,12 @@ public class TransaccionBancariaDAO {
             con = Conexion.getConnection();
             stmt = con.prepareStatement(sql_insert);
             stmt.setString(1, tipo.getCodigo_Transaccion());
-            stmt.setString(2, tipo.getBeneficiario());
-            stmt.setString(3, tipo.getConcepto_Transaccion());
+            stmt.setString(2, tipo.getFecha_Transaccion());
+            stmt.setString(3, tipo.getBeneficiario());
             stmt.setString(4, tipo.getCuenta_Bancaria());
-            stmt.setString(5, tipo.getFecha_Transaccion());
+            stmt.setString(5, tipo.getTipo_Transaccion());
             stmt.setString(6, tipo.getMonto_Transaccion());
-            stmt.setString(7, tipo.getTipo_Transaccion());
+            stmt.setString(7, tipo.getConcepto_Transaccion());
 
 
             rows = stmt.executeUpdate();
