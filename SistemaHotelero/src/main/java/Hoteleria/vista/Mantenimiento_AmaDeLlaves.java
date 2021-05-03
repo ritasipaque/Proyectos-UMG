@@ -26,6 +26,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 /**
  *
@@ -38,11 +40,44 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
 
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2001;
+        var usuario = Login.usuarioHoteleria;
+
+        btnAgregar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnBuscar.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            btnAgregar.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            btnBuscar.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            btnModificar.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            btnEliminar.setEnabled(true);
+        }
+    }
+    
     /**
      * Creates new form MantenimientoAplicacion
      */
     public Mantenimiento_AmaDeLlaves() {
         initComponents();
+        habilitarAcciones();
         cargarCombobox.query2(cbxPiso);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
