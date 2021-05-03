@@ -192,6 +192,24 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("MANTENIMIENTO DE SERVICIOS:");
         setVisible(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameDeactivated(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("DATOS DEL SERVICIO:"));
 
@@ -540,6 +558,14 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameDeactivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
