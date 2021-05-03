@@ -7,8 +7,16 @@ package Finanzas.vista;
 
 import Finanzas.dominio.ClasificacionCuenta;
 import java.io.File;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.Mantenimiento_Perfil;
 
 /**
  *
@@ -22,6 +30,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
     public FrmMantClasificacionCuentas() {
         initComponents();
         cargarTabla();
+        habilitarAcciones();
     }
 
     /**
@@ -40,10 +49,10 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JTxtCodigo = new javax.swing.JTextField();
         JTxtClasificacion = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        JBtnIngresar = new javax.swing.JButton();
-        JBtnModificar = new javax.swing.JButton();
-        JBtnEliminar = new javax.swing.JButton();
-        JBtnBuscar = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         JBtnAyuda = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTxtDescripcion = new javax.swing.JTextArea();
@@ -64,35 +73,35 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        JBtnIngresar.setText("Ingresar");
-        JBtnIngresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        JBtnIngresar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("Ingresar");
+        BtnIng.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnIngresarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        JBtnModificar.setText("Modificar");
-        JBtnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        JBtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("Modificar");
+        BtnMod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        JBtnEliminar.setText("Eliminar");
-        JBtnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        JBtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("Eliminar");
+        BtnElim.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        JBtnBuscar.setText("Buscar");
-        JBtnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        JBtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("Buscar");
+        BtnBus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBtnBuscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -109,13 +118,13 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JBtnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JBtnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JBtnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JBtnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JBtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(8, Short.MAX_VALUE))
@@ -125,10 +134,10 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JBtnIngresar)
-                    .addComponent(JBtnEliminar)
-                    .addComponent(JBtnModificar)
-                    .addComponent(JBtnBuscar)
+                    .addComponent(BtnIng)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnBus)
                     .addComponent(JBtnAyuda))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -213,6 +222,38 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 1000;
+        var usuario = Login.usuarioFianzas;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
+
     private void cargarTabla() {
 
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
@@ -241,7 +282,10 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         }
     }
 
-    private void JBtnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnIngresarActionPerformed
+    BitacoraDao BitacoraDAO = new BitacoraDao();
+    Bitacora AInsertar = new Bitacora();
+
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
 
         var codigoClasificacion = JTxtCodigo.getText();
@@ -253,16 +297,25 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Insertar(objClasificarCuenta);
-
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
         JTxtCodigo.setText("");
         JTxtClasificacion.setText("");
         JTxtDescripcion.setText("");
         JTxtCodigo.requestFocus();
 
-    }//GEN-LAST:event_JBtnIngresarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void JBtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnBuscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
 
         var codigoClasificacion = JTxtCodigo.getText();
@@ -274,12 +327,22 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JTxtCodigo.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[0]);
         JTxtClasificacion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[1]);
         JTxtDescripcion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[2]);
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Búsqueda");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
 
 
-    }//GEN-LAST:event_JBtnBuscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void JBtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
 
         var codigoClasificacion = JTxtCodigo.getText();
@@ -291,10 +354,20 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Actualizar(objClasificarCuenta);
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Actualizar");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
-    }//GEN-LAST:event_JBtnModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void JBtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
 
         var codigoClasificacion = JTxtCodigo.getText();
@@ -302,8 +375,18 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
 
         objClasificarCuenta.Eliminar(objClasificarCuenta);
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
-    }//GEN-LAST:event_JBtnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
     private void JBtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBtnAyudaActionPerformed
         try {
@@ -323,11 +406,11 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JButton JBtnAyuda;
-    private javax.swing.JButton JBtnBuscar;
-    private javax.swing.JButton JBtnEliminar;
-    private javax.swing.JButton JBtnIngresar;
-    private javax.swing.JButton JBtnModificar;
     private javax.swing.JTable JTableClasificacion;
     private javax.swing.JTextField JTxtClasificacion;
     private javax.swing.JTextField JTxtCodigo;
