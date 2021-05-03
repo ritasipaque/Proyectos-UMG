@@ -218,7 +218,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
 
     void habilitarAcciones() {
 
-        var codigoAplicacion = 1003;
+        var codigoAplicacion = 1000;
         var usuario = Login.usuarioFianzas;
 
         BtnIng.setEnabled(false);
