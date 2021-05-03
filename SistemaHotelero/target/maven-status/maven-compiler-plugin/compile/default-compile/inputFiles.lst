@@ -11,7 +11,6 @@ C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Comercial\vista
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\dominio\PeriodoFiscal.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\datos\Hash.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_usuario_Perfil1.java
-C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\CambioC.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\dominio\Asignacion_Usuario_Perfil.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Usuario.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\dominio\Servicios.java
@@ -25,7 +24,6 @@ C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\datos
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\Mantenimiento_Huespedes.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\Mantenimiento_Pisos.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\datos\ModulosDAO.java
-C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\Login.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Aplicacion_UsuarioDAO.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\LoginMDI.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\FrmMantClasificacionCuentas.java
@@ -54,6 +52,7 @@ C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Comercial\vista
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\datos\EmisionChequeDAO.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\datos\PermisosDAO.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\TransaccionBancaria.java
+C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\MetodoDePago.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\datos\ServiciosDAO.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista\MDI_Sistema.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\FrmNuevoEncabezadoAsiento.java
@@ -62,12 +61,14 @@ C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\dominio\Bitacora.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\datos\Modulo_guia.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\reportes\Modulo_guia.java
+C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\Asignaciones_Habitaciones.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\datos\Conexion.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\dominio\Usuario.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Comercial\dominio\Bitacora.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista\GenerarPermisos.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\dominio\TransaccionBancaria.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\datos\Conexion.java
+C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\ReservaDeHabitacion.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\datos\Asignacion_Aplicacion_PerfilDAO.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista\Mantenimiento_Perfil.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\dominio\EmisionCheque.java
@@ -89,7 +90,6 @@ C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\domin
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\dominio\TipoPersona.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\dominio\AmaDeLlaves.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\seguridad\vista\Asignacion_de_aplicacion_a_usuario.java
-C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Hoteleria\vista\Login.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\FrmCuentaBancaria.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\datos\ClasificacionCuentaDAO.java
 C:\Users\leone\Desktop\HOTEL BUENO\SistemaHotelero\src\main\java\Finanzas\vista\Mantenimiento_TipoAsiento.java

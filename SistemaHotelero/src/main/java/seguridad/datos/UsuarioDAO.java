@@ -24,6 +24,7 @@ public class UsuarioDAO extends Conexion {
     private static final String SQL_UPDATE = "UPDATE tbl_usuario SET PK_id_usuario=?, nombre_usuario=?, apellido_usuario=?, username_usuario=?, password_usuario=?, correo_usuario=?, cambio_password=?, estado_usuario=?, ultima_conexion=? WHERE PK_id_usuario = ?";
     private static final String SQL_DELETE = "DELETE FROM tbl_usuario WHERE PK_id_usuario=?";
     private static final String SQL_QUERY = "SELECT PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuario, cambio_password, estado_usuario, ultima_conexion FROM tbl_usuario WHERE username_usuario = ?";
+    private static final String SQL_QUERY2 = "SELECT PK_id_usuario, nombre_usuario, apellido_usuario, username_usuario, password_usuario, correo_usuario, cambio_password, estado_usuario, ultima_conexion FROM tbl_usuario WHERE PK_id_usuario = ?";
 
     Conexion conectar = new Conexion();
     Connection conn = null;
@@ -88,6 +89,54 @@ public class UsuarioDAO extends Conexion {
             //System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
             stmt.setString(1, usuario.getUser_usuario());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id_usuario = rs.getInt("PK_id_usuario");
+                String nombre_usuario = rs.getString("nombre_usuario");
+                String apellido_usuario = rs.getString("apellido_usuario");
+                String user_usuario = rs.getString("username_usuario");
+                String password_usuario = rs.getString("password_usuario");
+                String correo_usuario = rs.getString("correo_usuario");
+                int cambio_contrasena = rs.getInt("cambio_password");
+                int estado_usuario = rs.getInt("estado_usuario");
+                String ultima_conexion = rs.getString("ultima_conexion");
+
+                usuario = new Usuario();
+                usuario.setId_usuario(id_usuario);
+                usuario.setNombre_usuario(nombre_usuario);
+                usuario.setApellido_usuario(apellido_usuario);
+                usuario.setUser_usuario(user_usuario);
+                usuario.setPassword_usuario(password_usuario);
+                usuario.setCorreo_usuario(correo_usuario);
+                usuario.setCambio_password(cambio_contrasena);
+                usuario.setEstado_usuario(estado_usuario);
+                usuario.setUltima_conexion(ultima_conexion);
+
+                rows++;
+            }
+            //System.out.println("Registros buscado:" + usuario);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return usuario;
+    }
+    
+    public Usuario query2(Usuario usuario) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY2);
+            stmt.setInt(1, usuario.getId_usuario());
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int id_usuario = rs.getInt("PK_id_usuario");

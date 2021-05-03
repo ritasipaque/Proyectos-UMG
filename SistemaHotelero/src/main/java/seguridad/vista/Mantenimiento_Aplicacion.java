@@ -419,7 +419,7 @@ public class Mantenimiento_Aplicacion extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario("Aplicacion");
         AInsertar.setAccion("Modificación");
         AInsertar.setCodigoAplicacion(String.valueOf(codigoAplicacion));
-
+            
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
