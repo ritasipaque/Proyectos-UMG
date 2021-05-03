@@ -39,11 +39,11 @@ public class MDIHoteleria extends javax.swing.JFrame {
     public MDIHoteleria() throws UnknownHostException {
         initComponents();
         logo(0);
-        this.setTitle("Usuario: " + "[" + Login.usuarioSesion + "]" + " \t" + "IP: [" + LoginMDI.getIp() + "]");
+        this.setTitle("Usuario: " + "[" + Login.usuarioHoteleria + "]" + " \t" + "IP: [" + LoginMDI.getIp() + "]");
 
         GenerarPermisos generarPermisos = new GenerarPermisos();
-        var usuario = Login.usuarioSesion;
-        var modulo = "Hoteleria";
+        var usuario = Login.usuarioHoteleria;
+        var modulo = "Hotelero";
         generarPermisos.getPermisos(modulo, usuario);
     }
     public void logo(int activar){
