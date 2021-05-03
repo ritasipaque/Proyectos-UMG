@@ -129,18 +129,20 @@ public class GenerarPermisos {
                 MDIHoteleria.menu_procesos.setVisible(false);
                 MDIHoteleria.jMenu1.setVisible(true);
                 ejecutarPermisos.ejecutarBusqueda(usuario);
-                System.out.println(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
                     System.out.println(varApp);
                     if (varApp >= 2001 && varApp <= 2200) {
                         MDIHoteleria.menu_catalogos.setVisible(true);
+                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
                         switch (varApp) {
-                            case 2001:
-                            case 2100:
-                            case 2200:
-                                MDIHoteleria.submenu_mantenimientos.setVisible(true);
-                                break;
+                            case 2001:MDIHoteleria.mnt_amadellaves.setVisible(true);break;
+                            case 2002:MDIHoteleria.mnt_formasdepago.setVisible(true);break;
+                            case 2003:MDIHoteleria.mnt_habitaciones.setVisible(true);break;
+                            case 2004:MDIHoteleria.mnt_huespedes.setVisible(true);break;
+                            case 2005:MDIHoteleria.mnt_pisos.setVisible(true);break;
+                            case 2006:MDIHoteleria.mnt_servicios.setVisible(true);break;
+                            default:    
                         }
                     }
                     if (varApp >= 2201 && varApp <= 2400) {
