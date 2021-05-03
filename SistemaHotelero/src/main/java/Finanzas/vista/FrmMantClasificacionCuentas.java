@@ -7,10 +7,16 @@ package Finanzas.vista;
 
 import Finanzas.dominio.ClasificacionCuenta;
 import java.io.File;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
+import seguridad.vista.Mantenimiento_Perfil;
 
 /**
  *
@@ -247,7 +253,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
             BtnElim.setEnabled(true);
         }
     }
-    
+
     private void cargarTabla() {
 
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
@@ -276,6 +282,9 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         }
     }
 
+    BitacoraDao BitacoraDAO = new BitacoraDao();
+    Bitacora AInsertar = new Bitacora();
+
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         ClasificacionCuenta objClasificarCuenta = new ClasificacionCuenta();
 
@@ -288,7 +297,16 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Insertar(objClasificarCuenta);
-
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Insertar");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
         JTxtCodigo.setText("");
         JTxtClasificacion.setText("");
@@ -309,6 +327,16 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JTxtCodigo.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[0]);
         JTxtClasificacion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[1]);
         JTxtDescripcion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[2]);
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Búsqueda");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
 
 
@@ -326,6 +354,16 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Actualizar(objClasificarCuenta);
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Actualizar");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
     }//GEN-LAST:event_BtnModActionPerformed
 
@@ -337,6 +375,16 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
 
         objClasificarCuenta.Eliminar(objClasificarCuenta);
+        
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         cargarTabla();
     }//GEN-LAST:event_BtnElimActionPerformed
 
