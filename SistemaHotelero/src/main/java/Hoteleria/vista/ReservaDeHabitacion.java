@@ -5,10 +5,12 @@ package Hoteleria.vista;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 import Hoteleria.datos.HabitacionesDAO;
+import Hoteleria.datos.HuespedesDAO;
+import Hoteleria.datos.ReservacionDAO;
 import Hoteleria.dominio.Habitaciones;
+import Hoteleria.dominio.Huespedes;
+import Hoteleria.dominio.Reservacion;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,31 +24,34 @@ import javax.swing.table.DefaultTableModel;
  * @author leone
  */
 public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
-    DefaultTableModel modelo1; 
-    String dia_entrada, mes_entrada;
-    String dia_salida, mes_salida;
-    String dia_actual, mes_actual;
+
+    DefaultTableModel modelo1;
+    String dia_entrada, mes_entrada, año_entrada;
+    String dia_salida, mes_salida, año_salida;
     int tot_dias, tot_mes;
-    String fechasreservada_inicio[]=new String [3], fechareservada_final[]=new String[3];
-    
+    String fechasreservada_inicio[] = new String[3], fechareservada_final[] = new String[3];
+    int meses[]={31,28,31,30,31,30,31,31,30,31,30,31};
+
     /**
      * Creates new form ProcesoReservaDeHS
      */
     public ReservaDeHabitacion() {
         initComponents();
         cargar_habitaciones();
-       // imprimir_reservaciones();
+        imprimir_reservaciones();
         fecha_actual();
     }
-    public void cargar_habitaciones(){
+
+    public void cargar_habitaciones() {
         HabitacionesDAO personaDAO = new HabitacionesDAO();
         List<Habitaciones> habitaciones = personaDAO.select();
         for (Habitaciones habitacion : habitaciones) {
             c_habitaciones.addItem(String.valueOf(habitacion.getId_Habitaciones()));
         }
     }
-    /*public void imprimir_reservaciones(){
-        modelo1=new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
+
+    public void imprimir_reservaciones() {
+        modelo1 = new DefaultTableModel();   //ASIGNAMOS UN NUEVO DEFAULTABLEMODEL AL OBJETO MODELO1
         modelo1.addColumn("No. Reservación");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
         modelo1.addColumn("DPI Cliente");
         modelo1.addColumn("ID Trabajador");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
@@ -55,23 +60,24 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         modelo1.addColumn("Fecha de Entrada");
         modelo1.addColumn("Fecha de Salida");
         tabla1.setModel(modelo1);
-        String datos[]= new String[7];
+        String datos[] = new String[7];
         ReservacionDAO reservaciondao = new ReservacionDAO();
         List<Reservacion> reservacion = reservaciondao.select();
-        for (Reservacion reservar : reservacion){
-            
-            datos[0]=reservar.getId_reservacion();
-            datos[1]=reservar.getDpi();
-            datos[2]=reservar.getId_trabajador();
-            datos[3]=reservar.getId_habitacion();
-            datos[4]=reservar.getF_reserva();
-            datos[5]=reservar.getDesde();
-            datos[6]=reservar.getHasta();
+        for (Reservacion reservar : reservacion) {
+
+            datos[0] = reservar.getId_reservacion();
+            datos[1] = reservar.getDpi();
+            datos[2] = reservar.getId_trabajador();
+            datos[3] = reservar.getId_habitacion();
+            datos[4] = reservar.getF_reserva();
+            datos[5] = reservar.getDesde();
+            datos[6] = reservar.getHasta();
             modelo1.addRow(datos);
             tabla1.setModel(modelo1);
         }
-    }*/
-    public void limpiar(){
+    }
+
+    public void limpiar() {
         txt_dpi.setText("");
         txt_nombre_cliente.setText("");
         txt_nit.setText("");
@@ -81,11 +87,13 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_totalpago.setText("");
         txt_precio.setText("");
     }
-    public void fecha_actual(){
+
+    public void fecha_actual() {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         fecha_actual.setDate(date);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -103,7 +111,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_dpi = new javax.swing.JTextField();
-        btn_DatosCliente = new javax.swing.JButton();
+        btnBus = new javax.swing.JButton();
         txt_nombre_cliente = new javax.swing.JTextField();
         txt_apellido_cliente = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
@@ -116,10 +124,8 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnIns = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txt_totalpago = new javax.swing.JTextField();
@@ -130,7 +136,6 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(255, 153, 153));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
@@ -138,7 +143,6 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         setTitle("Reservación de Habitación o Salón");
         setVisible(true);
 
-        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
         jPanel1.setForeground(new java.awt.Color(240, 240, 240));
 
         jLabel1.setText("Fecha:");
@@ -155,10 +159,10 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
         txt_dpi.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        btn_DatosCliente.setText("CARGAR");
-        btn_DatosCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnBus.setText("CARGAR");
+        btnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_DatosClienteActionPerformed(evt);
+                btnBusActionPerformed(evt);
             }
         });
 
@@ -169,6 +173,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_apellido_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         txt_telefono.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_telefono.setEnabled(false);
 
         txt_correo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
@@ -195,10 +200,6 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_precio.setEditable(false);
         txt_precio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jLabel12.setText("Metodo de Pago:");
-
-        jButton4.setText("CARGAR METODOS DE PAGO");
-
         jButton5.setText("CANCELAR");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +207,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton6.setText("GUARDAR");
+        btnIns.setText("GUARDAR");
 
         jButton7.setText("AYUDA");
 
@@ -243,7 +244,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txt_dpi, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btn_DatosCliente))
+                                        .addComponent(btnBus))
                                     .addComponent(txt_nombre_cliente)
                                     .addComponent(txt_apellido_cliente)
                                     .addComponent(txt_telefono)
@@ -283,13 +284,9 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton7)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton6)
+                        .addComponent(btnIns)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(30, 30, 30)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton5)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -302,7 +299,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel6)
                         .addComponent(txt_dpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_DatosCliente)))
+                        .addComponent(btnBus)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -340,14 +337,10 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                     .addComponent(txt_totalpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
-                    .addComponent(jButton6)
+                    .addComponent(btnIns)
                     .addComponent(jButton7))
                 .addContainerGap())
         );
@@ -379,132 +372,166 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_DatosClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DatosClienteActionPerformed
+    private void btnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusActionPerformed
+        HuespedesDAO huespedesdao = new HuespedesDAO();
+        Huespedes buscarmetodo = new Huespedes();
 
-    }//GEN-LAST:event_btn_DatosClienteActionPerformed
+        buscarmetodo.setCodigo(txt_dpi.getText());
+        buscarmetodo = huespedesdao.query(buscarmetodo);
+        txt_nombre_cliente.setText(buscarmetodo.getNombre());
+        txt_apellido_cliente.setText(buscarmetodo.getApellido());
+        txt_nit.setText(buscarmetodo.getNit());
+        txt_telefono.setText(buscarmetodo.getTelefono());
+
+    }//GEN-LAST:event_btnBusActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-   /* int c=0, sd_entrada=0, sm_entrada=0, sd_salida=0, sm_salida=0, d1, m1, d2, m2, cantidad_dias=0, totalpago=0;
-    String newparra;
-    String fechaentrada = new SimpleDateFormat("dd/MM/yyyy").format(fecha_entrada.getDate());
-    String fechasalida = new SimpleDateFormat("dd/MM/yyyy").format(fecha_salida.getDate());
-    dia_entrada = fechaentrada.split("/")[0];mes_entrada = fechaentrada.split("/")[1];
-    dia_salida = fechasalida.split("/")[0];mes_salida = fechasalida.split("/")[1];
-    sd_entrada=Integer.parseInt(dia_entrada);sm_entrada=Integer.parseInt(mes_entrada);
-    sd_salida=Integer.parseInt(dia_salida);sm_salida=Integer.parseInt(mes_salida);
-    
-    boolean reservado=false, ciclo=false;
-        
+        int c = 0, sd_entrada = 0, sm_entrada = 0, sd_salida = 0, sm_salida = 0, d1, m1, d2, m2, cantidad_dias = 0, totalpago = 0,auxsm;
+        String newparra;
+        String fechaentrada = new SimpleDateFormat("dd/MM/yyyy").format(fecha_entrada.getDate());
+        String fechasalida = new SimpleDateFormat("dd/MM/yyyy").format(fecha_salida.getDate());
+        dia_entrada = fechaentrada.split("/")[0];
+        mes_entrada = fechaentrada.split("/")[1];
+        año_entrada = fechaentrada.split("/")[2];
+        dia_salida = fechasalida.split("/")[0];
+        mes_salida = fechasalida.split("/")[1];
+        año_salida = fechasalida.split("/")[2];
+        sd_entrada = Integer.parseInt(dia_entrada);
+        sm_entrada = Integer.parseInt(mes_entrada);
+        sd_salida = Integer.parseInt(dia_salida);
+        sm_salida = Integer.parseInt(mes_salida);
+
+        boolean reservado = false, ciclo = false;
+
         HabitacionesDAO habitacionesdao = new HabitacionesDAO();
         Habitaciones consultarhabitacion = new Habitaciones();
-        consultarhabitacion.setId(c_habitaciones.getSelectedItem().toString());
+        consultarhabitacion.setId_Habitaciones(Integer.parseInt(c_habitaciones.getSelectedItem().toString()));
         consultarhabitacion = habitacionesdao.query(consultarhabitacion);
-        
-       ReservacionDAO reservaciondao = new ReservacionDAO();
+
+        ReservacionDAO reservaciondao = new ReservacionDAO();
         List<Reservacion> reservacion = reservaciondao.select();
         for (Reservacion reservar : reservacion) {
             if (c_habitaciones.getSelectedItem().toString().equals(reservar.getId_habitacion())) {
-                StringTokenizer st = new StringTokenizer(reservar.getDesde(),"-");int a=0;
-                newparra="";
-                    while (st.hasMoreTokens()) {
-                        newparra = st.nextToken() ;
-                        fechasreservada_inicio[a]=newparra;
-                        a++;
-                    }
-                StringTokenizer st2 = new StringTokenizer(reservar.getHasta(),"-");int b=0;
-                    while (st2.hasMoreTokens()) {
-                        newparra = st2.nextToken() ;
-                        fechareservada_final[b]=newparra;
-                        b++;
-                    }
-                    
-                    d1=Integer.parseInt(fechasreservada_inicio[2]);m1=Integer.parseInt(fechasreservada_inicio[1]);
-                    d2=Integer.parseInt(fechareservada_final[2]);m2=Integer.parseInt(fechareservada_final[1]);
+                StringTokenizer st = new StringTokenizer(reservar.getDesde(), "-");
+                int a = 0;
+                newparra = "";
+                while (st.hasMoreTokens()) {
+                    newparra = st.nextToken();
+                    fechasreservada_inicio[a] = newparra;
+                    a++;
+                }
+                StringTokenizer st2 = new StringTokenizer(reservar.getHasta(), "-");
+                int b = 0;
+                while (st2.hasMoreTokens()) {
+                    newparra = st2.nextToken();
+                    fechareservada_final[b] = newparra;
+                    b++;
+                }
 
-                    //SE CAPTURAN EL DIA Y MES DE LAS FECHAS SOLICITADAS
-                   
+                d1 = Integer.parseInt(fechasreservada_inicio[2]);
+                m1 = Integer.parseInt(fechasreservada_inicio[1]);
+                d2 = Integer.parseInt(fechareservada_final[2]);
+                m2 = Integer.parseInt(fechareservada_final[1]);
 
-                    if (sm_entrada==sm_salida) {
-                        for (int i = sd_entrada; i <= sd_salida; i++) {
-                            if (i==d1||i==d2) {
-                                reservado=true;
-                            }
-                        }
-                    }else if(sm_salida>sm_entrada){
-                        for (int i = sm_entrada; i < sm_salida; i++) {
-                            if (ciclo=false) {
-                                for (int j = sd_entrada; j <= 31; j++) {
-                                    if (sm_entrada==m1) {
-                                        reservado=true;
-                                    }
-                                }
-                            }else if(i>=m1&&i<m2){
-                                reservado=true;
-                            }else if(i==m2){
-                                for (int j = 0; j <= d2; j++) {
-                                    if (j==d2) {
-                                        reservado=true;
-                                    }
-                                }
-                            }
-                            ciclo=true;
+                //SE CAPTURAN EL DIA Y MES DE LAS FECHAS SOLICITADAS
+                if (sm_entrada == sm_salida) {
+                    for (int i = sd_entrada; i <= sd_salida; i++) {
+                        if (i == d1 || i == d2) {
+                            reservado = true;
                         }
                     }
-                    
+                } else if (sm_salida > sm_entrada) {
+                    for (int i = sm_entrada; i < sm_salida; i++) {
+                        if (ciclo = false) {
+                            for (int j = sd_entrada; j <= 31; j++) {
+                                if (sm_entrada == m1) {
+                                    reservado = true;
+                                }
+                            }
+                        } else if (i >= m1 && i < m2) {
+                            reservado = true;
+                        } else if (i == m2) {
+                            for (int j = 0; j <= d2; j++) {
+                                if (j == d2) {
+                                    reservado = true;
+                                }
+                            }
+                        }
+                        ciclo = true;
+                    }
+                }
+
             }
         }
-        
-        if (reservado==false) {
-            cantidad_dias=0;
-        if (sm_entrada==sm_salida) {
-            for (int i = sd_entrada; i < sd_salida; i++) {
-                cantidad_dias++;
+        cantidad_dias=0;
+        if (Integer.parseInt(año_salida)==Integer.parseInt(año_entrada)) {
+            
+            if (sm_entrada == sm_salida) {
+                    if (sd_entrada<sd_salida) {
+                        for (int i = sd_entrada; i < sd_salida; i++) {
+                        cantidad_dias++;
+                    }
+                }else {
+                        JOptionPane.showMessageDialog(null, "Fecha de reservación invalida, no puede reservar dias ya cumplidos");
+                    }
             }
+            
+            if (sm_salida > sm_entrada) {
+            }
+                for (int i = sm_entrada; i < sm_salida; i++) {
+                    for (int j = 0; j < meses[sm_salida]; j++) {
+                        cantidad_dias++;
+                    }
+                }
+                for (int i = 0; i < sd_salida; i++) {
+                    cantidad_dias++;
+                }
+                System.out.println(cantidad_dias++);
+            
+        }else if(Integer.parseInt(año_salida)<Integer.parseInt(año_entrada)){
+            
+            JOptionPane.showMessageDialog(null, "Fechas de reservación invalida, no puede reservar dias ya cumplidos");
+            btnIns.setEnabled(false);reservado=true;
+            
+        }else if(Integer.parseInt(año_salida)>Integer.parseInt(año_entrada)){
+            
+            /*if (sm_salida > sm_entrada) {
+                for (int i = sd_entrada; i < 31; i++) {
+                    cantidad_dias++;
+                }
+                for (int i = 0; i < sd_salida; i++) {
+                    cantidad_dias++;
+                }
+            }*/
+            
+            
         }
-        if (sm_salida>sm_entrada) {
-            for (int i = sd_entrada; i < 31; i++) {
-                cantidad_dias++;
-            }
-            for (int i = 0; i < sd_salida; i++) {
-                cantidad_dias++;
-            }
-        }
-        txt_precio.setText(consultarhabitacion.getPrecio());
-        totalpago=cantidad_dias*Integer.parseInt(consultarhabitacion.getPrecio());
-        txt_totalpago.setText(String.valueOf(totalpago));
-            JOptionPane.showMessageDialog(null,"Habitación disponible");
-        }else{
-            JOptionPane.showMessageDialog(null,"Habitación reservada, por favor eligir otra habitación");
-            txt_precio.setText("");txt_totalpago.setText("");
-        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-limpiar();
+        limpiar();
     }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_DatosCliente;
+    private javax.swing.JButton btnBus;
+    private javax.swing.JButton btnIns;
     private javax.swing.JComboBox<String> c_habitaciones;
     private com.toedter.calendar.JDateChooser fecha_actual;
     private com.toedter.calendar.JDateChooser fecha_entrada;
     private com.toedter.calendar.JDateChooser fecha_salida;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
