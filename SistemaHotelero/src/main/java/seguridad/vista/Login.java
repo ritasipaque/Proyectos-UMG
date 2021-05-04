@@ -5,10 +5,11 @@
  */
 package seguridad.vista;
 
-import Comercial.vista.MDIcomercial;
+import Comercial.vista.MDIComercial1;
 import Finanzas.vista.MDIFinanzas;
 import Hoteleria.vista.MDIHoteleria;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import seguridad.datos.UsuarioDAO;
 import java.awt.HeadlessException;
 import java.net.UnknownHostException;
@@ -225,6 +226,7 @@ public class Login extends javax.swing.JFrame {
                         case "Area Hoteleria":
                                 try {
                             usuarioHoteleria = txtUsuario.getText();
+                            UIManager.setLookAndFeel(new FlatLightLaf());
                             MDIHoteleria menuHoteleria = new MDIHoteleria();
                             menuHoteleria.setVisible(true);
                             this.dispose();
@@ -234,21 +236,21 @@ public class Login extends javax.swing.JFrame {
                         break;
 
                         case "Area Finanzas":
-                                try {
-                            usuarioFianzas = txtUsuario.getText();
-                            MDIFinanzas menuFinanzas = new MDIFinanzas();
-                            menuFinanzas.setVisible(true);
+                                 try {
+                            usuarioHoteleria = txtUsuario.getText();
+                            MDIHoteleria menuHoteleria = new MDIHoteleria();
+                            menuHoteleria.setVisible(true);
                             this.dispose();
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
                         break;
 
                         case "Area Comercial":
                                 
                                try {
                             usuarioComercial = txtUsuario.getText();
-                            MDIcomercial menucomercial = new MDIcomercial();
+                            MDIComercial1 menucomercial = new MDIComercial1();
                             menucomercial.setVisible(true);
                             this.dispose();
 
