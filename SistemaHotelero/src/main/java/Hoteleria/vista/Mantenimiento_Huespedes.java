@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 /**
  *
  * @author leelu
@@ -23,8 +25,41 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
     /**
      * Creates new form Mantenimiento_Huespedes
      */
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2004;
+        var usuario = Login.usuarioHoteleria;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            System.out.println(permisosApp[0]);
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
     public Mantenimiento_Huespedes() {
         initComponents();
+        habilitarAcciones();
         actualizartabla();
     }
     
@@ -104,10 +139,10 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         txt_codigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
-        btn_guardar = new javax.swing.JButton();
-        btn_modificar = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
-        btn_buscar = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txt_apellido = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -120,31 +155,51 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         txt_telefono = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         txt_nit = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
 
         setClosable(true);
+        setIconifiable(true);
         setMaximizable(true);
+        setResizable(true);
         setTitle("Mantenimiento Huespedes");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameDeactivated(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jLabel1.setText("CODIGO:");
 
         jLabel2.setText("NOMBRE:");
 
-        btn_guardar.setText("AGREGAR");
-        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("AGREGAR");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_guardarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        btn_modificar.setText("EDITAR");
-        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("EDITAR");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_modificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
@@ -155,10 +210,10 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             }
         });
 
-        btn_buscar.setText("BUSCAR");
-        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("BUSCAR");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_buscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -174,10 +229,10 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
 
         jLabel10.setText("NIT:");
 
-        jButton1.setText("ELIMINAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("ELIMINAR");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
@@ -204,16 +259,16 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_buscar, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
+                                .addComponent(BtnBus, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
                             .addComponent(txt_nombre)))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(BtnElim)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_guardar)
+                        .addComponent(BtnIng)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_modificar)
+                        .addComponent(BtnMod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_cancelar))
                     .addGroup(panel1Layout.createSequentialGroup()
@@ -248,7 +303,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_buscar))
+                    .addComponent(BtnBus))
                 .addGap(18, 18, 18)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -279,10 +334,10 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                     .addComponent(txt_nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_guardar)
-                    .addComponent(btn_modificar)
+                    .addComponent(BtnIng)
+                    .addComponent(BtnMod)
                     .addComponent(btn_cancelar)
-                    .addComponent(jButton1)
+                    .addComponent(BtnElim)
                     .addComponent(jButton2))
                 .addContainerGap())
         );
@@ -340,7 +395,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())) {
             if (txt_codigo.getText().length()!=0&&txt_nombre.getText().length()!=0&&txt_apellido.getText().length()!=0&&
                     txt_nacionalidad.getText().length()!=0&&txt_direccion.getText().length()!=0&&
@@ -366,9 +421,9 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El No. de identificacion del huesped, unicamente pueden ser números");
         }
         limpiar();
-    }//GEN-LAST:event_btn_guardarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())) {
             if (txt_codigo.getText().length()!=0&&txt_nombre.getText().length()!=0&&txt_apellido.getText().length()!=0&&
                     txt_nacionalidad.getText().length()!=0&&txt_direccion.getText().length()!=0&&
@@ -394,13 +449,13 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El No. de indentificacion del huesped, unicamente pueden ser números");
         }
         limpiar();
-    }//GEN-LAST:event_btn_modificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         limpiar();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
-    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())) {
 
             HuespedesDAO huespedesdao = new HuespedesDAO();
@@ -419,9 +474,9 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null,"El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
         }
-    }//GEN-LAST:event_btn_buscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         // TODO add your handling code here:
         if (Mantenimiento_Huespedes.isNumeric(txt_codigo.getText())&& txt_codigo.getText().length()!=0 
             && txt_nombre.getText().length() != 0 && txt_apellido.getText().length() != 0 && txt_nacionalidad.getText().length()!=0
@@ -438,7 +493,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
             limpiar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -457,13 +512,21 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameDeactivated
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_buscar;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton btn_guardar;
-    private javax.swing.JButton btn_modificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
