@@ -18,7 +18,7 @@ import seguridad.vista.MDI_Components;
     @author Diego Vásquez
  */
 public class MDIFinanzas extends javax.swing.JFrame {
-
+    private Transaccion_Bancaria FrmTransacion;
     private FrmTipoTransaccion fmTipo;
     private Mantenimiento_Banco formMantenimiento_Banco;//llamado a la ventana Mantenimiento Banco
     private Mantenimiento_TipoPersona formMantenimiento_TipoPersona;//llamado a la ventana Mantenimiento Tipo Persona
@@ -62,6 +62,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuPersonaBancaria = new javax.swing.JMenuItem();
         JMenuProcesos = new javax.swing.JMenu();
         JMenuItemAsientoContable = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
         JMenuAyuda = new javax.swing.JMenu();
@@ -200,6 +201,14 @@ public class MDIFinanzas extends javax.swing.JFrame {
         });
         JMenuProcesos.add(JMenuItemAsientoContable);
 
+        jMenuItem1.setText("Transaccion Bancaria");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        JMenuProcesos.add(jMenuItem1);
+
         JMenuBarFinanzas.add(JMenuProcesos);
 
         JMenuInformes.setText("Informes");
@@ -318,6 +327,18 @@ public class MDIFinanzas extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       
+        try {
+            // TODO add your handling code here:
+            FrmTransacion = new Transaccion_Bancaria();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JDesktopFinanzas.add(FrmTransacion);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
 
         //FLATLAF
@@ -361,5 +382,6 @@ public class MDIFinanzas extends javax.swing.JFrame {
     public static javax.swing.JMenu JMenuProcesos;
     public static javax.swing.JMenuItem JMenuTipoAsientoContable;
     public static javax.swing.JMenuItem JMenuTipoTransaccion;
+    private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,12 +24,12 @@ public class CuentaBancariaDAO {
     private static final String sql_delete = "DELETE FROM CuentaBancaria WHERE Numero_CuentaBancaria=?";
     private static final String sql_query = "SELECT Numero_CuentaBancaria, Moneda_Cuenta, CuentaHabiente_Cuenta,Banco_Cuenta FROM TipoTransaccion WHERE CuentaBancaria=?";
 
-    public List<CuentaBancaria> select() throws SQLException {
+    public List<CuentaBancaria> listar()  {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         CuentaBancaria cuenta = null;
-        List<CuentaBancaria> tipo1 = new ArrayList<CuentaBancaria>();
+        List<CuentaBancaria> tipo1 = new ArrayList<>();
 
         try {
             con = Conexion.getConnection();

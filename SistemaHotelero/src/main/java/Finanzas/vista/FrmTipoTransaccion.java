@@ -23,7 +23,7 @@ import seguridad.dominio.Bitacora;
 public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
     int codigoAplicacion = 1002;
     // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
- public void llenadoDeTablas() {
+  public void llenadoDeTablas() {
       try {
           DefaultTableModel modelo = new DefaultTableModel();
           modelo.addColumn("Codigo");
@@ -46,7 +46,7 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
           Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
- 
+  
  
  //metodo para buscar Tipo De transaccion guardada en la db y que  despligue la informacion en los textfield
 public void buscarperfil(){
@@ -356,7 +356,7 @@ public void buscarperfil(){
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
         TipoTransaccion insertartipo = new TipoTransaccion();
-        insertartipo.setCodigo_TipoTransaccion(TxtTipo.getText());
+        insertartipo.setCodigo_TipoTransaccion(TxtCodigo1.getText());
         insertartipo.setTransaccion_Tipo(TxtTipo.getText());
          insertartipo.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
          BitacoraDao BitacoraDAO = new BitacoraDao();
