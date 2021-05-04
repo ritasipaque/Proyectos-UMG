@@ -37,9 +37,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
        }
  }
 
-      public void llenadoDeCombos2() throws SQLException  {
+      public void llenadoDeCombos2() {
        CuentaHabienteDAO cuentadao = new CuentaHabienteDAO();
-      List<CuentaHabiente> cuenta = cuentadao.select();
+      List<CuentaHabiente> cuenta = cuentadao.listar();
       Cbox_Cuenta.addItem("Seleccione una opción");
       for (int i = 0; i < cuenta.size(); i++) {
            Cbox_Cuenta.addItem(cuenta.get(i).getCodigo_CuentaHabiente());
@@ -61,16 +61,15 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
          
     // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
  public void llenadoDeTablas() {
-      try {
+    
           DefaultTableModel modelo = new DefaultTableModel();
           modelo.addColumn("Numero");
           modelo.addColumn("Moneda");
           modelo.addColumn("Cuenta Habiente");
           modelo.addColumn("Cuenta Del Banco"); 
-          
-          
+                  
           CuentaBancariaDAO TipoTDAO = new CuentaBancariaDAO();
-          List<CuentaBancaria> tipot = TipoTDAO.select();
+          List<CuentaBancaria> tipot = TipoTDAO.listar();
           JTableTransaccion.setModel(modelo);
           String[] dato = new String[4];
           for (int i = 0; i < tipot.size(); i++) {
@@ -80,9 +79,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
               dato[3] = tipot.get(i).getBanco_Cuenta();
               modelo.addRow(dato);
           }
-      } catch (SQLException ex) {
-          Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      
     }
 
     /**
