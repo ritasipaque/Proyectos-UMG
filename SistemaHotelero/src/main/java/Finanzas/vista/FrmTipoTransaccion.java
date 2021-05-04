@@ -23,7 +23,7 @@ import seguridad.dominio.Bitacora;
 public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
     int codigoAplicacion = 1002;
     // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
- public void llenadoDeTablas() {
+  public void llenadoDeTablas() {
       try {
           DefaultTableModel modelo = new DefaultTableModel();
           modelo.addColumn("Codigo");
@@ -46,7 +46,7 @@ public class FrmTipoTransaccion extends javax.swing.JInternalFrame {
           Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
- 
+  
  
  //metodo para buscar Tipo De transaccion guardada en la db y que  despligue la informacion en los textfield
 public void buscarperfil(){
@@ -55,7 +55,7 @@ public void buscarperfil(){
     ConsultarT.setCodigo_TipoTransaccion((txtbuscado.getText()));
     //-------------------------------------------------------------------
     ConsultarT = consultarDao.query(ConsultarT);
-    TxtCodigo.setText(String.valueOf(ConsultarT.getCodigo_TipoTransaccion()));
+    TxtTipo.setText(String.valueOf(ConsultarT.getCodigo_TipoTransaccion()));
     TxtTipo.setText(ConsultarT.getTransaccion_Tipo());
     TxtEfecto.setText(Integer.toString(ConsultarT.getEfecto_TipoTransaccion()));
 }
@@ -81,18 +81,18 @@ public void buscarperfil(){
 
         jPanel1 = new javax.swing.JPanel();
         label7 = new javax.swing.JLabel();
-        TxtCodigo = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
         label8 = new javax.swing.JLabel();
-        TxtTipo = new javax.swing.JTextField();
-        TxtEfecto = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
-        btnLimpiar1 = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         txtbuscado = new javax.swing.JTextField();
-        btnModificar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
         btnLimpiar2 = new javax.swing.JButton();
         BtnAyuda = new javax.swing.JButton();
+        TxtTipo = new javax.swing.JTextField();
+        TxtCodigo1 = new javax.swing.JTextField();
+        TxtEfecto = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableTransaccion = new javax.swing.JTable();
@@ -109,64 +109,47 @@ public void buscarperfil(){
         label7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label7.setText("Codigo:");
 
-        TxtCodigo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        TxtCodigo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        TxtCodigo.setOpaque(false);
-        TxtCodigo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtCodigoActionPerformed(evt);
-            }
-        });
-
         label9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label9.setText("Tipo De Transaccion:");
 
         label8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         label8.setText("Efecto De Transaccion:");
 
-        TxtTipo.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        TxtTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        TxtTipo.setOpaque(false);
-
-        TxtEfecto.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        TxtEfecto.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        TxtEfecto.setOpaque(false);
-
-        btnEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnElim.setText("Eliminar");
+        BtnElim.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        btnLimpiar1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        btnLimpiar1.setText("Buscar:");
-        btnLimpiar1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnLimpiar1.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnBus.setText("Buscar:");
+        BtnBus.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimpiar1ActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
         txtbuscado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnModificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        btnModificar.setText("Modificar");
-        btnModificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnMod.setText("Modificar");
+        BtnMod.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnIng.setText("Registrar");
+        BtnIng.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
@@ -196,34 +179,30 @@ public void buscarperfil(){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(label7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label8)
-                                    .addComponent(label9))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label8)
+                            .addComponent(label9)
+                            .addComponent(label7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TxtTipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnLimpiar2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -234,7 +213,7 @@ public void buscarperfil(){
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TxtCodigo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,13 +226,13 @@ public void buscarperfil(){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(btnLimpiar1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtbuscado, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42))
@@ -323,7 +302,7 @@ public void buscarperfil(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         // TODO add your handling code here:
         TipoTransaccionDAO tipodAO = new TipoTransaccionDAO();
         TipoTransaccion tipoEliminar = new TipoTransaccion();
@@ -342,15 +321,15 @@ public void buscarperfil(){
         } catch (UnknownHostException ex) {
               Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
           }
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
        //METODO MODIFICAR
         TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
         TipoTransaccion tipomodificar = new TipoTransaccion();
   
         
-        tipomodificar.setCodigo_TipoTransaccion(TxtCodigo.getText());
+        tipomodificar.setCodigo_TipoTransaccion(TxtTipo.getText());
         tipomodificar.setTransaccion_Tipo(TxtTipo.getText());
         tipomodificar.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
         
@@ -372,12 +351,12 @@ public void buscarperfil(){
           }
     
    
-    }//GEN-LAST:event_btnModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         TipoTransaccionDAO tipodao = new TipoTransaccionDAO();
         TipoTransaccion insertartipo = new TipoTransaccion();
-        insertartipo.setCodigo_TipoTransaccion(TxtCodigo.getText());
+        insertartipo.setCodigo_TipoTransaccion(TxtCodigo1.getText());
         insertartipo.setTransaccion_Tipo(TxtTipo.getText());
          insertartipo.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
          BitacoraDao BitacoraDAO = new BitacoraDao();
@@ -393,7 +372,7 @@ public void buscarperfil(){
           }
         tipodao.insert(insertartipo);
         llenadoDeTablas();
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
 
@@ -412,7 +391,7 @@ public void buscarperfil(){
         }    
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
-    private void btnLimpiar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar1ActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         // TODO add your handling code here:
     buscarperfil();
       BitacoraDao BitacoraDAO = new BitacoraDao();
@@ -427,23 +406,19 @@ public void buscarperfil(){
               Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
           }
         
-    }//GEN-LAST:event_btnLimpiar1ActionPerformed
-
-    private void TxtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TxtCodigoActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
     private void btnLimpiar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiar2ActionPerformed
         // TODO add your handling code here:
         
          //metodo de Limpiar automaticamente los textfield seleecionados 
-        TxtCodigo.setText("");
+        TxtTipo.setText("");
         TxtTipo.setText("");
         TxtEfecto.setText("");
         txtbuscado.setText("");
-        btnRegistrar.setEnabled(true);
-        btnModificar.setEnabled(true);
-        btnEliminar.setEnabled(true);
+        BtnIng.setEnabled(true);
+        BtnMod.setEnabled(true);
+        BtnElim.setEnabled(true);
         
     
     }//GEN-LAST:event_btnLimpiar2ActionPerformed
@@ -451,15 +426,15 @@ public void buscarperfil(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAyuda;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JTable JTableTransaccion;
-    private javax.swing.JTextField TxtCodigo;
+    private javax.swing.JTextField TxtCodigo1;
     private javax.swing.JTextField TxtEfecto;
     private javax.swing.JTextField TxtTipo;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnLimpiar1;
     private javax.swing.JButton btnLimpiar2;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.JButton btnRegistrar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

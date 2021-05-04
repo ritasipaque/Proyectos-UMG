@@ -21,12 +21,12 @@ public class CuentaHabienteDAO {
     private static final String sql_delete = "DELETE FROM CuentaHabiente WHERE Codigo_CuentaHabiente=?";
     private static final String sql_query = "SELECT Codigo_CuentaHabiente, Nombre_CuentaHabiente, ApellidoP_CuentaHabiente,ApellidoM_CuentaHabiente,TipoPersona_CuentaHabiente FROM CuentaHabiente WHERE Codigo_CuentaHabiente=?";
 
-    public List<CuentaHabiente> select() throws SQLException {
+    public List<CuentaHabiente> listar() {
         Connection con = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         CuentaHabiente cuenta = null;
-        List<CuentaHabiente> tipo1 = new ArrayList<CuentaHabiente>();
+        List<CuentaHabiente> tipo1 = new ArrayList<>();
 
         try {
             con = Conexion.getConnection();
