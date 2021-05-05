@@ -28,7 +28,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
-
+import Hoteleria.datos.GuardarBitacoraDAO;
 /**
  *
  * @author Jeff
@@ -39,10 +39,11 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
     ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    int codigoAplicacion = 2001;
 
     void habilitarAcciones() {
 
-        var codigoAplicacion = 2001;
+        codigoAplicacion = 2001;
         var usuario = Login.usuarioHoteleria;
 
         btnAgregar.setEnabled(false);
@@ -71,14 +72,14 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
             btnEliminar.setEnabled(true);
         }
     }
-    
+
     /**
      * Creates new form MantenimientoAplicacion
      */
     public Mantenimiento_AmaDeLlaves() {
         initComponents();
         habilitarAcciones();
-        cargarCombobox.query2(cbxPiso);
+        cargarCombobox.llenarCbx(cbxPiso);
         grupoDeRadios = new ButtonGroup();
         grupoDeRadios.add(btnRadioActivo);
         grupoDeRadios.add(btnRadioInactivo);
@@ -562,6 +563,9 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
                     btnRadioVacio.setSelected(true);
                     limpiar();
                     ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
+                    GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                    guardarBitacora.GuardarEnBitacora("Insertar", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+
                 } else {
                     JOptionPane.showMessageDialog(null, "Los horarios de entrada y salida no pueden ser iguales.");
                 }
@@ -609,6 +613,8 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
                 limpiar();
                 jdateInicio.setEnabled(true);
+                GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                guardarBitacora.GuardarEnBitacora("Modificacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Los horarios de entrada y salida no pueden ser iguales.");
@@ -631,6 +637,8 @@ public class Mantenimiento_AmaDeLlaves extends javax.swing.JInternalFrame {
             tabla();
             limpiar();
             jdateInicio.setEnabled(true);
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Eliminacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

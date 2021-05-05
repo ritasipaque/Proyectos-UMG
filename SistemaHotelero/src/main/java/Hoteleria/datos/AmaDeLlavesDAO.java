@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import Hoteleria.datos.LlenarCbxDAO;
 
 /**
  *
@@ -30,6 +31,7 @@ public class AmaDeLlavesDAO {
     public static final String SQL_QUERY = "SELECT PK_id_ama_de_llaves, nombre_ama_de_llaves, apellido_ama_de_llaves, piso_ama_de_llaves, entrada_ama_de_llaves, salida_ama_de_llaves, inicio_labores_ama_de_llaves, descripcion_ama_de_llaves, estado_ama_de_llaves FROM tbl_ama_de_llaves WHERE PK_id_ama_de_llaves = ?";
 
     public static final String SQL_QUERY2 = "SELECT PK_numero_piso FROM tbl_piso_hotel";
+    public static final String SQL_PK = "PK_numero_piso";
 
     public List<AmaDeLlaves> select() {
         Connection conn = null;
@@ -214,34 +216,39 @@ public class AmaDeLlavesDAO {
 
     }
     
-    public void query2(JComboBox cbxModulo) {
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-
-            conn = ConexionHoteleria.getConnection();
-            //System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY2);
-            //stmt.setInt(1, aplicacion.getId_ModuloCbx());
-            rs = stmt.executeQuery();
-
-            cbxModulo.addItem("Seleccionar...");
-            
-            while (rs.next()) {
-                cbxModulo.addItem(rs.getInt("PK_numero_piso"));
-            }
-            //System.out.println("Registros buscado:" + aplicacion);
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        } finally {
-            ConexionHoteleria.close(rs);
-            ConexionHoteleria.close(stmt);
-            ConexionHoteleria.close(conn);
-        }
-
+//    public void query2(JComboBox cbxModulo) {
+//
+//        Connection conn = null;
+//        PreparedStatement stmt = null;
+//        ResultSet rs = null;
+//
+//        try {
+//
+//            conn = ConexionHoteleria.getConnection();
+//            //System.out.println("Ejecutando query:" + SQL_QUERY);
+//            stmt = conn.prepareStatement(SQL_QUERY2);
+//            //stmt.setInt(1, aplicacion.getId_ModuloCbx());
+//            rs = stmt.executeQuery();
+//
+//            cbxModulo.addItem("Seleccionar...");
+//            
+//            while (rs.next()) {
+//                cbxModulo.addItem(rs.getInt("PK_numero_piso"));
+//            }
+//            //System.out.println("Registros buscado:" + aplicacion);
+//        } catch (SQLException ex) {
+//            ex.printStackTrace(System.out);
+//        } finally {
+//            ConexionHoteleria.close(rs);
+//            ConexionHoteleria.close(stmt);
+//            ConexionHoteleria.close(conn);
+//        }
+//
+//    }
+    
+    public void llenarCbx(JComboBox cbxModulo){
+        LlenarCbxDAO llenar = new LlenarCbxDAO();
+        llenar.llenarInt(SQL_QUERY2, SQL_PK, cbxModulo);
     }
 
 }
