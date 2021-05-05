@@ -5,7 +5,7 @@
  */
 package seguridad.vista;
 
-import Comercial.vista.MDIcomercial;
+import Comercial.vista.MDIComercial1;
 import Finanzas.vista.MDIFinanzas;
 import Hoteleria.vista.MDIHoteleria;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar)
                     .addComponent(btncambiodecontra))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -250,7 +250,7 @@ public class Login extends javax.swing.JFrame {
                                 
                                try {
                             usuarioComercial = txtUsuario.getText();
-                            MDIcomercial menucomercial = new MDIcomercial();
+                            MDIComercial1 menucomercial = new MDIComercial1();
                             menucomercial.setVisible(true);
                             this.dispose();
 
