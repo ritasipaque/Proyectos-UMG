@@ -474,5 +474,9 @@ ENGINE = InnoDB
 
 DEFAULT CHARACTER SET = utf8;
 
-
-
+INSERT INTO `clasificacioncuenta` (`Codigo_clasificacion`, `Clasificacion_CuentaNombre`, `Descripcion_Clasificacion`) VALUES
+('A001', 'Activo Corriente', 'Activos que se movilizan en la empresa en un período menor o igual a un año.'),
+('A002', 'Activo No Corriente', 'Activos que se movilizan en un período mayor a un año y menor a 3 años.'),
+('C001', 'Resultados', 'Capital de la Empresa'),
+('P001', 'Pasivo Corriente', 'Pasivos que se movilizan en un período menor a un año.'),
+('P002', 'Pasivo No Corriente', 'Pasivos que circulan entre uno y tres años.');

@@ -34,7 +34,7 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
  }
    
    
-   public void llenadoDeTablas() throws SQLException {
+   public void llenadoDeTablas()  {
        DefaultTableModel modelo = new DefaultTableModel();
        modelo.addColumn("Codigo");
        modelo.addColumn("Nombre");
@@ -42,7 +42,7 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
        modelo.addColumn("Apellido Materno");
        modelo.addColumn("Tipo ");
        CuentaHabienteDAO cuentaDao = new CuentaHabienteDAO();
-       List<CuentaHabiente> cuenta = cuentaDao.select();
+       List<CuentaHabiente> cuenta = cuentaDao.listar();
        JTableTransaccion.setModel(modelo);
        String[] dato = new String[5];
        for (int i = 0; i < cuenta.size(); i++) {
@@ -323,11 +323,9 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
           }
        
          cuentadao.insert(insertarcuenta);
-       try {
+
            llenadoDeTablas();
-       } catch (SQLException ex) {
-           Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
-       }
+
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void ssActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ssActionPerformed
@@ -335,11 +333,9 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
         CuentaHabiente cuentaeliminar = new CuentaHabiente();
         cuentaeliminar.setCodigo_CuentaHabiente((TxtBuscar.getText()));
         cuentadao.delete(cuentaeliminar);
-       try {
+
            llenadoDeTablas();
-       } catch (SQLException ex) {
-           Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
-       }
+
        
        
           BitacoraDao BitacoraDAO = new BitacoraDao();
