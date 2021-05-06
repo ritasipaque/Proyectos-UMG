@@ -13,9 +13,11 @@ import Hoteleria.dominio.Huespedes;
 import Hoteleria.dominio.Reservacion;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,13 +26,8 @@ import javax.swing.table.DefaultTableModel;
  * @author leone
  */
 public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
-
     DefaultTableModel modelo1;
-    String dia_entrada, mes_entrada, año_entrada;
-    String dia_salida, mes_salida, año_salida;
-    int tot_dias, tot_mes;
-    String fechasreservada_inicio[] = new String[3], fechareservada_final[] = new String[3];
-    int meses[]={31,28,31,30,31,30,31,31,30,31,30,31};
+    boolean activar_boton = false;
 
     /**
      * Creates new form ProcesoReservaDeHS
@@ -43,10 +40,13 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     }
 
     public void cargar_habitaciones() {
+        c_habitaciones.addItem("Seleccionar...");
         HabitacionesDAO personaDAO = new HabitacionesDAO();
         List<Habitaciones> habitaciones = personaDAO.select();
         for (Habitaciones habitacion : habitaciones) {
-            c_habitaciones.addItem(String.valueOf(habitacion.getId_Habitaciones()));
+            if (habitacion.getEstado_Habitacion()==1) {
+            c_habitaciones.addItem(String.valueOf(habitacion.getId_Habitaciones()));   
+            }
         }
     }
 
@@ -93,7 +93,20 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         fecha_actual.setDate(date);
     }
-
+    
+    public void calcular_dias(Date fechaEntrada, Date fechaSalida){
+        long diff = fechaSalida.getTime() - fechaEntrada.getTime();
+        TimeUnit time = TimeUnit.DAYS; 
+        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+        if (txt_precio.getText().length()!=0) {
+            int total=(int)(diffrence)*Integer.parseInt(txt_precio.getText());
+            if (total==0) {
+                JOptionPane.showMessageDialog(null, "Tiene que pasar almenos una noche en el hotel");
+            }else{
+                txt_totalpago.setText(String.valueOf(total)); 
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,7 +124,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_dpi = new javax.swing.JTextField();
-        btnBus = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         txt_nombre_cliente = new javax.swing.JTextField();
         txt_apellido_cliente = new javax.swing.JTextField();
         txt_telefono = new javax.swing.JTextField();
@@ -121,11 +134,11 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         fecha_entrada = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         fecha_salida = new com.toedter.calendar.JDateChooser();
-        jButton2 = new javax.swing.JButton();
+        btn_validar_fecha = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        btnIns = new javax.swing.JButton();
+        BtnLimpiar = new javax.swing.JButton();
+        BtnIns = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txt_totalpago = new javax.swing.JTextField();
@@ -133,6 +146,9 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_nit = new javax.swing.JTextField();
         c_habitaciones = new javax.swing.JComboBox<>();
         jLabel15 = new javax.swing.JLabel();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
 
@@ -159,10 +175,10 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
         txt_dpi.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        btnBus.setText("CARGAR");
-        btnBus.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("CARGAR");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBusActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -172,26 +188,28 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_apellido_cliente.setEditable(false);
         txt_apellido_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        txt_telefono.setEnabled(false);
+        txt_telefono.setEditable(false);
+        txt_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_telefono.setOpaque(false);
 
-        txt_correo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_correo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        fecha_actual.setDateFormatString("dd/MM/yyyy");
+        fecha_actual.setDateFormatString("yyyy-MM-dd");
         fecha_actual.setEnabled(false);
+        fecha_actual.setOpaque(false);
 
         jLabel7.setText("Fecha de Entrada:");
 
-        fecha_entrada.setDateFormatString("dd/MM/yyyy");
+        fecha_entrada.setDateFormatString("yyyy-MM-dd");
 
         jLabel8.setText("Fecha de Salida:");
 
-        fecha_salida.setDateFormatString("dd/MM/yyyy");
+        fecha_salida.setDateFormatString("yyyy-MM-dd");
 
-        jButton2.setText("VERIFICAR DISPONIBILIDAD");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_validar_fecha.setText("VERIFICAR DISPONIBILIDAD");
+        btn_validar_fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_validar_fechaActionPerformed(evt);
             }
         });
 
@@ -200,14 +218,14 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_precio.setEditable(false);
         txt_precio.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
-        jButton5.setText("CANCELAR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BtnLimpiar.setText("CANCELAR");
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BtnLimpiarActionPerformed(evt);
             }
         });
 
-        btnIns.setText("GUARDAR");
+        BtnIns.setText("GUARDAR");
 
         jButton7.setText("AYUDA");
 
@@ -219,17 +237,29 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         jLabel14.setText("NIT:");
 
         txt_nit.setEditable(false);
-        txt_nit.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txt_nit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        c_habitaciones.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                c_habitacionesItemStateChanged(evt);
+            }
+        });
 
         jLabel15.setText("ID habitación o salón:");
+
+        BtnMod.setText("MODIFICAR");
+
+        BtnElim.setText("ELIMINAR");
+
+        jButton3.setText("REPORTES");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -244,7 +274,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txt_dpi, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(btnBus))
+                                        .addComponent(BtnBus))
                                     .addComponent(txt_nombre_cliente)
                                     .addComponent(txt_apellido_cliente)
                                     .addComponent(txt_telefono)
@@ -258,8 +288,8 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txt_totalpago, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(fecha_entrada, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                                        .addGap(0, 8, Short.MAX_VALUE))
+                                    .addComponent(fecha_entrada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(fecha_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,23 +301,31 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(fecha_actual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txt_nit)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(c_habitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_precio))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel11)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(txt_precio))
+                                        .addComponent(btn_validar_fecha, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                        .addComponent(c_habitaciones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel15))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton7)
+                        .addComponent(BtnIns)
                         .addGap(18, 18, 18)
-                        .addComponent(btnIns)
+                        .addComponent(BtnMod)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5)))
-                .addContainerGap())
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(BtnLimpiar))))
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +337,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addComponent(jLabel6)
                         .addComponent(txt_dpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBus)))
+                        .addComponent(BtnBus)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -317,31 +355,35 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txt_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(fecha_entrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(c_habitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15)))
-                .addGap(18, 18, 18)
+                    .addComponent(c_habitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(fecha_salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel8))
-                    .addComponent(jButton2))
+                    .addComponent(btn_validar_fecha))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txt_totalpago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(btnIns)
+                    .addComponent(jButton3)
                     .addComponent(jButton7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnLimpiar)
+                    .addComponent(BtnIns)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnElim))
                 .addContainerGap())
         );
 
@@ -362,9 +404,9 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 752, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -372,14 +414,14 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBusActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         HuespedesDAO huespedesdao = new HuespedesDAO();
         Huespedes buscarmetodo = new Huespedes();
 
@@ -390,145 +432,71 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         txt_nit.setText(buscarmetodo.getNit());
         txt_telefono.setText(buscarmetodo.getTelefono());
 
-    }//GEN-LAST:event_btnBusActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        int c = 0, sd_entrada = 0, sm_entrada = 0, sd_salida = 0, sm_salida = 0, d1, m1, d2, m2, cantidad_dias = 0, totalpago = 0,auxsm;
-        String newparra;
-        String fechaentrada = new SimpleDateFormat("dd/MM/yyyy").format(fecha_entrada.getDate());
-        String fechasalida = new SimpleDateFormat("dd/MM/yyyy").format(fecha_salida.getDate());
-        dia_entrada = fechaentrada.split("/")[0];
-        mes_entrada = fechaentrada.split("/")[1];
-        año_entrada = fechaentrada.split("/")[2];
-        dia_salida = fechasalida.split("/")[0];
-        mes_salida = fechasalida.split("/")[1];
-        año_salida = fechasalida.split("/")[2];
-        sd_entrada = Integer.parseInt(dia_entrada);
-        sm_entrada = Integer.parseInt(mes_entrada);
-        sd_salida = Integer.parseInt(dia_salida);
-        sm_salida = Integer.parseInt(mes_salida);
-
-        boolean reservado = false, ciclo = false;
-
-        HabitacionesDAO habitacionesdao = new HabitacionesDAO();
-        Habitaciones consultarhabitacion = new Habitaciones();
-        consultarhabitacion.setId_Habitaciones(Integer.parseInt(c_habitaciones.getSelectedItem().toString()));
-        consultarhabitacion = habitacionesdao.query(consultarhabitacion);
-
-        ReservacionDAO reservaciondao = new ReservacionDAO();
-        List<Reservacion> reservacion = reservaciondao.select();
+    private void btn_validar_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_validar_fechaActionPerformed
+        boolean reservada=false;
+        if (fecha_entrada.getDate()!=null&&fecha_salida.getDate()!=null) {
+          ReservacionDAO dao = new ReservacionDAO();
+        String fechaentrada = new SimpleDateFormat("yyyy-MM-dd").format(fecha_entrada.getDate());
+        String fechasalida = new SimpleDateFormat("yyyy-MM-dd").format(fecha_salida.getDate());
+        
+        ReservacionDAO.id=c_habitaciones.getSelectedItem().toString();
+        ReservacionDAO.entrada=fechaentrada;
+        ReservacionDAO.salida=fechasalida;
+        
+        List<Reservacion> reservacion = dao.select2();
         for (Reservacion reservar : reservacion) {
-            if (c_habitaciones.getSelectedItem().toString().equals(reservar.getId_habitacion())) {
-                StringTokenizer st = new StringTokenizer(reservar.getDesde(), "-");
-                int a = 0;
-                newparra = "";
-                while (st.hasMoreTokens()) {
-                    newparra = st.nextToken();
-                    fechasreservada_inicio[a] = newparra;
-                    a++;
-                }
-                StringTokenizer st2 = new StringTokenizer(reservar.getHasta(), "-");
-                int b = 0;
-                while (st2.hasMoreTokens()) {
-                    newparra = st2.nextToken();
-                    fechareservada_final[b] = newparra;
-                    b++;
-                }
-
-                d1 = Integer.parseInt(fechasreservada_inicio[2]);
-                m1 = Integer.parseInt(fechasreservada_inicio[1]);
-                d2 = Integer.parseInt(fechareservada_final[2]);
-                m2 = Integer.parseInt(fechareservada_final[1]);
-
-                //SE CAPTURAN EL DIA Y MES DE LAS FECHAS SOLICITADAS
-                if (sm_entrada == sm_salida) {
-                    for (int i = sd_entrada; i <= sd_salida; i++) {
-                        if (i == d1 || i == d2) {
-                            reservado = true;
-                        }
-                    }
-                } else if (sm_salida > sm_entrada) {
-                    for (int i = sm_entrada; i < sm_salida; i++) {
-                        if (ciclo = false) {
-                            for (int j = sd_entrada; j <= 31; j++) {
-                                if (sm_entrada == m1) {
-                                    reservado = true;
-                                }
-                            }
-                        } else if (i >= m1 && i < m2) {
-                            reservado = true;
-                        } else if (i == m2) {
-                            for (int j = 0; j <= d2; j++) {
-                                if (j == d2) {
-                                    reservado = true;
-                                }
-                            }
-                        }
-                        ciclo = true;
-                    }
-                }
-
+            if (reservar.getDesde()==null&&reservar.getHasta()==null) {
+                reservada=false;
+            }else{
+                reservada=true;
             }
         }
-        cantidad_dias=0;
-        if (Integer.parseInt(año_salida)==Integer.parseInt(año_entrada)) {
-            
-            if (sm_entrada == sm_salida) {
-                    if (sd_entrada<sd_salida) {
-                        for (int i = sd_entrada; i < sd_salida; i++) {
-                        cantidad_dias++;
-                    }
-                }else {
-                        JOptionPane.showMessageDialog(null, "Fecha de reservación invalida, no puede reservar dias ya cumplidos");
-                    }
-            }
-            
-            if (sm_salida > sm_entrada) {
-            }
-                for (int i = sm_entrada; i < sm_salida; i++) {
-                    for (int j = 0; j < meses[sm_salida]; j++) {
-                        cantidad_dias++;
-                    }
-                }
-                for (int i = 0; i < sd_salida; i++) {
-                    cantidad_dias++;
-                }
-                System.out.println(cantidad_dias++);
-            
-        }else if(Integer.parseInt(año_salida)<Integer.parseInt(año_entrada)){
-            
-            JOptionPane.showMessageDialog(null, "Fechas de reservación invalida, no puede reservar dias ya cumplidos");
-            btnIns.setEnabled(false);reservado=true;
-            
-        }else if(Integer.parseInt(año_salida)>Integer.parseInt(año_entrada)){
-            
-            /*if (sm_salida > sm_entrada) {
-                for (int i = sd_entrada; i < 31; i++) {
-                    cantidad_dias++;
-                }
-                for (int i = 0; i < sd_salida; i++) {
-                    cantidad_dias++;
-                }
-            }*/
-            
-            
+        
+        if (reservada==false) {
+            JOptionPane.showMessageDialog(null, "Habitación Disponible");
+            calcular_dias(fecha_entrada.getDate(), fecha_salida.getDate());
+            activar_boton=true;
+        }else{
+            JOptionPane.showMessageDialog(null, "Habitación no Disponible");
+            activar_boton=false;
+        }   
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecciones fechas para reservar");
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_validar_fechaActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
         limpiar();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
+
+    private void c_habitacionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_c_habitacionesItemStateChanged
+        if (c_habitaciones.getSelectedItem().toString().equals("Seleccionar...")) {
+            txt_precio.setText("");
+        }else{
+        int id=Integer.parseInt(c_habitaciones.getSelectedItem().toString());
+        HabitacionesDAO habitacionesdao = new HabitacionesDAO();
+        Habitaciones habitaciones = new Habitaciones();
+        habitaciones.setId_Habitaciones(id);
+        habitaciones = habitacionesdao.query(habitaciones);
+        txt_precio.setText(String.valueOf(habitaciones.getPrecio()));
+        }
+    }//GEN-LAST:event_c_habitacionesItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBus;
-    private javax.swing.JButton btnIns;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIns;
+    private javax.swing.JButton BtnLimpiar;
+    private javax.swing.JButton BtnMod;
+    private javax.swing.JButton btn_validar_fecha;
     private javax.swing.JComboBox<String> c_habitaciones;
     private com.toedter.calendar.JDateChooser fecha_actual;
     private com.toedter.calendar.JDateChooser fecha_entrada;
     private com.toedter.calendar.JDateChooser fecha_salida;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

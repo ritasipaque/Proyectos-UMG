@@ -5,6 +5,7 @@
  */
 package Hoteleria.vista;
 
+import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Servicios;
 import java.io.File;
@@ -120,35 +121,6 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                tabla.setModel(modelo1);
         }
     }
-    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario){
-        BitacoraDao BitacoraDAO = new BitacoraDao();
-        Bitacora AInsertar = new Bitacora();
-        boolean estado=false;
-        switch(accion){
-            case "Insertar":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Inserción");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-                break;
-            case "Modificacion":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Modificación");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-                break;
-            case "Eliminacion":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Eliminar");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-        }
-        if (estado==true) {
-        try {
-            BitacoraDAO.insert(AInsertar);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }         
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -458,7 +430,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             serviciosdao.insert(servicios);
             JOptionPane.showMessageDialog(null, "Servicio agregado correctamente");
             limpiar();actualizartabla();
-           GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioSesion);
+            GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+            guardaraccion.GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioHoteleria);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
         }
@@ -491,7 +464,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 serviciosdao.update(servicios);
                 JOptionPane.showMessageDialog(null, "Servicio modificado correctamente");
                 limpiar();actualizartabla();
-                GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioSesion);
+                GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+                guardaraccion.GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioHoteleria);    
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
         }
@@ -536,8 +510,9 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         
         JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
         actualizartabla();
-        limpiar();
-        GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioSesion);
+        limpiar();        
+        GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+        guardaraccion.GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioHoteleria);
      }else{
          JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
      }

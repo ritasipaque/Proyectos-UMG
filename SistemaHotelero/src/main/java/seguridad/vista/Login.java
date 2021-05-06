@@ -159,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar)
                     .addComponent(btncambiodecontra))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
