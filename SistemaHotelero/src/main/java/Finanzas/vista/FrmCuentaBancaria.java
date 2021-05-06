@@ -37,9 +37,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
        }
  }
 
-      public void llenadoDeCombos2() throws SQLException  {
+      public void llenadoDeCombos2() {
        CuentaHabienteDAO cuentadao = new CuentaHabienteDAO();
-      List<CuentaHabiente> cuenta = cuentadao.select();
+      List<CuentaHabiente> cuenta = cuentadao.listar();
       Cbox_Cuenta.addItem("Seleccione una opción");
       for (int i = 0; i < cuenta.size(); i++) {
            Cbox_Cuenta.addItem(cuenta.get(i).getCodigo_CuentaHabiente());
@@ -61,16 +61,15 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
          
     // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico ademas crea las tablas en el jtable
  public void llenadoDeTablas() {
-      try {
+    
           DefaultTableModel modelo = new DefaultTableModel();
           modelo.addColumn("Numero");
           modelo.addColumn("Moneda");
           modelo.addColumn("Cuenta Habiente");
           modelo.addColumn("Cuenta Del Banco"); 
-          
-          
+                  
           CuentaBancariaDAO TipoTDAO = new CuentaBancariaDAO();
-          List<CuentaBancaria> tipot = TipoTDAO.select();
+          List<CuentaBancaria> tipot = TipoTDAO.listar();
           JTableTransaccion.setModel(modelo);
           String[] dato = new String[4];
           for (int i = 0; i < tipot.size(); i++) {
@@ -80,9 +79,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
               dato[3] = tipot.get(i).getBanco_Cuenta();
               modelo.addRow(dato);
           }
-      } catch (SQLException ex) {
-          Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
-      }
+      
     }
 
     /**
@@ -107,7 +104,6 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         label7 = new javax.swing.JLabel();
-        TxtNumero = new javax.swing.JTextField();
         label9 = new javax.swing.JLabel();
         label8 = new javax.swing.JLabel();
         label10 = new javax.swing.JLabel();
@@ -120,10 +116,11 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         TxtMoneda = new javax.swing.JTextField();
         TxtCuenta = new javax.swing.JTextField();
         TxtBanco = new javax.swing.JTextField();
-        btnEliminar = new javax.swing.JButton();
-        btnRegistrar = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
         btnLimpiar3 = new javax.swing.JButton();
         TxtBuscar = new javax.swing.JTextField();
+        TxtNumero = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableTransaccion = new javax.swing.JTable();
@@ -139,10 +136,6 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
         label7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label7.setText("Numero De cuenta:");
-
-        TxtNumero.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        TxtNumero.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(204, 204, 204)));
-        TxtNumero.setOpaque(false);
 
         label9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         label9.setText("Tipo De Moneda:");
@@ -191,21 +184,21 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
         TxtBanco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        btnEliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        btnEliminar.setText("Eliminar");
-        btnEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnElim.setText("Eliminar");
+        BtnElim.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        btnRegistrar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        btnRegistrar.setText("Registrar");
-        btnRegistrar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnIng.setText("Registrar");
+        BtnIng.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
@@ -225,52 +218,47 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(106, 106, 106)
+                        .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label10)
+                            .addComponent(label7)
+                            .addComponent(label9)
+                            .addComponent(label8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(Cbox_Banco, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Cbox_Cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbox_Moneda, 0, 255, Short.MAX_VALUE)
+                            .addComponent(TxtNumero))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label10)
-                                    .addComponent(label7)
-                                    .addComponent(label9)
-                                    .addComponent(label8))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(2, 2, 2)
+                                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jButton2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(TxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(Cbox_Banco, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(Cbox_Cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbox_Moneda, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton1)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(2, 2, 2)
-                                                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jButton2))
-                                        .addGap(16, 16, 16)))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TxtCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                                    .addComponent(TxtBanco)
-                                    .addComponent(TxtMoneda)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(TxtCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                                    .addComponent(TxtBanco)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TxtMoneda)))
+                        .addContainerGap())))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(252, 252, 252)
+                .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -287,7 +275,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbox_Moneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbox_Moneda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TxtMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(label8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Cbox_Cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -296,24 +286,20 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                             .addComponent(label10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Cbox_Banco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TxtMoneda))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtCuenta)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(TxtCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TxtBanco))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
         );
 
@@ -373,13 +359,13 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
         CuentaBancaria insertarcuenta = new CuentaBancaria();
         //METODO INSERTAR
@@ -405,9 +391,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
               Logger.getLogger(FrmCuentaBancaria.class.getName()).log(Level.SEVERE, null, ex);
           }
            
-    }//GEN-LAST:event_btnRegistrarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
        CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
         CuentaBancaria cuentaeliminar = new CuentaBancaria();
         //Metodo Para Eliminar con el Numero de Cuenta Bancaria
@@ -427,7 +413,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         } catch (UnknownHostException ex) {
               Logger.getLogger(FrmCuentaBancaria.class.getName()).log(Level.SEVERE, null, ex);
           }
-    }//GEN-LAST:event_btnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
     private void Cbox_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_CuentaActionPerformed
         // TODO add your handling code here:
@@ -493,6 +479,8 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
     private javax.swing.JComboBox<String> Cbox_Banco;
     private javax.swing.JComboBox<String> Cbox_Cuenta;
     private javax.swing.JTable JTableTransaccion;
@@ -501,9 +489,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField TxtCuenta;
     private javax.swing.JTextField TxtMoneda;
     private javax.swing.JTextField TxtNumero;
-    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar3;
-    private javax.swing.JButton btnRegistrar;
     private javax.swing.JComboBox<String> cbox_Moneda;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

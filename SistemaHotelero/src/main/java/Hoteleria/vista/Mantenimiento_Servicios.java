@@ -5,6 +5,7 @@
  */
 package Hoteleria.vista;
 
+import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Servicios;
 import java.io.File;
@@ -19,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
 
 /**
@@ -28,12 +30,44 @@ import seguridad.vista.Login;
 public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
-    String codigoAplicacion="2200";
+    String codigoAplicacion="2006";
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2006;
+        var usuario = Login.usuarioHoteleria;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
     /**
      * Creates new form Mantenimiento_Servicios
      */
     public Mantenimiento_Servicios() {
         initComponents();
+        habilitarAcciones();
         aux_tipo.setVisible(false);
         aux_estado.setVisible(false);
         actualizartabla();
@@ -87,35 +121,6 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                tabla.setModel(modelo1);
         }
     }
-    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario){
-        BitacoraDao BitacoraDAO = new BitacoraDao();
-        Bitacora AInsertar = new Bitacora();
-        boolean estado=false;
-        switch(accion){
-            case "Insertar":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Inserción");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-                break;
-            case "Modificacion":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Modificación");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-                break;
-            case "Eliminacion":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Eliminar");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-        }
-        if (estado==true) {
-        try {
-            BitacoraDAO.insert(AInsertar);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }         
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -159,6 +164,24 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("MANTENIMIENTO DE SERVICIOS:");
         setVisible(true);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameDeactivated(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("DATOS DEL SERVICIO:"));
 
@@ -407,7 +430,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             serviciosdao.insert(servicios);
             JOptionPane.showMessageDialog(null, "Servicio agregado correctamente");
             limpiar();actualizartabla();
-           GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioSesion);
+            GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+            guardaraccion.GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioHoteleria);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
         }
@@ -440,7 +464,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 serviciosdao.update(servicios);
                 JOptionPane.showMessageDialog(null, "Servicio modificado correctamente");
                 limpiar();actualizartabla();
-                GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioSesion);
+                GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+                guardaraccion.GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioHoteleria);    
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios o sin seleccionar");
         }
@@ -485,8 +510,9 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         
         JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
         actualizartabla();
-        limpiar();
-        GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioSesion);
+        limpiar();        
+        GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+        guardaraccion.GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioHoteleria);
      }else{
          JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
      }
@@ -507,6 +533,14 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameDeactivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
