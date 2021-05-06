@@ -22,7 +22,9 @@ import seguridad.dominio.Bitacora;
  * @author Nay Ale
  */
 public class Mantenimiento_Moneda extends javax.swing.JInternalFrame {
-int codigoAplicacion = 1005;
+
+    int codigoAplicacion = 1005;
+
     /**
      * Creates new form Mantenimiento_Moneda
      */
@@ -31,23 +33,26 @@ int codigoAplicacion = 1005;
         int codigoAplicacion = 1005; // numero de asignacion para perfiles para bitacora.
         llenadodetablas();    // metodo para el llenado de la tabla con los datos automaticamente
     }
-        public void limpiar() {   //metodo de Limpiar automaticamente las cajas de textos 
+
+    public void limpiar() {   //metodo de Limpiar automaticamente las cajas de textos 
         txt_CodigoMoneda.setText("");
         txt_NombreMoneda.setText("");
         txt_SimboloMoneda.setText("");
         txt_Buscar.setText("");
     }
-  public void buscarmoneda(){    ///metodo para buscar moneda ingresada y guardada a la base de datos
-    Moneda monedaconsultar = new Moneda();
-    MonedaDAO monedaDAO = new MonedaDAO();
-    monedaconsultar.setCodigo_Moneda((txt_Buscar.getText().toString()));
-    //-------------------------------------------------------------------
-    monedaconsultar = monedaDAO.query(monedaconsultar);
-    txt_CodigoMoneda.setText((monedaconsultar.getCodigo_Moneda()));
-    txt_NombreMoneda.setText(monedaconsultar.getNombre_Moneda());
-    txt_SimboloMoneda.setText(monedaconsultar.getSimbolo_Moneda());  
-  }
-  public void llenadodetablas(){   // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico
+
+    public void buscarmoneda() {    ///metodo para buscar moneda ingresada y guardada a la base de datos
+        Moneda monedaconsultar = new Moneda();
+        MonedaDAO monedaDAO = new MonedaDAO();
+        monedaconsultar.setCodigo_Moneda((txt_Buscar.getText().toString()));
+        //-------------------------------------------------------------------
+        monedaconsultar = monedaDAO.query(monedaconsultar);
+        txt_CodigoMoneda.setText((monedaconsultar.getCodigo_Moneda()));
+        txt_NombreMoneda.setText(monedaconsultar.getNombre_Moneda());
+        txt_SimboloMoneda.setText(monedaconsultar.getSimbolo_Moneda());
+    }
+
+    public void llenadodetablas() {   // metodo de llenado de tablas automaticamente aparecen los datos guardados en bd y se despliega en automatico
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Codigo Moneda");
         modelo.addColumn("Nombre Moneda");
@@ -59,10 +64,11 @@ int codigoAplicacion = 1005;
         for (int i = 0; i < moneda.size(); i++) {
             dato[0] = moneda.get(i).getCodigo_Moneda();
             dato[1] = moneda.get(i).getNombre_Moneda();
-            dato[2] = moneda.get(i).getSimbolo_Moneda();   
+            dato[2] = moneda.get(i).getSimbolo_Moneda();
             modelo.addRow(dato);
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -261,48 +267,49 @@ int codigoAplicacion = 1005;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
-     Moneda monedaInsertar = new Moneda();
-     MonedaDAO monedaDAO = new MonedaDAO();
+        Moneda monedaInsertar = new Moneda();
+        MonedaDAO monedaDAO = new MonedaDAO();
         // Prueba insert
         monedaInsertar.setCodigo_Moneda(txt_CodigoMoneda.getText());
         monedaInsertar.setNombre_Moneda(txt_NombreMoneda.getText());
-        monedaInsertar.setSimbolo_Moneda(txt_SimboloMoneda.getText()); 
+        monedaInsertar.setSimbolo_Moneda(txt_SimboloMoneda.getText());
         //bitacora
         BitacoraDao BitacoraDAO = new BitacoraDao();
         Bitacora AInsertar = new Bitacora();
         AInsertar.setId_Usuario("MantenimientoMoneda");
         AInsertar.setAccion("Insertar");
         AInsertar.setCodigoAplicacion("1005");
-        try{
-            BitacoraDAO.insert(AInsertar);   
-        }   catch (UnknownHostException ex) {
+        
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Moneda.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-            JOptionPane.showMessageDialog(null, "Moneda registrada Exitosamente"); 
-            monedaDAO.insert(monedaInsertar);
-            llenadodetablas();
-            limpiar();
-                          
-        
+
+        JOptionPane.showMessageDialog(null, "Moneda registrada Exitosamente");
+        monedaDAO.insert(monedaInsertar);
+        llenadodetablas();
+        limpiar();
+
+
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
-     MonedaDAO monedaDAO = new MonedaDAO();
+        MonedaDAO monedaDAO = new MonedaDAO();
         Moneda monedaModificar = new Moneda();
         //MONEDA modificar
         monedaModificar.setCodigo_Moneda(txt_CodigoMoneda.getText());
         monedaModificar.setNombre_Moneda(txt_NombreMoneda.getText());
-        monedaModificar.setSimbolo_Moneda(txt_SimboloMoneda.getText()); 
+        monedaModificar.setSimbolo_Moneda(txt_SimboloMoneda.getText());
         //bitacora
         BitacoraDao BitacoraDAO = new BitacoraDao();
         Bitacora AInsertar = new Bitacora();
         AInsertar.setId_Usuario("MantenimientoMoneda");
         AInsertar.setAccion("Modificar");
         AInsertar.setCodigoAplicacion("1005");
-        try{
-            BitacoraDAO.insert(AInsertar);   
-        }   catch (UnknownHostException ex) {
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Moneda.class.getName()).log(Level.SEVERE, null, ex);
         }
         monedaDAO.update(monedaModificar);
@@ -322,15 +329,15 @@ int codigoAplicacion = 1005;
         AInsertar.setId_Usuario("MantenimientoMoneda");
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1005");
-        try{
-            BitacoraDAO.insert(AInsertar);   
-        }   catch (UnknownHostException ex) {
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Moneda.class.getName()).log(Level.SEVERE, null, ex);
         }
         monedaDAO.delete(monedaEliminar);
         JOptionPane.showMessageDialog(null, "Moneda Eliminado.");
         llenadodetablas();
-        limpiar(); 
+        limpiar();
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
@@ -339,7 +346,7 @@ int codigoAplicacion = 1005;
 
     private void BtnAyuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyuActionPerformed
         /// metodo para ejecutar la ayuda que es una guia para el mantenimiento MONEDA
-          try {
+        try {
             if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoMoneda.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
@@ -351,7 +358,7 @@ int codigoAplicacion = 1005;
             //System.out.println("Correcto");
         } catch (Exception ex) {
             ex.printStackTrace();
-        }    
+        }
     }//GEN-LAST:event_BtnAyuActionPerformed
 
 

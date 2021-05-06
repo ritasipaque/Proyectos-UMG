@@ -5,14 +5,23 @@
  */
 package seguridad.vista;
 
+import Comercial.vista.MDIComercial1;
+import Finanzas.vista.MDIFinanzas;
+import Hoteleria.vista.MDIHoteleria;
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import seguridad.datos.UsuarioDAO;
 import java.awt.HeadlessException;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import seguridad.datos.BitacoraDao;
 import seguridad.datos.UsuarioDAO;
 import seguridad.dominio.Usuario;
 import seguridad.datos.PermisosDAO;
+import seguridad.dominio.Bitacora;
 
 /**
  *
@@ -23,9 +32,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    
-    public static String usuarioSesion="";
-    
+    public static String usuarioSesion = "";
+    public static String usuarioFianzas = "";
+    public static String usuarioHoteleria = "";
+    public static String usuarioComercial = "";
+
     public Login() {
         initComponents();
         setLocationRelativeTo(null);
@@ -50,6 +61,8 @@ public class Login extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         txtContraseña = new javax.swing.JPasswordField();
         btncambiodecontra = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        cbxAcceso = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -89,6 +102,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Seleccione el Area");
+
+        cbxAcceso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione: ", "Area Seguridad", "Area Hoteleria", "Area Finanzas", "Area Comercial", " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +129,12 @@ public class Login extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btncambiodecontra)))
+                        .addComponent(btncambiodecontra))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbxAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -120,7 +142,11 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cbxAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar)
                     .addComponent(btncambiodecontra))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -144,6 +170,11 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        String cbx_AccesoSeguridad = cbxAcceso.getSelectedItem().toString();
+        String cbx_AccesoHoteleria = cbxAcceso.getSelectedItem().toString();
+        String cbx_AccesoFinanzas = cbxAcceso.getSelectedItem().toString();
+        String cbx_AccesoComercial = cbxAcceso.getSelectedItem().toString();
+
         if (txtUsuario.getText().trim().isEmpty() || txtContraseña.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "NO PUEDEN HABER CAMPOS VACIOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -153,6 +184,9 @@ public class Login extends javax.swing.JFrame {
                 seguridad.dominio.Usuario usuarioAConsultar = new seguridad.dominio.Usuario();
                 UsuarioDAO usuarioDAO = new UsuarioDAO();
                 usuarioAConsultar.setUser_usuario((txtUsuario.getText()));
+
+                BitacoraDao BitacoraDAO = new BitacoraDao();
+                Bitacora AInsertar = new Bitacora();
 
                 System.out.println(usuarioAConsultar.toString());
                 // Recuperación de información a través de otro objeto
@@ -173,29 +207,67 @@ public class Login extends javax.swing.JFrame {
                     // if (txtContraseña.getText().equals(usuarioAConsultar.getPassword_usuario())){
                     JOptionPane.showMessageDialog(null, "Bienvenido\n", "Mensaje de bienvenida", JOptionPane.INFORMATION_MESSAGE);
 
+                    String area;
+                    area = cbxAcceso.getSelectedItem().toString();
 
-                    try {
-                       
-                        usuarioSesion=txtUsuario.getText();
-                        MDI_Sistema menuGeneral = new MDI_Sistema();
-                        menuGeneral.setVisible(true);
-                        this.dispose();
+                    switch (area) {
 
-                    } catch (Exception e) {
-                        System.out.println(e);
+                        case "Area Seguridad":
+                                try {
+                            usuarioSesion = txtUsuario.getText();
+                            MDI_Sistema menuGeneral = new MDI_Sistema();
+                            menuGeneral.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;
+
+                        case "Area Hoteleria":
+                                try {
+                            usuarioHoteleria = txtUsuario.getText();
+                            UIManager.setLookAndFeel(new FlatLightLaf());
+                            MDIHoteleria menuHoteleria = new MDIHoteleria();
+                            menuHoteleria.setVisible(true);
+                            this.dispose();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;
+
+                        case "Area Finanzas":
+                                 try {
+                            usuarioHoteleria = txtUsuario.getText();
+                            MDIHoteleria menuHoteleria = new MDIHoteleria();
+                            menuHoteleria.setVisible(true);
+                            this.dispose();
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
+                        break;
+
+                        case "Area Comercial":
+                                
+                               try {
+                            usuarioComercial = txtUsuario.getText();
+                            MDIComercial1 menucomercial = new MDIComercial1();
+                            menucomercial.setVisible(true);
+                            this.dispose();
+
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        break;
+
+                        default:
                     }
 
-                    MDI_Components menuGeneral = new  MDI_Components();
-                  //  menuGeneral.setVisible(true);
-                  
                     //----
                     PermisosDAO permisos = new PermisosDAO();
                     permisos.setNombreUsuario(usuarioAConsultar.getNombre_usuario());
                     //----
-                    
-                    
-                    this.dispose();
 
+                    this.dispose();
 
                     JOptionPane.showMessageDialog(null, permisos.getNombreUsuario());
                 } else {
@@ -207,6 +279,7 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "ERROR AL ENCONTRAR USUARIO O CONTRASEÑA", "ERROR", JOptionPane.ERROR_MESSAGE);
                 txtContraseña.setText("");
                 txtUsuario.setText("");
+
             }
         }
 
@@ -235,7 +308,7 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -248,9 +321,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btncambiodecontra;
+    private javax.swing.JComboBox<String> cbxAcceso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

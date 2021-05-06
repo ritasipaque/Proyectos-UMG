@@ -3,26 +3,39 @@ package Finanzas.vista;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /*
     @author Diego Vásquez
  */
 public class MDIFinanzas extends javax.swing.JFrame {
-  private FrmTipoTransaccion fmTipo;
-  private Mantenimiento_Banco formMantenimiento_Banco;//llamado a la ventana Mantenimiento Banco
-  private Mantenimiento_TipoPersona formMantenimiento_TipoPersona;//llamado a la ventana Mantenimiento Tipo Persona
-  private Mantenimiento_Moneda formMantenimiento_Moneda;//llamado a la ventana Mantenimiento Moneda 
-  private FrmCuentaBancaria FrmBancaria;
-  private FrmCuentaHabiente FrmHabiente;
-  private Mantenimiento_TipoAsiento FrmTipoAsiento;
- 
-    public MDIFinanzas() {
+    private Transaccion_Bancaria FrmTransacion;
+    private FrmTipoTransaccion fmTipo;
+    private Mantenimiento_Banco formMantenimiento_Banco;//llamado a la ventana Mantenimiento Banco
+    private Mantenimiento_TipoPersona formMantenimiento_TipoPersona;//llamado a la ventana Mantenimiento Tipo Persona
+    private Mantenimiento_Moneda formMantenimiento_Moneda;//llamado a la ventana Mantenimiento Moneda 
+    private FrmCuentaBancaria FrmBancaria;
+    private FrmCuentaHabiente FrmHabiente;
+    private Mantenimiento_TipoAsiento FrmTipoAsiento;
+    GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+
+    
+    
+    public MDIFinanzas() throws UnknownHostException {
+        var modulo_nombre = "Finanzas";
         initComponents();
+        this.setTitle("Usuario: " + "[" + Login.usuarioFianzas + "]" + " \t" + "IP: [" + mdi_Components.getIp() + "]");
+        permisos.getPermisos(modulo_nombre, Login.usuarioFianzas);
     }
 
     @SuppressWarnings("unchecked")
@@ -33,21 +46,23 @@ public class MDIFinanzas extends javax.swing.JFrame {
         ;
         JMenuBarFinanzas = new javax.swing.JMenuBar();
         JMenuArchivo = new javax.swing.JMenu();
+        JMenuCerrarSesion = new javax.swing.JMenuItem();
         JMenuCatalogos = new javax.swing.JMenu();
         JMenuCatalogoContabilidad = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        JMenuClasificacionCuentas = new javax.swing.JMenuItem();
+        JMenuCuentasContables = new javax.swing.JMenuItem();
+        JMenuPeriodoFiscal = new javax.swing.JMenuItem();
+        JMenuTipoAsientoContable = new javax.swing.JMenuItem();
         JMenuCatalogoBancos = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        JMenuTipoTransaccion = new javax.swing.JMenuItem();
+        JMenuCuentaBancaria = new javax.swing.JMenuItem();
+        JMenuCuentahabiente = new javax.swing.JMenuItem();
+        JMenuBancos = new javax.swing.JMenuItem();
+        JMenuDivisas = new javax.swing.JMenuItem();
+        JMenuPersonaBancaria = new javax.swing.JMenuItem();
         JMenuProcesos = new javax.swing.JMenu();
         JMenuItemAsientoContable = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
         JMenuAyuda = new javax.swing.JMenu();
@@ -56,7 +71,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         setTitle("Modulo Finanzas [ip] [user]");
         setResizable(false);
 
-        JDesktopFinanzas.setBackground(new java.awt.Color(60, 80, 40));
+        JDesktopFinanzas.setBackground(new java.awt.Color(70, 95, 50));
 
         javax.swing.GroupLayout JDesktopFinanzasLayout = new javax.swing.GroupLayout(JDesktopFinanzas);
         JDesktopFinanzas.setLayout(JDesktopFinanzasLayout);
@@ -71,6 +86,15 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
         JMenuArchivo.setText("Archivo");
         JMenuArchivo.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+
+        JMenuCerrarSesion.setText("Cerrar Sesión");
+        JMenuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuCerrarSesionActionPerformed(evt);
+            }
+        });
+        JMenuArchivo.add(JMenuCerrarSesion);
+
         JMenuBarFinanzas.add(JMenuArchivo);
 
         JMenuCatalogos.setText("Catálogos");
@@ -78,89 +102,89 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
         JMenuCatalogoContabilidad.setText("Catálogos Contabilidad");
 
-        jMenuItem1.setText("Mantenimiento de Clasificación de Cuentas");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        JMenuClasificacionCuentas.setText("Mantenimiento de Clasificación de Cuentas");
+        JMenuClasificacionCuentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                JMenuClasificacionCuentasActionPerformed(evt);
             }
         });
-        JMenuCatalogoContabilidad.add(jMenuItem1);
+        JMenuCatalogoContabilidad.add(JMenuClasificacionCuentas);
 
-        jMenuItem3.setText("Mantenimiento de Cuentas Contables");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        JMenuCuentasContables.setText("Mantenimiento de Cuentas Contables");
+        JMenuCuentasContables.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                JMenuCuentasContablesActionPerformed(evt);
             }
         });
-        JMenuCatalogoContabilidad.add(jMenuItem3);
+        JMenuCatalogoContabilidad.add(JMenuCuentasContables);
 
-        jMenuItem2.setText("Mantenimiento de Periodo Fiscal");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        JMenuPeriodoFiscal.setText("Mantenimiento de Periodo Fiscal");
+        JMenuPeriodoFiscal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                JMenuPeriodoFiscalActionPerformed(evt);
             }
         });
-        JMenuCatalogoContabilidad.add(jMenuItem2);
+        JMenuCatalogoContabilidad.add(JMenuPeriodoFiscal);
 
-        jMenuItem4.setText("Mantenimiento de Tipo de Asiento Contable");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        JMenuTipoAsientoContable.setText("Mantenimiento de Tipo de Asiento Contable");
+        JMenuTipoAsientoContable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                JMenuTipoAsientoContableActionPerformed(evt);
             }
         });
-        JMenuCatalogoContabilidad.add(jMenuItem4);
+        JMenuCatalogoContabilidad.add(JMenuTipoAsientoContable);
 
         JMenuCatalogos.add(JMenuCatalogoContabilidad);
 
         JMenuCatalogoBancos.setText("Catálogos Bancos");
 
-        jMenuItem5.setText("Mantenimiento de Tipo de Transacción");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        JMenuTipoTransaccion.setText("Mantenimiento de Tipo de Transacción");
+        JMenuTipoTransaccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                JMenuTipoTransaccionActionPerformed(evt);
             }
         });
-        JMenuCatalogoBancos.add(jMenuItem5);
+        JMenuCatalogoBancos.add(JMenuTipoTransaccion);
 
-        jMenuItem6.setText("Mantenimiento de Cuentas Bancarias");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        JMenuCuentaBancaria.setText("Mantenimiento de Cuentas Bancarias");
+        JMenuCuentaBancaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                JMenuCuentaBancariaActionPerformed(evt);
             }
         });
-        JMenuCatalogoBancos.add(jMenuItem6);
+        JMenuCatalogoBancos.add(JMenuCuentaBancaria);
 
-        jMenuItem7.setText("Mantenimiento de Cuentahabientes");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+        JMenuCuentahabiente.setText("Mantenimiento de Cuentahabientes");
+        JMenuCuentahabiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
+                JMenuCuentahabienteActionPerformed(evt);
             }
         });
-        JMenuCatalogoBancos.add(jMenuItem7);
+        JMenuCatalogoBancos.add(JMenuCuentahabiente);
 
-        jMenuItem8.setText("Mantenimiento de Bancos");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        JMenuBancos.setText("Mantenimiento de Bancos");
+        JMenuBancos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                JMenuBancosActionPerformed(evt);
             }
         });
-        JMenuCatalogoBancos.add(jMenuItem8);
+        JMenuCatalogoBancos.add(JMenuBancos);
 
-        jMenuItem9.setText("Mantenimiento de Divisas");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        JMenuDivisas.setText("Mantenimiento de Divisas");
+        JMenuDivisas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                JMenuDivisasActionPerformed(evt);
             }
         });
-        JMenuCatalogoBancos.add(jMenuItem9);
+        JMenuCatalogoBancos.add(JMenuDivisas);
 
-        jMenuItem10.setText("Mantenimiento de Persona Bancaria");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        JMenuPersonaBancaria.setText("Mantenimiento de Persona Bancaria");
+        JMenuPersonaBancaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                JMenuPersonaBancariaActionPerformed(evt);
             }
         });
-        JMenuCatalogoBancos.add(jMenuItem10);
+        JMenuCatalogoBancos.add(JMenuPersonaBancaria);
 
         JMenuCatalogos.add(JMenuCatalogoBancos);
 
@@ -176,6 +200,14 @@ public class MDIFinanzas extends javax.swing.JFrame {
             }
         });
         JMenuProcesos.add(JMenuItemAsientoContable);
+
+        jMenuItem1.setText("Transaccion Bancaria");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        JMenuProcesos.add(jMenuItem1);
 
         JMenuBarFinanzas.add(JMenuProcesos);
 
@@ -209,84 +241,106 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void JMenuCuentasContablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCuentasContablesActionPerformed
         FrmMantCuentaContable frmMantCuentaContable = new FrmMantCuentaContable();
         JDesktopFinanzas.add(frmMantCuentaContable);
         frmMantCuentaContable.setVisible(true);
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_JMenuCuentasContablesActionPerformed
+
+    private void JMenuClasificacionCuentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuClasificacionCuentasActionPerformed
         FrmMantClasificacionCuentas frmMantClasificacionCuentas = new FrmMantClasificacionCuentas();
         JDesktopFinanzas.add(frmMantClasificacionCuentas);
         frmMantClasificacionCuentas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_JMenuClasificacionCuentasActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void JMenuTipoTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuTipoTransaccionActionPerformed
         // TODO add your handling code here:
-                fmTipo = new FrmTipoTransaccion();
+        fmTipo = new FrmTipoTransaccion();
         JDesktopFinanzas.add(fmTipo);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_JMenuTipoTransaccionActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-    //Banco
+    private void JMenuBancosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuBancosActionPerformed
+        //Banco
         formMantenimiento_Banco = new Mantenimiento_Banco();
         JDesktopFinanzas.add(formMantenimiento_Banco);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    }//GEN-LAST:event_JMenuBancosActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void JMenuDivisasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuDivisasActionPerformed
         // Moneda
         formMantenimiento_Moneda = new Mantenimiento_Moneda();
         JDesktopFinanzas.add(formMantenimiento_Moneda);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_JMenuDivisasActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-    //Tipo de persona 
+    private void JMenuPersonaBancariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuPersonaBancariaActionPerformed
+        //Tipo de persona 
         formMantenimiento_TipoPersona = new Mantenimiento_TipoPersona();
         JDesktopFinanzas.add(formMantenimiento_TipoPersona);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
+    }//GEN-LAST:event_JMenuPersonaBancariaActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-      try {
-          // TODO add your handling code here:
-          FrmBancaria = new FrmCuentaBancaria();
-      } catch (SQLException ex) {
-          Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    private void JMenuCuentaBancariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCuentaBancariaActionPerformed
+        try {
+            // TODO add your handling code here:
+            FrmBancaria = new FrmCuentaBancaria();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JDesktopFinanzas.add(FrmBancaria);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+    }//GEN-LAST:event_JMenuCuentaBancariaActionPerformed
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-      try {
-          // TODO add your handling code here:
-          FrmHabiente = new FrmCuentaHabiente();
-      } catch (SQLException ex) {
-          Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
-      }
+    private void JMenuCuentahabienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCuentahabienteActionPerformed
+        try {
+            // TODO add your handling code here:
+            FrmHabiente = new FrmCuentaHabiente();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         JDesktopFinanzas.add(FrmHabiente);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_JMenuCuentahabienteActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void JMenuTipoAsientoContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuTipoAsientoContableActionPerformed
         Mantenimiento_TipoAsiento FrmTipoAsiento = new Mantenimiento_TipoAsiento();
         FrmTipoAsiento.setVisible(true);
         JDesktopFinanzas.add(FrmTipoAsiento);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_JMenuTipoAsientoContableActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void JMenuPeriodoFiscalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuPeriodoFiscalActionPerformed
         Mantenimiento_PeriodoFiscal frm_mantPerFis = new Mantenimiento_PeriodoFiscal();
         frm_mantPerFis.setVisible(true);
         JDesktopFinanzas.add(frm_mantPerFis);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_JMenuPeriodoFiscalActionPerformed
 
     private void JMenuItemAsientoContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemAsientoContableActionPerformed
         FrmEncabezadoAsiento frmEncabezadoAsiento = new FrmEncabezadoAsiento();
         frmEncabezadoAsiento.setVisible(true);
     }//GEN-LAST:event_JMenuItemAsientoContableActionPerformed
 
+    private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
+       /*===== OPERACIÓN CERRAR SESIÓN ====
+          Variable entera respuesta_cs*/
+       Login frmLogin = new Login();
+        int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
 
+        if (respuesta_cs == 0) {
+            this.dispose();
+            frmLogin.setVisible(true);
+        }
+    }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       
+        try {
+            // TODO add your handling code here:
+            FrmTransacion = new Transaccion_Bancaria();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JDesktopFinanzas.add(FrmTransacion);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
-       
+
         //FLATLAF
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -296,7 +350,11 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MDIFinanzas().setVisible(true);
+                try {
+                    new MDIFinanzas().setVisible(true);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -305,23 +363,25 @@ public class MDIFinanzas extends javax.swing.JFrame {
     private javax.swing.JDesktopPane JDesktopFinanzas;
     private javax.swing.JMenu JMenuArchivo;
     private javax.swing.JMenu JMenuAyuda;
+    public static javax.swing.JMenuItem JMenuBancos;
     private javax.swing.JMenuBar JMenuBarFinanzas;
-    private javax.swing.JMenu JMenuCatalogoBancos;
-    private javax.swing.JMenu JMenuCatalogoContabilidad;
-    private javax.swing.JMenu JMenuCatalogos;
+    public static javax.swing.JMenu JMenuCatalogoBancos;
+    public static javax.swing.JMenu JMenuCatalogoContabilidad;
+    public static javax.swing.JMenu JMenuCatalogos;
+    private javax.swing.JMenuItem JMenuCerrarSesion;
+    public static javax.swing.JMenuItem JMenuClasificacionCuentas;
+    public static javax.swing.JMenuItem JMenuCuentaBancaria;
+    public static javax.swing.JMenuItem JMenuCuentahabiente;
+    public static javax.swing.JMenuItem JMenuCuentasContables;
+    public static javax.swing.JMenuItem JMenuDivisas;
     private javax.swing.JMenu JMenuHerramientas;
-    private javax.swing.JMenu JMenuInformes;
-    private javax.swing.JMenuItem JMenuItemAsientoContable;
-    private javax.swing.JMenu JMenuProcesos;
+    public static javax.swing.JMenu JMenuInformes;
+    public static javax.swing.JMenuItem JMenuItemAsientoContable;
+    public static javax.swing.JMenuItem JMenuPeriodoFiscal;
+    public static javax.swing.JMenuItem JMenuPersonaBancaria;
+    public static javax.swing.JMenu JMenuProcesos;
+    public static javax.swing.JMenuItem JMenuTipoAsientoContable;
+    public static javax.swing.JMenuItem JMenuTipoTransaccion;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }
