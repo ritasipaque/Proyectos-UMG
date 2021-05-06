@@ -6,6 +6,7 @@
 package Hoteleria.vista;
 
 import Hoteleria.datos.FormasDePagoDAO;
+import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.dominio.FormasDePago;
 import java.io.File;
 import java.net.UnknownHostException;
@@ -66,7 +67,6 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         }
     }
 
-
     public Mantenimiento_FormasDePago() {
         initComponents();
         habilitarAcciones();
@@ -114,34 +114,6 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                modelo1.addRow(datos);
                tabla.setModel(modelo1);
         }
-    }
-    private void GuardarEnBitacora(String accion, String codigoModulo, String idUsuario){
-        BitacoraDao BitacoraDAO = new BitacoraDao();
-        Bitacora AInsertar = new Bitacora();
-        boolean estado=false;
-        switch(accion){
-            case "Insertar":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Inserción");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-                break;
-            case "Modificacion":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Modificación");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-                break;
-            case "Eliminacion":
-                AInsertar.setId_Usuario(idUsuario);
-                AInsertar.setAccion("Eliminar");
-                AInsertar.setCodigoAplicacion(codigoModulo);estado=true;
-        }
-        if (estado==true) {
-        try {
-            BitacoraDAO.insert(AInsertar);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        }         
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -409,11 +381,12 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                             }
                     formasdepagodao.insert(guardarmetodo);
                     actualizartabla();
+                    GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+                    guardaraccion.GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioHoteleria);
                     JOptionPane.showMessageDialog(null, "Metodo de pago guardado correctamente");
                 }else{
                     JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
                 }
-           GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioSesion);
         }else{
             JOptionPane.showMessageDialog(null, "El codigo del metodo de pago, unicamente pueden ser números");
         }
@@ -436,11 +409,12 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                             }
                     formasdepagodao.update(modificarmetodo);
                     actualizartabla();
+                    GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+                    guardaraccion.GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioHoteleria);
                     JOptionPane.showMessageDialog(null, "Metodo de pago actualizado correctamente");
                 }else{
                     JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
-                } 
-           GuardarEnBitacora("Modificacion",codigoAplicacion,  Login.usuarioSesion);
+                }            
         }else{
             JOptionPane.showMessageDialog(null, "El codigo del metodo de pago, unicamente pueden ser números");
         }
@@ -480,8 +454,9 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         formasdepagodao.delete(eliminarmetodo);
         JOptionPane.showMessageDialog(null, "Forma de pago eliminado exitosamente");
         actualizartabla();
-        limpiar();
-       GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioSesion);
+        limpiar();          
+        GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+        guardaraccion.GuardarEnBitacora("Eliminacion",codigoAplicacion,  Login.usuarioHoteleria);
        
      }else{
          JOptionPane.showMessageDialog(null, "El codigo de metodo son solamente números");
