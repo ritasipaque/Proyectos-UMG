@@ -13,9 +13,11 @@ import Hoteleria.dominio.Huespedes;
 import Hoteleria.dominio.Reservacion;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
+    boolean activar_boton = false;
 
     /**
      * Creates new form ProcesoReservaDeHS
@@ -37,10 +40,13 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     }
 
     public void cargar_habitaciones() {
+        c_habitaciones.addItem("Seleccionar...");
         HabitacionesDAO personaDAO = new HabitacionesDAO();
         List<Habitaciones> habitaciones = personaDAO.select();
         for (Habitaciones habitacion : habitaciones) {
-            c_habitaciones.addItem(String.valueOf(habitacion.getId_Habitaciones()));
+            if (habitacion.getEstado_Habitacion()==1) {
+            c_habitaciones.addItem(String.valueOf(habitacion.getId_Habitaciones()));   
+            }
         }
     }
 
@@ -87,7 +93,16 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         fecha_actual.setDate(date);
     }
-
+    
+    public void calcular_dias(Date fechaEntrada, Date fechaSalida){
+        long diff = fechaSalida.getTime() - fechaEntrada.getTime();
+        TimeUnit time = TimeUnit.DAYS; 
+        long diffrence = time.convert(diff, TimeUnit.MILLISECONDS);
+        if (txt_precio.getText().length()!=0) {
+            int total=(int)(diffrence)*Integer.parseInt(txt_precio.getText());
+            txt_totalpago.setText(String.valueOf(total)); 
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -217,6 +232,12 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
         txt_nit.setEditable(false);
         txt_nit.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+
+        c_habitaciones.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                c_habitacionesItemStateChanged(evt);
+            }
+        });
 
         jLabel15.setText("ID habitación o salón:");
 
@@ -409,7 +430,8 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
     private void btn_validar_fechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_validar_fechaActionPerformed
         boolean reservada=false;
-        ReservacionDAO dao = new ReservacionDAO();
+        if (fecha_entrada.getDate()!=null&&fecha_salida.getDate()!=null) {
+          ReservacionDAO dao = new ReservacionDAO();
         String fechaentrada = new SimpleDateFormat("yyyy-MM-dd").format(fecha_entrada.getDate());
         String fechasalida = new SimpleDateFormat("yyyy-MM-dd").format(fecha_salida.getDate());
         
@@ -428,16 +450,33 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         
         if (reservada==false) {
             JOptionPane.showMessageDialog(null, "Habitación Disponible");
+            calcular_dias(fecha_entrada.getDate(), fecha_salida.getDate());
+            activar_boton=true;
         }else{
             JOptionPane.showMessageDialog(null, "Habitación no Disponible");
+            activar_boton=false;
+        }   
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecciones fechas para reservar");
         }
-        
-        
     }//GEN-LAST:event_btn_validar_fechaActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         limpiar();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void c_habitacionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_c_habitacionesItemStateChanged
+        if (c_habitaciones.getSelectedItem().toString().equals("Seleccionar...")) {
+            txt_precio.setText("");
+        }else{
+        int id=Integer.parseInt(c_habitaciones.getSelectedItem().toString());
+        HabitacionesDAO habitacionesdao = new HabitacionesDAO();
+        Habitaciones habitaciones = new Habitaciones();
+        habitaciones.setId_Habitaciones(id);
+        habitaciones = habitacionesdao.query(habitaciones);
+        txt_precio.setText(String.valueOf(habitaciones.getPrecio()));
+        }
+    }//GEN-LAST:event_c_habitacionesItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
