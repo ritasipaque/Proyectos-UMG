@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
+import Hoteleria.datos.GuardarBitacoraDAO;
 /**
  *
  * @author leelu
@@ -22,6 +23,7 @@ import seguridad.vista.Login;
 public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
+    String codigoAplicacion="2004";
     /**
      * Creates new form Mantenimiento_Huespedes
      */
@@ -414,6 +416,8 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             huespedesdao.insert(guardarmetodo);
             actualizartabla();
             JOptionPane.showMessageDialog(null, "Huesped guardado correctamente");
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                    guardarBitacora.GuardarEnBitacora("Insertar", (codigoAplicacion), Login.usuarioHoteleria);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
         }
@@ -442,6 +446,8 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             huespedesdao.update(modificarmetodo);
             actualizartabla();
             JOptionPane.showMessageDialog(null, "Huesped actualizado correctamente");
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                guardarBitacora.GuardarEnBitacora("Modificacion", (codigoAplicacion), Login.usuarioHoteleria);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
         }
@@ -488,6 +494,8 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             modulosDAO.delete(moduloEliminar);
             actualizartabla();
             JOptionPane.showMessageDialog(null, "Huesped eliminado correctamente");
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Eliminacion", (codigoAplicacion), Login.usuarioHoteleria);
         }else{
             JOptionPane.showMessageDialog(null, "El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error

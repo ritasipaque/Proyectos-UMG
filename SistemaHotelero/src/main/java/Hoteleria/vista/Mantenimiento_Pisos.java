@@ -6,6 +6,7 @@
 package Hoteleria.vista;
 
 import Hoteleria.datos.ConexionHoteleria;
+import Hoteleria.datos.GuardarBitacoraDAO;
 import java.io.File;
 import java.util.List;
 import javax.swing.ButtonGroup;
@@ -25,6 +26,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
+
 /**
  *
  * @author Jeff
@@ -34,10 +36,11 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
     ButtonGroup grupoDeRadios;
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    int codigoAplicacion = 2002;
 
     void habilitarAcciones() {
 
-        var codigoAplicacion = 2002;
+        codigoAplicacion = 2002;
         var usuario = Login.usuarioHoteleria;
 
         btnAgregar.setEnabled(false);
@@ -66,7 +69,7 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
             btnEliminar.setEnabled(true);
         }
     }
-    
+
     /**
      * Creates new form MantenimientoAplicacion
      */
@@ -421,23 +424,20 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
         if (txtNumeroDePiso.getText().length() != 0 && txtCantidadHabitaciones.getText().length() != 0
                 && txtaDescripcion.getText().length() != 0
                 && btnRadioActivo.isSelected() || btnRadioInactivo.isSelected()) {
-            {
-                pisosInsertar.setId_Numero_De_Piso(Integer.parseInt(txtNumeroDePiso.getText()));
-                pisosInsertar.setCantidad_De_Habitaciones(Integer.parseInt(txtCantidadHabitaciones.getText()));
-                pisosInsertar.setDescripcion_De_Piso(txtaDescripcion.getText());
-                if (btnRadioInactivo.isSelected()) {
-                    pisosInsertar.setEstado_De_Piso(0);
-                }
-                if (btnRadioActivo.isSelected()) {
-                    pisosInsertar.setEstado_De_Piso(1);
-                }
-//                if (btnRadioVacaciones.isSelected()) {
-//                    pisosInsertar.setEstado_De_Piso(2);
-//                }
-                btnRadioVacio.setSelected(true);
-                limpiar();
-                pisosDAO.insert(pisosInsertar);
+            pisosInsertar.setId_Numero_De_Piso(Integer.parseInt(txtNumeroDePiso.getText()));
+            pisosInsertar.setCantidad_De_Habitaciones(Integer.parseInt(txtCantidadHabitaciones.getText()));
+            pisosInsertar.setDescripcion_De_Piso(txtaDescripcion.getText());
+            if (btnRadioInactivo.isSelected()) {
+                pisosInsertar.setEstado_De_Piso(0);
             }
+            if (btnRadioActivo.isSelected()) {
+                pisosInsertar.setEstado_De_Piso(1);
+            }
+            btnRadioVacio.setSelected(true);
+            limpiar();
+            pisosDAO.insert(pisosInsertar);
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Insertar", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
         }
@@ -452,24 +452,24 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
         if (txtNumeroDePiso.getText().length() != 0 && txtCantidadHabitaciones.getText().length() != 0
                 && txtaDescripcion.getText().length() != 0
                 && btnRadioActivo.isSelected() || btnRadioInactivo.isSelected()) {
-            {
-                pisosModificar.setId_Numero_De_Piso(Integer.parseInt(txtNumeroDePiso.getText()));
-                pisosModificar.setCantidad_De_Habitaciones(Integer.parseInt(txtCantidadHabitaciones.getText()));
-                pisosModificar.setDescripcion_De_Piso(txtaDescripcion.getText());
-                if (btnRadioInactivo.isSelected()) {
-                    pisosModificar.setEstado_De_Piso(0);
-                }
-                if (btnRadioActivo.isSelected()) {
-                    pisosModificar.setEstado_De_Piso(1);
-                }
-                int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea modificar el registro?", "Modificar", JOptionPane.YES_NO_OPTION);
+            pisosModificar.setId_Numero_De_Piso(Integer.parseInt(txtNumeroDePiso.getText()));
+            pisosModificar.setCantidad_De_Habitaciones(Integer.parseInt(txtCantidadHabitaciones.getText()));
+            pisosModificar.setDescripcion_De_Piso(txtaDescripcion.getText());
+            if (btnRadioInactivo.isSelected()) {
+                pisosModificar.setEstado_De_Piso(0);
+            }
+            if (btnRadioActivo.isSelected()) {
+                pisosModificar.setEstado_De_Piso(1);
+            }
+            int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea modificar el registro?", "Modificar", JOptionPane.YES_NO_OPTION);
 
-                if (confirmar == 0) {
-                    btnRadioVacio.setSelected(true);
-                    limpiar();
-                    pisosDAO.update(pisosModificar);
-                    JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
-                }
+            if (confirmar == 0) {
+                btnRadioVacio.setSelected(true);
+                limpiar();
+                pisosDAO.update(pisosModificar);
+                JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
+                GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                guardarBitacora.GuardarEnBitacora("Modificacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
@@ -562,6 +562,8 @@ public class Mantenimiento_Pisos extends javax.swing.JInternalFrame {
             btnRadioVacio.setSelected(true);
             tabla();
             limpiar();
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Eliminacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
