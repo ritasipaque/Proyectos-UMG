@@ -121,20 +121,20 @@ public class GenerarPermisos {
                 }
             }
             if (modulo == "Hotelero") {
-                MDIHoteleria.menu_archivo.setVisible(false);
+                MDIHoteleria.menu_archivo.setVisible(true);
                 MDIHoteleria.menu_ayuda.setVisible(true);
-                MDIHoteleria.menu_catalogos.setVisible(false);
+                MDIHoteleria.menu_catalogos.setVisible(true);
                 MDIHoteleria.menu_herramientas.setVisible(true);
                 MDIHoteleria.menu_informes.setVisible(true);
-                MDIHoteleria.menu_procesos.setVisible(false);
+                MDIHoteleria.menu_procesos.setVisible(true);
                 MDIHoteleria.cerrar_sesion.setVisible(true);
+                MDIHoteleria.menu_procesos.setVisible(true);
+                MDIHoteleria.submenu_mantenimientos.setVisible(false);
+                MDIHoteleria.submenu_procesos.setVisible(false);
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
-                    System.out.println(varApp);
                     if (varApp >= 2001 && varApp <= 2200) {
-                        MDIHoteleria.menu_archivo.setVisible(true);
-                        MDIHoteleria.menu_catalogos.setVisible(true);
                         MDIHoteleria.submenu_mantenimientos.setVisible(true);
                         switch (varApp) {
                             case 2001:MDIHoteleria.mnt_amadellaves.setVisible(true);break;
@@ -147,7 +147,7 @@ public class GenerarPermisos {
                         }
                     }
                     if (varApp >= 2201 && varApp <= 2400) {
-                        MDIHoteleria.menu_procesos.setVisible(true);
+                        MDIHoteleria.submenu_procesos.setVisible(true);
                         switch (varApp) {
                             case 2201:
                             case 2300:
