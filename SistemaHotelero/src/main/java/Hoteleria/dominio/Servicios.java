@@ -10,7 +10,7 @@ package Hoteleria.dominio;
  * @author leone
  */
 public class Servicios {
-    private String id, nombre, descripcion, tipo, estado;
+    private String id, nombre, descripcion, tipo, estado, precio;
 
     public String getId() {
         return id;
@@ -50,5 +50,13 @@ public class Servicios {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
     }
 }
