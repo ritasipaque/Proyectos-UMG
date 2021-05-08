@@ -121,20 +121,20 @@ public class GenerarPermisos {
                 }
             }
             if (modulo == "Hotelero") {
-                MDIHoteleria.menu_archivo.setVisible(false);
+                MDIHoteleria.menu_archivo.setVisible(true);
                 MDIHoteleria.menu_ayuda.setVisible(true);
-                MDIHoteleria.menu_catalogos.setVisible(false);
+                MDIHoteleria.menu_catalogos.setVisible(true);
                 MDIHoteleria.menu_herramientas.setVisible(true);
                 MDIHoteleria.menu_informes.setVisible(true);
-                MDIHoteleria.menu_procesos.setVisible(false);
+                MDIHoteleria.menu_procesos.setVisible(true);
                 MDIHoteleria.cerrar_sesion.setVisible(true);
+                MDIHoteleria.menu_procesos.setVisible(true);
+                MDIHoteleria.submenu_mantenimientos.setVisible(false);
+                MDIHoteleria.submenu_procesos.setVisible(false);
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
-                    System.out.println(varApp);
                     if (varApp >= 2001 && varApp <= 2200) {
-                        MDIHoteleria.menu_archivo.setVisible(true);
-                        MDIHoteleria.menu_catalogos.setVisible(true);
                         MDIHoteleria.submenu_mantenimientos.setVisible(true);
                         switch (varApp) {
                             case 2001:MDIHoteleria.mnt_amadellaves.setVisible(true);break;
@@ -147,7 +147,7 @@ public class GenerarPermisos {
                         }
                     }
                     if (varApp >= 2201 && varApp <= 2400) {
-                        MDIHoteleria.menu_procesos.setVisible(true);
+                        MDIHoteleria.submenu_procesos.setVisible(true);
                         switch (varApp) {
                             case 2201:
                             case 2300:
@@ -159,6 +159,36 @@ public class GenerarPermisos {
                 }
             }
             if (modulo == "Comercial") {
+                
+    
+                
+//              
+//   MDIComercial1.M_deudor.setVisible(false);
+//    MDIComercial1.M_proveedor.setVisible(false); 
+//     MDIComercial1.M_producto.setVisible(false);
+//  MDIComercial.M_inventario.setVisible(false);
+      ejecutarPermisos.ejecutarBusqueda(usuario);
+ 
+   
+                   for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
+                    int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
+                    if (varApp >= 3000 && varApp <= 3360) {
+                  MDIComercial.M_venta.setVisible(true);
+                    MDIComercial.M_compras.setVisible(true);
+                      MDIComercial.M_inventario.setVisible(true);
+                        switch (varApp) {
+                             case 3001 :  MDIComercial.M_cliente.setVisible(true);break;  
+                             case 3002:   MDIComercial.M_deudor.setVisible(true);break;
+                             case 3003:     MDIComercial.M_proveedor.setVisible(true);break;
+                              case 3004:  MDIComercial.M_producto1.setVisible(true);break;
+
+                         
+                        }
+                    }
+                    
+                }
+                
+                
 
             }
         } catch (NumberFormatException ex) {
