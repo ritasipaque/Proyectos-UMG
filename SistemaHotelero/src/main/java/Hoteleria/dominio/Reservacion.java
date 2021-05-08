@@ -12,7 +12,7 @@ package Hoteleria.dominio;
  * @author leone
  */
 public class Reservacion {
-    private String id_reservacion, dpi, id_trabajador, f_reserva, desde, hasta, id_habitacion;
+    private String id_reservacion, dpi, f_reserva, desde, hasta, id_habitacion, precio, estado;
 
     public String getId_reservacion() {
         return id_reservacion;
@@ -28,14 +28,6 @@ public class Reservacion {
 
     public void setDpi(String dpi) {
         this.dpi = dpi;
-    }
-
-    public String getId_trabajador() {
-        return id_trabajador;
-    }
-
-    public void setId_trabajador(String id_trabajador) {
-        this.id_trabajador = id_trabajador;
     }
 
     public String getF_reserva() {
@@ -68,5 +60,21 @@ public class Reservacion {
 
     public void setId_habitacion(String id_habitacion) {
         this.id_habitacion = id_habitacion;
+    }
+
+    public String getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(String precio) {
+        this.precio = precio;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }
