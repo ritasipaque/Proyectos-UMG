@@ -55,19 +55,19 @@ public class GenerarPermisos {
             }
             if (modulo == "Finanzas") {
 
-                MDIFinanzas.JMenuCatalogos.setEnabled(false);
-                MDIFinanzas.JMenuProcesos.setEnabled(false);
-                MDIFinanzas.JMenuInformes.setEnabled(false);
-                MDIFinanzas.JMenuClasificacionCuentas.setEnabled(false);
-                MDIFinanzas.JMenuPeriodoFiscal.setEnabled(false);
-                MDIFinanzas.JMenuTipoTransaccion.setEnabled(false);
-                MDIFinanzas.JMenuCuentasContables.setEnabled(false);
-                MDIFinanzas.JMenuTipoAsientoContable.setEnabled(false);
-                MDIFinanzas.JMenuDivisas.setEnabled(false);
-                MDIFinanzas.JMenuCuentaBancaria.setEnabled(false);
-                MDIFinanzas.JMenuPersonaBancaria.setEnabled(false);
-                MDIFinanzas.JMenuBancos.setEnabled(false);
-                MDIFinanzas.JMenuCuentahabiente.setEnabled(false);
+                MDIFinanzas.JMenuCatalogos.setEnabled(true);
+                MDIFinanzas.JMenuProcesos.setEnabled(true);
+                MDIFinanzas.JMenuInformes.setEnabled(true);
+                MDIFinanzas.JMenuClasificacionCuentas.setEnabled(true);
+                MDIFinanzas.JMenuPeriodoFiscal.setEnabled(true);
+                MDIFinanzas.JMenuTipoTransaccion.setEnabled(true);
+                MDIFinanzas.JMenuCuentasContables.setEnabled(true);
+                MDIFinanzas.JMenuTipoAsientoContable.setEnabled(true);
+                MDIFinanzas.JMenuDivisas.setEnabled(true);
+                MDIFinanzas.JMenuCuentaBancaria.setEnabled(true);
+                MDIFinanzas.JMenuPersonaBancaria.setEnabled(true);
+                MDIFinanzas.JMenuBancos.setEnabled(true);
+                MDIFinanzas.JMenuCuentahabiente.setEnabled(true);
 
                 ejecutarPermisos.ejecutarBusqueda(usuario);
 
@@ -159,53 +159,34 @@ public class GenerarPermisos {
                 }
             }
             if (modulo == "Comercial") {
-                  MDIComercial1.M_venta.setVisible(true);
-                      MDIComercial1.M_compras.setVisible(true);
-     MDIComercial1.M_cliente.setVisible(true);
-              
-   MDIComercial1.M_deudor.setVisible(false);
-    MDIComercial1.M_proveedor.setVisible(true); 
-     MDIComercial1.M_producto.setVisible(true);
-
+                
+    
+                
+//              
+//   MDIComercial1.M_deudor.setVisible(false);
+//    MDIComercial1.M_proveedor.setVisible(false); 
+//     MDIComercial1.M_producto.setVisible(false);
+//  MDIComercial.M_inventario.setVisible(false);
       ejecutarPermisos.ejecutarBusqueda(usuario);
  
    
                    for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
-                    if (varApp >= 3001 && varApp <= 3360) {
-                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
-                        MDIHoteleria.submenu_procesos.setVisible(false);
+                    if (varApp >= 3000 && varApp <= 3360) {
+                  MDIComercial.M_venta.setVisible(true);
+                    MDIComercial.M_compras.setVisible(true);
+                      MDIComercial.M_inventario.setVisible(true);
                         switch (varApp) {
-                             case 3001:      MDIComercial1.M_cliente.setVisible(true);
-              
-   MDIComercial1.M_deudor.setVisible(true);
-    MDIComercial1.M_proveedor.setVisible(true); 
-     MDIComercial1.M_producto.setVisible(true);break;
-                        case 3200:    MDIComercial1.M_cliente.setVisible(false); break;
-                        
-              case 3020:   MDIComercial1.M_deudor.setVisible(true);break;
-             case 3100:     MDIComercial1.M_proveedor.setVisible(true);
-              
-
-     MDIComercial1.M_producto.setVisible(true);break;
+                             case 3001 :  MDIComercial.M_cliente.setVisible(true);break;  
+                             case 3002:   MDIComercial.M_deudor.setVisible(true);break;
+                             case 3003:     MDIComercial.M_proveedor.setVisible(true);break;
+                              case 3004:  MDIComercial.M_producto1.setVisible(true);break;
 
                          
                         }
                     }
-                    if (varApp >= 2202 && varApp <= 2400) {
-                        MDIHoteleria.submenu_procesos.setVisible(true);
-                        MDIHoteleria.submenu_mantenimientos.setVisible(true);
-                        switch (varApp) {
-                            case 2202:
-                                MDIHoteleria.mnt_formasdepago.setVisible(true);
-                                break;
-                            case 2400:
-                                MDIHoteleria.mnt_pisos.setVisible(true);
-                                break;
-                        }
-                    }
+                    
                 }
-                
                 
                 
 
