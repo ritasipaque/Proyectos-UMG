@@ -64,9 +64,9 @@ public class BitacoraDao extends Conexion {
      * declaracion estatico de selec ,insert y query
      */
 
-    private static final String SQL_INSERT = "INSERT INTO tbl_bitacora(PK_id_bitacora, PK_id_usuario, fecha,hora,ip,accion,tabla,host1 ) VALUES(?, ?,?, ?,?, ?,?,?)";
-    private static final String SQL_SELECT = "SELECT PK_id_bitacora, PK_id_usuario, fecha,hora,ip,accion, tabla ,host1 FROM tbl_bitacora";
-    private static final String SQL_QUERY = "SELECT PK_id_bitacora, PK_id_usuario, fecha,hora,ip,accion, tabla,host1 FROM tbl_bitacora WHERE PK_id_usuario = ?";
+    private static final String SQL_INSERT = "INSERT INTO tbl_bitacora( PK_id_usuario, fecha,hora,ip,accion,tabla,host1,modulo ) VALUES(?, ?,?, ?,?, ?,?,?)";
+    private static final String SQL_SELECT = "SELECT PK_id_bitacora, PK_id_usuario, fecha,hora,ip,accion, tabla ,host1,modulo FROM tbl_bitacora";
+    private static final String SQL_QUERY = "SELECT PK_id_bitacora, PK_id_usuario, fecha,hora,ip,accion, tabla,host1,modulo FROM tbl_bitacora WHERE PK_id_usuario = ?";
 
     /**
      *
@@ -104,6 +104,7 @@ public class BitacoraDao extends Conexion {
                 String ip = rs.getString("ip");
                 String accion = rs.getString("accion");
                 String CodigoAplicacion = rs.getString("tabla");
+                 String Modulo = rs.getString("modulo");
 
                 usuario = new Bitacora();
                 usuario.setId_Bitacora(id_bitacora);
@@ -113,7 +114,8 @@ public class BitacoraDao extends Conexion {
                 usuario.setHost(host);
                 usuario.setIp(ip);
                 usuario.setAccion(accion);
-                usuario.setcodigoAplicacion(CodigoAplicacion);
+                usuario.setCodigoAplicacion(CodigoAplicacion);
+                usuario.setModulo(Modulo);
 
                 usuarios.add(usuario);
             }
@@ -163,6 +165,8 @@ public class BitacoraDao extends Conexion {
                 String ip = rs.getString("ip");
                 String accion = rs.getString("accion");
                 String codigoAplicacion = rs.getString("tabla");
+                     String modulo = rs.getString("modulo");
+
 
                 /**
                  *
@@ -178,7 +182,8 @@ public class BitacoraDao extends Conexion {
         
                 usuario.setIp(ip);
                 usuario.setAccion(accion);
-                usuario.setcodigoAplicacion(codigoAplicacion);
+                usuario.setCodigoAplicacion(codigoAplicacion);
+                        usuario.setModulo(modulo);
 
                 usuarios.add(usuario);
 
@@ -209,14 +214,15 @@ public class BitacoraDao extends Conexion {
             
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setString(1,  insertar.getId_Bitacora());
-            stmt.setString(2,  insertar.getId_Usuario());System.out.println(insertar.getId_Usuario());
-            stmt.setString(3,  insertar.getFecha());
-            stmt.setString(4,   insertar.getHora());
-             stmt.setString(5,  insertar.getHost());
-                stmt.setString(6,  insertar.getAccion());
-            stmt.setString(7,  insertar.getcodigoAplicacion());
-             stmt.setString(8,  insertar.getIp());
+         
+            stmt.setString(1,  insertar.getId_Usuario());
+            stmt.setString(2,  insertar.getFecha());
+            stmt.setString(3,   insertar.getHora());
+             stmt.setString(4,  insertar.getHost());
+                stmt.setString(5,  insertar.getAccion());
+            stmt.setString(6,  insertar.getCodigoAplicacion());
+             stmt.setString(7,  insertar.getIp());
+                    stmt.setString(8,  insertar.getModulo());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
