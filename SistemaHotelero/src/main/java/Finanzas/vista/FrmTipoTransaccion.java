@@ -13,12 +13,14 @@ import java.util.logging.Logger;
 import Finanzas.dominio.TipoTransaccion;
 import Finanzas.datos.TipoTransaccionDAO;
 import Finanzas.datos.Conexion;
+
 import Hoteleria.datos.ConexionHoteleria;
 import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -379,9 +381,8 @@ public void buscarperfil(){
 
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
-      
-        
-       Map p = new HashMap();
+
+     Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -391,7 +392,7 @@ public void buscarperfil(){
                     + "/src/main/java/Finanzas/reportes/ReporteTipoTransaccion.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
-            view.setTitle("Reporte de Pisos");
+            view.setTitle("Reporte de Tipo Transaccion");
             view.setVisible(true);
 
         } catch (Exception e) {

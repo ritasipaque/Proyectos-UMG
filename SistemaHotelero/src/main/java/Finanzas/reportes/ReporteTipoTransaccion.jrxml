@@ -2,7 +2,8 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="21912583-9e49-48e3-9caa-9d4f1681c598">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="27"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM finanzas.TipoTransaccion;]]>
 	</queryString>
@@ -19,18 +20,14 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="144" splitType="Stretch">
+		<band height="97" splitType="Stretch">
 			<staticText>
-				<reportElement x="72" y="76" width="359" height="53" uuid="9ecb03f2-b156-47a4-bef2-ab473386fbf8"/>
+				<reportElement x="85" y="44" width="359" height="53" uuid="9ecb03f2-b156-47a4-bef2-ab473386fbf8"/>
 				<textElement>
 					<font fontName="Californian FB" size="36" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ Tipo De Transaccion:]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="83" height="76" uuid="dba73a7c-1af2-4fef-aea6-161f8e64e8f0"/>
-				<imageExpression><![CDATA["C:\\Users\\TagoKG\\Desktop\\Proyecto Seguridad\\SistemaHotelero\\src\\main\\java\\logo.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
