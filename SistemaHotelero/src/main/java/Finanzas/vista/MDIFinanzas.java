@@ -27,7 +27,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     private FrmCuentaBancaria FrmBancaria;
     private FrmCuentaHabiente FrmHabiente;
     private Mantenimiento_TipoAsiento FrmTipoAsiento;
-    private Emision_Cheque formEmision_Cheque;
+    private Emision__Cheque formEmision_Cheque;
     GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
 
@@ -353,7 +353,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
     private void JMenunEmisionChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenunEmisionChequeActionPerformed
         try {
-            formEmision_Cheque = new Emision_Cheque();
+            formEmision_Cheque = new Emision__Cheque();
         } catch (SQLException ex) {
             Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
         }
