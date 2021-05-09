@@ -140,8 +140,8 @@ public class ClienteDao {
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return venta;
-
+       return venta;
+ 
 
     
      }
