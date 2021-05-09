@@ -20,7 +20,7 @@ import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
- * @author SIPAQUE.RITA
+ * @author SIPAQUE.RITA - DIANA VICTORES 
  */
 public class MantenimientoProductos extends javax.swing.JInternalFrame {
 
@@ -385,7 +385,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         try {
             BitacoraDAO.insert(Insertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
