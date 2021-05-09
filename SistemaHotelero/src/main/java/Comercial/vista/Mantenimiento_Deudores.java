@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -106,7 +109,7 @@ producto.setText(Buscar.getProducto());
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        btnAyuda = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         i = new javax.swing.JTextField();
         cliente = new javax.swing.JTextField();
@@ -125,20 +128,20 @@ producto.setText(Buscar.getProducto());
         jLabel4 = new javax.swing.JLabel();
         ID = new javax.swing.JTextField();
         estatus = new javax.swing.JTextField();
-        btnElimianr = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Mantenimiento Deudor\n\n");
 
-        btnAyuda.setText("Ayuda");
-        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Ayuda");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAyudaActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -191,31 +194,31 @@ producto.setText(Buscar.getProducto());
             }
         });
 
-        btnElimianr.setText("Eliminar");
-        btnElimianr.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimianrActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setText("Buscar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
 
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+        jButton5.setText("Modificar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
+                jButton5ActionPerformed(evt);
             }
         });
 
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        jButton6.setText("Guardar");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                jButton6ActionPerformed(evt);
             }
         });
 
@@ -261,17 +264,17 @@ producto.setText(Buscar.getProducto());
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(47, 47, 47)
-                                .addComponent(btnAyuda))
+                                .addComponent(jButton1))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 72, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnGuardar)
+                        .addComponent(jButton6)
                         .addGap(65, 65, 65)
-                        .addComponent(btnModificar)
+                        .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnElimianr)
+                        .addComponent(jButton3)
                         .addGap(26, 26, 26)
-                        .addComponent(btnBuscar)
+                        .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(i, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(164, 164, 164))))
@@ -281,7 +284,7 @@ producto.setText(Buscar.getProducto());
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAyuda)
+                    .addComponent(jButton1)
                     .addComponent(jLabel1))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -314,10 +317,10 @@ producto.setText(Buscar.getProducto());
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(i, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnElimianr))
+                    .addComponent(jButton5)
+                    .addComponent(jButton4)
+                    .addComponent(jButton6)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
@@ -326,12 +329,12 @@ producto.setText(Buscar.getProducto());
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      try {
-            if ((new File("src\\main\\java\\Comercial\\ayuda\\Clientes.chm")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\Clientes.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\ayuda\\Clientes.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\Clientes.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -342,7 +345,7 @@ producto.setText(Buscar.getProducto());
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAyudaActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nitActionPerformed
         // TODO add your handling code here:
@@ -352,7 +355,7 @@ producto.setText(Buscar.getProducto());
         // TODO add your handling code here:
     }//GEN-LAST:event_estatusActionPerformed
 
-    private void btnElimianrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimianrActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         DeudoresDAO acreedor = new DeudoresDAO ();
 
         Deudores vendedorAEliminar = new Deudores();
@@ -371,9 +374,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora AInsertar = new Bitacora();
 
-        AInsertar.setId_Usuario("Usuario");
+       
         AInsertar.setAccion("Eliminar");
-        AInsertar.setCodigoAplicacion("03");
+         GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ AInsertar.setCodigoAplicacion("3002");
+           AInsertar.setModulo("Comercial");
+ AInsertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -381,18 +388,22 @@ producto.setText(Buscar.getProducto());
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnElimianrActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         buscarVendedor();
         BitacoraDao BitacoraDAO = new BitacoraDao();
 
         Bitacora AInsertar = new Bitacora();
 
-        AInsertar.setId_Usuario("Usuario");
+       
         AInsertar.setAccion("Buscar");
-        AInsertar.setCodigoAplicacion("03");
+         GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ AInsertar.setCodigoAplicacion("3002");
+           AInsertar.setModulo("Comercial");
+ AInsertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -400,9 +411,9 @@ producto.setText(Buscar.getProducto());
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
        DeudoresDAO dao = new   DeudoresDAO  ();
 
         Deudores  modificar = new   Deudores ();
@@ -421,9 +432,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora AInsertar = new Bitacora();
 
-        AInsertar.setId_Usuario("Usuario");
+      
         AInsertar.setAccion("Modificar");
-        AInsertar.setCodigoAplicacion("03");
+   GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ AInsertar.setCodigoAplicacion("3002");
+           AInsertar.setModulo("Comercial");
+ AInsertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -431,9 +446,9 @@ producto.setText(Buscar.getProducto());
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
         DeudoresDAO    AcreedoresDAO = new   DeudoresDAO  ();
 
@@ -452,9 +467,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora Insertar = new Bitacora();
 
-        Insertar.setId_Usuario("Usuario");
+      
         Insertar.setAccion("insertar");
-        Insertar.setCodigoAplicacion("03");
+          GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ Insertar.setCodigoAplicacion("3002");
+           Insertar.setModulo("Comercial");
+ Insertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(Insertar);
         } catch (UnknownHostException ex) {
@@ -462,33 +481,33 @@ producto.setText(Buscar.getProducto());
         }
 
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ID;
-    private javax.swing.JTable JtProductos1;
-    private javax.swing.JButton btnAyuda;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnElimianr;
-    private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnModificar;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField cliente;
-    private javax.swing.JTextField estatus;
-    private javax.swing.JTextField i;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField monto;
-    private javax.swing.JTextField nit;
-    private javax.swing.JTextField producto;
-    private javax.swing.JTextField telefono;
+    private static javax.swing.JTextField ID;
+    private static javax.swing.JTable JtProductos1;
+    private static javax.swing.ButtonGroup buttonGroup1;
+    private static javax.swing.JTextField cliente;
+    private static javax.swing.JTextField estatus;
+    private static javax.swing.JTextField i;
+    private static javax.swing.JButton jButton1;
+    private static javax.swing.JButton jButton3;
+    private static javax.swing.JButton jButton4;
+    private static javax.swing.JButton jButton5;
+    private static javax.swing.JButton jButton6;
+    private static javax.swing.JLabel jLabel1;
+    private static javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel jLabel3;
+    private static javax.swing.JLabel jLabel4;
+    private static javax.swing.JLabel jLabel5;
+    private static javax.swing.JLabel jLabel6;
+    private static javax.swing.JLabel jLabel7;
+    private static javax.swing.JLabel jLabel8;
+    private static javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JTextField monto;
+    private static javax.swing.JTextField nit;
+    private static javax.swing.JTextField producto;
+    private static javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
