@@ -237,9 +237,9 @@ public class Login extends javax.swing.JFrame {
 
                         case "Area Finanzas":
                                  try {
-                            usuarioHoteleria = txtUsuario.getText();
-                            MDIHoteleria menuHoteleria = new MDIHoteleria();
-                            menuHoteleria.setVisible(true);
+                            usuarioFianzas = txtUsuario.getText();
+                            MDIFinanzas menuFinanzas = new MDIFinanzas();
+                            menuFinanzas.setVisible(true);
                             this.dispose();
                             } catch (Exception e) {
                                 System.out.println(e);
