@@ -6,13 +6,18 @@
 package Hoteleria.vista;
 
 import Hoteleria.datos.EntregaHabitacionDAO;
+import Hoteleria.datos.FacturacionDAO;
 import Hoteleria.datos.FormasDePagoDAO;
 import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.dominio.EntregaHabitaciones;
+import Hoteleria.dominio.Facturacion;
 import Hoteleria.dominio.FormasDePago;
 import Hoteleria.dominio.Habitaciones;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,14 +39,21 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     String codigoAplicacion = "2100";
-    boolean option=false;
+    boolean option=false, option2=false;
 
     /**
      * Creates new form Mantenimiento_FomasDePago
      */
     public Asignaciones_Habitaciones() {
         initComponents();
-
+        jComboBox2.addItem("Seleccione...");
+        fecha_actual();
+    }
+    
+    public void fecha_actual() {
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        fecha_actual.setDate(date);
     }
 
     private static boolean isNumeric(String cadena) {
@@ -137,19 +149,19 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         BtnMod = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
         BtnBus = new javax.swing.JButton();
-        BtnElim = new javax.swing.JButton();
         btn_ayuda = new javax.swing.JButton();
         TXT_Nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         TXT_reserva = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        TXT_fecha = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         TXT_Estado = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         TXT_factura = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        fecha_actual = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -174,14 +186,14 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Nombre de la persona");
 
-        BtnIng.setText("AGREGAR");
+        BtnIng.setText("GUARDAR");
         BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnIngActionPerformed(evt);
             }
         });
 
-        BtnMod.setText("EDITAR");
+        BtnMod.setText("MODIFICAR");
         BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnModActionPerformed(evt);
@@ -199,13 +211,6 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnBusActionPerformed(evt);
-            }
-        });
-
-        BtnElim.setText("ELIMINAR");
-        BtnElim.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnElimActionPerformed(evt);
             }
         });
 
@@ -229,13 +234,16 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox2ItemStateChanged(evt);
+        jLabel9.setText("ID Entrega");
+
+        jButton1.setText("CARGAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel9.setText("ID Entrega");
+        fecha_actual.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -259,19 +267,16 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
                                     .addComponent(TXT_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(TXT_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(TXT_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(txt_Habitaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(149, 149, 149)
-                                .addComponent(btn_cancelar))
                             .addComponent(jLabel8)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -286,13 +291,15 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(18, 18, 18)
                                             .addComponent(BtnMod)
-                                            .addGap(21, 21, 21)
-                                            .addComponent(BtnElim)
-                                            .addGap(27, 27, 27)
+                                            .addGap(26, 26, 26)
+                                            .addComponent(btn_cancelar)
+                                            .addGap(18, 18, 18)
                                             .addComponent(btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGap(28, 28, 28)
-                                            .addComponent(TXT_reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(TXT_reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -301,13 +308,14 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBus)
                     .addComponent(jLabel9)
                     .addComponent(txt_Entrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TXT_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -321,17 +329,16 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
                     .addComponent(TXT_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel3)
-                        .addGap(32, 32, 32))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(TXT_reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel6))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TXT_reserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(TXT_fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                        .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(TXT_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -339,10 +346,9 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
                     .addComponent(BtnMod)
-                    .addComponent(BtnElim)
-                    .addComponent(btn_ayuda))
-                .addGap(12, 12, 12)
-                .addComponent(btn_cancelar))
+                    .addComponent(btn_ayuda)
+                    .addComponent(btn_cancelar))
+                .addGap(35, 35, 35))
         );
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
@@ -433,7 +439,6 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         int id_habitacion=Integer.parseInt(txt_Habitaciones.getText());
         String nombre=TXT_Nombre.getText();
         int reserva=Integer.parseInt(TXT_reserva.getText());
-        int fecha=Integer.parseInt(TXT_fecha.getText());
         
     }//GEN-LAST:event_BtnIngActionPerformed
 
@@ -448,10 +453,6 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         limpiar();
     }//GEN-LAST:event_btn_cancelarActionPerformed
-
-    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
-
-    }//GEN-LAST:event_BtnElimActionPerformed
 
     private void btn_ayudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ayudaActionPerformed
         try {
@@ -472,49 +473,69 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
             
             if (jComboBox1.getSelectedItem().toString() == "Entregar") {
-                option=true;
+                option=false;option=true;
                 jComboBox2.removeAllItems();
-                jComboBox2.addItem("Seleccionar...");
-                EntregaHabitacionDAO DAO = new EntregaHabitacionDAO();
+                jComboBox2.addItem("Seleccione...");
+                String datos[] = new String[8];
+                FacturacionDAO ama_De_Llaves_DAO = new FacturacionDAO();
+                List<Facturacion> ama_De_Llaves = ama_De_Llaves_DAO.select();
+                for (Facturacion ama_De_Llave : ama_De_Llaves) {
+                    jComboBox2.addItem(String.valueOf(ama_De_Llave.getId_Factura()));
+        }
+
+            } else if (jComboBox1.getSelectedItem().toString() == "Recibir") {
+                option=true;option2=false;
+                jComboBox2.removeAllItems();
+                jComboBox2.addItem("Seleccione...");
+                 EntregaHabitacionDAO DAO = new EntregaHabitacionDAO();
                 List<EntregaHabitaciones>entrega = DAO.select();
                 for (EntregaHabitaciones habitacion:entrega) {
                     if (habitacion.getEstado().equals("1")) {
                         jComboBox2.addItem(habitacion.getPk_id_entrega());
                     }
                 }
-
-            } else if (jComboBox1.getSelectedItem().toString() == "Recibir") {
-                jComboBox2.removeAllItems();
-                jComboBox2.addItem("wuenas");
             }
         
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
-    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
-        if (option==true) {
-             EntregaHabitacionDAO DAO = new EntregaHabitacionDAO();
-                List<EntregaHabitaciones>entrega = DAO.select();
-                for (EntregaHabitaciones habitacion:entrega) {
-                    if (habitacion.getEstado().equals("1")) {
-                        jComboBox2.addItem(habitacion.getPk_id_entrega());
-                    }
-                }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (option) {
+            if (jComboBox2.getSelectedItem().toString()!= "Seleccione...") {
+                EntregaHabitacionDAO DAO = new EntregaHabitacionDAO();
+                EntregaHabitaciones entrega = new EntregaHabitaciones();
+                
+                entrega.setPk_id_entrega(jComboBox2.getSelectedItem().toString());
+                entrega = DAO.query(entrega);
+                
+                txt_Entrega.setText(entrega.getPk_id_entrega());
+                TXT_factura.setText(entrega.getNo_factura());
+                txt_Habitaciones.setText(entrega.getPk_id_habitaciones());
+                TXT_Nombre.setText(entrega.getNombre());
+                TXT_reserva.setText(entrega.getNo_reserva());
+                TXT_Estado.setText(entrega.getEstado());
+            }
         }
-    }//GEN-LAST:event_jComboBox2ItemStateChanged
+        if (option2) {
+            if (jComboBox2.getSelectedItem().toString()!= "Seleccione...") {
+                
+            }
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBus;
-    private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
     private javax.swing.JTextField TXT_Estado;
     private javax.swing.JTextField TXT_Nombre;
     private javax.swing.JTextField TXT_factura;
-    private javax.swing.JTextField TXT_fecha;
     private javax.swing.JTextField TXT_reserva;
     private javax.swing.JButton btn_ayuda;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser fecha_actual;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
