@@ -5,6 +5,9 @@
  */
 package Finanzas.vista;
 
+import Finanzas.dominio.PartidaContable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego Vásquez
@@ -14,8 +17,38 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
     /**
      * Creates new form CodigosPartidaContable
      */
+    
+    private void cargarTabla() {
+
+        PartidaContable objPartida = new PartidaContable();
+
+        objPartida.getTablaRegistros();
+
+        int contI = 0;
+        contI = objPartida.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][4];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrixData[i][j] = objPartida.getTablaRegistros()[i][j];
+            }
+        }
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) TblPartidas.getModel();
+        modeloTabla.setRowCount(contI);
+        modeloTabla.setColumnCount(4);
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                TblPartidas.setValueAt(matrixData[i][j], i, j);;
+            }
+        }
+    }
+    
     public CodigosPartidaContable() {
         initComponents();
+        cargarTabla();
     }
 
     /**

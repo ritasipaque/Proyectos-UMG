@@ -26,7 +26,7 @@ public class AsientoContableDAO extends Conexion {
             }
 
         } catch (Exception ex) {
-            System.out.println("¡ERROR!\n"+ex.toString());
+            System.out.println("¡ERROR!\n" + ex.toString());
         }
 
         return NumeroAsientoContable;

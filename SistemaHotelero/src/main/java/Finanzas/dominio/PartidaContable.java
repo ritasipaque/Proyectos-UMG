@@ -31,20 +31,35 @@ public class PartidaContable {
             if (incremento >= 10 && incremento <= 99) {
                 CodigoRegistro = "00000" + String.valueOf(incremento);
             }
-            if(incremento >=100 && incremento <=999){
+            if (incremento >= 100 && incremento <= 999) {
                 CodigoRegistro = "0000" + String.valueOf(incremento);
             }
-            if(incremento >=1000 && incremento <=9999){
+            if (incremento >= 1000 && incremento <= 9999) {
                 CodigoRegistro = "000" + String.valueOf(incremento);
             }
-            if(incremento >=10000 && incremento <=99999){
+            if (incremento >= 10000 && incremento <= 99999) {
                 CodigoRegistro = "00" + String.valueOf(incremento);
             }
-            if(incremento >=100000 && incremento <=999999){
+            if (incremento >= 100000 && incremento <= 999999) {
                 CodigoRegistro = "0" + String.valueOf(incremento);
             }
 
         }
         return CodigoRegistro;
+    }
+
+    public String[][] getTablaRegistros() {
+        String[][] matrixRegistros;
+
+        partidaContableDAO.TablaDespliegue();
+
+        matrixRegistros = new String[partidaContableDAO.TablaDespliegue().length][4];
+
+        for (int i = 0; i < partidaContableDAO.TablaDespliegue().length; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrixRegistros[i][j] = partidaContableDAO.TablaDespliegue()[i][j];
+            }
+        }
+        return matrixRegistros;
     }
 }
