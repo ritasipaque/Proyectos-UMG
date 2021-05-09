@@ -18,10 +18,10 @@ import java.util.List;
  * @author leone
  */
 public class ServiciosDAO {
-    private static final String SQL_INSERT = "insert into tbl_servicios values(?,?,?,?,?)";
-    private static final String SQL_UPDATE = "UPDATE tbl_servicios SET nombre_servicio=?, descripcion_servicio=?, tipo_servicio=?, estado_servicio=? WHERE PK_id_servicio=?";
-    private static final String SQL_SELECT = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, tipo_servicio, estado_servicio FROM tbl_servicios";
-    private static final String SQL_QUERY = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, tipo_servicio, estado_servicio FROM tbl_servicios WHERE PK_id_servicio = ?";
+    private static final String SQL_INSERT = "insert into tbl_servicios values(?,?,?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_servicios SET nombre_servicio=?, descripcion_servicio=?, precio_servicio=?, tipo_servicio=?, estado_servicio=? WHERE PK_id_servicio=?";
+    private static final String SQL_SELECT = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, precio_servicio, tipo_servicio, estado_servicio FROM tbl_servicios";
+    private static final String SQL_QUERY = "SELECT PK_id_servicio, nombre_servicio, descripcion_servicio, precio_servicio, tipo_servicio, estado_servicio FROM tbl_servicios WHERE PK_id_servicio = ?";
     private static final String SQL_DELETE = "delete from tbl_servicios where PK_id_servicio = ?";  
     
     public int insert(Servicios servicios) {
@@ -34,8 +34,9 @@ public class ServiciosDAO {
             stmt.setString(1, servicios.getId());
             stmt.setString(2, servicios.getNombre());
             stmt.setString(3, servicios.getDescripcion());
-            stmt.setString(4, servicios.getTipo());
-            stmt.setString(5, servicios.getEstado());
+            stmt.setString(4, servicios.getPrecio());
+            stmt.setString(5, servicios.getTipo());
+            stmt.setString(6, servicios.getEstado());
            
 
             //System.out.println("ejecutando query:" + SQL_INSERT);
@@ -61,9 +62,10 @@ public class ServiciosDAO {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, servicios.getNombre());
             stmt.setString(2, servicios.getDescripcion());
-            stmt.setString(3, servicios.getTipo()); 
-            stmt.setString(4, servicios.getEstado());
-            stmt.setString(5, servicios.getId());
+            stmt.setString(3, servicios.getPrecio()); 
+            stmt.setString(4, servicios.getTipo()); 
+            stmt.setString(5, servicios.getEstado());
+            stmt.setString(6, servicios.getId());
             
             rows = stmt.executeUpdate();
             
@@ -92,6 +94,7 @@ public class ServiciosDAO {
                 String id = rs.getString("PK_id_servicio");
                 String nombre = rs.getString("nombre_servicio");
                 String descripcion = rs.getString("descripcion_servicio");
+                String precio = rs.getString("precio_servicio");
                 String tipo = rs.getString("tipo_servicio");
                 String estado = rs.getString("estado_servicio");
                 
@@ -99,6 +102,7 @@ public class ServiciosDAO {
                 servicio.setId(id);
                 servicio.setNombre(nombre);
                 servicio.setDescripcion(descripcion);
+                servicio.setPrecio(precio);
                 servicio.setTipo(tipo);
                 servicio.setEstado(estado);
                 
@@ -133,6 +137,7 @@ public class ServiciosDAO {
                 String id = rs.getString("PK_id_servicio");
                 String nombre = rs.getString("nombre_servicio");
                 String descripcion = rs.getString("descripcion_servicio");
+                String precio = rs.getString("precio_servicio");
                 String tipo = rs.getString("tipo_servicio");
                 String estado = rs.getString("estado_servicio");
 
@@ -140,6 +145,7 @@ public class ServiciosDAO {
                 servicios.setId(id);
                 servicios.setNombre(nombre);
                 servicios.setDescripcion(descripcion);
+                servicios.setPrecio(precio);
                 servicios.setTipo(tipo);
                 servicios.setEstado(estado);
             }

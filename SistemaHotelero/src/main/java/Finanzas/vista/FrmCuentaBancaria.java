@@ -14,9 +14,18 @@ import Finanzas.dominio.CuentaHabiente;
 import Finanzas.datos.CuentaHabienteDAO;
 import Finanzas.dominio.Banco;
 import Finanzas.datos.BancoDAO;
+import Finanzas.datos.Conexion;
 import com.mysql.cj.Query;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 /**
@@ -121,6 +130,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         btnLimpiar3 = new javax.swing.JButton();
         TxtBuscar = new javax.swing.JTextField();
         TxtNumero = new javax.swing.JTextField();
+        BtnElim1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableTransaccion = new javax.swing.JTable();
@@ -185,7 +195,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         TxtBanco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         BtnElim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        BtnElim.setText("Eliminar");
+        BtnElim.setText("Imprimir:");
         BtnElim.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,6 +223,15 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
         TxtBuscar.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
+        BtnElim1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnElim1.setText("Eliminar");
+        BtnElim1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnElim1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnElim1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -223,10 +242,11 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(106, 106, 106)
                         .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addGap(32, 32, 32)
+                        .addComponent(BtnElim1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(label10)
@@ -254,7 +274,11 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TxtMoneda)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 15, Short.MAX_VALUE))
+                                    .addComponent(TxtMoneda))))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(252, 252, 252)
@@ -271,7 +295,8 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(TxtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -298,9 +323,9 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39))
+                    .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnElim1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalles"));
@@ -359,7 +384,7 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         pack();
@@ -392,27 +417,28 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
           }
            
     }//GEN-LAST:event_BtnIngActionPerformed
-
-    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
-       CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
-        CuentaBancaria cuentaeliminar = new CuentaBancaria();
-        //Metodo Para Eliminar con el Numero de Cuenta Bancaria
-        cuentaeliminar.setNumero_CuentaBancaria((TxtBuscar.getText()));
-        cuentadao.delete(cuentaeliminar);
+ 
+    
+     private Connection connection = null;
      
-           llenadoDeTablas();
-           
-        BitacoraDao BitacoraDAO = new BitacoraDao();
-        Bitacora AInsertar = new Bitacora();
-        AInsertar.setId_Usuario("FrmCuentaBancaria");
-        AInsertar.setAccion("Eliminar");
-        AInsertar.setCodigoAplicacion("1006");
-        try{
-            BitacoraDAO.insert(AInsertar);
-            
-        } catch (UnknownHostException ex) {
-              Logger.getLogger(FrmCuentaBancaria.class.getName()).log(Level.SEVERE, null, ex);
-          }
+     
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Finanzas/reportes/reporteCuentaBancaria.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Cuenta Bancaria");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void Cbox_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_CuentaActionPerformed
@@ -477,9 +503,14 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void BtnElim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElim1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnElim1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnElim1;
     private javax.swing.JButton BtnIng;
     private javax.swing.JComboBox<String> Cbox_Banco;
     private javax.swing.JComboBox<String> Cbox_Cuenta;

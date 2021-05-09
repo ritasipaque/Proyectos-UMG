@@ -5,18 +5,27 @@
  */
 package Hoteleria.vista;
 
+import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Servicios;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
@@ -86,12 +95,14 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         txt_id.setText("");
         txt_nombre.setText("");
         txt_descripcion.setText("");
+        txt_precio.setText("");
     }
     private void actualizartabla(){
         modelo1=new DefaultTableModel();   
         modelo1.addColumn("ID");      
         modelo1.addColumn("NOMBRE");
-        modelo1.addColumn("DESCRIPCION");      
+        modelo1.addColumn("DESCRIPCION");  
+        modelo1.addColumn("PRECIO");     
         modelo1.addColumn("TIPO");    
         modelo1.addColumn("ESTADO");
         tabla.setModel(modelo1);
@@ -101,22 +112,25 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(2).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(3).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(4).setCellRenderer(centro);
+        tabla.getColumnModel().getColumn(5).setCellRenderer(centro);
         
         tabla.getColumnModel().getColumn(0).setPreferredWidth(25);        
-        tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(350);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(25);
-        tabla.getColumnModel().getColumn(2).setPreferredWidth(25);
+        tabla.getColumnModel().getColumn(1).setPreferredWidth(75);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(275);
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(75);
+        tabla.getColumnModel().getColumn(4).setPreferredWidth(75);
+        tabla.getColumnModel().getColumn(5).setPreferredWidth(75);
         
         ServiciosDAO serviciosdao = new ServiciosDAO();
         List<Servicios> servicios = serviciosdao.select();
-        String datos[]= new String[5];
+        String datos[]= new String[6];
         for (Servicios servicio : servicios) {
                datos[0]=servicio.getId();
                datos[1]=servicio.getNombre();
                datos[2]=servicio.getDescripcion();
-               datos[3]=servicio.getTipo();  
-               datos[4]=servicio.getEstado();  
+               datos[3]=servicio.getPrecio();
+               datos[4]=servicio.getTipo();  
+               datos[5]=servicio.getEstado();  
                modelo1.addRow(datos);
                tabla.setModel(modelo1);
         }
@@ -153,7 +167,10 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         txt_adicional = new javax.swing.JRadioButton();
         aux_tipo = new javax.swing.JRadioButton();
         BtnElim = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        BtnAyuda = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txt_precio = new javax.swing.JTextField();
+        BtnReporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -250,10 +267,19 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("AYUDA");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BtnAyuda.setText("AYUDA");
+        BtnAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BtnAyudaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("PRECIO:");
+
+        BtnReporte.setText("REPORTE");
+        BtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteActionPerformed(evt);
             }
         });
 
@@ -276,9 +302,6 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(BtnBus))
                             .addComponent(txt_nombre)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -305,11 +328,20 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                             .addComponent(BtnIng, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnMod)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(BtnAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_precio)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -327,14 +359,17 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_precio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_basico)
-                            .addComponent(txt_adicional)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5)
+                        .addComponent(txt_basico)
+                        .addComponent(txt_adicional))
                     .addComponent(aux_tipo))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,7 +386,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnElim)
-                    .addComponent(jButton2))
+                    .addComponent(BtnAyuda)
+                    .addComponent(BtnReporte))
                 .addGap(13, 13, 13))
         );
 
@@ -378,7 +414,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -409,7 +445,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
     if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
         if (txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&txt_id.getText().length()!=0&&(
-            txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())) {
+            txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())
+            &&txt_precio.getText().length()!=0) {
             ServiciosDAO serviciosdao = new ServiciosDAO();
             Servicios servicios = new Servicios();
             servicios.setId(txt_id.getText());
@@ -427,6 +464,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
             }else if(txt_inactivo.isSelected()){
                 servicios.setEstado("0");
             }
+            servicios.setPrecio(txt_precio.getText());
             serviciosdao.insert(servicios);
             JOptionPane.showMessageDialog(null, "Servicio agregado correctamente");
             limpiar();actualizartabla();
@@ -443,7 +481,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
     if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
         if (txt_nombre.getText().length()!=0&&txt_descripcion.getText().length()!=0&&txt_id.getText().length()!=0&&(
-            txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())) {
+            txt_basico.isSelected()||txt_adicional.isSelected())&&(txt_activo.isSelected()||txt_inactivo.isSelected())
+            &&txt_precio.getText().length()!=0) {
                 ServiciosDAO serviciosdao = new ServiciosDAO();
                 Servicios servicios = new Servicios();
                 servicios.setId(txt_id.getText());
@@ -461,6 +500,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 }else if(txt_inactivo.isSelected()){
                     servicios.setEstado("0");
                 }
+                servicios.setPrecio(txt_precio.getText());
                 serviciosdao.update(servicios);
                 JOptionPane.showMessageDialog(null, "Servicio modificado correctamente");
                 limpiar();actualizartabla();
@@ -480,23 +520,24 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
     if(Mantenimiento_Servicios.isNumeric(txt_id.getText())){
-        ServiciosDAO formasdepagodao = new ServiciosDAO();
-        Servicios buscarmetodo = new Servicios();
+        ServiciosDAO serviciodao = new ServiciosDAO();
+        Servicios servicio = new Servicios();
         
-        buscarmetodo.setId(txt_id.getText());
-        buscarmetodo = formasdepagodao.query(buscarmetodo);
-        txt_nombre.setText(buscarmetodo.getNombre());
-        txt_descripcion.setText(buscarmetodo.getDescripcion());
-            if ("0".equals(buscarmetodo.getEstado())) {
+        servicio.setId(txt_id.getText());
+        servicio = serviciodao.query(servicio);
+        txt_nombre.setText(servicio.getNombre());
+        txt_descripcion.setText(servicio.getDescripcion());
+            if ("0".equals(servicio.getEstado())) {
                 txt_inactivo.setSelected(true);
-                }else if("1".equals(buscarmetodo.getEstado())){
+                }else if("1".equals(servicio.getEstado())){
                     txt_activo.setSelected(true);
                 }
-            if ("1".equals(buscarmetodo.getTipo())) {
+            if ("1".equals(servicio.getTipo())) {
                 txt_basico.setSelected(true);
-            }else if("2".equals(buscarmetodo.getTipo())){
+            }else if("2".equals(servicio.getTipo())){
                 txt_adicional.setSelected(true);
             }
+            txt_precio.setText(servicio.getPrecio());
         
     }
     }//GEN-LAST:event_BtnBusActionPerformed
@@ -518,7 +559,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
      }
     }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
     try {
             if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaServicios.chm")).exists()) {
                 Process p = Runtime
@@ -532,7 +573,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BtnAyudaActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
     MDIHoteleria.logo.setVisible(true);
@@ -541,24 +582,46 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
     MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
+    private Connection connection = null;
+
+    private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try {
+            connection = ConexionHoteleria.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Hoteleria/reportes/ReporteServicios.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BtnReporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAyuda;
     private javax.swing.JButton BtnBus;
     private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnReporte;
     private javax.swing.ButtonGroup ESTADO;
     private javax.swing.ButtonGroup TIPO;
     private javax.swing.JRadioButton aux_estado;
     private javax.swing.JRadioButton aux_tipo;
     private javax.swing.JButton btn_cancelar;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -571,5 +634,6 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_id;
     private javax.swing.JRadioButton txt_inactivo;
     private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_precio;
     // End of variables declaration//GEN-END:variables
 }
