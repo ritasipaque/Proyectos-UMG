@@ -51,6 +51,11 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
         jLabel3.setText("¿No encuentra el asiento contable?");
 
         jButton2.setText("Nuevo Asiento Contable");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("?");
 
@@ -100,6 +105,11 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        FrmNuevoEncabezadoAsiento frmNuevoEncabezadoAsiento = new FrmNuevoEncabezadoAsiento();
+        frmNuevoEncabezadoAsiento.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
