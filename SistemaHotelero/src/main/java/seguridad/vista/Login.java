@@ -5,7 +5,7 @@
  */
 package seguridad.vista;
 
-import Comercial.vista.MDIComercial1;
+import Comercial.vista.MDIComercial;
 import Finanzas.vista.MDIFinanzas;
 import Hoteleria.vista.MDIHoteleria;
 import com.formdev.flatlaf.FlatDarkLaf;
@@ -250,7 +250,7 @@ public class Login extends javax.swing.JFrame {
                                 
                                try {
                             usuarioComercial = txtUsuario.getText();
-                            MDIComercial1 menucomercial = new MDIComercial1();
+                            MDIComercial menucomercial = new MDIComercial();
                             menucomercial.setVisible(true);
                             this.dispose();
 
