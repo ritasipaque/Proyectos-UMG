@@ -11,10 +11,16 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Comercial.datos.Conexion;
 import java.io.File;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
- * @author SIPAQUE.RITA
+ * @author SIPAQUE.RITA - DIANA VICTORES 
  */
 public class MantenimientoProductos extends javax.swing.JInternalFrame {
 
@@ -49,7 +55,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
           public void buscar() {
        Producto proveedorAConsultar = new Producto();
         ProductoDAO proveedorDAO = new ProductoDAO();
-        proveedorAConsultar.setPK_id_producto(Integer.parseInt(Txtbuscar.getText()));
+        proveedorAConsultar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         proveedorAConsultar = proveedorDAO.query(proveedorAConsultar);
         
         txt_Nombre.setText(proveedorAConsultar.getNombre_producto());
@@ -84,7 +90,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAyuda = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -101,10 +106,10 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
-        Txtbuscar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaProducto1 = new javax.swing.JTable();
+        btnAyuda = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -112,13 +117,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Mantenimiento Producto");
         setVisible(true);
-
-        btnAyuda.setText("Ayuda");
-        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAyudaActionPerformed(evt);
-            }
-        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("Mantenimiento Productos");
@@ -144,7 +142,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         txt_Descripcion.setRows(5);
         jScrollPane1.setViewportView(txt_Descripcion);
 
-        btnGuardar.setBackground(new java.awt.Color(204, 204, 204));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,7 +149,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnModificar.setBackground(new java.awt.Color(204, 204, 204));
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,7 +156,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(204, 204, 204));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,11 +163,10 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnBuscar.setBackground(new java.awt.Color(204, 204, 204));
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -204,19 +198,17 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 99, Short.MAX_VALUE))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(0, 43, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addComponent(btnModificar)
-                .addGap(22, 22, 22)
-                .addComponent(btnEliminar)
                 .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnEliminar)
+                .addGap(123, 123, 123))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,8 +216,9 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txt_IdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(txt_IdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(7, 7, 7)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -244,14 +237,12 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(txt_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnModificar)
-                    .addComponent(btnEliminar)
-                    .addComponent(btnBuscar)
-                    .addComponent(Txtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(127, 127, 127))
+                    .addComponent(btnEliminar))
+                .addGap(150, 150, 150))
         );
 
         TablaProducto1.setModel(new javax.swing.table.DefaultTableModel(
@@ -267,47 +258,143 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(TablaProducto1);
 
+        btnAyuda.setText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(168, 168, 168)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(65, 65, 65)
+                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 93, Short.MAX_VALUE))
+                .addGap(0, 78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        ProductoDAO productoDAO = new ProductoDAO();
+        Producto productoAInsertar = new Producto();
+
+        productoAInsertar.setPK_id_producto((int) Integer.parseInt(txt_IdProducto.getText()));
+        productoAInsertar.setNombre_producto(txt_Nombre.getText());
+        productoAInsertar.setPrecio_producto(txt_Precio.getText());
+        productoAInsertar.setDescripcion_producto(txt_Descripcion.getText());
+        productoAInsertar.setEstatus_producto(txt_Estado.getText());
+
+        productoDAO.insert(productoAInsertar);
+
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("MantenimientoProductos");
+        Insertar.setAccion("Insertar");
+        Insertar.setCodigoAplicacion("3010");
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        llenadoDeTablas();
+        limpiar();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
+        ProductoDAO productoDAO = new ProductoDAO();
+        Producto productoAActualizar = new Producto();
+        productoAActualizar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
+        productoAActualizar.setNombre_producto(txt_Nombre.getText());
+        productoAActualizar.setPrecio_producto(txt_Precio.getText());
+        productoAActualizar.setDescripcion_producto(txt_Descripcion.getText());
+        productoAActualizar.setEstatus_producto(txt_Estado.getText());
+        productoDAO.update(productoAActualizar);
+        JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
+
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("MantenimientoProductos");
+        Insertar.setAccion("Modificar");
+        Insertar.setCodigoAplicacion("3010");
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        llenadoDeTablas();
+        limpiar();
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        ProductoDAO productoDAO = new ProductoDAO();
+        Producto productoAEliminar = new Producto();
+        productoAEliminar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
+        productoDAO.delete(productoAEliminar);
+        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
+
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("MantenimientoProductos");
+        Insertar.setAccion("Modificar");
+        Insertar.setCodigoAplicacion("3010");
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        llenadoDeTablas();
+        limpiar();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        buscar();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario("MantenimientoProductos");
+        Insertar.setAccion("Buscar");
+        Insertar.setCodigoAplicacion("3010");
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(MantenimientoProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         try {
-            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProveedores")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm")).exists()) {
                 Process p = Runtime
                 .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProveedores.chm");
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -318,59 +405,14 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAyudaActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        ProductoDAO proveedorDAO = new ProductoDAO();
-        Producto proveedorAInsertar = new Producto();
-        proveedorAInsertar.setPK_id_producto((int) Integer.parseInt(txt_IdProducto.getText()));
-        proveedorAInsertar.setNombre_producto(txt_Nombre.getText());
-        proveedorAInsertar.setPrecio_producto(txt_Precio.getText());
-        proveedorAInsertar.setDescripcion_producto(txt_Descripcion.getText());
-        proveedorAInsertar.setEstatus_producto(txt_Estado.getText());
-
-        proveedorDAO.insert(proveedorAInsertar);
-
-        llenadoDeTablas();
-        limpiar();
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        ProductoDAO proveedorDAO = new  ProductoDAO();
-        Producto proveedorAActualizar = new Producto();
-        proveedorAActualizar.setPK_id_producto(Integer.parseInt(Txtbuscar.getText()));
-        proveedorAActualizar.setNombre_producto(txt_Nombre.getText());
-        proveedorAActualizar.setPrecio_producto(txt_Precio.getText());
-        proveedorAActualizar.setDescripcion_producto(txt_Descripcion.getText());
-        proveedorAActualizar.setEstatus_producto(txt_Estado.getText());
-        proveedorDAO.update(proveedorAActualizar);
-        JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
-        llenadoDeTablas();
-        limpiar();
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        ProductoDAO proveedorDAO = new ProductoDAO();
-        Producto proveedorAEliminar = new Producto();
-        proveedorAEliminar.setPK_id_producto(Integer.parseInt(Txtbuscar.getText()));
-        proveedorDAO.delete(proveedorAEliminar);
-        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
-        llenadoDeTablas();
-        limpiar();
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-        buscar();
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaProducto1;
-    private javax.swing.JTextField Txtbuscar;
     public javax.swing.JButton btnAyuda;
-    public javax.swing.JButton btnBuscar;
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnGuardar;
-    public javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
