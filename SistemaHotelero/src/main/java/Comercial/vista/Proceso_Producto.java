@@ -26,44 +26,44 @@ public class Proceso_Producto extends javax.swing.JFrame {
      * Creates new form Proceso_Producto
      */
     public void llenadoDeTablas() {
-//        DefaultTableModel modelo = new DefaultTableModel();
-//        modelo.addColumn("Producto");
-//        modelo.addColumn("Bodega");
-//        modelo.addColumn("Existencias");
-//
-//        ProcesoProductoDAO procesoproductoDAO = new ProcesoProductoDAO();
-//
-//        List<ProcesoProducto> procesoproducto = procesoproductoDAO.select();
-//        TablaProducto.setModel(modelo);
-//        String[] dato = new String[5];
-//        for (int i = 0; i < procesoproducto.size(); i++) {
-//
-//            dato[0] = procesoproducto.get(i).getNombre_producto();
-//            dato[1] = procesoproducto.get(i).getNombre_bodega();
-//            dato[2] = procesoproducto.get(i).getExistencias_producto();
-//
-//            //System.out.println("vendedor:" + vendedores);
-//            modelo.addRow(dato);
-//        }
-//    }
-//
-//    public void buscar() {
-//        ProcesoProducto productoAConsultar = new ProcesoProducto();
-//        ProcesoProductoDAO productoDAO = new ProcesoProductoDAO();
-//        productoAConsultar.setPK_id_procesoproducto(Integer.parseInt(txtProducto.getText()));
-////        productoAConsultar = ProcesoProductoDAO.query(productoAConsultar);
-//
-//        //  txtProducto.setText(productoAConsultar.getNombre_producto());
-//        txtnombrebodega.setText(productoAConsultar.getNombre_bodega());
-//        txtExistenciasProducto.setText(productoAConsultar.getExistencias_producto());
-//
-//    }
-//
-//    public void limpiar() {
-//
-//        txtProducto.setText("");
-//        txtnombrebodega.setText("");
-//        txtExistenciasProducto.setText("");
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Producto");
+        modelo.addColumn("Bodega");
+        modelo.addColumn("Existencias");
+
+        ProcesoProductoDAO procesoproductoDAO = new ProcesoProductoDAO();
+
+        List<ProcesoProducto> procesoproducto = procesoproductoDAO.select();
+        TablaProducto.setModel(modelo);
+        String[] dato = new String[5];
+        for (int i = 0; i < procesoproducto.size(); i++) {
+
+            dato[0] = procesoproducto.get(i).getNombre_producto();
+            dato[1] = procesoproducto.get(i).getNombre_bodega();
+            dato[2] = procesoproducto.get(i).getExistencias_producto();
+
+            //System.out.println("vendedor:" + vendedores);
+            modelo.addRow(dato);
+        }
+    }
+
+    public void buscar() {
+        ProcesoProducto productoAConsultar = new ProcesoProducto();
+        ProcesoProductoDAO productoDAO = new ProcesoProductoDAO();
+        productoAConsultar.setPK_id_procesoproducto(Integer.parseInt(txtProducto.getText()));
+//        productoAConsultar = ProcesoProductoDAO.query(productoAConsultar);
+
+        //  txtProducto.setText(productoAConsultar.getNombre_producto());
+        txtnombrebodega.setText(productoAConsultar.getNombre_bodega());
+        txtExistenciasProducto.setText(productoAConsultar.getExistencias_producto());
+
+    }
+
+    public void limpiar() {
+
+        txtProducto.setText("");
+        txtnombrebodega.setText("");
+        txtExistenciasProducto.setText("");
 //
     }
 
