@@ -1,6 +1,7 @@
 package Finanzas.vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.UnknownHostException;
@@ -36,7 +37,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         var modulo_nombre = "Finanzas";
         initComponents();
         this.setTitle("Usuario: " + "[" + Login.usuarioFianzas + "]" + " \t" + "IP: [" + mdi_Components.getIp() + "]");
-        permisos.getPermisos(modulo_nombre, Login.usuarioFianzas);
+        //permisos.getPermisos(modulo_nombre, Login.usuarioFianzas);
     }
 
     @SuppressWarnings("unchecked")
@@ -321,8 +322,9 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }//GEN-LAST:event_JMenuPeriodoFiscalActionPerformed
 
     private void JMenuItemAsientoContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemAsientoContableActionPerformed
-        FrmEncabezadoAsiento frmEncabezadoAsiento = new FrmEncabezadoAsiento();
-        frmEncabezadoAsiento.setVisible(true);
+        FrmAsientoContable frmAsientoContable = new FrmAsientoContable();
+        JDesktopFinanzas.add(frmAsientoContable);
+        frmAsientoContable.setVisible(true);
     }//GEN-LAST:event_JMenuItemAsientoContableActionPerformed
 
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
@@ -363,7 +365,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
         //FLATLAF
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
