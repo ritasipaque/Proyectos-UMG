@@ -1,4 +1,4 @@
--- MySQL Workbench Forward Engineering
+﻿-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 INSERT INTO `umg`.`tbl_modulo` (`PK_id_Modulo`, `nombre_modulo`, `descripcion_modulo`, `estado_modulo`) VALUES ('1', 'Modulo 1', 'Esta es una prueba de un módulo.', '1');
 
-
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_aplicacion`
 -- -----------------------------------------------------
@@ -43,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion` (
   PRIMARY KEY (`PK_id_aplicacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_usuario`
@@ -74,10 +72,10 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_bitacora` (
   `ip` VARCHAR(25) NULL DEFAULT NULL,
   `accion` VARCHAR(50) NULL DEFAULT NULL,
   `tabla` VARCHAR(45) NULL DEFAULT NULL,
+  `modulo` VARCHAR(25) NULL DEFAULT NULL,
   PRIMARY KEY (`PK_id_bitacora`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_perfil_encabezado`
@@ -91,7 +89,6 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_perfil_encabezado` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 INSERT INTO `umg`.`tbl_perfil_encabezado` (`PK_id_perfil`, `nombre_perfil`, `descripcion_perfil`, `estado_perfil`) VALUES ('1', 'perfil1', 'prueba en el perfil 1', '1');
-
 
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_perfil_detalle`
@@ -114,7 +111,6 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_perfil_detalle` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_usuario_aplicacion`
 -- -----------------------------------------------------
@@ -136,8 +132,6 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario_aplicacion` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-
-
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_usuario_perfil`
 -- -----------------------------------------------------
@@ -153,7 +147,6 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_usuario_perfil` (
     REFERENCES `umg`.`tbl_usuario` (`PK_id_usuario`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `umg`.`tbl_aplicacion_a_modulo`
@@ -171,9 +164,15 @@ CREATE TABLE IF NOT EXISTS `umg`.`tbl_aplicacion_a_modulos` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+
+-- -----------------------------------------------------
+-- Insert usuarios (Hoteleria)
+-- -----------------------------------------------------
 INSERT INTO `tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('1', 'jefferson', 'davila', 'jeff', '123', 'jeff@gmail.com', '1', '1', '2021-05-02 21:00:48');
 INSERT INTO `tbl_usuario` (`PK_id_usuario`, `nombre_usuario`, `apellido_usuario`, `username_usuario`, `password_usuario`, `correo_usuario`, `cambio_password`, `estado_usuario`, `ultima_conexion`) VALUES ('2', 'esduardo', 'delaguila', 'esduardo10', '123', 'esduardo@gmail.com', '1', '1', '2021-05-02 21:00:48');
-
+-- -----------------------------------------------------
+-- Insert aplicacion (Hoteleria)
+-- -----------------------------------------------------
 INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2001', 'Mantenimiento Ama de Llaves', 'esta es una prueba', '1', '1');
 INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2002', 'Mantenimiento de Formas de pago', 'esta es una prueba','4', '1');
 INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2003', 'Mantenimiento de Habitaciones', 'esta es una prueba', '3', '1');
@@ -181,7 +180,9 @@ INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripc
 INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2005', 'Mantenimiento de Pisos', 'esta es una prueba', '6', '1');
 INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2006', 'Mantenimiento de Servicios', 'esta es una prueba', '2', '1');
 INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('2201', 'Procesos', 'esta es una prueba', '2', '1');
-
+-- -----------------------------------------------------
+-- Insert usuario_aplicacion (Hoteleria)
+-- -----------------------------------------------------
 INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '2001', '1', '1', '1', '1', '1');
 INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '2002', '1', '1', '1', '1', '1');
 INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '2003', '1', '1', '1', '1', '1');
@@ -189,3 +190,19 @@ INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingr
 INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '2005', '1', '1', '1', '1', '1');
 INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '2006', '1', '1', '1', '1', '1');
 INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('1', '2201', '1', '1', '1', '1', '1');
+
+
+-- -----------------------------------------------------
+-- Insert aplicacion (Comercial)
+-- -----------------------------------------------------
+INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('3001', 'Mantenimiento clientes', 'areacomercial', '1', '1');
+INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('3002', 'Mantenimiento Deudores', 'areacomercial', '2', '1');
+INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('3003', 'Mantenimiento Proveedores', 'areacomercial', '3', '1');
+INSERT INTO `tbl_aplicacion` (`PK_id_aplicacion`, `nombre_aplicacion`, `descripcion_aplicacion`, `no_reporteAsociado`, `estado_aplicacion`) VALUES ('3004', 'Mantenimiento productos', 'areacomercial', '4', '1');
+-- -----------------------------------------------------
+-- Insert usuario_aplicacion (Comercial)
+-- -----------------------------------------------------
+INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '3001', '1', '1', '1', '1', '1');
+INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '3002', '1', '1', '1', '1', '1');
+INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '3003', '1', '1', '1', '1', '1');
+INSERT INTO `tbl_usuario_aplicacion` (`PK_id_usuario`, `PK_id_aplicacion`, `ingresar`, `consulta`, `modificar`, `eliminar`, `imprimir`) VALUES ('2', '3004', '1', '1', '1', '1', '1');
