@@ -26,6 +26,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     private FrmCuentaBancaria FrmBancaria;
     private FrmCuentaHabiente FrmHabiente;
     private Mantenimiento_TipoAsiento FrmTipoAsiento;
+    private Emision_Cheque formEmision_Cheque;
     GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
 
@@ -63,6 +64,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuProcesos = new javax.swing.JMenu();
         JMenuItemAsientoContable = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        JMenunEmisionCheque = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
         JMenuAyuda = new javax.swing.JMenu();
@@ -209,6 +211,14 @@ public class MDIFinanzas extends javax.swing.JFrame {
         });
         JMenuProcesos.add(jMenuItem1);
 
+        JMenunEmisionCheque.setText("Emision Cheque");
+        JMenunEmisionCheque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenunEmisionChequeActionPerformed(evt);
+            }
+        });
+        JMenuProcesos.add(JMenunEmisionCheque);
+
         JMenuBarFinanzas.add(JMenuProcesos);
 
         JMenuInformes.setText("Informes");
@@ -339,6 +349,16 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JDesktopFinanzas.add(FrmTransacion);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void JMenunEmisionChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenunEmisionChequeActionPerformed
+        try {
+            formEmision_Cheque = new Emision_Cheque();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JDesktopFinanzas.add(formEmision_Cheque);
+        
+    }//GEN-LAST:event_JMenunEmisionChequeActionPerformed
+
     public static void main(String args[]) {
 
         //FLATLAF
@@ -382,6 +402,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     public static javax.swing.JMenu JMenuProcesos;
     public static javax.swing.JMenuItem JMenuTipoAsientoContable;
     public static javax.swing.JMenuItem JMenuTipoTransaccion;
+    private javax.swing.JMenuItem JMenunEmisionCheque;
     private javax.swing.JMenuItem jMenuItem1;
     // End of variables declaration//GEN-END:variables
 }
