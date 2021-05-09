@@ -125,7 +125,10 @@
                               <Component id="BtnElim" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="BtnMod" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="BtnMod" max="32767" attributes="0"/>
+                              <Component id="BtnReporte" max="32767" attributes="0"/>
+                          </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btn_cancelar" max="32767" attributes="0"/>
@@ -197,6 +200,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BtnElim" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="BtnAyuda" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BtnReporte" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               </Group>
@@ -348,6 +352,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_precio">
+        </Component>
+        <Component class="javax.swing.JButton" name="BtnReporte">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="REPORTE"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnReporteActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
