@@ -23,7 +23,10 @@ import java.util.List;
  */
 public class ReservacionDAO {
     public static String id, entrada, salida;
-    private static final String SQL_SELECT = "SELECT PK_id_reservacion, PK_DPI, PK_id_trabajado, PK_id_habitacion, fecha_reserva, desde, hasta FROM tbl_reservaciones";
+    private static final String SQL_INSERT = "insert into tbl_reservaciones values(?,?,?,?,?,?,?,?)";
+    private static final String SQL_SELECT = "SELECT * FROM tbl_reservaciones";
+    private static final String SQL_QUERY = "SELECT PK_id_reservacion, PK_no_identificacion, PK_id_habitacion, fecha_reserva, desde, hasta, precio, estado FROM tbl_reservaciones WHERE PK_id_reservacion = ?";
+    private static final String SQL_UPDATE = "UPDATE tbl_reservaciones SET PK_no_identificacion=?, PK_id_habitacion=?, fecha_reserva=?, desde=?, hasta=?, precio=?, estado=? WHERE PK_id_reservacion=?";
     
     public List<Reservacion> select(){
         Connection conn = null;
@@ -38,22 +41,68 @@ public class ReservacionDAO {
             rs = stmt.executeQuery();
             while(rs.next()){
                 String id_reservacion = rs.getString("PK_id_reservacion");
-                String dpi = rs.getString("PK_DPI");
-                String id_trabajador = rs.getString("PK_id_trabajado");
+                String dpi = rs.getString("PK_no_identificacion");
                 String id_habitacion = rs.getString("PK_id_habitacion");
                 String f_reserva = rs.getString("fecha_reserva");
                 String desde = rs.getString("desde");
                 String hasta = rs.getString("hasta");
+                String precio = rs.getString("precio");
+                String estado = rs.getString("estado");
                 
                 reservacion = new Reservacion();
                 reservacion.setId_reservacion(id_reservacion);
                 reservacion.setDpi(dpi);
-                reservacion.setId_trabajador(id_trabajador);
                 reservacion.setId_habitacion(id_habitacion);
                 reservacion.setF_reserva(f_reserva);
                 reservacion.setDesde(desde);
                 reservacion.setHasta(hasta);
+                reservacion.setPrecio(precio);
+                reservacion.setEstado(estado);
                 reservar.add(reservacion);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        }
+        finally{
+            ConexionHoteleria.close(rs);
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+        
+        return reservar;
+    }
+    public List<Reservacion> select2(){
+        String SQL_SELECT2="SELECT * FROM tbl_reservaciones WHERE (PK_id_reservacion) AND ((desde BETWEEN '"+entrada+"' AND '"+salida+"') or (hasta between '"+entrada+"' AND '"+salida+"')) AND (estado < '2')";
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Reservacion reservacion = null;
+        List<Reservacion> reservar = new ArrayList<Reservacion>();
+        reservacion = new Reservacion();
+        try {
+            conn = ConexionHoteleria.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT2);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                String id_reservacion = rs.getString("PK_id_reservacion");
+                String dpi = rs.getString("PK_no_identificacion");
+                String id_habitacion = rs.getString("PK_id_habitacion");
+                String f_reserva = rs.getString("fecha_reserva");
+                String desde = rs.getString("desde");
+                String hasta = rs.getString("hasta");
+                String precio = rs.getString("precio");
+                String estado = rs.getString("estado");
+                reservacion.setId_reservacion(id_reservacion);
+                reservacion.setDpi(dpi);
+                reservacion.setId_habitacion(id_habitacion);
+                reservacion.setF_reserva(f_reserva);
+                reservacion.setDesde(desde);
+                reservacion.setHasta(hasta);
+                reservacion.setPrecio(precio);
+                reservacion.setEstado(estado);
+                reservar.add(reservacion);
+                System.out.println(id_habitacion+" "+desde+" "+hasta+" "+estado);
             }
             
         } catch (SQLException ex) {
@@ -68,45 +117,108 @@ public class ReservacionDAO {
         return reservar;
     }
     
-    public List<Reservacion> select2(){
-        String SQL_SELECT2="SELECT * FROM tbl_reservaciones WHERE (PK_id_reservacion) AND (desde BETWEEN '"+entrada+"' AND '"+salida+"') or (hasta between '"+entrada+"' AND '"+salida+"')";
+    public Reservacion query(Reservacion reserva) {    
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Reservacion reservacion = null;
-        List<Reservacion> reservar = new ArrayList<Reservacion>();
-        reservacion = new Reservacion();
+        int rows = 0;
+
         try {
             conn = ConexionHoteleria.getConnection();
-            stmt = conn.prepareStatement(SQL_SELECT2);
+            //System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY);
+            stmt.setString(1, reserva.getId_reservacion());
             rs = stmt.executeQuery();
-            while(rs.next()){
-                String id_reservacion = rs.getString("PK_id_reservacion");
-                String dpi = rs.getString("PK_DPI");
-                String id_trabajador = rs.getString("PK_id_trabajado");
-                String id_habitacion = rs.getString("PK_id_habitacion");
-                String f_reserva = rs.getString("fecha_reserva");
+            while (rs.next()) {
+                String id_reserva = rs.getString("PK_id_reservacion");
+                String dpi = rs.getString("PK_no_identificacion");
+                String habitacion = rs.getString("PK_id_habitacion");
+                String fecha = rs.getString("fecha_reserva");
                 String desde = rs.getString("desde");
                 String hasta = rs.getString("hasta");
-                reservacion.setId_reservacion(id_reservacion);
-                reservacion.setDpi(dpi);
-                reservacion.setId_trabajador(id_trabajador);
-                reservacion.setId_habitacion(id_habitacion);
-                reservacion.setF_reserva(f_reserva);
-                reservacion.setDesde(desde);
-                reservacion.setHasta(hasta);
-                reservar.add(reservacion);
+                String precio = rs.getString("precio");
+                String estado = rs.getString("estado");
+
+                reserva = new Reservacion();
+                reserva.setId_reservacion(id_reserva);
+                reserva.setDpi(dpi);
+                reserva.setId_habitacion(habitacion);
+                reserva.setF_reserva(fecha);
+                reserva.setDesde(desde);
+                reserva.setHasta(hasta);
+                reserva.setPrecio(precio);
+                reserva.setEstado(estado);
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(rs);
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+        return reserva;
+    }
+    
+    public int insert(Reservacion reserva) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = ConexionHoteleria.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setString(1, reserva.getId_reservacion());
+            stmt.setString(2, reserva.getDpi());
+            stmt.setString(3, reserva.getId_habitacion());
+            stmt.setString(4, reserva.getF_reserva());
+            stmt.setString(5, reserva.getDesde());
+            stmt.setString(6, reserva.getHasta());
+            stmt.setString(7, reserva.getPrecio());
+            stmt.setString(8, reserva.getEstado());
+           
+
+            //System.out.println("ejecutando query:" + SQL_INSERT);
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros afectados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            ConexionHoteleria.close(stmt);
+            ConexionHoteleria.close(conn);
+        }
+
+        return rows;
+    }
+    
+    
+    public int update(Reservacion reservacion){
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        
+        try {
+            conn = ConexionHoteleria.getConnection();
+//          System.out.println("ejecutando query: " + SQL_UPDATE);
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, reservacion.getDpi());
+            stmt.setString(2, reservacion.getId_habitacion());
+            stmt.setString(3, reservacion.getF_reserva()); 
+            stmt.setString(4, reservacion.getDesde()); 
+            stmt.setString(5, reservacion.getHasta());
+            stmt.setString(6, reservacion.getPrecio());
+            stmt.setString(7, reservacion.getEstado());
+            stmt.setString(8, reservacion.getId_reservacion());
+            
+            rows = stmt.executeUpdate();
             
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         }
         finally{
-            ConexionHoteleria.close(rs);
             ConexionHoteleria.close(stmt);
             ConexionHoteleria.close(conn);
         }
         
-        return reservar;
+        return rows;
     }
+    
 }
