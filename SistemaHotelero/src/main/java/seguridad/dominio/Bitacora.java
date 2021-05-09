@@ -24,33 +24,8 @@ public class Bitacora {
      private String Host;
         private String Ip;
     private String Accion;
-    private String codigoAplicacion;
-
-    public String getHost() {
-        return Host;
-    }
-
-    public void setHost(String Host) {
-        this.Host = Host;
-    }
-
-    public String getCodigoAplicacion() {
-        return codigoAplicacion;
-    }
-
-    public void setCodigoAplicacion(String codigoAplicacion) {
-        this.codigoAplicacion = codigoAplicacion;
-    }
-   
-
- 
-/**
- *
- * generacion de  get y set de los variables
- * 
- */
-    
-   
+    private String CodigoAplicacion;
+    private String Modulo;
 
     public String getId_Bitacora() {
         return Id_Bitacora;
@@ -84,7 +59,13 @@ public class Bitacora {
         this.Hora = Hora;
     }
 
+    public String getHost() {
+        return Host;
+    }
 
+    public void setHost(String Host) {
+        this.Host = Host;
+    }
 
     public String getIp() {
         return Ip;
@@ -102,29 +83,35 @@ public class Bitacora {
         this.Accion = Accion;
     }
 
-    public String getcodigoAplicacion() {
-        return codigoAplicacion;
+    public String getCodigoAplicacion() {
+        return CodigoAplicacion;
     }
 
-    public void setcodigoAplicacion(String codigoAplicacion) {
-        this.codigoAplicacion = codigoAplicacion;
+    public void setCodigoAplicacion(String CodigoAplicacion) {
+        this.CodigoAplicacion = CodigoAplicacion;
     }
 
-    /**
- *
- *  retorno de de las  variables declaradas
- */
+    public String getModulo() {
+        return Modulo;
+    }
+
+    public void setModulo(String Modulo) {
+        this.Modulo = Modulo;
+    }
+
     @Override
     public String toString() {
-
-        return "Bitacora{" + "Id_Bitacora=" + Id_Bitacora + ", Id_Usuario=" + Id_Usuario + ", Fecha=" + Fecha + ", Hora=" + Hora +  ", Ip=" + Ip + ", Accion=" + Accion + ", codigoAplicacion=" + codigoAplicacion +  + '}';
-
-     
+        return "Bitacora{" + "Id_Bitacora=" + Id_Bitacora + ", Id_Usuario=" + Id_Usuario + ", Fecha=" + Fecha + ", Hora=" + Hora + ", Host=" + Host + ", Ip=" + Ip + ", Accion=" + Accion + ", CodigoAplicacion=" + CodigoAplicacion + ", Modulo=" + Modulo + '}';
+    }
+    
+    
+    
 
 
     }
+
+  
 
    
 
     
-}

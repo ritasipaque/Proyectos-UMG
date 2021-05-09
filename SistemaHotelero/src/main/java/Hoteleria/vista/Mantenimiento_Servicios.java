@@ -5,18 +5,27 @@
  */
 package Hoteleria.vista;
 
+import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Servicios;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
@@ -161,6 +170,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
         BtnAyuda = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
+        BtnReporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -266,6 +276,13 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
 
         jLabel6.setText("PRECIO:");
 
+        BtnReporte.setText("REPORTE");
+        BtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -311,7 +328,9 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                             .addComponent(BtnIng, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnMod)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -367,7 +386,8 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnElim)
-                    .addComponent(BtnAyuda))
+                    .addComponent(BtnAyuda)
+                    .addComponent(BtnReporte))
                 .addGap(13, 13, 13))
         );
 
@@ -562,6 +582,26 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
     MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
+    private Connection connection = null;
+
+    private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try {
+            connection = ConexionHoteleria.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Hoteleria/reportes/ReporteServicios.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BtnReporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -570,6 +610,7 @@ public class Mantenimiento_Servicios extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnReporte;
     private javax.swing.ButtonGroup ESTADO;
     private javax.swing.ButtonGroup TIPO;
     private javax.swing.JRadioButton aux_estado;
