@@ -5,18 +5,27 @@
  */
 package Hoteleria.vista;
 
+import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.FormasDePagoDAO;
 import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.dominio.FormasDePago;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
@@ -143,6 +152,7 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
         limpio = new javax.swing.JRadioButton();
         BtnElim = new javax.swing.JButton();
         btn_ayuda = new javax.swing.JButton();
+        BtnReporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -236,6 +246,13 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
             }
         });
 
+        BtnReporte.setText("REPORTE");
+        BtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -273,7 +290,9 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(BtnMod)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnElim)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BtnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btn_ayuda, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -305,7 +324,9 @@ public class Mantenimiento_FormasDePago extends javax.swing.JInternalFrame {
                             .addComponent(inactivo)))
                     .addComponent(limpio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_ayuda)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_ayuda)
+                    .addComponent(BtnReporte))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
@@ -486,6 +507,25 @@ try {
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
     MDIHoteleria.logo.setVisible(true);
     }//GEN-LAST:event_formInternalFrameDeactivated
+private Connection connection = null;
+    private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try {
+            connection = ConexionHoteleria.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Hoteleria/reportes/ReportesFormasDePago.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BtnReporteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -493,6 +533,7 @@ try {
     private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnReporte;
     private javax.swing.JRadioButton activo;
     private javax.swing.JButton btn_ayuda;
     private javax.swing.JButton btn_cancelar;
