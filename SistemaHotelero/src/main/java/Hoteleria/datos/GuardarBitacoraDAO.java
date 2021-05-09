@@ -22,18 +22,21 @@ public class GuardarBitacoraDAO {
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("Inserción");
                 AInsertar.setCodigoAplicacion(codigoModulo);
+                AInsertar.setModulo("Hoteleria");
                 estado = true;
                 break;
             case "Modificacion":
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("Modificación");
                 AInsertar.setCodigoAplicacion(codigoModulo);
+                AInsertar.setModulo("Hoteleria");
                 estado = true;
                 break;
             case "Eliminacion":
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("Eliminación");
                 AInsertar.setCodigoAplicacion(codigoModulo);
+                AInsertar.setModulo("Hoteleria");
                 estado = true;
         }
         if (estado == true) {
