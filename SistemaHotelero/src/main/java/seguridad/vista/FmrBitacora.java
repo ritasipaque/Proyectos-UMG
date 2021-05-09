@@ -35,14 +35,15 @@ public class FmrBitacora extends javax.swing.JInternalFrame {
  */
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Bitacora");
-        modelo.addColumn("ID Usuario");
+        modelo.addColumn("Usuario");
         modelo.addColumn("Fecha");
           modelo.addColumn("Hora");
           modelo.addColumn("Ip");
           modelo.addColumn("host");
       
           modelo.addColumn("Accion");
-        modelo.addColumn("codigo Aplicacion");
+        modelo.addColumn("Codigo Aplicacion");
+         modelo.addColumn("Modulo");
     /**
  *
  * instaciamiento de las las  clases Bitacora y BiracoraDAO
@@ -51,7 +52,7 @@ public class FmrBitacora extends javax.swing.JInternalFrame {
      BitacoraDao BicDAO = new BitacoraDao();
         List<Bitacora> usuario = BicDAO.select();
         JtProductos1.setModel(modelo);
-        String[] dato = new String[8];
+        String[] dato = new String[9];
         for (int i = 0; i < usuario.size(); i++) {
             dato[0] = usuario.get(i).getId_Bitacora();
             dato[1] = usuario.get(i).getId_Usuario();
@@ -60,7 +61,8 @@ public class FmrBitacora extends javax.swing.JInternalFrame {
            dato[4] = usuario.get(i).getHost();
             dato[5] = usuario.get(i).getIp();
               dato[6] = usuario.get(i).getAccion();
-            dato[7] = usuario.get(i).getcodigoAplicacion();
+            dato[7] = usuario.get(i).getCodigoAplicacion();
+               dato[8] = usuario.get(i).getModulo();
           
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
