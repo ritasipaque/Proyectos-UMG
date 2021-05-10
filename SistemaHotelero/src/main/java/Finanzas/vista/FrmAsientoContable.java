@@ -26,12 +26,13 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         String codigoAsientoContable = asientoContable.CodigoAsientoContable();
         TxtCodigoAsiento.setText(codigoAsientoContable);
     }
-    
-    void setCodigoPartida(){
+
+    void setCodigoPartida() {
         String codigoPartidaContable = partidaContable.CodigoPartidaContable();
         TxtCodigoPartida.setText(codigoPartidaContable);
     }
-    private void comboBox() {
+
+    private void comboBoxCuenta() {
         CuentaContable objCuenta = new CuentaContable();
 
         objCuenta.getTablaRegistros();
@@ -53,10 +54,80 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
 
     }
 
+    private void comboBoxEncabezado() {
+        AsientoContable objAsiento = new AsientoContable();
+
+        objAsiento.getRegistrosEncabezado();
+
+        int contI = 0;
+        contI = objAsiento.getRegistrosEncabezado().length;
+
+        String[][] matrixData = new String[contI][1];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 1; j++) {
+                matrixData[i][j] = objAsiento.getRegistrosEncabezado()[i][j];
+            }
+        }
+
+        for (int i = 0; i < contI; i++) {
+            CmbEncabezado.addItem(matrixData[i][0]);
+        }
+
+    }
+
+    private void comboBoxPeriodos() {
+        AsientoContable objAsiento = new AsientoContable();
+
+        objAsiento.getRegistrosEncabezado();
+
+        int contI = 0;
+        contI = objAsiento.getRegistrosPeriodos().length;
+
+        String[][] matrixData = new String[contI][1];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 1; j++) {
+                matrixData[i][j] = objAsiento.getRegistrosPeriodos()[i][j];
+            }
+        }
+
+        for (int i = 0; i < contI; i++) {
+            CmbPeriodoFiscal.addItem(matrixData[i][0]);
+        }
+
+    }
+
+    private void comboBoxTipos() {
+        AsientoContable objAsiento = new AsientoContable();
+
+        objAsiento.getTipoAsientos();
+
+        int contI = 0;
+        contI = objAsiento.getTipoAsientos().length;
+
+        String[] matrixData = new String[contI];
+
+        for (int i = 0; i < contI; i++) {
+
+            matrixData[i] = objAsiento.getTipoAsientos()[i];
+
+        }
+
+        for (int i = 0; i < contI; i++) {
+            CmbTipoAsiento.addItem(matrixData[i]);
+        }
+
+    }
+
     public FrmAsientoContable() {
         initComponents();
         setCodigoAsiento();
-        comboBox();
+        comboBoxCuenta();
+        comboBoxEncabezado();
+        comboBoxPeriodos();
+        comboBoxTipos();
+        RbtDebe.setSelected(true);
     }
 
     /**
@@ -75,7 +146,6 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         TxtCodigoPartida = new javax.swing.JTextField();
-        DateChooserFechaPartida = new com.toedter.calendar.JDateChooser();
         CmbPeriodoFiscal = new javax.swing.JComboBox<>();
         TxtGlosaContable = new javax.swing.JTextField();
         BtnAceptarPartida = new javax.swing.JButton();
@@ -83,6 +153,7 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         BtnNuevaPartida = new javax.swing.JButton();
         BtnRegistrar = new javax.swing.JButton();
         BtnAyuda = new javax.swing.JButton();
+        TxtFecha = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         TxtCodigoAsiento = new javax.swing.JTextField();
@@ -95,16 +166,14 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         RbtDebe = new javax.swing.JRadioButton();
         RbtHaber = new javax.swing.JRadioButton();
         BtnRegistrarAsiento = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        TableAsiento = new javax.swing.JTable();
         BtnRegistrarDetalle = new javax.swing.JButton();
         CmbCuenta = new javax.swing.JComboBox<>();
         TxtPartida = new javax.swing.JTextField();
         CmbTipoAsiento = new javax.swing.JComboBox<>();
         BtnImprimir = new javax.swing.JButton();
         BtnVerificarPartida = new javax.swing.JButton();
-        TxtEncabezado = new javax.swing.JTextField();
         BtnBuscarEncabezado = new javax.swing.JButton();
+        CmbEncabezado = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setTitle("Asiento Contable");
@@ -120,8 +189,6 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         jLabel4.setText("Glosa Partida:");
 
         TxtCodigoPartida.setEnabled(false);
-
-        DateChooserFechaPartida.setEnabled(false);
 
         CmbPeriodoFiscal.setEnabled(false);
 
@@ -158,6 +225,8 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
 
         BtnAyuda.setText("?");
 
+        TxtFecha.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -181,13 +250,13 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
                         .addComponent(BtnRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnAyuda))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(CmbPeriodoFiscal, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DateChooserFechaPartida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(TxtGlosaContable, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnAceptarPartida)))
+                        .addComponent(BtnAceptarPartida))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(TxtFecha, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(CmbPeriodoFiscal, javax.swing.GroupLayout.Alignment.LEADING, 0, 140, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -202,10 +271,10 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
                         .addComponent(BtnRegistrar)
                         .addComponent(BtnAyuda))
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DateChooserFechaPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(TxtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -241,6 +310,11 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         RbtHaber.setText("Haber");
 
         BtnRegistrarAsiento.setText("Registrar");
+        BtnRegistrarAsiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegistrarAsientoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -248,46 +322,50 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbtDebe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbtHaber)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnRegistrarAsiento)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TxtMonto)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnRegistrarAsiento))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(RbtDebe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RbtHaber)
+                        .addGap(0, 64, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TxtMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(RbtDebe)
-                    .addComponent(RbtHaber)
-                    .addComponent(BtnRegistrarAsiento))
-                .addContainerGap())
+                    .addComponent(RbtHaber))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BtnRegistrarAsiento)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        TableAsiento.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cuenta", "Debe", "Haber"
-            }
-        ));
-        jScrollPane1.setViewportView(TableAsiento);
-
         BtnRegistrarDetalle.setText("Registrar Detalle");
+
+        BtnRegistrarDetalle.setEnabled(false);
+
+
+        BtnRegistrarDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegistrarDetalleActionPerformed(evt);
+            }
+        });
 
         TxtPartida.setEditable(false);
 
         BtnImprimir.setText("Imprimir");
+        BtnImprimir.setEnabled(false);
 
         BtnVerificarPartida.setText("Verificar Partida");
-
-        TxtEncabezado.setEditable(false);
+        BtnVerificarPartida.setEnabled(false);
 
         BtnBuscarEncabezado.setText("...");
         BtnBuscarEncabezado.addActionListener(new java.awt.event.ActionListener() {
@@ -301,11 +379,13 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
+
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
+
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
@@ -313,30 +393,55 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel9))
                         .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TxtCodigoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(CmbTipoAsiento, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TxtPartida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(CmbCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TxtEncabezado, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnBuscarEncabezado)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(CmbTipoAsiento, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TxtPartida, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(CmbCuenta, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CmbEncabezado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TxtCodigoAsiento))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBuscarEncabezado)
+                        .addGap(62, 62, 62)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
                         .addComponent(BtnRegistrarDetalle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnVerificarPartida)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(TxtCodigoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(CmbCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(TxtPartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(BtnBuscarEncabezado)
+                            .addComponent(CmbEncabezado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(CmbTipoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(TxtCodigoAsiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -360,8 +465,7 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnRegistrarDetalle)
                     .addComponent(BtnImprimir)
@@ -398,17 +502,20 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         frmEncabezadoAsiento.setVisible(true);
     }//GEN-LAST:event_BtnBuscarEncabezadoActionPerformed
 
-    boolean flagNuevaPartida = false;
-    boolean flagRegistrado = false;
     private void BtnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevaPartidaActionPerformed
 
-        /*if (flagRegistrado == false) {
-
-        } else {
-            flagNuevaPartida = true;
-        }*/
-        
         setCodigoPartida();
+
+        TxtFecha.setEnabled(true);
+
+        DateChooserFechaPartida.setEnabled(true);
+
+        CmbPeriodoFiscal.setEnabled(true);
+        TxtGlosaContable.setEnabled(true);
+        BtnRegistrar.setEnabled(true);
+        BtnNuevaPartida.setEnabled(false);
+        BtnBuscarPartida.setEnabled(false);
+        BtnAceptarPartida.setEnabled(false);
     }//GEN-LAST:event_BtnNuevaPartidaActionPerformed
 
     private void BtnAceptarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAceptarPartidaActionPerformed
@@ -432,6 +539,27 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnRegistrarActionPerformed
 
+    private void BtnRegistrarAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarAsientoActionPerformed
+
+
+        if (!TxtMonto.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Para finalizar, presione el botón: 'Registrar Detalle'", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            BtnRegistrarDetalle.setEnabled(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "El Campo: 'Monto', está vacío", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+
+        JOptionPane.showMessageDialog(null, "Para finalizar, presione el botón: 'Registrar Detalle'", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        BtnRegistrarDetalle.setEnabled(true);
+
+    }//GEN-LAST:event_BtnRegistrarAsientoActionPerformed
+
+    private void BtnRegistrarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarDetalleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnRegistrarDetalleActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAceptarPartida;
@@ -445,16 +573,25 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnRegistrarDetalle;
     private javax.swing.JButton BtnVerificarPartida;
     private javax.swing.JComboBox<String> CmbCuenta;
-    private javax.swing.JComboBox<String> CmbPeriodoFiscal;
+
+    private javax.swing.JComboBox<String> CmbEncabezado;
+    public static javax.swing.JComboBox<String> CmbPeriodoFiscal;
     private javax.swing.JComboBox<String> CmbTipoAsiento;
-    private com.toedter.calendar.JDateChooser DateChooserFechaPartida;
+
+    public static javax.swing.JComboBox<String> CmbPeriodoFiscal;
+    private javax.swing.JComboBox<String> CmbTipoAsiento;
+    public static com.toedter.calendar.JDateChooser DateChooserFechaPartida;
+
     private javax.swing.JRadioButton RbtDebe;
     private javax.swing.JRadioButton RbtHaber;
-    private javax.swing.JTable TableAsiento;
     private javax.swing.JTextField TxtCodigoAsiento;
-    private javax.swing.JTextField TxtCodigoPartida;
+    public static javax.swing.JTextField TxtCodigoPartida;
+
+    public static javax.swing.JTextField TxtFecha;
+
     private javax.swing.JTextField TxtEncabezado;
-    private javax.swing.JTextField TxtGlosaContable;
+
+    public static javax.swing.JTextField TxtGlosaContable;
     private javax.swing.JTextField TxtMonto;
     private javax.swing.JTextField TxtPartida;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -470,6 +607,5 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,9 @@
  */
 package Finanzas.vista;
 
+import Finanzas.dominio.PartidaContable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Diego Vásquez
@@ -14,8 +17,38 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
     /**
      * Creates new form CodigosPartidaContable
      */
+    
+    private void cargarTabla() {
+
+        PartidaContable objPartida = new PartidaContable();
+
+        objPartida.getTablaRegistros();
+
+        int contI = 0;
+        contI = objPartida.getTablaRegistros().length;
+
+        String[][] matrixData = new String[contI][4];
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrixData[i][j] = objPartida.getTablaRegistros()[i][j];
+            }
+        }
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) TblPartidas.getModel();
+        modeloTabla.setRowCount(contI);
+        modeloTabla.setColumnCount(4);
+
+        for (int i = 0; i < contI; i++) {
+            for (int j = 0; j < 4; j++) {
+                TblPartidas.setValueAt(matrixData[i][j], i, j);;
+            }
+        }
+    }
+    
     public CodigosPartidaContable() {
         initComponents();
+        cargarTabla();
     }
 
     /**
@@ -30,6 +63,7 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TblPartidas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        BtnSeleccionar = new javax.swing.JButton();
 
         setTitle("Códigos de Partida Contable");
         setResizable(false);
@@ -47,6 +81,13 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Códigos de Partidas Contables");
 
+        BtnSeleccionar.setText("Seleccionar");
+        BtnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSeleccionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -57,7 +98,10 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnSeleccionar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -66,13 +110,22 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnSeleccionar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeleccionarActionPerformed
+        FrmAsientoContable.TxtCodigoPartida.setText((String) TblPartidas.getValueAt(TblPartidas.getSelectedRow(), 0));
+        FrmAsientoContable.TxtFecha.setText((String) TblPartidas.getValueAt(TblPartidas.getSelectedRow(), 1));
+        FrmAsientoContable.CmbPeriodoFiscal.setSelectedItem((String) TblPartidas.getValueAt(TblPartidas.getSelectedRow(), 2));
+        FrmAsientoContable.TxtGlosaContable.setText((String) TblPartidas.getValueAt(TblPartidas.getSelectedRow(), 3));
+    }//GEN-LAST:event_BtnSeleccionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,6 +163,7 @@ public class CodigosPartidaContable extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnSeleccionar;
     private javax.swing.JTable TblPartidas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
