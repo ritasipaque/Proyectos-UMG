@@ -30,8 +30,9 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
     /**
      * Creates new form FrmEncabezadoAsiento
      */
-    public FrmEncabezadoAsiento() {
+    public FrmEncabezadoAsiento() throws SQLException {
         initComponents();
+        llenadoDeCombos();
     }
 
     /**
@@ -143,7 +144,11 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmEncabezadoAsiento().setVisible(true);
+                try {
+                    new FrmEncabezadoAsiento().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmEncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

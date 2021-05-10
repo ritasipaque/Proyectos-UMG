@@ -144,6 +144,7 @@ public class EncabezadoAsientoDAO {
             stmt.setString(2, EncA.getFecha());
             stmt.setString(3, EncA.getMoneda());
             stmt.setString(4, EncA.getDescripcion());
+            stmt.setString(5, EncA.getCodigoEA());
             rows = stmt.executeUpdate();
             //System.out.println("Registros actualizado:" + rows);
 

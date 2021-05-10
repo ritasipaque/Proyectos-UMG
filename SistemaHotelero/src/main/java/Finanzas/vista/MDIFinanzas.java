@@ -371,7 +371,12 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }//GEN-LAST:event_JMenunEmisionChequeActionPerformed
 
     private void EncabezadoAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncabezadoAsientoActionPerformed
-        FrmEncabezadoAsiento frm_encabezadoasiento = new FrmEncabezadoAsiento();
+        FrmEncabezadoAsiento frm_encabezadoasiento = null;
+        try {
+            frm_encabezadoasiento = new FrmEncabezadoAsiento();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frm_encabezadoasiento.setVisible(true);
         JDesktopFinanzas.add(frm_encabezadoasiento);
     }//GEN-LAST:event_EncabezadoAsientoActionPerformed

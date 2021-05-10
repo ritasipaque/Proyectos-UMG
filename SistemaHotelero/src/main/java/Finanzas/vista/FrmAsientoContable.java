@@ -8,6 +8,9 @@ package Finanzas.vista;
 import Finanzas.dominio.AsientoContable;
 import Finanzas.dominio.CuentaContable;
 import Finanzas.dominio.PartidaContable;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -394,7 +397,12 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnBuscarEncabezadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarEncabezadoActionPerformed
-        FrmEncabezadoAsiento frmEncabezadoAsiento = new FrmEncabezadoAsiento();
+        FrmEncabezadoAsiento frmEncabezadoAsiento = null;
+        try {
+            frmEncabezadoAsiento = new FrmEncabezadoAsiento();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmAsientoContable.class.getName()).log(Level.SEVERE, null, ex);
+        }
         frmEncabezadoAsiento.setVisible(true);
     }//GEN-LAST:event_BtnBuscarEncabezadoActionPerformed
 

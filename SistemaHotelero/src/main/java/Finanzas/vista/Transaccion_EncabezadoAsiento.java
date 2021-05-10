@@ -32,7 +32,7 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
       List<Moneda> tipo = moneda.listar();
       CbMoneda.addItem("Seleccione una opción");
       for (int i = 0; i < tipo.size(); i++) {
-           CbMoneda.addItem(tipo.get(i).getNombre_Moneda());
+           CbMoneda.addItem(tipo.get(i).getCodigo_Moneda());
        }
  }
     
