@@ -6,6 +6,9 @@
 package Finanzas.vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 
 /**
@@ -107,8 +110,13 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FrmNuevoEncabezadoAsiento frmNuevoEncabezadoAsiento = new FrmNuevoEncabezadoAsiento();
-        frmNuevoEncabezadoAsiento.setVisible(true);
+        Transaccion_EncabezadoAsiento NuevoEA = null;
+        try {
+            NuevoEA = new Transaccion_EncabezadoAsiento();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmEncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        NuevoEA.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
