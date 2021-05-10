@@ -17,6 +17,9 @@ import javax.swing.table.DefaultTableModel;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -328,10 +331,10 @@ producto.setText(Buscar.getProducto());
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      try {
-            if ((new File("src\\main\\java\\Comercial\\ayuda\\Clientes.chm")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\Clientes.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\ayuda\\Clientes.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\Clientes.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -371,9 +374,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora AInsertar = new Bitacora();
 
-        AInsertar.setId_Usuario("Usuario");
+       
         AInsertar.setAccion("Eliminar");
-        AInsertar.setCodigoAplicacion("03");
+         GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ AInsertar.setCodigoAplicacion("3002");
+           AInsertar.setModulo("Comercial");
+ AInsertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -390,9 +397,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora AInsertar = new Bitacora();
 
-        AInsertar.setId_Usuario("Usuario");
+       
         AInsertar.setAccion("Buscar");
-        AInsertar.setCodigoAplicacion("03");
+         GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ AInsertar.setCodigoAplicacion("3002");
+           AInsertar.setModulo("Comercial");
+ AInsertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -421,9 +432,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora AInsertar = new Bitacora();
 
-        AInsertar.setId_Usuario("Usuario");
+      
         AInsertar.setAccion("Modificar");
-        AInsertar.setCodigoAplicacion("03");
+   GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ AInsertar.setCodigoAplicacion("3002");
+           AInsertar.setModulo("Comercial");
+ AInsertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -452,9 +467,13 @@ producto.setText(Buscar.getProducto());
 
         Bitacora Insertar = new Bitacora();
 
-        Insertar.setId_Usuario("Usuario");
+      
         Insertar.setAccion("insertar");
-        Insertar.setCodigoAplicacion("03");
+          GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ Insertar.setCodigoAplicacion("3002");
+           Insertar.setModulo("Comercial");
+ Insertar.setId_Usuario(Login.usuarioComercial);
         try {
             BitacoraDAO.insert(Insertar);
         } catch (UnknownHostException ex) {
@@ -466,29 +485,29 @@ producto.setText(Buscar.getProducto());
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField ID;
-    private javax.swing.JTable JtProductos1;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JTextField cliente;
-    private javax.swing.JTextField estatus;
-    private javax.swing.JTextField i;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField monto;
-    private javax.swing.JTextField nit;
-    private javax.swing.JTextField producto;
-    private javax.swing.JTextField telefono;
+    private static javax.swing.JTextField ID;
+    private static javax.swing.JTable JtProductos1;
+    private static javax.swing.ButtonGroup buttonGroup1;
+    private static javax.swing.JTextField cliente;
+    private static javax.swing.JTextField estatus;
+    private static javax.swing.JTextField i;
+    private static javax.swing.JButton jButton1;
+    private static javax.swing.JButton jButton3;
+    private static javax.swing.JButton jButton4;
+    private static javax.swing.JButton jButton5;
+    private static javax.swing.JButton jButton6;
+    private static javax.swing.JLabel jLabel1;
+    private static javax.swing.JLabel jLabel2;
+    private static javax.swing.JLabel jLabel3;
+    private static javax.swing.JLabel jLabel4;
+    private static javax.swing.JLabel jLabel5;
+    private static javax.swing.JLabel jLabel6;
+    private static javax.swing.JLabel jLabel7;
+    private static javax.swing.JLabel jLabel8;
+    private static javax.swing.JScrollPane jScrollPane1;
+    private static javax.swing.JTextField monto;
+    private static javax.swing.JTextField nit;
+    private static javax.swing.JTextField producto;
+    private static javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
