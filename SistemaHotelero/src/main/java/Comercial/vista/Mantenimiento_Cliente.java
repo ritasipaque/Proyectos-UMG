@@ -19,6 +19,9 @@ import javax.swing.table.DefaultTableModel;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
@@ -333,7 +336,8 @@ producto.setText(Buscar.getProducto());
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         ClienteDao dao = new    ClienteDao  ();
+
+        ClienteDao dao = new    ClienteDao  ();
 
          Cliente modi = new    Cliente ();
         modi.setId_cliente (ID.getText());
@@ -350,9 +354,15 @@ producto.setText(Buscar.getProducto());
              BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("Usuario");
+      
         Insertar.setAccion("Modificar");
-        Insertar.setCodigoAplicacion("03");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+         GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ Insertar.setCodigoAplicacion("3001");
+           Insertar.setModulo("Comercial");
+
+        
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -382,9 +392,13 @@ producto.setText(Buscar.getProducto());
             BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("Usuario");
+      
         Insertar.setAccion("Eliminar");
-        Insertar.setCodigoAplicacion("03");
+         GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ Insertar.setCodigoAplicacion("3001");
+           Insertar.setModulo("Comercial");
+ Insertar.setId_Usuario(Login.usuarioComercial);
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -399,9 +413,13 @@ producto.setText(Buscar.getProducto());
     BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("Buscar");
+       
         Insertar.setAccion("Buscar");
-        Insertar.setCodigoAplicacion("03");
+          GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+ Insertar.setCodigoAplicacion("3001");
+           Insertar.setModulo("Comercial");
+ Insertar.setId_Usuario(Login.usuarioComercial);
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -413,9 +431,13 @@ producto.setText(Buscar.getProducto());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+       
+          GenerarPermisos permisos = new GenerarPermisos();
+    MDI_Components mdi_Components = new MDI_Components();
+       
         String id="0";
         ClienteDao ClienteDAO = new ClienteDao ();
-
+ 
         Cliente AInsertar = new Cliente();
         AInsertar.setId_cliente(ID.getText());
         AInsertar.setCliente(cliente.getText());
@@ -431,9 +453,12 @@ producto.setText(Buscar.getProducto());
              BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("Usuario");
+        Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Insertar");
-        Insertar.setCodigoAplicacion("03");
+    
+ Insertar.setCodigoAplicacion("3001");
+           Insertar.setModulo("Comercial");
+
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
