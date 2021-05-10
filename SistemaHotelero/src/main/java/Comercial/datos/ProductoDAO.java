@@ -12,11 +12,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Sipaque Rita - DIANA VICTORES 
+ * @author familia Sipaque
  */
 public class ProductoDAO {
     
@@ -25,6 +26,7 @@ private static final String SQL_INSERT = "INSERT INTO tbl_producto (PK_id_produc
 private static final String SQL_UPDATE = "UPDATE tbl_producto SET   nombre_producto= ?, precio_producto= ?, descripcion_producto= ?, estatus_producto= ?    WHERE PK_id_producto= ?";
 private static final String SQL_QUERY = "SELECT PK_id_producto, nombre_producto, precio_producto, descripcion_producto, estatus_producto FROM tbl_producto WHERE PK_id_producto=?";
 private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_producto=?";
+public static final String SQL_QUERY2 = "SELECT  PK_id_producto  FROM tbl_producto";
  
  
  public List<Producto> select() {
@@ -41,7 +43,7 @@ private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_p
             while (rs.next()) {
                 int PK_id_producto = rs.getInt("PK_id_producto");
                 String nombre_producto = rs.getString("nombre_producto");
-                String precio_producto = rs.getString("precio_producto");
+                int precio_producto = rs.getInt("precio_producto");
                 String descripcion_producto = rs.getString("descripcion_producto");
                 String estatus_producto = rs.getString("estatus_producto");
                 
@@ -76,7 +78,7 @@ private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_p
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, aplicacion.getPK_id_producto());
             stmt.setString(2, aplicacion.getNombre_producto());
-            stmt.setString(3, aplicacion.getPrecio_producto());
+            stmt.setInt(3, aplicacion.getPrecio_producto());
             stmt.setString(4, aplicacion.getDescripcion_producto());
             stmt.setString(5, aplicacion.getEstatus_producto());
             
@@ -105,7 +107,7 @@ private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_p
             stmt = conn.prepareStatement(SQL_UPDATE);
             
             stmt.setString(1, aplicacion.getNombre_producto());
-            stmt.setString(2, aplicacion.getPrecio_producto());
+            stmt.setInt(2, aplicacion.getPrecio_producto());
             stmt.setString(3, aplicacion.getDescripcion_producto());
             stmt.setString(4, aplicacion.getEstatus_producto());
             stmt.setInt(5, aplicacion.getPK_id_producto());
@@ -123,36 +125,35 @@ private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_p
 
         return rows;
     }
-  public Producto query(Producto producto) {    
+  public Producto query(Producto moduloC) {    
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        List<Producto> productos = new ArrayList<Producto>();
         int rows = 0;
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
+//            System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-            stmt.setInt(1, producto.getPK_id_producto());
+            stmt.setInt(1, moduloC.getPK_id_producto());
             rs = stmt.executeQuery();
             while (rs.next()) {
-               int PK_id_producto = rs.getInt("PK_id_producto");
-                String nombre_producto = rs.getString("nombre_producto");
-                String precio_producto = rs.getString("precio_producto");
-                String descripcion_producto = rs.getString("descripcion_producto");
-                String estatus_producto = rs.getString("estatus_producto");
-                 
+                int id_proveedor = rs.getInt("PK_id_producto");
+                String nombre = rs.getString("nombre_producto");
+                int apellido = rs.getInt("precio_producto");
+                String contacto = rs.getString("descripcion_producto");
+                String estatus = rs.getString("estatus_producto");
+
+             
+                moduloC = new Producto();
+                moduloC.setPK_id_producto(id_proveedor);
+                moduloC.setNombre_producto(nombre);
+                moduloC.setPrecio_producto(apellido);
+                moduloC.setDescripcion_producto(contacto);
+                moduloC.setEstatus_producto(estatus);
                 
-                producto = new Producto();
-                producto.setNombre_producto(nombre_producto);
-                producto.setPrecio_producto(precio_producto);
-                producto.setDescripcion_producto(descripcion_producto);
-                producto.setEstatus_producto(estatus_producto);
                 
-                //empleados.add(empleado); // Si se utiliza un ArrayList
             }
-            //System.out.println("Registros buscado:" + empleado);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -160,10 +161,8 @@ private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_p
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-
-        //return empleados;  // Si se utiliza un ArrayList
-        return producto;
-    } 
+        return moduloC;
+    }
  public int delete(Producto aplicacion) {
 
         Connection conn = null;
@@ -186,8 +185,66 @@ private static final String SQL_DELETE = "DELETE FROM tbl_producto WHERE PK_id_p
 
         return rows;
     }
+ 
+ public void query2(JComboBox uno) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+
+            conn = Conexion.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY2);
+            //stmt.setInt(1, aplicacion.getId_ModuloCbx());
+            rs = stmt.executeQuery();
+
+            uno.addItem("Seleccionar...");
+            
+            while (rs.next()) {
+                uno.addItem(rs.getInt("PK_id_producto"));
+                
+            }
+            //System.out.println("Registros buscado:" + aplicacion);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
     
+    
+    
+    }
+ 
+  public List<Producto> listar() {
+        List<Producto> perfil = new ArrayList <>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;   
+        try {
+            conn=Conexion.getConnection();
+            stmt=conn.prepareStatement(SQL_SELECT);
+            rs=stmt.executeQuery();
+            while (rs.next()) {
+            Producto usr = new Producto();
+            usr.setPK_id_producto(rs.getInt(1));
+            usr.setNombre_producto(rs.getString(2));
+            usr.setPrecio_producto(rs.getInt(3));
+            usr.setDescripcion_producto(rs.getString(4));
+            usr.setEstatus_producto(rs.getString(5));
+            perfil.add(usr);
+             }
+         }catch (Exception e){
+         }
+         return perfil;
+     }
 }
+
+ 
+ 
 
  
  
