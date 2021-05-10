@@ -186,7 +186,16 @@ public class Login extends javax.swing.JFrame {
                 usuarioAConsultar.setUser_usuario((txtUsuario.getText()));
 
                 BitacoraDao BitacoraDAO = new BitacoraDao();
-                Bitacora AInsertar = new Bitacora();
+
+                Bitacora Insertar = new Bitacora();
+                Insertar.setId_Usuario("Login");
+                Insertar.setAccion("Insertar");
+                Insertar.setCodigoAplicacion("000");
+                try {
+                    BitacoraDAO.insert(Insertar);
+                } catch (UnknownHostException ex) {
+                    Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 System.out.println(usuarioAConsultar.toString());
                 // Recuperación de información a través de otro objeto
@@ -237,13 +246,13 @@ public class Login extends javax.swing.JFrame {
 
                         case "Area Finanzas":
                                  try {
-                            usuarioHoteleria = txtUsuario.getText();
-                            MDIHoteleria menuHoteleria = new MDIHoteleria();
-                            menuHoteleria.setVisible(true);
+                            usuarioFianzas = txtUsuario.getText();
+                            MDIFinanzas menuFinanzas = new MDIFinanzas();
+                            menuFinanzas.setVisible(true);
                             this.dispose();
-                            } catch (Exception e) {
-                                System.out.println(e);
-                            }
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
                         break;
 
                         case "Area Comercial":

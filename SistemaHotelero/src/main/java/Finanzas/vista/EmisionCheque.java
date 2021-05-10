@@ -201,13 +201,14 @@ public class EmisionCheque extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtFirma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Boton_Buscar)
-                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Boton_Guardar)
-                    .addComponent(Boton_Modificar)
-                    .addComponent(Boton_Eliminar)
-                    .addComponent(Boton_Ayuda)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(Boton_Buscar)
+                        .addComponent(Boton_Guardar)
+                        .addComponent(Boton_Modificar)
+                        .addComponent(Boton_Eliminar)
+                        .addComponent(Boton_Ayuda))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle:"));
