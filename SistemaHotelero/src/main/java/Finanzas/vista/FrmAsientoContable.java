@@ -365,10 +365,8 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         TxtPartida.setEditable(false);
 
         BtnImprimir.setText("Imprimir");
-        BtnImprimir.setEnabled(false);
 
         BtnVerificarPartida.setText("Verificar Partida");
-        BtnVerificarPartida.setEnabled(false);
 
         BtnBuscarEncabezado.setText("...");
         BtnBuscarEncabezado.addActionListener(new java.awt.event.ActionListener() {
@@ -531,7 +529,26 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnRegistrarAsientoActionPerformed
 
     private void BtnRegistrarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarDetalleActionPerformed
-        // TODO add your handling code here:
+        AsientoContable asientoContable = new AsientoContable();
+        
+        asientoContable.setCodigo_DetalleAsiento(TxtCodigoAsiento.getText());
+        asientoContable.setCuentaContable_Asiento(CmbCuenta.getSelectedItem().toString());
+        asientoContable.setPartida_Asiento(TxtPartida.getText());
+        asientoContable.setTipo_Asiento(CmbTipoAsiento.getSelectedItem().toString());
+        asientoContable.setEncabezado_Asiento(CmbEncabezado.getSelectedItem().toString());
+        
+        if(RbtDebe.isSelected()){
+            asientoContable.setMonto_Debe(TxtMonto.getText());
+            asientoContable.setMonto_Haber("0");
+        }
+        if(RbtHaber.isSelected()){
+            asientoContable.setMonto_Debe("0");
+            asientoContable.setMonto_Haber(TxtMonto.getText());
+        }
+        
+        asientoContable.RegistrarDetalle(asientoContable);
+        
+        setCodigoAsiento();
     }//GEN-LAST:event_BtnRegistrarDetalleActionPerformed
 
 
