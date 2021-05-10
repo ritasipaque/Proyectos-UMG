@@ -135,6 +135,7 @@ int codigoAplicacion = 3003;
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("MantenimientoProveedor");
         setVisible(true);
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Proveedores"));
@@ -376,9 +377,11 @@ int codigoAplicacion = 3003;
 BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        Insertar.setId_Usuario("Proveedores");
         Insertar.setAccion("Insertar");
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("Comercial");
+        
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -408,9 +411,10 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        Insertar.setId_Usuario("Proveedores");
         Insertar.setAccion("Modificar");
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("Comercial");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -433,9 +437,10 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        Insertar.setId_Usuario("Proveedores");
         Insertar.setAccion("Eliminar");
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("Comercial");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -453,9 +458,10 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        Insertar.setId_Usuario("Proveedores");
         Insertar.setAccion("Buscar");
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("Comercial");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
