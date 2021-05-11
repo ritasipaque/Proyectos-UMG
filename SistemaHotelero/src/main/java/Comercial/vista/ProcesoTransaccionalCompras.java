@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 import javax.swing.Icon;
@@ -30,21 +31,53 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author SipaqueRitaMaria
  */
-public class ProcesoCompra extends javax.swing.JInternalFrame {
-     ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
+public class ProcesoTransaccionalCompras extends javax.swing.JFrame {
+
+    ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
     int estadovalidacion;
     ProductoDAO productos = new ProductoDAO();
     int variable1;
     DefaultTableModel model = new DefaultTableModel();
+    
 
     /**
-     * Creates new form ProcesoCompra
+     * Creates new form ProcesoTransaccionalCompras
      */
-    public ProcesoCompra() {
+    public void llenadoDeTablas() {
+//   DefaultTableModel model = new DefaultTableModel();
+//
+//        
+//       
+//
+//      CompraDAO proveedorDAO = new CompraDAO();
+//        List<Compra> proveedor = proveedorDAO.select();
+//        tbtTabla.setModel(model);
+//        String[] dato = new String[9];
+//        for (int i = 0; i < proveedor.size(); i++) {
+//            dato[0] = Integer.toString(proveedor.get(i).getId_compra());
+//            dato[1] = proveedor.get(i).getId_proveedor();
+//            dato[2] = proveedor.get(i).getNombre_proveedor();
+//            dato[3] = proveedor.get(i).getContacto_proveedor();
+//           dato[4] = proveedor.get(i).getNit_proveedor(); 
+//           dato[5] = proveedor.get(i).getId_producto();
+//           dato[6] = proveedor.get(i).getNombre_producto();
+//           dato[7] = proveedor.get(i).getPrecio_producto();
+//           dato[98] = proveedor.get(i).getCantidad_producto();
+//           dato[9] = proveedor.get(i).getTotal_producto();
+//           
+//            //System.out.println("vendedor:" + vendedores);
+//            model.addRow(dato);
+        
+    }
+
+    public ProcesoTransaccionalCompras() {
         initComponents();
+         llenadoDeTablas();
+
         cargarCombobox.query2(txt_combox);
         productos.query2(uno);
-         model.addColumn("IDCOMPRA");
+
+        model.addColumn("IDCOMPRA");
         model.addColumn("IDPROVEEDOR");
         model.addColumn("NOMBRE");
         model.addColumn("NIT");
@@ -54,7 +87,8 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         model.addColumn("CANTIDAD");
         model.addColumn("TOTAL");
 
-       this.tbtTabla.setModel(model);
+        this.tbtTabla.setModel(model);
+
     }
 
     /**
@@ -98,14 +132,9 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         txt_1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         Reporte = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        setTitle("Proceso Compra");
-        setToolTipText("");
-        setVisible(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Proceso Transaccional Compras");
@@ -359,28 +388,34 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Ayuda");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(233, 233, 233)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(70, 70, 70))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -390,7 +425,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private Connection connectio = null;
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
         // TODO add your handling code here:
         String valor = txt_combox.getSelectedItem().toString();
@@ -430,7 +465,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
             variable1 = 0;
         }
     }//GEN-LAST:event_valiarActionPerformed
-private double redondear(double num) {
+    private double redondear(double num) {
         return Math.rint(num * 100) / 100;
     }
 
@@ -494,7 +529,7 @@ private double redondear(double num) {
         imp = redondear(imp);
         datos[8] = imp.toString();
         txt_1.setText(String.valueOf(imp));
-
+        
         model.addRow(datos);
         calTot();
 
@@ -527,6 +562,7 @@ private double redondear(double num) {
         txt_cantidad.setText("");
         txt_1.setText("");
 
+
     }//GEN-LAST:event_GenerarCompraActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
@@ -537,29 +573,66 @@ private double redondear(double num) {
 
     private void ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteActionPerformed
         // TODO add your handling code here:
-        //        Map p =new HashMap();
-        //        JasperReport report;
-        //        JasperPrint print;
-        //         try {
-            //            connection = ConexionHoteleria.getConnection();
-            //            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                //                    + "/src/main/java/Hoteleria/reportes/ReporteAmaDeLlaves.jrxml");
-            //            print = JasperFillManager.fillReport(report, p, connection);
-            //            JasperViewer view = new JasperViewer(print, false);
-            //            view.setTitle("Reporte de Ama de Llaves");
-            //            view.setVisible(true);
-            //
-            //        } catch (Exception e) {
-            //            e.printStackTrace();
-            //        }
-
+//        Map p =new HashMap();
+//        JasperReport report;
+//        JasperPrint print;
+//         try {
+//            connection = ConexionHoteleria.getConnection();
+//            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+//                    + "/src/main/java/Hoteleria/reportes/ReporteAmaDeLlaves.jrxml");
+//            print = JasperFillManager.fillReport(report, p, connection);
+//            JasperViewer view = new JasperViewer(print, false);
+//            view.setTitle("Reporte de Ama de Llaves");
+//            view.setVisible(true);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        
+        
     }//GEN-LAST:event_ReporteActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(ProcesoTransaccionalCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ProcesoTransaccionalCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ProcesoTransaccionalCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ProcesoTransaccionalCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new ProcesoTransaccionalCompras().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton GenerarCompra;
     private javax.swing.JButton Reporte;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
