@@ -21,7 +21,7 @@ import seguridad.dominio.Bitacora;
 
 /**
  *
- * @author Diego Vásquez
+ * 
  */
 public class MDIComercial extends javax.swing.JFrame {
 
