@@ -482,13 +482,11 @@
         <Component class="javax.swing.JButton" name="BtnImprimir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Imprimir"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BtnVerificarPartida">
           <Properties>
             <Property name="text" type="java.lang.String" value="Verificar Partida"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscarEncabezado">

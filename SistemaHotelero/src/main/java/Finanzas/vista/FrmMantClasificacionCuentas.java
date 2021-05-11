@@ -30,7 +30,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
     public FrmMantClasificacionCuentas() {
         initComponents();
         cargarTabla();
-        habilitarAcciones();
+        //habilitarAcciones();
     }
 
     /**
