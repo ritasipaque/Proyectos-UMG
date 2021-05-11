@@ -23,7 +23,7 @@ public class ProveedorDAO1 {
  private static final String SQL_SELECT = "SELECT PK_id_proveedor, nombre_proveedor, direccion_proveedor, contacto_proveedor, telefono_proveedor, nit_proveedor, email_proveedor, estatus_proveedor FROM tbl_proveedor";
  private static final String SQL_INSERT = "INSERT INTO tbl_proveedor (PK_id_proveedor, nombre_proveedor, direccion_proveedor, contacto_proveedor, telefono_proveedor, nit_proveedor, email_proveedor, estatus_proveedor) VALUES(?,?,?,?,?,?,?,?)";
 // private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET   nombre_proveedor= ?, direccion_proveedor= ?, contacto_proveedor= ?, telefono_proveedor= ?, nit_proveedor= ?,  email_proveedor= ?, estatus_proveedor= ?    WHERE PK_id_proveedor= ?";
- private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET   nombre_proveedor= ?, direccion_proveedor= ?, contacto_proveedor= ?, telefono_proveedor= ?,  nit_proveedor= ?, email_proveedor= ?,  estatus_proveedor= ?     WHERE PK_id_proveedor= ?";
+ private static final String SQL_UPDATE = "UPDATE tbl_proveedor SET  PK_id_proveedor= ?, nombre_proveedor= ?, direccion_proveedor= ?, contacto_proveedor= ?, telefono_proveedor= ?,  nit_proveedor= ?, email_proveedor= ?,  estatus_proveedor= ?     WHERE PK_id_proveedor= ?";
  private static final String SQL_QUERY = "SELECT PK_id_proveedor, nombre_proveedor, direccion_proveedor, contacto_proveedor, telefono_proveedor, nit_proveedor, email_proveedor, estatus_proveedor FROM tbl_proveedor WHERE PK_id_proveedor= ?";
  private static final String SQL_DELETE = "DELETE FROM tbl_proveedor WHERE PK_id_proveedor=?";
   public static final String SQL_QUERY2 = "SELECT PK_id_proveedor FROM tbl_proveedor"; 
@@ -121,6 +121,7 @@ public class ProveedorDAO1 {
                 String contacto = rs.getString("contacto_proveedor");
                 String telefono = rs.getString("telefono_proveedor");
                 String nit = rs.getString("nit_proveedor");
+                 String email = rs.getString("email_proveedor");
                 String estatus = rs.getString("estatus_proveedor");
 
                 
@@ -131,6 +132,7 @@ public class ProveedorDAO1 {
                 moduloC.setContacto_proveedor(contacto);
                 moduloC.setTelefono_proveedor(telefono);
                 moduloC.setNit_proveedor(nit);
+                moduloC.setEmail_proveedor(email);
                 moduloC.setEstatus_proveedor(estatus);
                 
                 
@@ -178,14 +180,16 @@ public class ProveedorDAO1 {
             System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             
-            stmt.setString(1, aplicacion.getNombre_proveedor());
-            stmt.setString(2, aplicacion.getDireccion_proveedor());
-            stmt.setString(3, aplicacion.getContacto_proveedor());
+            
+            
+             stmt.setInt(1, aplicacion.getPK_id_proveedor());
+            stmt.setString(2, aplicacion.getNombre_proveedor());
+            stmt.setString(3, aplicacion.getDireccion_proveedor());
             stmt.setString(4, aplicacion.getContacto_proveedor());
             stmt.setString(5, aplicacion.getTelefono_proveedor());
             stmt.setString(6, aplicacion.getNit_proveedor());
-            stmt.setString(7, aplicacion.getEstatus_proveedor());
-            stmt.setInt(8, aplicacion.getPK_id_proveedor());
+            stmt.setString(7, aplicacion.getEmail_proveedor());
+            stmt.setString(8, aplicacion.getEstatus_proveedor());
             
             
             rows = stmt.executeUpdate();
@@ -231,7 +235,8 @@ public class ProveedorDAO1 {
     
     
     
-    }
+ }
+    
  public List<Proveedor> listar() {
         List<Proveedor> perfil = new ArrayList <>();
         Connection conn = null;
