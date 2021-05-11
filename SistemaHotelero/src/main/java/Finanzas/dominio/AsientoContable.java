@@ -1,12 +1,111 @@
 package Finanzas.dominio;
 
 import Finanzas.datos.AsientoContableDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Diego Vásquez
  */
 public class AsientoContable {
+
+    /**
+     * @return the Codigo_DetalleAsiento
+     */
+    public String getCodigo_DetalleAsiento() {
+        return Codigo_DetalleAsiento;
+    }
+
+    /**
+     * @param Codigo_DetalleAsiento the Codigo_DetalleAsiento to set
+     */
+    public void setCodigo_DetalleAsiento(String Codigo_DetalleAsiento) {
+        this.Codigo_DetalleAsiento = Codigo_DetalleAsiento;
+    }
+
+    /**
+     * @return the CuentaContable_Asiento
+     */
+    public String getCuentaContable_Asiento() {
+        return CuentaContable_Asiento;
+    }
+
+    /**
+     * @param CuentaContable_Asiento the CuentaContable_Asiento to set
+     */
+    public void setCuentaContable_Asiento(String CuentaContable_Asiento) {
+        this.CuentaContable_Asiento = CuentaContable_Asiento;
+    }
+
+    /**
+     * @return the Partida_Asiento
+     */
+    public String getPartida_Asiento() {
+        return Partida_Asiento;
+    }
+
+    /**
+     * @param Partida_Asiento the Partida_Asiento to set
+     */
+    public void setPartida_Asiento(String Partida_Asiento) {
+        this.Partida_Asiento = Partida_Asiento;
+    }
+
+    /**
+     * @return the Encabezado_Asiento
+     */
+    public String getEncabezado_Asiento() {
+        return Encabezado_Asiento;
+    }
+
+    /**
+     * @param Encabezado_Asiento the Encabezado_Asiento to set
+     */
+    public void setEncabezado_Asiento(String Encabezado_Asiento) {
+        this.Encabezado_Asiento = Encabezado_Asiento;
+    }
+
+    /**
+     * @return the Tipo_Asiento
+     */
+    public String getTipo_Asiento() {
+        return Tipo_Asiento;
+    }
+
+    /**
+     * @param Tipo_Asiento the Tipo_Asiento to set
+     */
+    public void setTipo_Asiento(String Tipo_Asiento) {
+        this.Tipo_Asiento = Tipo_Asiento;
+    }
+
+    /**
+     * @return the Monto_Debe
+     */
+    public String getMonto_Debe() {
+        return Monto_Debe;
+    }
+
+    /**
+     * @param Monto_Debe the Monto_Debe to set
+     */
+    public void setMonto_Debe(String Monto_Debe) {
+        this.Monto_Debe = Monto_Debe;
+    }
+
+    /**
+     * @return the Monto_Haber
+     */
+    public String getMonto_Haber() {
+        return Monto_Haber;
+    }
+
+    /**
+     * @param Monto_Haber the Monto_Haber to set
+     */
+    public void setMonto_Haber(String Monto_Haber) {
+        this.Monto_Haber = Monto_Haber;
+    }
 
     AsientoContableDAO asientoContableDAO = new AsientoContableDAO();
 
@@ -88,4 +187,29 @@ public class AsientoContable {
         }
         return matrixRegistros;
     }
+
+    public void RegistrarDetalle(AsientoContable objAsiento) {
+        
+        if (objAsiento.equals(null)) {
+
+            JOptionPane.showMessageDialog(null, "¡NO PUEDEN HABER CAMPOS VACÍOS!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int respuesta = asientoContableDAO.RegistrarAsientoDetalle(objAsiento);
+
+            if (respuesta == 1) {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO EXITOSO!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO ERRÓNEO!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private String Codigo_DetalleAsiento;
+    private String CuentaContable_Asiento;
+    private String Partida_Asiento;
+    private String Encabezado_Asiento;
+    private String Tipo_Asiento;
+    private String Monto_Debe;
+    private String Monto_Haber;
 }
