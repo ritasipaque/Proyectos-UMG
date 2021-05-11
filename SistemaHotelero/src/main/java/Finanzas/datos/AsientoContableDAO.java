@@ -1,8 +1,10 @@
 package Finanzas.datos;
 
+import Finanzas.dominio.AsientoContable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -151,7 +153,7 @@ public class AsientoContableDAO extends Conexion {
 
         return matrixClasificacion;
     }
-    
+
     public int getCantidadTipoAsiento() {
         int cantidadRegistros = 0;
         Connection conn = null;
@@ -210,5 +212,41 @@ public class AsientoContableDAO extends Conexion {
         }
 
         return matrixClasificacion;
+    }
+
+    public int RegistrarAsientoDetalle(AsientoContable objAsientoContable) {
+
+        int flagRegistro = 0;
+
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int row = 0;
+
+        try {
+            con = Conexion.getConnection();
+            stmt = con.prepareStatement("INSERT INTO asientocontabledetalle (Codigo_DetalleAsiento, CuentaContable_Asiento, Partida_Asiento, Encabezado_Asiento, Tipo_Asiento, Monto_Debe, Monto_Haber) VALUES (?,?,?,?,?,?,?)");
+            stmt.setString(1, objAsientoContable.getCodigo_DetalleAsiento());
+            stmt.setString(2, objAsientoContable.getCuentaContable_Asiento());
+            stmt.setString(3, objAsientoContable.getPartida_Asiento());
+            stmt.setString(4, objAsientoContable.getEncabezado_Asiento());
+            stmt.setString(5, objAsientoContable.getTipo_Asiento());
+            stmt.setString(6, objAsientoContable.getMonto_Debe());
+            stmt.setString(7, objAsientoContable.getMonto_Haber());
+            row = stmt.executeUpdate();
+
+            if (row >= 1) {
+                flagRegistro = 1;
+            } else {
+                flagRegistro = 0;
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "¡ERROR INTERNO, CONSULTE CON EL ADMINISTRADOR!", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            Conexion.close(con);
+            Conexion.close(stmt);
+        }
+        return flagRegistro;
     }
 }
