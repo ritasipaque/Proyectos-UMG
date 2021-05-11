@@ -4,6 +4,7 @@ import Hoteleria.datos.FacturacionDAO;
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Facturacion;
 import Hoteleria.dominio.Servicios;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JLabel;
@@ -226,6 +227,11 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                 txtFacturaActionPerformed(evt);
             }
         });
+        txtFactura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFacturaKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("No. Reservación:");
 
@@ -233,6 +239,11 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
         txtReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtReservaActionPerformed(evt);
+            }
+        });
+        txtReserva.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtReservaKeyTyped(evt);
             }
         });
 
@@ -249,6 +260,16 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
 
         txtNombre.setEditable(false);
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
 
         txtEntrada.setEditable(false);
         txtEntrada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -271,6 +292,16 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
         jLabel6.setText("Forma de Pago:");
 
         cbxPago.setEnabled(false);
+        cbxPago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbxPagoItemStateChanged(evt);
+            }
+        });
+        cbxPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxPagoActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("No. Tarjeta:");
 
@@ -281,6 +312,11 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                 txtNoTarjetaActionPerformed(evt);
             }
         });
+        txtNoTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNoTarjetaKeyTyped(evt);
+            }
+        });
 
         jLabel9.setText("CVV:");
 
@@ -289,6 +325,11 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
         txtCvv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCvvActionPerformed(evt);
+            }
+        });
+        txtCvv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCvvKeyTyped(evt);
             }
         });
 
@@ -381,6 +422,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jdateCaducidad.setDateFormatString("yyyy-MM-dd");
         jdateCaducidad.setEnabled(false);
 
         btnConfirmarPago.setText("Confirmar Pago");
@@ -405,7 +447,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -459,13 +501,12 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnConfirmarPago, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel15)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTotalServicios))))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTotalServicios)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -533,7 +574,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                     .addComponent(jLabel16)
                     .addComponent(txtTotalFacturacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConfirmarPago))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Facturas"));
@@ -573,7 +614,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -659,9 +700,9 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
 
         txtNombre.setEditable(true);
         cbxPago.setEnabled(true);
-        txtNoTarjeta.setEditable(true);
-        txtCvv.setEditable(true);
-        jdateCaducidad.setEnabled(true);
+        //txtNoTarjeta.setEditable(true);
+        //txtCvv.setEditable(true);
+        //jdateCaducidad.setEnabled(true);
         txtTotalServicios.setText(String.valueOf(0));
         txtTotalFacturacion.setText(txtTotalReservacion.getText());
         btnAsignarUno.setEnabled(true);
@@ -736,51 +777,163 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
 
         String cbx_Pago = cbxPago.getSelectedItem().toString();
 
-        if (txtFactura.getText().length() != 0 && txtReserva.getText().length() != 0
-                && txtNoTarjeta.getText().length() != 0 && txtCvv.getText().length() != 0
-                && txtTotalReservacion.getText().length() != 0 && txtTotalServicios.getText().length() != 0
-                && txtTotalFacturacion.getText().length() != 0 && jdateCaducidad.getDate() != null
-                && cbx_Pago != "Seleccionar...") {
-            {
-                String fecha = new SimpleDateFormat("dd/MM/yyyy").format(jdateCaducidad.getDate());
-                ama_De_Llaves_Insertar.setId_Factura(Integer.parseInt(txtFactura.getText()));
-                ama_De_Llaves_Insertar.setId_Reservacion(Integer.parseInt(txtReserva.getText()));
-                ama_De_Llaves_Insertar.setNombre_Factura(txtNombre.getText());
-                ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
-                ama_De_Llaves_Insertar.setFechaSalida_Factura(txtSalida.getText());
-                ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
-                ama_De_Llaves_Insertar.setFormaPago_Factura(cbx_Pago);
-                ama_De_Llaves_Insertar.setNoTarjeta_Factura(Integer.parseInt(txtNoTarjeta.getText()));
-                ama_De_Llaves_Insertar.setCvv_Factura(Integer.parseInt(txtCvv.getText()));
-                ama_De_Llaves_Insertar.setCaducidad_Factura(fecha);
-                ama_De_Llaves_Insertar.setTotalReservacion_Factura(Integer.parseInt(txtTotalReservacion.getText()));
-                ama_De_Llaves_Insertar.setTotalServicios_Factura(Integer.parseInt(txtTotalServicios.getText()));
-                ama_De_Llaves_Insertar.setTotalFactura_Factura(Integer.parseInt(txtTotalFacturacion.getText()));
-                ama_De_Llaves_Insertar.setEstado_Factura(1);
+        if (cbx_Pago.equals("Tarjeta")) {
+            if (txtFactura.getText().length() != 0 && txtReserva.getText().length() != 0
+                    && txtNoTarjeta.getText().length() != 0 && txtCvv.getText().length() != 0
+                    && txtTotalReservacion.getText().length() != 0 && txtTotalServicios.getText().length() != 0
+                    && txtTotalFacturacion.getText().length() != 0 && jdateCaducidad.getDate() != null
+                    && cbx_Pago != "Seleccionar...") {
+                {
+                    String fecha = new SimpleDateFormat("yyyy-MM-dd").format(jdateCaducidad.getDate());
+                    ama_De_Llaves_Insertar.setId_Factura(Integer.parseInt(txtFactura.getText()));
+                    ama_De_Llaves_Insertar.setId_Reservacion(Integer.parseInt(txtReserva.getText()));
+                    ama_De_Llaves_Insertar.setNombre_Factura(txtNombre.getText());
+                    ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
+                    ama_De_Llaves_Insertar.setFechaSalida_Factura(txtSalida.getText());
+                    ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
+                    ama_De_Llaves_Insertar.setFormaPago_Factura(cbx_Pago);
+                    ama_De_Llaves_Insertar.setNoTarjeta_Factura(Integer.parseInt(txtNoTarjeta.getText()));
+                    ama_De_Llaves_Insertar.setCvv_Factura(Integer.parseInt(txtCvv.getText()));
+                    ama_De_Llaves_Insertar.setCaducidad_Factura(fecha);
+                    ama_De_Llaves_Insertar.setTotalReservacion_Factura(Integer.parseInt(txtTotalReservacion.getText()));
+                    ama_De_Llaves_Insertar.setTotalServicios_Factura(Integer.parseInt(txtTotalServicios.getText()));
+                    ama_De_Llaves_Insertar.setTotalFactura_Factura(Integer.parseInt(txtTotalFacturacion.getText()));
+                    ama_De_Llaves_Insertar.setEstado_Factura(1);
 
-                int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea seguir adelante con su pago?", "Pago", JOptionPane.YES_NO_OPTION);
-                if (confirmar == 0) {
-                    ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
-                    limpiar();
-                    //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
-                    //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
-                    txtNombre.setEditable(false);
-                    cbxPago.setEnabled(false);
-                    txtNoTarjeta.setEditable(false);
-                    txtCvv.setEditable(false);
-                    jdateCaducidad.setEnabled(false);
-                    btnAsignarUno.setEnabled(false);
-                    btnAsignarTodos.setEnabled(false);
-                    btnQuitarUno.setEnabled(false);
-                    btnQuitarTodos.setEnabled(false);
-                    btnConfirmarPago.setEnabled(false);
+                    int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea seguir adelante con su pago?", "Pago", JOptionPane.YES_NO_OPTION);
+                    if (confirmar == 0) {
+                        ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
+                        limpiar();
+                        //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                        //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+                        txtNombre.setEditable(false);
+                        cbxPago.setEnabled(false);
+                        txtNoTarjeta.setEditable(false);
+                        txtCvv.setEditable(false);
+                        jdateCaducidad.setEnabled(false);
+                        btnAsignarUno.setEnabled(false);
+                        btnAsignarTodos.setEnabled(false);
+                        btnQuitarUno.setEnabled(false);
+                        btnQuitarTodos.setEnabled(false);
+                        btnConfirmarPago.setEnabled(false);
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
+
+        } else if (cbx_Pago.equals("Efectivo")) {
+            if (txtFactura.getText().length() != 0 && txtReserva.getText().length() != 0
+                    /*&& txtNoTarjeta.getText().length() != 0 && txtCvv.getText().length() != 0*/
+                    && txtTotalReservacion.getText().length() != 0 && txtTotalServicios.getText().length() != 0
+                    && txtTotalFacturacion.getText().length() != 0 /*&& jdateCaducidad.getDate() != null*/
+                    && cbx_Pago != "Seleccionar...") {
+                {
+                    ama_De_Llaves_Insertar.setId_Factura(Integer.parseInt(txtFactura.getText()));
+                    ama_De_Llaves_Insertar.setId_Reservacion(Integer.parseInt(txtReserva.getText()));
+                    ama_De_Llaves_Insertar.setNombre_Factura(txtNombre.getText());
+                    ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
+                    ama_De_Llaves_Insertar.setFechaSalida_Factura(txtSalida.getText());
+                    ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
+                    ama_De_Llaves_Insertar.setFormaPago_Factura(cbx_Pago);
+                    ama_De_Llaves_Insertar.setNoTarjeta_Factura(0);
+                    ama_De_Llaves_Insertar.setCvv_Factura(0);
+                    ama_De_Llaves_Insertar.setCaducidad_Factura(null);
+                    ama_De_Llaves_Insertar.setTotalReservacion_Factura(Integer.parseInt(txtTotalReservacion.getText()));
+                    ama_De_Llaves_Insertar.setTotalServicios_Factura(Integer.parseInt(txtTotalServicios.getText()));
+                    ama_De_Llaves_Insertar.setTotalFactura_Factura(Integer.parseInt(txtTotalFacturacion.getText()));
+                    ama_De_Llaves_Insertar.setEstado_Factura(1);
+
+                    int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea seguir adelante con su pago?", "Pago", JOptionPane.YES_NO_OPTION);
+                    if (confirmar == 0) {
+                        ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
+                        limpiar();
+                        //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                        //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+                        txtNombre.setEditable(false);
+                        cbxPago.setEnabled(false);
+                        txtNoTarjeta.setEditable(false);
+                        txtCvv.setEditable(false);
+                        jdateCaducidad.setEnabled(false);
+                        btnAsignarUno.setEnabled(false);
+                        btnAsignarTodos.setEnabled(false);
+                        btnQuitarUno.setEnabled(false);
+                        btnQuitarTodos.setEnabled(false);
+                        btnConfirmarPago.setEnabled(false);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
+            }
         }
         tabla();
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
+
+    private void txtFacturaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFacturaKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txtFacturaKeyTyped
+
+    private void txtReservaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtReservaKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txtReservaKeyTyped
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo letras.");
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtNoTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNoTarjetaKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txtNoTarjetaKeyTyped
+
+    private void txtCvvKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCvvKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txtCvvKeyTyped
+
+    private void cbxPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPagoActionPerformed
+
+    }//GEN-LAST:event_cbxPagoActionPerformed
+
+    private void cbxPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxPagoItemStateChanged
+        String cbx_Pago = cbxPago.getSelectedItem().toString();
+        if (cbx_Pago.equals("Tarjeta")) {
+            txtNoTarjeta.setEditable(true);
+            txtCvv.setEditable(true);
+            jdateCaducidad.setEnabled(true);
+        } else if (cbx_Pago.equals("Efectivo")) {
+            txtNoTarjeta.setEditable(false);
+            txtCvv.setEditable(false);
+            jdateCaducidad.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbxPagoItemStateChanged
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
