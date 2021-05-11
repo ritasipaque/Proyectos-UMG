@@ -15,6 +15,16 @@ String nombre_producto;
 String precio_producto; 
 String descripcion_producto; 
 String estatus_producto;
+String cantidad;
+
+   
+    public String getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(String cantidad) {
+        this.cantidad = cantidad;
+    }
 
     public int getPK_id_producto() {
         return PK_id_producto;
@@ -55,6 +65,7 @@ String estatus_producto;
     public void setEstatus_producto(String estatus_producto) {
         this.estatus_producto = estatus_producto;
     }
+    
 
     @Override
     public String toString() {

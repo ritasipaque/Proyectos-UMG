@@ -118,7 +118,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla();
         comboBox();
-        habilitarAcciones();
+        //habilitarAcciones();
     }
 
     /**
