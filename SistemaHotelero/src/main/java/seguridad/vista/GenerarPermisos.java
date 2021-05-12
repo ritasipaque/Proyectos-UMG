@@ -168,8 +168,10 @@ public class GenerarPermisos {
 //     MDIComercial1.M_producto.setVisible(false);
 //  MDIComercial.M_inventario.setVisible(false);
       ejecutarPermisos.ejecutarBusqueda(usuario);
- 
-   
+   MDIComercial.M_venta.setVisible(false);
+                    MDIComercial.M_compras.setVisible(false);
+                      MDIComercial.M_inventario.setVisible(false);
+
                    for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
                     if (varApp >= 3000 && varApp <= 3360) {

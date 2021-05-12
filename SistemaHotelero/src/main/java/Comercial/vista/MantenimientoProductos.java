@@ -20,7 +20,7 @@ import seguridad.vista.Aplicacion_Perfil;
 
 /**
  *
- * @author SIPAQUE.RITA
+ * @author SIPAQUE.RITA - DIANA VICTORES 
  */
 public class MantenimientoProductos extends javax.swing.JInternalFrame {
 
@@ -44,6 +44,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             dato[0] = Integer.toString(proveedor.get(i).getPK_id_producto());
             dato[1] = proveedor.get(i).getNombre_producto();
             dato[2] = proveedor.get(i).getPrecio_producto();
+            
             dato[3] = proveedor.get(i).getDescripcion_producto();
             dato[4] = proveedor.get(i).getEstatus_producto();
             
@@ -59,7 +60,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         proveedorAConsultar = proveedorDAO.query(proveedorAConsultar);
         
         txt_Nombre.setText(proveedorAConsultar.getNombre_producto());
-        txt_Precio.setText(proveedorAConsultar.getPrecio_producto());
+        txt_Precio.setText(String.valueOf(proveedorAConsultar.getPrecio_producto()));
+        
         txt_Descripcion.setText(proveedorAConsultar.getDescripcion_producto());
         txt_Estado.setText(proveedorAConsultar.getEstatus_producto());
         
@@ -90,7 +92,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAyuda = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -107,9 +108,10 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablaProducto1 = new javax.swing.JTable();
+        btnAyuda = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -117,13 +119,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Mantenimiento Producto");
         setVisible(true);
-
-        btnAyuda.setText("Ayuda");
-        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAyudaActionPerformed(evt);
-            }
-        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel17.setText("Mantenimiento Productos");
@@ -149,7 +144,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         txt_Descripcion.setRows(5);
         jScrollPane1.setViewportView(txt_Descripcion);
 
-        btnGuardar.setBackground(new java.awt.Color(204, 204, 204));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +151,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnModificar.setBackground(new java.awt.Color(204, 204, 204));
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +158,6 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnEliminar.setBackground(new java.awt.Color(204, 204, 204));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,11 +165,10 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             }
         });
 
-        btnBuscar.setBackground(new java.awt.Color(204, 204, 204));
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -209,15 +200,15 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscar)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(0, 43, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addComponent(btnModificar)
-                .addGap(22, 22, 22)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
                 .addGap(123, 123, 123))
         );
@@ -228,7 +219,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txt_IdProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(jButton1))
                 .addGap(7, 7, 7)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -269,32 +260,37 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(TablaProducto1);
 
+        btnAyuda.setText("Ayuda");
+        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(168, 168, 168)
-                .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4))
-                .addGap(0, 93, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel17)
+                        .addGap(65, 65, 65)
+                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
                     .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(10, 10, 10)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -302,29 +298,15 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
-        try {
-            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoPrducto.chm")).exists()) {
-                Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoPrducto.chm");
-                p.waitFor();
-            } else {
-                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
-            }
-            //System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }//GEN-LAST:event_btnAyudaActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       ProductoDAO productoDAO = new ProductoDAO();
+        // TODO add your handling code here:
+        ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAInsertar = new Producto();
 
         productoAInsertar.setPK_id_producto((int) Integer.parseInt(txt_IdProducto.getText()));
         productoAInsertar.setNombre_producto(txt_Nombre.getText());
         productoAInsertar.setPrecio_producto(txt_Precio.getText());
+        
         productoAInsertar.setDescripcion_producto(txt_Descripcion.getText());
         productoAInsertar.setEstatus_producto(txt_Estado.getText());
 
@@ -346,11 +328,13 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your handling code here:
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAActualizar = new Producto();
         productoAActualizar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         productoAActualizar.setNombre_producto(txt_Nombre.getText());
-        productoAActualizar.setPrecio_producto(txt_Precio.getText());
+        productoAActualizar.setNombre_producto(txt_Precio.getText());
+        
         productoAActualizar.setDescripcion_producto(txt_Descripcion.getText());
         productoAActualizar.setEstatus_producto(txt_Estado.getText());
         productoDAO.update(productoAActualizar);
@@ -372,7 +356,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-         ProductoDAO productoDAO = new ProductoDAO();
+        // TODO add your handling code here:
+        ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAEliminar = new Producto();
         productoAEliminar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         productoDAO.delete(productoAEliminar);
@@ -393,9 +378,9 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-
-       buscar();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        buscar();
         BitacoraDao BitacoraDAO = new BitacoraDao();
         Bitacora Insertar = new Bitacora();
         Insertar.setId_Usuario("MantenimientoProductos");
@@ -404,18 +389,34 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         try {
             BitacoraDAO.insert(Insertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoProductos.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_btnAyudaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TablaProducto1;
     public javax.swing.JButton btnAyuda;
-    public javax.swing.JButton btnBuscar;
-    public javax.swing.JButton btnEliminar;
-    public javax.swing.JButton btnGuardar;
-    public javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
