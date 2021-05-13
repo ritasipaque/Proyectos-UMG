@@ -21,7 +21,7 @@ import seguridad.dominio.Bitacora;
 
 /**
  *
- * @author Diego Vásquez
+ * 
  */
 public class MDIComercial extends javax.swing.JFrame {
 
@@ -34,6 +34,8 @@ public class MDIComercial extends javax.swing.JFrame {
     private MantenimientoProveedor MantenimientoProveedor;
     private Proceso_Factura Proceso_Factura;
     private Proceso_Depositos Proceso_Depositos;
+    private ProcesoCompra Compra;
+     private FacturaProveedor Factura;
       public static JLabel logo = new JLabel();
     
     public MDIComercial() throws UnknownHostException {
@@ -93,6 +95,9 @@ public class MDIComercial extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        ProcesoCompra = new javax.swing.JMenuItem();
+        FacturaCompras = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -196,6 +201,26 @@ public class MDIComercial extends javax.swing.JFrame {
         jMenu2.add(jMenuItem3);
 
         jMenu4.add(jMenu2);
+
+        jMenu5.setText("ProcesoCompra");
+
+        ProcesoCompra.setText("TransaccionalCompra");
+        ProcesoCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProcesoCompraActionPerformed(evt);
+            }
+        });
+        jMenu5.add(ProcesoCompra);
+
+        FacturaCompras.setText("Factura Compras");
+        FacturaCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturaComprasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(FacturaCompras);
+
+        jMenu4.add(jMenu5);
 
         jMenuBar1.add(jMenu4);
 
@@ -498,7 +523,7 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 
-        
+    
           Proceso_Depositos  = new Proceso_Depositos();
         jDesktopPane1.add(Proceso_Depositos);
                   
@@ -529,6 +554,32 @@ public class MDIComercial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void ProcesoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoCompraActionPerformed
+        // TODO add your handling code here:
+         Compra = new ProcesoCompra();
+        jDesktopPane1.add(Compra);
+        
+           Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize =   Compra.getSize();
+          Compra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+           Compra.show();
+        logo.setVisible(true);
+     Compra.setVisible(true);
+    }//GEN-LAST:event_ProcesoCompraActionPerformed
+
+    private void FacturaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturaComprasActionPerformed
+        // TODO add your handling code here:
+        Factura = new FacturaProveedor();
+        jDesktopPane1.add(Factura);
+        
+           Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize =    Factura.getSize();
+          Factura.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+           Factura.show();
+        logo.setVisible(true);
+     Factura.setVisible(true);
+    }//GEN-LAST:event_FacturaComprasActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -554,6 +605,7 @@ public class MDIComercial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem FacturaCompras;
     public static javax.swing.JMenu M_ccompras;
     public static javax.swing.JMenuItem M_cliente;
     public static javax.swing.JMenu M_compras;
@@ -562,6 +614,7 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenuItem M_producto1;
     public static javax.swing.JMenuItem M_proveedor;
     public static javax.swing.JMenu M_venta;
+    private javax.swing.JMenuItem ProcesoCompra;
     public static javax.swing.JMenu cerrar_sesion;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
@@ -570,6 +623,7 @@ public class MDIComercial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     public static javax.swing.JMenuBar jMenuBar1;

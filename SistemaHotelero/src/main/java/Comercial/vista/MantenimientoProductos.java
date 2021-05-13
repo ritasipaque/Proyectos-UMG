@@ -44,6 +44,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             dato[0] = Integer.toString(proveedor.get(i).getPK_id_producto());
             dato[1] = proveedor.get(i).getNombre_producto();
             dato[2] = proveedor.get(i).getPrecio_producto();
+            
             dato[3] = proveedor.get(i).getDescripcion_producto();
             dato[4] = proveedor.get(i).getEstatus_producto();
             
@@ -59,7 +60,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         proveedorAConsultar = proveedorDAO.query(proveedorAConsultar);
         
         txt_Nombre.setText(proveedorAConsultar.getNombre_producto());
-        txt_Precio.setText(proveedorAConsultar.getPrecio_producto());
+        txt_Precio.setText(String.valueOf(proveedorAConsultar.getPrecio_producto()));
+        
         txt_Descripcion.setText(proveedorAConsultar.getDescripcion_producto());
         txt_Estado.setText(proveedorAConsultar.getEstatus_producto());
         
@@ -304,6 +306,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         productoAInsertar.setPK_id_producto((int) Integer.parseInt(txt_IdProducto.getText()));
         productoAInsertar.setNombre_producto(txt_Nombre.getText());
         productoAInsertar.setPrecio_producto(txt_Precio.getText());
+        
         productoAInsertar.setDescripcion_producto(txt_Descripcion.getText());
         productoAInsertar.setEstatus_producto(txt_Estado.getText());
 
@@ -330,7 +333,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         Producto productoAActualizar = new Producto();
         productoAActualizar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         productoAActualizar.setNombre_producto(txt_Nombre.getText());
-        productoAActualizar.setPrecio_producto(txt_Precio.getText());
+        productoAActualizar.setNombre_producto(txt_Precio.getText());
+        
         productoAActualizar.setDescripcion_producto(txt_Descripcion.getText());
         productoAActualizar.setEstatus_producto(txt_Estado.getText());
         productoDAO.update(productoAActualizar);
