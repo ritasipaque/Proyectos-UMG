@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+import java.sql.Connection;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
 import javax.swing.Icon;
@@ -18,13 +19,21 @@ import Comercial.dominio.Proveedor;
 import Comercial.datos.ProveedorDAO1;
 import Comercial.datos.CompraDAO;
 import Comercial.datos.ProductoDAO;
-import com.sun.jdi.connect.spi.Connection;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import Comercial.datos.Conexion;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -97,7 +106,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         txt_total = new javax.swing.JTextField();
         txt_1 = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        Reporte = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -310,10 +319,10 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
 
         jLabel16.setText("Sub Total");
 
-        Reporte.setText("Reporte");
-        Reporte.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReporteActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -329,13 +338,13 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                         .addComponent(Eliminar)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(238, 238, 238)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel15)
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(Reporte)
+                                .addGap(30, 30, 30)
+                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -351,7 +360,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                     .addComponent(Eliminar)
                     .addComponent(txt_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(Reporte))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,7 +394,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -534,32 +543,33 @@ private double redondear(double num) {
 
         eliminar();
     }//GEN-LAST:event_EliminarActionPerformed
-
-    private void ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteActionPerformed
+private Connection connection = null;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //        Map p =new HashMap();
-        //        JasperReport report;
-        //        JasperPrint print;
-        //         try {
-            //            connection = ConexionHoteleria.getConnection();
-            //            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                //                    + "/src/main/java/Hoteleria/reportes/ReporteAmaDeLlaves.jrxml");
-            //            print = JasperFillManager.fillReport(report, p, connection);
-            //            JasperViewer view = new JasperViewer(print, false);
-            //            view.setTitle("Reporte de Ama de Llaves");
-            //            view.setVisible(true);
-            //
-            //        } catch (Exception e) {
-            //            e.printStackTrace();
-            //        }
+           Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
 
-    }//GEN-LAST:event_ReporteActionPerformed
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Comercial/reportes/ReporteProcesp.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Proceso compras");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton GenerarCompra;
-    private javax.swing.JButton Reporte;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
