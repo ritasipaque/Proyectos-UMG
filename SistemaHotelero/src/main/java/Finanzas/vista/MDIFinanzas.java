@@ -1,6 +1,7 @@
 package Finanzas.vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.net.UnknownHostException;
@@ -26,7 +27,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     private FrmCuentaBancaria FrmBancaria;
     private FrmCuentaHabiente FrmHabiente;
     private Mantenimiento_TipoAsiento FrmTipoAsiento;
-    private Emision_Cheque formEmision_Cheque;
+    private Emision__Cheque formEmision_Cheque;
     GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
 
@@ -36,7 +37,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         var modulo_nombre = "Finanzas";
         initComponents();
         this.setTitle("Usuario: " + "[" + Login.usuarioFianzas + "]" + " \t" + "IP: [" + mdi_Components.getIp() + "]");
-        permisos.getPermisos(modulo_nombre, Login.usuarioFianzas);
+        //permisos.getPermisos(modulo_nombre, Login.usuarioFianzas);
     }
 
     @SuppressWarnings("unchecked")
@@ -65,6 +66,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
         JMenuItemAsientoContable = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         JMenunEmisionCheque = new javax.swing.JMenuItem();
+        EncabezadoAsiento = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
         JMenuAyuda = new javax.swing.JMenu();
@@ -219,6 +221,14 @@ public class MDIFinanzas extends javax.swing.JFrame {
         });
         JMenuProcesos.add(JMenunEmisionCheque);
 
+        EncabezadoAsiento.setText("Encabezado Asiento");
+        EncabezadoAsiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EncabezadoAsientoActionPerformed(evt);
+            }
+        });
+        JMenuProcesos.add(EncabezadoAsiento);
+
         JMenuBarFinanzas.add(JMenuProcesos);
 
         JMenuInformes.setText("Informes");
@@ -321,8 +331,9 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }//GEN-LAST:event_JMenuPeriodoFiscalActionPerformed
 
     private void JMenuItemAsientoContableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuItemAsientoContableActionPerformed
-        FrmEncabezadoAsiento frmEncabezadoAsiento = new FrmEncabezadoAsiento();
-        frmEncabezadoAsiento.setVisible(true);
+        FrmAsientoContable frmAsientoContable = new FrmAsientoContable();
+        JDesktopFinanzas.add(frmAsientoContable);
+        frmAsientoContable.setVisible(true);
     }//GEN-LAST:event_JMenuItemAsientoContableActionPerformed
 
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
@@ -351,7 +362,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
     private void JMenunEmisionChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenunEmisionChequeActionPerformed
         try {
-            formEmision_Cheque = new Emision_Cheque();
+            formEmision_Cheque = new Emision__Cheque();
         } catch (SQLException ex) {
             Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -359,11 +370,22 @@ public class MDIFinanzas extends javax.swing.JFrame {
         
     }//GEN-LAST:event_JMenunEmisionChequeActionPerformed
 
+    private void EncabezadoAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncabezadoAsientoActionPerformed
+        FrmEncabezadoAsiento frm_encabezadoasiento = null;
+        try {
+            frm_encabezadoasiento = new FrmEncabezadoAsiento();
+        } catch (SQLException ex) {
+            Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        frm_encabezadoasiento.setVisible(true);
+        JDesktopFinanzas.add(frm_encabezadoasiento);
+    }//GEN-LAST:event_EncabezadoAsientoActionPerformed
+
     public static void main(String args[]) {
 
         //FLATLAF
         try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
+            UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
             System.out.println(ex);
         }
@@ -380,6 +402,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem EncabezadoAsiento;
     private javax.swing.JDesktopPane JDesktopFinanzas;
     private javax.swing.JMenu JMenuArchivo;
     private javax.swing.JMenu JMenuAyuda;
