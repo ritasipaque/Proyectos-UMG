@@ -43,7 +43,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         for (int i = 0; i < proveedor.size(); i++) {
             dato[0] = Integer.toString(proveedor.get(i).getPK_id_producto());
             dato[1] = proveedor.get(i).getNombre_producto();
-            dato[2] = Integer.toString(proveedor.get(i).getPrecio_producto());
+            dato[2] = proveedor.get(i).getPrecio_producto();
+            
             dato[3] = proveedor.get(i).getDescripcion_producto();
             dato[4] = proveedor.get(i).getEstatus_producto();
             
@@ -304,7 +305,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
 
         productoAInsertar.setPK_id_producto((int) Integer.parseInt(txt_IdProducto.getText()));
         productoAInsertar.setNombre_producto(txt_Nombre.getText());
-        productoAInsertar.setPrecio_producto((int) Integer.parseInt(txt_Precio.getText()));
+        productoAInsertar.setPrecio_producto(txt_Precio.getText());
+        
         productoAInsertar.setDescripcion_producto(txt_Descripcion.getText());
         productoAInsertar.setEstatus_producto(txt_Estado.getText());
 
@@ -331,7 +333,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         Producto productoAActualizar = new Producto();
         productoAActualizar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         productoAActualizar.setNombre_producto(txt_Nombre.getText());
-        productoAActualizar.setPrecio_producto(Integer.parseInt(txt_Precio.getText()));
+        productoAActualizar.setNombre_producto(txt_Precio.getText());
+        
         productoAActualizar.setDescripcion_producto(txt_Descripcion.getText());
         productoAActualizar.setEstatus_producto(txt_Estado.getText());
         productoDAO.update(productoAActualizar);
