@@ -109,7 +109,56 @@ public List<Compra> select() {
 
         return rows;
     }
+ public Compra query(Compra moduloC) {    
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int rows = 0;
 
+        try {
+            conn = Conexion.getConnection();
+//            System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY);
+            stmt.setInt(1, moduloC.getId_compra());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int Id_compra = rs.getInt("Id_compra");
+                String Id_proveedor = rs.getString("Id_proveedor");
+                String  Nombre_proveedor = rs.getString("Nombre_proveedor");
+                String Contacto_proveedor = rs.getString("Contacto_proveedor");
+                String Nit_proveedor = rs.getString("Nit_proveedor");
+                String Id_producto = rs.getString("Id_producto");
+                String  Nombre_producto = rs.getString("Nombre_producto");
+                String  Precio_producto = rs.getString("Precio_producto");
+                String  Cantidad_producto = rs.getString("Cantidad_producto");
+                 String  Total_producto = rs.getString("Total_producto");
+                
+               
+                
+                moduloC = new Compra();
+                 moduloC.setId_compra(Id_compra);
+                moduloC.setId_proveedor(Id_proveedor);
+                moduloC.setNombre_proveedor(Nombre_proveedor);
+                moduloC.setContacto_proveedor(Contacto_proveedor);
+                moduloC.setNit_proveedor(Nit_proveedor);
+                moduloC.setId_producto(Id_producto);
+                moduloC.setNombre_producto(Nombre_producto);
+                moduloC.setPrecio_producto(Precio_producto);
+                moduloC.setCantidad_producto(Cantidad_producto);
+                moduloC.setTotal_producto(Total_producto);
+                
+                
+                
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return moduloC;
+    }
 
    
 }

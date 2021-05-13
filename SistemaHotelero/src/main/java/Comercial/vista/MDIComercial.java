@@ -21,7 +21,7 @@ import seguridad.dominio.Bitacora;
 
 /**
  *
- * @author Diego Vásquez
+ * 
  */
 public class MDIComercial extends javax.swing.JFrame {
 
@@ -35,6 +35,7 @@ public class MDIComercial extends javax.swing.JFrame {
     private Proceso_Factura Proceso_Factura;
     private Proceso_Depositos Proceso_Depositos;
     private ProcesoCompra Compra;
+     private FacturaProveedor Factura;
       public static JLabel logo = new JLabel();
     
     public MDIComercial() throws UnknownHostException {
@@ -96,6 +97,7 @@ public class MDIComercial extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         ProcesoCompra = new javax.swing.JMenuItem();
+        FacturaCompras = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -209,6 +211,14 @@ public class MDIComercial extends javax.swing.JFrame {
             }
         });
         jMenu5.add(ProcesoCompra);
+
+        FacturaCompras.setText("Factura Compras");
+        FacturaCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FacturaComprasActionPerformed(evt);
+            }
+        });
+        jMenu5.add(FacturaCompras);
 
         jMenu4.add(jMenu5);
 
@@ -550,12 +560,25 @@ public class MDIComercial extends javax.swing.JFrame {
         jDesktopPane1.add(Compra);
         
            Dimension desktopSize = jDesktopPane1.getSize();
-        Dimension FrameSize =    MantenimientoProveedor.getSize();
+        Dimension FrameSize =   Compra.getSize();
           Compra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
            Compra.show();
         logo.setVisible(true);
      Compra.setVisible(true);
     }//GEN-LAST:event_ProcesoCompraActionPerformed
+
+    private void FacturaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturaComprasActionPerformed
+        // TODO add your handling code here:
+        Factura = new FacturaProveedor();
+        jDesktopPane1.add(Factura);
+        
+           Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize =    Factura.getSize();
+          Factura.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+           Factura.show();
+        logo.setVisible(true);
+     Factura.setVisible(true);
+    }//GEN-LAST:event_FacturaComprasActionPerformed
 
 
     /**
@@ -582,6 +605,7 @@ public class MDIComercial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem FacturaCompras;
     public static javax.swing.JMenu M_ccompras;
     public static javax.swing.JMenuItem M_cliente;
     public static javax.swing.JMenu M_compras;
