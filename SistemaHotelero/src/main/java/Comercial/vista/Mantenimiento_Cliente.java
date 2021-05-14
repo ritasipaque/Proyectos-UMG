@@ -75,6 +75,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
           modelo.addColumn("Poducto");
           modelo.addColumn("Estatis Cliente");
            modelo.addColumn("Capital");
+             modelo.addColumn("Cuenta");
   
      ClienteDao  ventasDAO = new  ClienteDao();
   
@@ -82,7 +83,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
 
        List<Cliente> ventas = ventasDAO.select();
         JtProductos1.setModel(modelo);
-        String[] dato = new String[7];
+        String[] dato = new String[8];
     for (int i = 0; i < ventas.size(); i++) {
             dato[0] = (ventas.get(i).getId_cliente());
             dato[1] = ventas.get(i).getCliente();
@@ -91,6 +92,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
           dato[4] = (ventas.get(i).getProducto());
             dato[5] = (ventas.get(i).getEstatus_Cliente());
             dato[6] = ventas.get(i).getMonto();
+              dato[7] = ventas.get(i).getCuenta();
           
           
             System.out.println("vendedor:" + ventas);
@@ -114,6 +116,7 @@ monto.setText(Buscar.getMonto());
 estatus.setText(Buscar.getEstatus_Cliente());
 telefono.setText(Buscar.getTelefono());
 producto.setText(Buscar.getProducto());
+cuenta.setText(Buscar.getCuenta());
   
     }
     public void limpiar() {
@@ -124,6 +127,7 @@ producto.setText(Buscar.getProducto());
         estatus.setText("");
         telefono.setText("");
            producto.setText("");
+            cuenta.setText("");
     }
     /**
      * Creates new form Mantenimiento_Cliente
@@ -168,6 +172,8 @@ producto.setText(Buscar.getProducto());
         jButton1 = new javax.swing.JButton();
         monto = new javax.swing.JTextField();
         i = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        cuenta = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -259,6 +265,9 @@ producto.setText(Buscar.getProducto());
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel9.setText("Cuenta");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,7 +324,12 @@ producto.setText(Buscar.getProducto());
                                         .addComponent(cliente, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(telefono))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(208, 208, 208))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,7 +369,11 @@ producto.setText(Buscar.getProducto());
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(cuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -383,6 +401,7 @@ producto.setText(Buscar.getProducto());
         modi.setEstatus_Cliente(estatus.getText());
         modi.setTelefono(telefono.getText());
         modi.setProducto(producto.getText());
+         modi.setCuenta(cuenta.getText());
 
         dao.update(modi);
         llenadoDeTablas();
@@ -421,6 +440,7 @@ producto.setText(Buscar.getProducto());
         vendedorAEliminar.setEstatus_Cliente(estatus.getText());
         vendedorAEliminar.setTelefono(telefono.getText());
         vendedorAEliminar.setProducto(producto.getText());
+            vendedorAEliminar.setCuenta(cuenta.getText());
         acreedor.delete(vendedorAEliminar);
         llenadoDeTablas();
  limpiar();
@@ -482,6 +502,7 @@ producto.setText(Buscar.getProducto());
         AInsertar.setEstatus_Cliente(estatus.getText());
         AInsertar.setTelefono(telefono.getText());
         AInsertar.setProducto(producto.getText());
+           AInsertar.setCuenta(cuenta.getText());
         ClienteDAO.insert(AInsertar);
         
         llenadoDeTablas();
@@ -538,6 +559,7 @@ producto.setText(Buscar.getProducto());
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JTextField cliente;
+    private javax.swing.JTextField cuenta;
     private javax.swing.JTextField estatus;
     private javax.swing.JTextField i;
     private javax.swing.JButton jButton1;
@@ -549,6 +571,7 @@ producto.setText(Buscar.getProducto());
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField monto;

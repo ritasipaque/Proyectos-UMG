@@ -16,14 +16,14 @@ import java.util.List;
 public class Factura  {
     
 String Cliente;  
-int Nit;  
-int Teléfono; 
+String Nit;  
+String Telefono; 
 String producto; 
  
-int Cantidad;  
-int  Precio_por_unidad; 
-int Monto; 
-int TotalmoNto; 
+String Cantidad;  
+String  Precio_por_unidad; 
+String Monto; 
+String TotalmoNto; 
 
     public String getCliente() {
         return Cliente;
@@ -33,20 +33,20 @@ int TotalmoNto;
         this.Cliente = Cliente;
     }
 
-    public int getNit() {
+    public String getNit() {
         return Nit;
     }
 
-    public void setNit(int Nit) {
+    public void setNit(String Nit) {
         this.Nit = Nit;
     }
 
-    public int getTeléfono() {
-        return Teléfono;
+    public String getTelefono() {
+        return Telefono;
     }
 
-    public void setTeléfono(int Teléfono) {
-        this.Teléfono = Teléfono;
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
     }
 
     public String getProducto() {
@@ -57,40 +57,44 @@ int TotalmoNto;
         this.producto = producto;
     }
 
-    public int getCantidad() {
+    public String getCantidad() {
         return Cantidad;
     }
 
-    public void setCantidad(int Cantidad) {
+    public void setCantidad(String Cantidad) {
         this.Cantidad = Cantidad;
     }
 
-    public int getPrecio_por_unidad() {
+    public String getPrecio_por_unidad() {
         return Precio_por_unidad;
     }
 
-    public void setPrecio_por_unidad(int Precio_por_unidad) {
+    public void setPrecio_por_unidad(String Precio_por_unidad) {
         this.Precio_por_unidad = Precio_por_unidad;
     }
 
-    public int getMonto() {
+    public String getMonto() {
         return Monto;
     }
 
-    public void setMonto(int Monto) {
+    public void setMonto(String Monto) {
         this.Monto = Monto;
     }
 
-    public int getTotalmoNto() {
+    public String getTotalmoNto() {
         return TotalmoNto;
     }
 
-    public void setTotalmoNto(int TotalmoNto) {
+    public void setTotalmoNto(String TotalmoNto) {
         this.TotalmoNto = TotalmoNto;
     }
 
+    @Override
+    public String toString() {
+        return "Factura{" + "Cliente=" + Cliente + ", Nit=" + Nit + ", Telefono=" + Telefono + ", producto=" + producto + ", Cantidad=" + Cantidad + ", Precio_por_unidad=" + Precio_por_unidad + ", Monto=" + Monto + ", TotalmoNto=" + TotalmoNto + '}';
+    }
+
    
-    
 
     
  

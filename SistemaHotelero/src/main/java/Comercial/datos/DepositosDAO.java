@@ -1,6 +1,7 @@
 package Comercial.datos;
 
 
+import Comercial.dominio.Cliente;
 import Comercial.dominio.Deposito;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,13 +24,13 @@ import java.util.List;
 
 public class DepositosDAO {
     
-       private static final String SQL_INSERT = "INSERT INTO   deposito (Id_cliente,Cliente,Monto,Estatus ,Id_producto ,Detalle, Cantidad ,Precio_por_unidad) VALUES(?, ?,?, ?,?, ?,?,?)";
-    private static final String SQL_SELECT = "SELECT Id_cliente,Cliente,Monto,Estatus ,Id_producto ,Detalle, Cantidad ,Precio_por_unidad FROM deposito";
-    private static final String SQL_QUERY = "SELECT Id_cliente,Cliente,Monto,Estatus ,Id_producto ,Detalle, Cantidad ,Precio_por_unidad FROM deposito WHERE Id_cliente = ?";
-  private static final String SQL_UPDATE = "UPDATE   tbl_pedido_factura  SET Id_cliente= ?,Cliente=?,Monto=?,Estatus=? ,Id_producto=? ,Detalle=?, Cantidad=? ,Precio_por_unidad =? WHERE id_vendedor = ?";
-    private static final String SQL_DELETE = "DELETE FROM depositos WHERE Id_cliente= ?,Cliente=?,Monto=?,Estatus=? ,Id_producto=? ,Detalle=?, Cantidad=? ,Precio_por_unidad =? WHERE id_vendedor = ?";
+       private static final String SQL_INSERT = "INSERT INTO depositos(Id_pedido,Cliente,cuenta ,Fecha_inicial,Fecha_final,Nit,telefono,producto ,Detalle, Cantidad) VALUES(?,?,?,?,?,?,?,?,?,?)";
+    private static final String SQL_SELECT = "SELECT Id_pedido,Cliente,cuenta ,Fecha_inicial ,Fecha_final ,Nit,telefono,producto ,Detalle, Cantidad FROM depositos";
+    private static final String SQL_QUERY3 = "SELECT Id_pedido,Cliente,cuenta ,Fecha_inicial ,Fecha_final,Nit,telefono,producto ,Detalle, Cantidad FROM depositos WHERE Id_pedido = ?";
+  private static final String SQL_UPDATE = "UPDATE   depositos  SET Id_pedido = ? ,Cliente = ? ,cuenta = ? ,Fecha_inicial = ?,Fecha_final = ? ,Nit = ?,telefono = ?,producto = ? , Detalle = ?, Cantidad = ? WHERE Id_pedido";
+    private static final String SQL_DELETE = "DELETE FROM depositos WHERE Id_pedido =?";
   
-     public Deposito select() {
+     public  List<Deposito>  select() {
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -48,17 +49,20 @@ public class DepositosDAO {
                  *
                  * busqueda de datos de la bitacocora en la de usuarios
                  */
-                int id_cliente  = rs.getInt("id_cliente");
+                String id_pedido  = rs.getString("Id_pedido");
                 String cliente  = rs.getString("Cliente");
+                     String cuenta  = rs.getString("Cuenta");
+                         String fecha_inicial  = rs.getString("Fecha_inicial");
+                             String fecha_final = rs.getString("Fecha_final");
+                                String nit = rs.getString("Nit");
                
-                int telefono = rs.getInt("telefono");
-                  int id_producto = rs.getInt("Id_producto");
+                  String   telefono = rs.getString("telefono");
+                     String  producto = rs.getString("producto");
                   
                   
                   String detalle  = rs.getString("Detalle");
-               float cantidad = rs.getFloat("Cantidad");
-                int precio = rs.getInt("Precio_por_unidad ");
-                  float monto = rs.getFloat("Totalmonto");
+                  String  cantidad = rs.getString("Cantidad");
+             
 
                 /**
                  *
@@ -68,14 +72,16 @@ public class DepositosDAO {
 
                   venta = new Deposito();
                   venta.setCliente(cliente);
-                    venta.setId_cliente(id_cliente);
-                 
-                    
-                    venta.setId_producto(id_producto);
+                    venta.setId_pedido(id_pedido);
+                     venta.setCuenta(cuenta);
+                      venta.setFecha_inicial(fecha_inicial);
+                       venta.setFecha_final(fecha_final);
+                     venta.setNit(nit);
+                      venta.setTelefono(telefono);
+                       venta.setProducto(producto);
                     venta.setDetalle(detalle);
                     venta.setCantidad(cantidad);
-                    venta.setPrecio_por_unidad(precio);
-                    venta.setMonto(monto);
+                   
 
                     ventas.add(venta);
             }
@@ -87,10 +93,11 @@ public class DepositosDAO {
 
             Conexion.close(conn);
         }
+         
+return ventas ;
 
-        return venta;
     }
-     Deposito query(Deposito venta){
+   public   Deposito query3(Deposito venta){
         /**
          *
          * conexion de base de datos
@@ -103,52 +110,66 @@ public class DepositosDAO {
 
         try {
             conn = Conexion.getConnection();
-            System.out.println("Ejecutando query:" + SQL_QUERY);
-            stmt = conn.prepareStatement(SQL_QUERY);
+            System.out.println("Ejecutando query:" + SQL_QUERY3);
+            stmt = conn.prepareStatement(SQL_QUERY3);
+             stmt.setString(1, venta.getId_pedido());
+             
           
             rs = stmt.executeQuery();
             while (rs.next()) {
+              
+                 String id_pedido  = rs.getString("Id_pedido");
+                String cliente  = rs.getString("Cliente");
+                     String cuenta  = rs.getString("Cuenta");
+                         String fecha_inicial  = rs.getString("Fecha_inicial");
+                             String fecha_final = rs.getString("Fecha_final");
+                                String nit = rs.getString("Nit");
+               
+                  String   telefono = rs.getString("telefono");
+                     String  producto = rs.getString("producto");
+                  
+                  
+                  String detalle  = rs.getString("Detalle");
+                  String  cantidad = rs.getString("Cantidad");
+             
+
+                /**
+                 *
+                 * concatenacionde de variables de de busqueda
+                 */
+              
+
+                  venta = new Deposito();
+                  venta.setCliente(cliente);
+                    venta.setId_pedido(id_pedido);
+                     venta.setCuenta(cuenta);
+                      venta.setFecha_inicial(fecha_inicial);
+                       venta.setFecha_final(fecha_final);
+                     venta.setNit(nit);
+                      venta.setTelefono(telefono);
+                       venta.setProducto(producto);
+                    venta.setDetalle(detalle);
+                    venta.setCantidad(cantidad);
+                   
+
+                    ventas.add(venta);
                 /**
                  *
                  * busqueda de datos de la bitacocora en la de usuarios
                  */
                 
-                int id_cliente  = rs.getInt("id_cliente");
-                String cliente  = rs.getString("Cliente");
-                int nit = rs.getInt("Nit");
-                int telefono = rs.getInt("telefono");
-                  int id_producto = rs.getInt("Id_producto");
-                  
-                  
-                  String detalle  = rs.getString("Detalle");
-                float cantidad = rs.getInt("Cantidad");
-                int precio = rs.getInt("Precio_por_unidad ");
-                  float monto = rs.getInt("Totalmonto");
-                /**
-                 *
-                 * concatenacionde de variables de de busqueda
-                 */
-                   venta = new Deposito();
-                  venta.setCliente(cliente);
-                    venta.setId_cliente(id_cliente);
                
-                    venta.setId_producto(id_producto);
-                    venta.setDetalle(detalle);
-                  venta.setCantidad(cantidad);
-                    venta.setPrecio_por_unidad(precio);
-                    venta.setMonto(monto);
-                       ventas.add(venta);
             }
             //System.out.println("Registros buscado:" + vendedor);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            Conexion.close(rs);
+           
             Conexion.close(stmt);
             Conexion.close(conn);
         }
-        return venta;
-
+       return venta;
+ 
 
     
      }
@@ -162,13 +183,17 @@ public class DepositosDAO {
             
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
-            stmt.setInt(1,  insertar.getId_cliente());
+            stmt.setString(1,  insertar.getId_pedido());
             stmt.setString(2,  insertar.getCliente());       
-            stmt.setInt(3,   insertar.getId_producto());
-             stmt.setString(4,  insertar.getDetalle());
-                stmt.setFloat(5,  insertar.getCantidad());
-            stmt.setFloat(6,  insertar.getPrecio_por_unidad());
-             stmt.setFloat(7,  insertar.getMonto());
+            stmt.setString(3,   insertar.getCuenta());
+               stmt.setString(4,   insertar.getFecha_inicial());
+                  stmt.setString(5,   insertar.getFecha_final());
+                     stmt.setString(6,   insertar.getNit());
+                        stmt.setString(7,   insertar.getTelefono());
+                          stmt.setString(8,   insertar.getProducto());
+                     stmt.setString(9,  insertar.getDetalle());
+                stmt.setString(10,  insertar.getCantidad());
+       
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -183,7 +208,7 @@ public class DepositosDAO {
         return rows;
     }
      
-    public int update(Deposito insertar) {
+    public int update(Deposito mod) {
         Connection conn = null;
         PreparedStatement stmt = null;
         int rows = 0;
@@ -191,20 +216,24 @@ public class DepositosDAO {
         try {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
-          stmt.setInt(1,  insertar.getId_cliente());
-            stmt.setString(2,  insertar.getCliente());       
-            stmt.setInt(3,   insertar.getId_producto());
-             stmt.setString(4,  insertar.getDetalle());
-                stmt.setFloat(5,  insertar.getCantidad());
-            stmt.setFloat(6,  insertar.getPrecio_por_unidad());
-             stmt.setFloat(7,  insertar.getMonto());
+     
+            stmt.setString(1,   mod.getCliente());       
+            stmt.setString(2,    mod.getCuenta());
+               stmt.setString(3,    mod.getFecha_inicial());
+                  stmt.setString(4,    mod.getFecha_final());
+                     stmt.setString(5,    mod.getNit());
+                        stmt.setString(6,   mod.getTelefono());
+                          stmt.setString(7,    mod.getProducto());
+                     stmt.setString(8,   mod.getDetalle());
+                stmt.setString(8,   mod.getCantidad());
             rows = stmt.executeUpdate();
             System.out.println("Registros actualizado:" + rows);
 
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
-            Conexion.close(stmt);
+         
+             Conexion.close(stmt);
             Conexion.close(conn);
         }
 
@@ -220,8 +249,8 @@ public class DepositosDAO {
             
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_DELETE);
-            stmt.setInt(1,  insertar.getId_cliente());
-            stmt.setString(2,  insertar.getCliente());
+            stmt.setString(1,  insertar.getId_pedido());
+//            stmt.setString(2,  insertar.getCliente());
 //            stmt.setInt(3,  insertar.getNit());
 //            stmt.setInt(4,   insertar.getId_producto());
 //             stmt.setString(5,  insertar.getDetalle());
