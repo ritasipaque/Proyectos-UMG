@@ -10,14 +10,14 @@ package Hoteleria.dominio;
  * @author leelu
  */
 public class ObjetoPerdido {
-    private String idobjeto, habitacion, ama, fecha, objeto;
-    
-     public String getIdObjeto() {
+    private String idobjeto, habitacion, ama, fecha, objeto, nombre, dpi, estado;
+
+    public String getIdobjeto() {
         return idobjeto;
     }
 
-    public void setIdObjeto(String habitacion) {
-        this.idobjeto = habitacion;
+    public void setIdobjeto(String idobjeto) {
+        this.idobjeto = idobjeto;
     }
 
     public String getHabitacion() {
@@ -51,5 +51,28 @@ public class ObjetoPerdido {
     public void setObjeto(String objeto) {
         this.objeto = objeto;
     }
-    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDpi() {
+        return dpi;
+    }
+
+    public void setDpi(String dpi) {
+        this.dpi = dpi;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }
