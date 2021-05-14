@@ -22,11 +22,12 @@ import java.util.List;
  */
 public class ClienteDao {
     
-        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto) VALUES(?, ?,?, ?,?, ?,?)";
-    private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto FROM tbl_cliente";
-    private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto FROM tbl_cliente WHERE Id_cliente = ?";
-  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente = ?,cliente =?,Nit= ? , telefono = ? ,producto = ? , Estatus_Cliente = ? , Monto = ? WHERE Id_cliente";
+        private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto,cuenta) VALUES(?, ?,?, ?,?, ?,?,?)";
+    private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto,cuenta FROM tbl_cliente";
+    private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto, cuenta FROM tbl_cliente WHERE Id_cliente = ?";
+  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente = ?,cliente =?,Nit= ? , telefono = ? ,producto = ? , Estatus_Cliente = ? , Monto = ?,cuenta WHERE Id_cliente";
     private static final String SQL_DELETE = "DELETE FROM tbl_cliente  WHERE Id_cliente = ? ";
+      private static final String SQL_QUERY22 = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto,cliente, cuenta FROM tbl_cliente WHERE cliente = ?";
   
      public List<Cliente> select() {
         Connection conn = null;
@@ -54,6 +55,7 @@ public class ClienteDao {
                     String producto =      rs.getString("producto");
                   String monto = rs.getString("Monto");
                     String estatus_cliente  = rs.getString("Estatus_Cliente");
+                          String cuenta  = rs.getString("cuenta");
 
                 /**
                  *
@@ -69,6 +71,7 @@ public class ClienteDao {
                  venta.setProducto(producto);
                     venta.setMonto(monto);
                venta.setEstatus_Cliente(estatus_cliente);
+                    venta.setCuenta(cuenta);
                     ventas.add(venta);
             }
 
@@ -99,6 +102,7 @@ public class ClienteDao {
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
              stmt.setString(1, venta.getId_cliente());
+             
           
             rs = stmt.executeQuery();
             while (rs.next()) {
@@ -110,6 +114,7 @@ public class ClienteDao {
                   String monto = rs.getString("Monto");
                     String estatus_cliente  = rs.getString("Estatus_Cliente");
                   String id = rs.getString("Id_cliente");
+                      String cuenta = rs.getString("cuenta");
                 /**
                  *
                  * concatenacionde de variables de de busqueda
@@ -124,6 +129,72 @@ public class ClienteDao {
                  venta.setProducto(producto);
                     venta.setMonto(monto);
                venta.setEstatus_Cliente(estatus_cliente);
+                  venta.setCuenta(cuenta);
+                    ventas.add(venta);
+                /**
+                 *
+                 * busqueda de datos de la bitacocora en la de usuarios
+                 */
+                
+               
+            }
+            //System.out.println("Registros buscado:" + vendedor);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+           
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+       return venta;
+ 
+
+    
+     }
+ public   Cliente query2(Cliente venta){
+        /**
+         *
+         * conexion de base de datos
+         */
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Cliente> ventas = new ArrayList<Cliente>();
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            System.out.println("Ejecutando query:" + SQL_QUERY22);
+            stmt = conn.prepareStatement(SQL_QUERY22);
+             
+                 stmt.setString(1, venta.getCliente());
+          
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+              
+                String cliente  = rs.getString("Cliente");
+                String nit =      rs.getString("Nit");
+                String telefono = rs.getString("telefono");
+                    String producto =      rs.getString("producto");
+                  String monto = rs.getString("Monto");
+                    String estatus_cliente  = rs.getString("Estatus_Cliente");
+                  String id = rs.getString("Id_cliente");
+                     String cuenta = rs.getString("cuenta");
+                /**
+                 *
+                 * concatenacionde de variables de de busqueda
+                 */
+              
+
+                  venta = new Cliente();
+                  venta.setCliente(cliente);
+              venta.setId_cliente(id);
+                 venta.setNit(nit);
+                 venta.setTelefono(telefono);
+                 venta.setProducto(producto);
+                    venta.setMonto(monto);
+               venta.setEstatus_Cliente(estatus_cliente);
+                   venta.setCuenta(cuenta);
                     ventas.add(venta);
                 /**
                  *
@@ -162,9 +233,8 @@ public class ClienteDao {
               stmt.setString(4,  insertar.getTelefono());
                stmt.setString(5,  insertar.getProducto());
                 stmt.setString(6,  insertar.getEstatus_Cliente());
-       
-        
-    stmt.setString(7,  insertar.getMonto());
+               stmt.setString(7,  insertar.getMonto());
+     stmt.setString(8,  insertar.getCuenta());
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
             System.out.println("Registros afectados:" + rows);
@@ -194,6 +264,7 @@ public class ClienteDao {
              stmt.setString(5,   mod.getEstatus_Cliente());
             stmt.setString(6,   mod.getTelefono());
              stmt.setString(7,  mod.getProducto());
+                  stmt.setString(8,  mod.getCuenta());
    rows = stmt.executeUpdate();
          
             System.out.println("Registros actualizado:" + rows);

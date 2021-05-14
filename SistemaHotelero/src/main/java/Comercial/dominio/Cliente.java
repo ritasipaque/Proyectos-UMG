@@ -20,6 +20,16 @@ String Telefono;
 String Producto;
 String Estatus_Cliente;
 String Monto;
+String cuenta ;
+
+    public String getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
+    }
+
 
 
     public String getId_cliente() {
