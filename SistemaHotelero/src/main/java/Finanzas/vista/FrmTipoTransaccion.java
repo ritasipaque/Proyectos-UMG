@@ -341,6 +341,7 @@ public void buscarperfil(){
         AInsertar.setId_Usuario("FrmTipoTransaccion");
         AInsertar.setAccion("Elimiar");
         AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -369,6 +370,7 @@ public void buscarperfil(){
         AInsertar.setId_Usuario("FrmTipoTransaccion");
         AInsertar.setAccion("Modificar");
         AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -398,6 +400,19 @@ public void buscarperfil(){
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
@@ -451,6 +466,32 @@ public void buscarperfil(){
 
     private void BtnIng1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIng1ActionPerformed
         // TODO add your handling code here:
+        
+          
+        TipoTransaccionDAO cuentadao = new TipoTransaccionDAO();
+        TipoTransaccion insertarcuenta = new TipoTransaccion();
+        insertarcuenta.setCodigo_TipoTransaccion(TxtCodigo1.getText());
+        insertarcuenta.setTransaccion_Tipo(TxtTipo.getText());
+
+       
+       insertarcuenta.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("buscar");
+        AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
+          }
+       
+         cuentadao.insert(insertarcuenta);
+
+           llenadoDeTablas();
+
     }//GEN-LAST:event_BtnIng1ActionPerformed
 
 
