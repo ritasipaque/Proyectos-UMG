@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS `areacomercial` DEFAULT CHARACTER SET utf8 ;
+﻿CREATE SCHEMA IF NOT EXISTS `areacomercial` DEFAULT CHARACTER SET utf8 ;
 USE `areacomercial` ;
 
 -- -----------------------------------------------------
@@ -44,7 +44,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- --------------------------------------------------------COMPRAS--------------------------------------------
-
 -- -----------------------------------------------------
 -- Table `areacomercial`.`tbl_proveedor`
 -- -----------------------------------------------------
@@ -75,7 +74,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------
--- Table `areacomercial`.`tbl_compras`
+-- Table `areacomercial`.`tbl_compra`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `areacomercial`.`tbl_compra` (
   `PK_id_proveedor` INT NOT NULL,
@@ -88,12 +87,14 @@ CREATE TABLE IF NOT EXISTS `areacomercial`.`tbl_compra` (
 PRIMARY KEY (`PK_id_proveedor`,`PK_id_producto`),
 CONSTRAINT `fk_tbl_proveedor1`
 FOREIGN KEY (`PK_id_proveedor`)
-REFERENCES `ModuloCompra`.`tbl_proveedor` (`PK_id_proveedor`),
+REFERENCES `areacomercial`.`tbl_proveedor` (`PK_id_proveedor`),
 CONSTRAINT `fk_tbl_producto1`
 FOREIGN KEY (`PK_id_producto`)
-REFERENCES `ModuloCompra`.`tbl_producto` (`PK_id_producto`))    
+REFERENCES `areacomercial`.`tbl_producto` (`PK_id_producto`))    
+  
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 
 
@@ -101,30 +102,34 @@ DEFAULT CHARACTER SET = utf8;
 -- ------------------------------------------------------VENTAS---------------------------------------------
 
 CREATE TABLE  tbl_pedido_factura (
- id_cliente int (10)  NOT NULL,
+ id_cliente INT NOT NULL AUTO_INCREMENT,
  Cliente  VARCHAR(5)  NOT NULL,
 Nit   int (25)  NOT NULL,
-teléfono VARCHAR(25)  NOT NULL,
-Id_producto  int (25)  NOT NULL,
-Detalle VARCHAR(25)  NOT NULL,
+telefono VARCHAR(25)  NOT NULL,
+producto  int (25)  NOT NULL,
 Cantidad  int (25)  NOT NULL,
 Precio_por_unidad  int (25)  NOT NULL,
-TotalmoNto int (25)  ,
+Monto  int (25)  NOT NULL,
+
  PRIMARY KEY ( id_cliente)
 );
 
 CREATE TABLE  depositos (
-Id_cliente INT NOT NULL AUTO_INCREMENT, 
-Cliente  VARCHAR(5)  NOT NULL,
-Monto  int (10)  NOT NULL,
-Estatus  VARCHAR(5)  NOT NULL,
-Id_producto int (5)  NOT NULL, 
+Id_pedido INT NOT NULL AUTO_INCREMENT,
+Cliente  VARCHAR(15)  NOT NULL, 
+cuenta  VARCHAR(15)  NOT NULL,
+Fecha_inicial VARCHAR(25)  NOT NULL,
+Fecha_final VARCHAR(25)  NOT NULL,
+Nit int (25)  NOT NULL, 
+telefono int (25)  NOT NULL, 
+producto int (15)  NOT NULL, 
 Detalle VARCHAR(25)  NOT NULL,
-Cantidad int (5)  NOT NULL, 
-Precio_por_unidad int (5)  NOT NULL,
- PRIMARY KEY ( id_cliente)
+Cantidad VARCHAR(25)  NOT NULL, 
+
+ PRIMARY KEY ( Id_pedido)
 )ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
 
 CREATE TABLE  estatus_credito (
 Id_cliente int (25)  NOT NULL,  
