@@ -486,7 +486,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="BtnVerificarPartida">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Verificar Partida"/>
+            <Property name="text" type="java.lang.String" value="Cuadrar Partida"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="BtnBuscarEncabezado">
