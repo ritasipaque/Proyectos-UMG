@@ -160,27 +160,31 @@ public class GenerarPermisos {
             }
             if (modulo == "Comercial") {
                 
-    
-                
-//              
-//   MDIComercial1.M_deudor.setVisible(false);
-//    MDIComercial1.M_proveedor.setVisible(false); 
-//     MDIComercial1.M_producto.setVisible(false);
-//  MDIComercial.M_inventario.setVisible(false);
-      ejecutarPermisos.ejecutarBusqueda(usuario);
- 
    
+      ejecutarPermisos.ejecutarBusqueda(usuario);
+                   MDIComercial.M_venta.setVisible(false);
+                    MDIComercial.M_compras.setVisible(false);
+                      MDIComercial.M_inventario.setVisible(false);
+                           MDIComercial.P_ventas.setVisible(false);
+                              MDIComercial.P_compras.setVisible(false);
+
                    for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
                     if (varApp >= 3000 && varApp <= 3360) {
                   MDIComercial.M_venta.setVisible(true);
                     MDIComercial.M_compras.setVisible(true);
                       MDIComercial.M_inventario.setVisible(true);
+                         MDIComercial.P_ventas.setVisible(true);
+                              MDIComercial.P_compras.setVisible(true);
                         switch (varApp) {
                              case 3001 :  MDIComercial.M_cliente.setVisible(true);break;  
                              case 3002:   MDIComercial.M_deudor.setVisible(true);break;
                              case 3003:     MDIComercial.M_proveedor.setVisible(true);break;
                               case 3004:  MDIComercial.M_producto1.setVisible(true);break;
+                                case 3005:  MDIComercial.P_pedido_factura.setVisible(true);break;
+                                  case 3006:  MDIComercial.P_deposito.setVisible(true);break;
+                                    case 3007:  MDIComercial.ProcesoCompra.setVisible(true);break;
+                                       case 3008:  MDIComercial.FacturaCompras.setVisible(true);break;       
 
                          
                         }

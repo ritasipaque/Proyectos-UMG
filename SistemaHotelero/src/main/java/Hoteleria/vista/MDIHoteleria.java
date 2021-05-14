@@ -34,6 +34,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private ReservaDeHabitacion fromReservaDeHabitacion;
     private FacturacionDeHabitacion fromFacturacionDeHabitacion;
     private ObjetosPerdidos fromObjetosPerdidos;
+    private Entregar_objeto fromObjetosPerdidosEnt;
     public static JLabel logo = new JLabel();
 
     /**
@@ -92,6 +93,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
         reserva_de_habitacion = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         menu_informes = new javax.swing.JMenu();
         menu_herramientas = new javax.swing.JMenu();
         menu_ayuda = new javax.swing.JMenu();
@@ -211,6 +213,14 @@ public class MDIHoteleria extends javax.swing.JFrame {
             }
         });
         submenu_procesos.add(jMenuItem2);
+
+        jMenuItem3.setText("Entregar Obj Perdido");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        submenu_procesos.add(jMenuItem3);
 
         menu_procesos.add(submenu_procesos);
 
@@ -374,6 +384,18 @@ public class MDIHoteleria extends javax.swing.JFrame {
         logo.setVisible(false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        fromObjetosPerdidosEnt = new Entregar_objeto();
+        
+        jDesktopPane1.add(fromObjetosPerdidosEnt);
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension FrameSize = fromObjetosPerdidosEnt.getSize();
+        fromObjetosPerdidosEnt.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        fromObjetosPerdidosEnt.setVisible(true);
+        logo.setVisible(false);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -404,6 +426,7 @@ public class MDIHoteleria extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JMenu menu_archivo;
     public static javax.swing.JMenu menu_ayuda;
     public static javax.swing.JMenu menu_catalogos;
