@@ -43,7 +43,7 @@ public static final String SQL_QUERY2 = "SELECT  PK_id_producto  FROM tbl_produc
             while (rs.next()) {
                 int PK_id_producto = rs.getInt("PK_id_producto");
                 String nombre_producto = rs.getString("nombre_producto");
-                int precio_producto = rs.getInt("precio_producto");
+                String precio_producto = rs.getString("precio_producto");
                 String descripcion_producto = rs.getString("descripcion_producto");
                 String estatus_producto = rs.getString("estatus_producto");
                 
@@ -78,7 +78,7 @@ public static final String SQL_QUERY2 = "SELECT  PK_id_producto  FROM tbl_produc
             stmt = conn.prepareStatement(SQL_INSERT);
             stmt.setInt(1, aplicacion.getPK_id_producto());
             stmt.setString(2, aplicacion.getNombre_producto());
-            stmt.setInt(3, aplicacion.getPrecio_producto());
+            stmt.setString(3, aplicacion.getPrecio_producto());
             stmt.setString(4, aplicacion.getDescripcion_producto());
             stmt.setString(5, aplicacion.getEstatus_producto());
             
@@ -107,7 +107,7 @@ public static final String SQL_QUERY2 = "SELECT  PK_id_producto  FROM tbl_produc
             stmt = conn.prepareStatement(SQL_UPDATE);
             
             stmt.setString(1, aplicacion.getNombre_producto());
-            stmt.setInt(2, aplicacion.getPrecio_producto());
+            stmt.setString(2, aplicacion.getPrecio_producto());
             stmt.setString(3, aplicacion.getDescripcion_producto());
             stmt.setString(4, aplicacion.getEstatus_producto());
             stmt.setInt(5, aplicacion.getPK_id_producto());
@@ -140,7 +140,7 @@ public static final String SQL_QUERY2 = "SELECT  PK_id_producto  FROM tbl_produc
             while (rs.next()) {
                 int id_proveedor = rs.getInt("PK_id_producto");
                 String nombre = rs.getString("nombre_producto");
-                int apellido = rs.getInt("precio_producto");
+                String apellido = rs.getString("precio_producto");
                 String contacto = rs.getString("descripcion_producto");
                 String estatus = rs.getString("estatus_producto");
 
@@ -232,7 +232,7 @@ public static final String SQL_QUERY2 = "SELECT  PK_id_producto  FROM tbl_produc
             Producto usr = new Producto();
             usr.setPK_id_producto(rs.getInt(1));
             usr.setNombre_producto(rs.getString(2));
-            usr.setPrecio_producto(rs.getInt(3));
+            usr.setPrecio_producto(rs.getString(3));
             usr.setDescripcion_producto(rs.getString(4));
             usr.setEstatus_producto(rs.getString(5));
             perfil.add(usr);

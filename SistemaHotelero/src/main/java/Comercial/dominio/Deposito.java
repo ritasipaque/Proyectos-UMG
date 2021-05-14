@@ -11,22 +11,23 @@ package Comercial.dominio;
  * @author PERSONAL
  */
 public class Deposito {
-  int  Id_cliente; 
+ String  Id_pedido; 
 String  Cliente  ;
-float  Monto ;
-String  Estatus; 
-int Id_producto;
+String Cuenta;
+String Fecha_inicial;
+String Fecha_final;
+String Nit;
+String Telefono;
+String Producto;
 String Detalle;
-Float Cantidad;
-float Precio_por_unidad ;
+String Cantidad;
 
-   
-    public int getId_cliente() {
-        return Id_cliente;
+    public String getId_pedido() {
+        return Id_pedido;
     }
 
-    public void setId_cliente(int Id_cliente) {
-        this.Id_cliente = Id_cliente;
+    public void setId_pedido(String Id_pedido) {
+        this.Id_pedido = Id_pedido;
     }
 
     public String getCliente() {
@@ -37,28 +38,52 @@ float Precio_por_unidad ;
         this.Cliente = Cliente;
     }
 
-    public float getMonto() {
-        return Monto;
+    public String getCuenta() {
+        return Cuenta;
     }
 
-    public void setMonto(float Monto) {
-        this.Monto = Monto;
+    public void setCuenta(String Cuenta) {
+        this.Cuenta = Cuenta;
     }
 
-    public String getEstatus() {
-        return Estatus;
+    public String getFecha_inicial() {
+        return Fecha_inicial;
     }
 
-    public void setEstatus(String Estatus) {
-        this.Estatus = Estatus;
+    public void setFecha_inicial(String Fecha_inicial) {
+        this.Fecha_inicial = Fecha_inicial;
     }
 
-    public int getId_producto() {
-        return Id_producto;
+    public String getFecha_final() {
+        return Fecha_final;
     }
 
-    public void setId_producto(int Id_producto) {
-        this.Id_producto = Id_producto;
+    public void setFecha_final(String Fecha_final) {
+        this.Fecha_final = Fecha_final;
+    }
+
+    public String getNit() {
+        return Nit;
+    }
+
+    public void setNit(String Nit) {
+        this.Nit = Nit;
+    }
+
+    public String getTelefono() {
+        return Telefono;
+    }
+
+    public void setTelefono(String Telefono) {
+        this.Telefono = Telefono;
+    }
+
+    public String getProducto() {
+        return Producto;
+    }
+
+    public void setProducto(String Producto) {
+        this.Producto = Producto;
     }
 
     public String getDetalle() {
@@ -69,28 +94,21 @@ float Precio_por_unidad ;
         this.Detalle = Detalle;
     }
 
-    public Float getCantidad() {
+    public String getCantidad() {
         return Cantidad;
     }
 
-    public void setCantidad(Float Cantidad) {
+    public void setCantidad(String Cantidad) {
         this.Cantidad = Cantidad;
-    }
-
-    public float getPrecio_por_unidad() {
-        return Precio_por_unidad;
-    }
-
-    public void setPrecio_por_unidad(float Precio_por_unidad) {
-        this.Precio_por_unidad = Precio_por_unidad;
     }
 
     @Override
     public String toString() {
-        return "Deposito{" + "Id_cliente=" + Id_cliente + ", Cliente=" + Cliente + ", Monto=" + Monto + ", Estatus=" + Estatus + ", Id_producto=" + Id_producto + ", Detalle=" + Detalle + ", Cantidad=" + Cantidad + ", Precio_por_unidad=" + Precio_por_unidad + '}';
+        return "Deposito{" + "Id_pedido=" + Id_pedido + ", Cliente=" + Cliente + ", Cuenta=" + Cuenta + ", Fecha_inicial=" + Fecha_inicial + ", Fecha_final=" + Fecha_final + ", Nit=" + Nit + ", Telefono=" + Telefono + ", Producto=" + Producto + ", Detalle=" + Detalle + ", Cantidad=" + Cantidad + '}';
     }
 
-   
+    
+
 
     
 }

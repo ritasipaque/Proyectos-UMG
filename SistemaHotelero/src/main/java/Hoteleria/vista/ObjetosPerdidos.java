@@ -116,7 +116,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         List<ObjetoPerdido> listarmetodos = huespedes.select();
         String datos[]= new String[5];
         for (ObjetoPerdido listar : listarmetodos) {
-            datos[0]=listar.getIdObjeto();
+            datos[0]=listar.getIdobjeto();
                 datos[1]=listar.getHabitacion();
                datos[2]=listar.getAma();
                datos[3]=listar.getFecha();
@@ -399,7 +399,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             ObjetosPerdidosDAO huespedesdao = new ObjetosPerdidosDAO();
             ObjetoPerdido buscarmetodo = new ObjetoPerdido();
 
-            buscarmetodo.setIdObjeto(txt_id.getText());
+            buscarmetodo.setIdobjeto(txt_id.getText());
             buscarmetodo = huespedesdao.query(buscarmetodo);
 
             txt_ama.setSelectedItem(buscarmetodo.getAma());
@@ -417,7 +417,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                     txt_objeto.getText().length()!=0) {
             ObjetosPerdidosDAO modulosDAO = new ObjetosPerdidosDAO();
             ObjetoPerdido moduloEliminar = new ObjetoPerdido();
-            moduloEliminar.setIdObjeto(txt_id.getText());
+            moduloEliminar.setIdobjeto(txt_id.getText());
             modulosDAO.delete(moduloEliminar);
             imprimir_Objetos();
             JOptionPane.showMessageDialog(null, "Huesped eliminado correctamente");
@@ -435,7 +435,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                     txt_objeto.getText().length()!=0) {
             ObjetosPerdidosDAO huespedesdao = new ObjetosPerdidosDAO();
             ObjetoPerdido modificarmetodo = new ObjetoPerdido();
-            modificarmetodo.setIdObjeto(txt_id.getText());
+            modificarmetodo.setIdobjeto(txt_id.getText());
             modificarmetodo.setAma(txt_ama.getSelectedItem().toString());
             modificarmetodo.setHabitacion(txt_habitacion.getSelectedItem().toString());
             String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
