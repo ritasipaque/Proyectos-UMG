@@ -301,6 +301,8 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Insertar");
         AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -331,6 +333,8 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Búsqueda");
         AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -358,6 +362,8 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Actualizar");
         AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -379,6 +385,8 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
