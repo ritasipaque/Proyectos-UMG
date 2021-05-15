@@ -415,7 +415,7 @@ cuenta.setText(Buscar.getCuenta());
          GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
  Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
         
             try {
@@ -453,7 +453,7 @@ cuenta.setText(Buscar.getCuenta());
          GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
  Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
  Insertar.setId_Usuario(Login.usuarioComercial);
             try {
                 BitacoraDAO.insert(Insertar);
@@ -474,7 +474,7 @@ cuenta.setText(Buscar.getCuenta());
           GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
  Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
  Insertar.setId_Usuario(Login.usuarioComercial);
             try {
                 BitacoraDAO.insert(Insertar);
@@ -514,7 +514,7 @@ cuenta.setText(Buscar.getCuenta());
         Insertar.setAccion("Insertar");
     
  Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
