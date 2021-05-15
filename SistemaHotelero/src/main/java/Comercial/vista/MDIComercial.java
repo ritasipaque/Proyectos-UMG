@@ -92,10 +92,10 @@ public class MDIComercial extends javax.swing.JFrame {
         M_inventario = new javax.swing.JMenu();
         M_producto1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        P_ventas = new javax.swing.JMenu();
+        P_pedido_factura = new javax.swing.JMenuItem();
+        P_deposito = new javax.swing.JMenuItem();
+        P_compras = new javax.swing.JMenu();
         ProcesoCompra = new javax.swing.JMenuItem();
         FacturaCompras = new javax.swing.JMenuItem();
         jMenu12 = new javax.swing.JMenu();
@@ -182,27 +182,27 @@ public class MDIComercial extends javax.swing.JFrame {
         jMenu4.setText("Procesos");
         jMenu4.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
 
-        jMenu2.setText("Proseso ventas");
+        P_ventas.setText("Proseso ventas");
 
-        jMenuItem2.setText(" Pedido de  Factura");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        P_pedido_factura.setText(" Pedido de  Factura");
+        P_pedido_factura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                P_pedido_facturaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        P_ventas.add(P_pedido_factura);
 
-        jMenuItem3.setText("Depositos");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        P_deposito.setText("Depositos");
+        P_deposito.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                P_depositoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        P_ventas.add(P_deposito);
 
-        jMenu4.add(jMenu2);
+        jMenu4.add(P_ventas);
 
-        jMenu5.setText("ProcesoCompra");
+        P_compras.setText("ProcesoCompra");
 
         ProcesoCompra.setText("TransaccionalCompra");
         ProcesoCompra.addActionListener(new java.awt.event.ActionListener() {
@@ -210,7 +210,7 @@ public class MDIComercial extends javax.swing.JFrame {
                 ProcesoCompraActionPerformed(evt);
             }
         });
-        jMenu5.add(ProcesoCompra);
+        P_compras.add(ProcesoCompra);
 
         FacturaCompras.setText("Factura Compras");
         FacturaCompras.addActionListener(new java.awt.event.ActionListener() {
@@ -218,9 +218,9 @@ public class MDIComercial extends javax.swing.JFrame {
                 FacturaComprasActionPerformed(evt);
             }
         });
-        jMenu5.add(FacturaCompras);
+        P_compras.add(FacturaCompras);
 
-        jMenu4.add(jMenu5);
+        jMenu4.add(P_compras);
 
         jMenuBar1.add(jMenu4);
 
@@ -317,7 +317,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("Acceso ");
     
  Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -350,7 +350,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("Acceso  ");
     
  Insertar.setCodigoAplicacion("3002");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -394,7 +394,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("Accesso");
     
  Insertar.setCodigoAplicacion("200");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -427,7 +427,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("ayuda");
     
  Insertar.setCodigoAplicacion("0000");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -452,7 +452,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("cerrar");
     
  Insertar.setCodigoAplicacion("0");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -480,7 +480,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("Acceso");
     
  Insertar.setCodigoAplicacion("3003");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -491,7 +491,7 @@ public class MDIComercial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_M_producto1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void P_pedido_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_pedido_facturaActionPerformed
 
         
         Proceso_Factura  = new Proceso_Factura();
@@ -511,7 +511,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("Acceso");
     
  Insertar.setCodigoAplicacion("30010");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -519,9 +519,9 @@ public class MDIComercial extends javax.swing.JFrame {
                 Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
             }
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_P_pedido_facturaActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void P_depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_depositoActionPerformed
 
     
           Proceso_Depositos  = new Proceso_Depositos();
@@ -541,7 +541,7 @@ public class MDIComercial extends javax.swing.JFrame {
         Insertar.setAccion("Acceso");
     
  Insertar.setCodigoAplicacion("3010");
-           Insertar.setModulo("Comercial");
+           Insertar.setModulo("3000");
 
             try {
                 BitacoraDAO.insert(Insertar);
@@ -552,7 +552,7 @@ public class MDIComercial extends javax.swing.JFrame {
         // TODO add your handling code here:
                          
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_P_depositoActionPerformed
 
     private void ProcesoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoCompraActionPerformed
         // TODO add your handling code here:
@@ -605,7 +605,7 @@ public class MDIComercial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem FacturaCompras;
+    public static javax.swing.JMenuItem FacturaCompras;
     public static javax.swing.JMenu M_ccompras;
     public static javax.swing.JMenuItem M_cliente;
     public static javax.swing.JMenu M_compras;
@@ -614,22 +614,22 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenuItem M_producto1;
     public static javax.swing.JMenuItem M_proveedor;
     public static javax.swing.JMenu M_venta;
-    private javax.swing.JMenuItem ProcesoCompra;
+    public static javax.swing.JMenu P_compras;
+    public static javax.swing.JMenuItem P_deposito;
+    public static javax.swing.JMenuItem P_pedido_factura;
+    public static javax.swing.JMenu P_ventas;
+    public static javax.swing.JMenuItem ProcesoCompra;
     public static javax.swing.JMenu cerrar_sesion;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem7;
     // End of variables declaration//GEN-END:variables
 }
