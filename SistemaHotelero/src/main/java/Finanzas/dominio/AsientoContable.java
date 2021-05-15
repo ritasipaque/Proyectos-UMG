@@ -4,7 +4,6 @@ import Finanzas.datos.AsientoContableDAO;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author Diego Vásquez
  */
 public class AsientoContable {
@@ -201,7 +200,7 @@ public class AsientoContable {
                 JOptionPane.showMessageDialog(null, "¡REGISTRO EXITOSO!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "¡REGISTRO ERRÓNEO!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
+            } 
         }
     }
 

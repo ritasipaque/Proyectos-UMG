@@ -366,7 +366,7 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
 
         BtnImprimir.setText("Imprimir");
 
-        BtnVerificarPartida.setText("Verificar Partida");
+        BtnVerificarPartida.setText("Cuadrar Partida");
 
         BtnBuscarEncabezado.setText("...");
         BtnBuscarEncabezado.addActionListener(new java.awt.event.ActionListener() {
@@ -513,11 +513,35 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnBuscarPartidaActionPerformed
 
     private void BtnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarActionPerformed
-        // TODO add your handling code here:
+
+        PartidaContable objPartidaContable = new PartidaContable();
+
+        objPartidaContable.setCodigoPartidaContable(TxtCodigoPartida.getText());
+        objPartidaContable.setFechaPartidaContable(TxtFecha.getText());
+        objPartidaContable.setPeriodoFiscalPartida((CmbPeriodoFiscal.getSelectedItem().toString()));
+        objPartidaContable.setGlosaPartidaContable(TxtGlosaContable.getText());
+
+        objPartidaContable.RegistrarPartida(objPartidaContable);
+
+        TxtCodigoPartida.setEnabled(false);
+        TxtFecha.setEnabled(false);
+        CmbPeriodoFiscal.setEnabled(false);
+        TxtGlosaContable.setEnabled(false);
+
+        TxtCodigoPartida.setText("");
+        TxtFecha.setText("");
+        CmbPeriodoFiscal.setSelectedIndex(0);
+        TxtGlosaContable.setText("");
+
+        BtnRegistrar.setEnabled(false);
+        BtnAceptarPartida.setEnabled(true);
+        BtnBuscarPartida.setEnabled(true);
+        BtnBuscarEncabezado.setEnabled(true);
+
+
     }//GEN-LAST:event_BtnRegistrarActionPerformed
 
     private void BtnRegistrarAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarAsientoActionPerformed
-
 
         if (!TxtMonto.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Para finalizar, presione el botón: 'Registrar Detalle'", "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -530,25 +554,28 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
 
     private void BtnRegistrarDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistrarDetalleActionPerformed
         AsientoContable asientoContable = new AsientoContable();
-        
+
         asientoContable.setCodigo_DetalleAsiento(TxtCodigoAsiento.getText());
         asientoContable.setCuentaContable_Asiento(CmbCuenta.getSelectedItem().toString());
         asientoContable.setPartida_Asiento(TxtPartida.getText());
         asientoContable.setTipo_Asiento(CmbTipoAsiento.getSelectedItem().toString());
         asientoContable.setEncabezado_Asiento(CmbEncabezado.getSelectedItem().toString());
-        
-        if(RbtDebe.isSelected()){
+
+        if (RbtDebe.isSelected()) {
             asientoContable.setMonto_Debe(TxtMonto.getText());
             asientoContable.setMonto_Haber("0");
         }
-        if(RbtHaber.isSelected()){
+        if (RbtHaber.isSelected()) {
             asientoContable.setMonto_Debe("0");
             asientoContable.setMonto_Haber(TxtMonto.getText());
         }
-        
+
         asientoContable.RegistrarDetalle(asientoContable);
-        
+
         setCodigoAsiento();
+
+        TxtMonto.setText("");
+        BtnRegistrarDetalle.setEnabled(false);
     }//GEN-LAST:event_BtnRegistrarDetalleActionPerformed
 
 
