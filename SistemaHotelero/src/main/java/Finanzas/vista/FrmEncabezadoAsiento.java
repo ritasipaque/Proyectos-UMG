@@ -13,7 +13,7 @@ import javax.swing.UIManager;
 import Finanzas.datos.EncabezadoAsientoDAO;
 import Finanzas.dominio.EncabezadoAsiento;
 import java.util.List;
-/**
+/** 
  *
  * @author Diego Vásquez
  */
