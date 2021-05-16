@@ -131,6 +131,15 @@ public class GenerarPermisos {
                 MDIHoteleria.menu_procesos.setVisible(true);
                 MDIHoteleria.submenu_mantenimientos.setVisible(false);
                 MDIHoteleria.submenu_procesos.setVisible(false);
+                
+                MDIHoteleria.mnt_amadellaves.setVisible(false);MDIHoteleria.mnt_formasdepago.setVisible(false);
+                MDIHoteleria.mnt_habitaciones.setVisible(false);MDIHoteleria.mnt_huespedes.setVisible(false);
+                MDIHoteleria.mnt_pisos.setVisible(false);MDIHoteleria.mnt_servicios.setVisible(false);
+                
+                MDIHoteleria.Reserva_De_Habitacion.setVisible(false);MDIHoteleria.Entregar_Recibir_Habitacion.setVisible(false);
+                MDIHoteleria.Facturacion.setVisible(false);MDIHoteleria.Objetos_Perdidos.setVisible(false);
+                MDIHoteleria.Entrega_Objetos_Perdidos.setVisible(false);
+                
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
@@ -149,11 +158,12 @@ public class GenerarPermisos {
                     if (varApp >= 2201 && varApp <= 2400) {
                         MDIHoteleria.submenu_procesos.setVisible(true);
                         switch (varApp) {
-                            case 2201:
-                            case 2300:
-                            case 2400:
-                                MDIHoteleria.submenu_procesos.setVisible(true);
-                                break;
+                            case 2201:MDIHoteleria.Reserva_De_Habitacion.setVisible(true);break;
+                            case 2202:MDIHoteleria.Entregar_Recibir_Habitacion.setVisible(true);break;
+                            case 2203:MDIHoteleria.Facturacion.setVisible(true);break;
+                            case 2204:MDIHoteleria.Objetos_Perdidos.setVisible(true);break;
+                            case 2005:MDIHoteleria.Entrega_Objetos_Perdidos.setVisible(true);break;
+                            default:
                         }
                     }
                 }

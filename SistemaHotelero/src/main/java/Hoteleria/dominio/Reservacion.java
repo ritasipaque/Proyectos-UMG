@@ -12,7 +12,7 @@ package Hoteleria.dominio;
  * @author leone
  */
 public class Reservacion {
-    private String id_reservacion, dpi, f_reserva, desde, hasta, id_habitacion, precio, estado;
+    private String id_reservacion, dpi, f_reserva, desde, hasta, id_habitacion, precio, estado, cantidadpersonas;
 
     public String getId_reservacion() {
         return id_reservacion;
@@ -76,5 +76,13 @@ public class Reservacion {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getCantidadpersonas() {
+        return cantidadpersonas;
+    }
+
+    public void setCantidadpersonas(String cantidadpersonas) {
+        this.cantidadpersonas = cantidadpersonas;
     }
 }
