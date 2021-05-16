@@ -179,10 +179,10 @@
                           <Component id="estado_reservacion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="CR" min="-2" max="-2" attributes="0"/>
-                              <Component id="NF" min="-2" max="-2" attributes="0"/>
+                              <Component id="SE" min="-2" max="-2" attributes="0"/>
+                              <Component id="PE" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="YF" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Cancelar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="limpio" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -266,12 +266,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="estado_reservacion" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="NF" min="-2" max="-2" attributes="0"/>
+                          <Component id="PE" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="CR" min="-2" max="-2" attributes="0"/>
+                          <Component id="SE" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="YF" min="-2" max="-2" attributes="0"/>
+                              <Component id="Cancelar" min="-2" max="-2" attributes="0"/>
                               <Component id="limpio" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -444,28 +444,28 @@
             <Property name="text" type="java.lang.String" value="ESTADO DE LA RESERVACI&#xd3;N:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="NF">
+        <Component class="javax.swing.JRadioButton" name="PE">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="estado"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Pendiente o Entregada la habitaci&#xf3;n"/>
+            <Property name="text" type="java.lang.String" value="Pendiente de Entrega"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="CR">
+        <Component class="javax.swing.JRadioButton" name="SE">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="estado"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Cancelar Reservaci&#xf3;n"/>
+            <Property name="text" type="java.lang.String" value="Entregada"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="YF">
+        <Component class="javax.swing.JRadioButton" name="Cancelar">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
               <ComponentRef name="estado"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Terminada la estadia en el Hotel"/>
+            <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="limpio">

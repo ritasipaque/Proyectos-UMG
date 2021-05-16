@@ -202,9 +202,9 @@ void habilitarAcciones() {
 
     public void estado(boolean estado){
         estado_reservacion.setVisible(estado);
-        NF.setVisible(estado);
-        CR.setVisible(estado);
-        YF.setVisible(estado);
+        PE.setVisible(estado);
+        SE.setVisible(estado);
+        Cancelar.setVisible(estado);
         limpio.setVisible(false);
     }
     
@@ -248,9 +248,9 @@ void habilitarAcciones() {
         BtnMod = new javax.swing.JButton();
         BtnReporte = new javax.swing.JButton();
         estado_reservacion = new javax.swing.JLabel();
-        NF = new javax.swing.JRadioButton();
-        CR = new javax.swing.JRadioButton();
-        YF = new javax.swing.JRadioButton();
+        PE = new javax.swing.JRadioButton();
+        SE = new javax.swing.JRadioButton();
+        Cancelar = new javax.swing.JRadioButton();
         limpio = new javax.swing.JRadioButton();
         txt_total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -361,14 +361,14 @@ void habilitarAcciones() {
 
         estado_reservacion.setText("ESTADO DE LA RESERVACIÓN:");
 
-        estado.add(NF);
-        NF.setText("Pendiente o Entregada la habitación");
+        estado.add(PE);
+        PE.setText("Pendiente de Entrega");
 
-        estado.add(CR);
-        CR.setText("Cancelar Reservación");
+        estado.add(SE);
+        SE.setText("Entregada");
 
-        estado.add(YF);
-        YF.setText("Terminada la estadia en el Hotel");
+        estado.add(Cancelar);
+        Cancelar.setText("Cancelar");
 
         estado.add(limpio);
 
@@ -476,10 +476,10 @@ void habilitarAcciones() {
                         .addComponent(estado_reservacion)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CR)
-                            .addComponent(NF)
+                            .addComponent(SE)
+                            .addComponent(PE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(YF)
+                                .addComponent(Cancelar)
                                 .addGap(18, 18, 18)
                                 .addComponent(limpio)))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -542,12 +542,12 @@ void habilitarAcciones() {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(estado_reservacion)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(NF)
+                        .addComponent(PE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(CR)
+                        .addComponent(SE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(YF)
+                            .addComponent(Cancelar)
                             .addComponent(limpio))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -621,7 +621,7 @@ void habilitarAcciones() {
                         insertar.setDesde(fechaentrada);
                         insertar.setHasta(fechasalida);
                         insertar.setPrecio(txt_total.getText());
-                        insertar.setEstado("1");
+                        insertar.setEstado("0");
 
                         dao.insert(insertar);
                         actualizar_tabla();
@@ -684,12 +684,12 @@ void habilitarAcciones() {
             fecha_entrada.setDate(fechaentrada);
             fecha_salida.setDate(fechasalida);
             txt_total.setText(buscar.getPrecio());
-            if (buscar.getEstado().equals("1")) {
-                NF.setSelected(true);
-            }else if(buscar.getEstado().equals("2")){
-                YF.setSelected(true);
+            if (buscar.getEstado().equals("0")) {
+                PE.setSelected(true);
+            }else if(buscar.getEstado().equals("1")){
+                Cancelar.setSelected(true);
             }else if(buscar.getEstado().equals("3")){
-                CR.setSelected(true);
+                SE.setSelected(true);
             }
             estado(true);
         }
@@ -722,12 +722,12 @@ void habilitarAcciones() {
             modificar.setDesde(fechaentrada);
             modificar.setHasta(fechasalida);
             modificar.setPrecio(txt_total.getText());
-            if (NF.isSelected()) {
-               modificar.setEstado("1");
-            } else if(CR.isSelected()){
+            if (PE.isSelected()) {
+               modificar.setEstado("0");
+            } else if(SE.isSelected()){
+                modificar.setEstado("1");
+            } else if(Cancelar.isSelected()){
                 modificar.setEstado("3");
-            } else if(YF.isSelected()){
-                modificar.setEstado("2");
             }
             dao.update(modificar);
             actualizar_tabla();
@@ -777,9 +777,9 @@ private Connection connection = null;
     private javax.swing.JButton BtnMod;
     private javax.swing.JButton BtnReporte;
     private javax.swing.JButton BtnTotal;
-    private javax.swing.JRadioButton CR;
-    private javax.swing.JRadioButton NF;
-    private javax.swing.JRadioButton YF;
+    private javax.swing.JRadioButton Cancelar;
+    private javax.swing.JRadioButton PE;
+    private javax.swing.JRadioButton SE;
     private javax.swing.ButtonGroup estado;
     private javax.swing.JLabel estado_reservacion;
     private com.toedter.calendar.JDateChooser fecha_actual;
