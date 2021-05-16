@@ -8,18 +8,31 @@ package Hoteleria.vista;
 import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.dominio.Habitaciones;
 import Hoteleria.datos.AmaDeLlavesDAO;
+import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.dominio.AmaDeLlaves;
 import Hoteleria.datos.ObjetosPerdidosDAO;
 import Hoteleria.dominio.ObjetoPerdido;
+import java.io.File;
+import java.sql.Connection;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
 
@@ -129,6 +142,9 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
     private void limpiar(){
         txt_objeto.setText("");
         txt_id.setText("");
+        fecha_actual();
+        txt_ama.setSelectedItem("Seleccionar...");
+        txt_habitacion.setSelectedItem("Seleccionar...");
     }
     
     private static boolean isNumeric(String cadena){
@@ -159,9 +175,10 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         txt_objeto = new javax.swing.JTextField();
         BtnIng = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla1 = new javax.swing.JTable();
@@ -173,6 +190,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        setTitle("Objetos Perdidos");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("INFORMACION"));
 
@@ -202,8 +220,6 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("?");
-
         jButton4.setText("Eliminar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,6 +234,15 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton6.setText("Ayuda");
+
+        jButton7.setText("Reporte");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -226,22 +251,9 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txt_ama, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txt_objeto, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -251,7 +263,21 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txt_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_ama, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -273,15 +299,16 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_objeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
-                    .addComponent(jButton5))
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton7))
                 .addContainerGap())
         );
 
@@ -313,7 +340,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 557, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -372,6 +399,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
             guardarmetodo.setFecha(fechaactual);
             guardarmetodo.setObjeto(txt_objeto.getText());
+            guardarmetodo.setEstado("1");
             huespedesdao.insert(guardarmetodo);
             imprimir_Objetos();
             JOptionPane.showMessageDialog(null, "Objeto guardado correctamente");
@@ -382,7 +410,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         }
             
         }else{
-            JOptionPane.showMessageDialog(null, "Tiene Que Seleccionar una Habitacion");
+            JOptionPane.showMessageDialog(null, "Tiene Que Seleccionar una Habitacion y una Ama de llaves");
         }
         limpiar();
     }//GEN-LAST:event_BtnIngActionPerformed
@@ -395,6 +423,8 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         if (ObjetosPerdidos.isNumeric(txt_id.getText())) {
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            Date fechaguardado = null;
 
             ObjetosPerdidosDAO huespedesdao = new ObjetosPerdidosDAO();
             ObjetoPerdido buscarmetodo = new ObjetoPerdido();
@@ -406,6 +436,12 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             txt_habitacion.setSelectedItem(buscarmetodo.getHabitacion());
             txt_objeto.setText(buscarmetodo.getObjeto());
             
+            try {
+                fechaguardado=formato.parse(buscarmetodo.getFecha());
+            } catch (ParseException ex) {
+                Logger.getLogger(ReservaDeHabitacion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            fecha_actual.setDate(fechaguardado);
         }else{
             JOptionPane.showMessageDialog(null,"El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
         }
@@ -430,9 +466,10 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        if (ObjetosPerdidos.isNumeric(txt_habitacion.getSelectedItem().toString())) {
+        if (ObjetosPerdidos.isNumeric(txt_id.getText())) {
             if (txt_habitacion.getSelectedItem().toString().length()!=0&&txt_ama.getSelectedItem().toString().length()!=0&&
                     txt_objeto.getText().length()!=0) {
+                
             ObjetosPerdidosDAO huespedesdao = new ObjetosPerdidosDAO();
             ObjetoPerdido modificarmetodo = new ObjetoPerdido();
             modificarmetodo.setIdobjeto(txt_id.getText());
@@ -441,6 +478,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
             modificarmetodo.setFecha(fechaactual);
             modificarmetodo.setObjeto(txt_objeto.getText());
+            modificarmetodo.setEstado("1");
             huespedesdao.update(modificarmetodo);
             imprimir_Objetos();
             JOptionPane.showMessageDialog(null, "Objeto actualizado correctamente");
@@ -448,10 +486,32 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
         }
         }else{
-            JOptionPane.showMessageDialog(null, "NO. de habitacion no puede estar vacio");
+            JOptionPane.showMessageDialog(null, "ID esta vacio");
         }
         limpiar();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private Connection connection = null;
+    
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = ConexionHoteleria.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Hoteleria/reportes/reporteObjetosPerdidos.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Objetos Perdidos");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {                                         
     MDIHoteleria.logo.setVisible(true);
@@ -466,9 +526,10 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JDateChooser fecha_actual;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
