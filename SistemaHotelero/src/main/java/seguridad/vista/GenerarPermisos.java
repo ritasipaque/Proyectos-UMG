@@ -187,7 +187,7 @@ public class GenerarPermisos {
                             case 2204:
                                 MDIHoteleria.Objetos_Perdidos.setVisible(true);
                                 break;
-                            case 2005:
+                            case 2205:
                                 MDIHoteleria.Entrega_Objetos_Perdidos.setVisible(true);
                                 break;
                             default:
