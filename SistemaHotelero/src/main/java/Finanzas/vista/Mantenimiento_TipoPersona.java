@@ -5,15 +5,24 @@
  */
 package Finanzas.vista;
 
+import Finanzas.datos.Conexion;
 import Finanzas.datos.TipoPersonaDAO;
 import Finanzas.dominio.TipoPersona;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 
@@ -76,6 +85,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         BtnBus = new javax.swing.JButton();
         BtnAyu = new javax.swing.JButton();
         txt_Buscar = new javax.swing.JTextField();
+        btnImprimir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla_TipoPersona = new javax.swing.JTable();
@@ -142,6 +152,15 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
             }
         });
 
+        btnImprimir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -172,7 +191,9 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BtnAyu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnAyu, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
                         .addGap(26, 26, 26))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -189,8 +210,9 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnBus)
-                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnImprimir))
+                .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
                     .addComponent(BtnMod)
@@ -263,6 +285,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario("MantenimientoTipoPersona");
         AInsertar.setAccion("Insertar");
         AInsertar.setCodigoAplicacion("1007");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);   
         }   catch (UnknownHostException ex) {
@@ -289,6 +312,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario("MantenimientoTipoPersona");
         AInsertar.setAccion("Modificar");
         AInsertar.setCodigoAplicacion("1007");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);   
         }   catch (UnknownHostException ex) {
@@ -311,6 +335,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario("MantenimientoTipoPersona");
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1007");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);   
         }   catch (UnknownHostException ex) {
@@ -342,6 +367,25 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }    
     }//GEN-LAST:event_BtnAyuActionPerformed
+ private Connection connection = null;
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+      Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Finanzas/reportes/reporteTipoPersona.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte Tipo Persona");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -351,6 +395,7 @@ public class Mantenimiento_TipoPersona extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
     private javax.swing.JTable Tabla_TipoPersona;
+    public javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
