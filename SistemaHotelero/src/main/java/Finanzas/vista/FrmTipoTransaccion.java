@@ -186,6 +186,12 @@ public void buscarperfil(){
             }
         });
 
+        TxtEfecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtEfectoKeyTyped(evt);
+            }
+        });
+
         BtnIng1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         BtnIng1.setText("Registrar");
         BtnIng1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -418,10 +424,10 @@ public void buscarperfil(){
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
 
         try {
-            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoTransaccion.chm")).exists()) {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTransaccion.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoTransaccion.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTransaccion.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -493,6 +499,17 @@ public void buscarperfil(){
            llenadoDeTablas();
 
     }//GEN-LAST:event_BtnIng1ActionPerformed
+
+    private void TxtEfectoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEfectoKeyTyped
+        // TODO add your handling code here:
+          char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+          getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NUMEROS");
+        }
+    }//GEN-LAST:event_TxtEfectoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
