@@ -30,6 +30,8 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
     public Entregar_objeto() {
         initComponents();
         cargar_habitaciones();
+        imprimir_Objetos();
+        imprimir_Objetos_entregar();
     }
     
     public void cargar_habitaciones() {
@@ -88,6 +90,23 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         tabla2.getColumnModel().getColumn(3).setPreferredWidth(50);
         tabla2.getColumnModel().getColumn(4).setPreferredWidth(50);
     }
+    
+    private static boolean isNumeric(String cadena){
+        try {
+                Integer.parseInt(cadena);
+                return true;
+        } catch (NumberFormatException nfe){
+                return false;
+        }
+    }
+    
+    private void limpiar(){
+        txt_nombre.setText("");
+        txt_dpi.setText("");
+        id.setSelectedItem("Seleccionar...");
+        imprimir_Objetos();
+        imprimir_Objetos_entregar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,11 +136,12 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         tabla2 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Entregar Objeto Perdido");
 
         jLabel1.setText("Habitacion:");
 
@@ -235,7 +255,12 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
 
         jButton7.setText("?");
 
-        jButton8.setText("REPORTE");
+        jButton2.setText("CANCELAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,7 +297,7 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8)
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -309,8 +334,8 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton7)
-                    .addComponent(jButton8))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jButton2))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -319,10 +344,7 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String combobox=id.getSelectedItem().toString();
-        int validar=Integer.parseInt(combobox);
-        imprimir_Objetos();
-        imprimir_Objetos_entregar();
-        
+        int validar=Integer.parseInt(combobox);        
         String datos[] = new String[5];
         ObjetosPerdidosDAO dao = new ObjetosPerdidosDAO();
         List<ObjetoPerdido> personas = dao.select();
@@ -377,6 +399,9 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        if (Entregar_objeto.isNumeric(id.getSelectedItem().toString())) {
+            if (id.getSelectedItem().toString().length()!=0&&txt_dpi.getText().length()!=0&&
+                    txt_nombre.getText().length()!=0) {
         ObjetosPerdidosDAO modulosDAO = new ObjetosPerdidosDAO();
         String Vector[]=new String[5];
             ObjetoPerdido moduloInsertar = new ObjetoPerdido();
@@ -402,6 +427,13 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         }
             
             JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
+            }else{
+            JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una habitacion");
+        }
+        limpiar();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void btnQuitarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarUnoActionPerformed
@@ -435,6 +467,11 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         imprimir_Objetos();
     }//GEN-LAST:event_btnQuitarTodoActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAsignarTodo;
@@ -443,9 +480,9 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnQuitarUno;
     private javax.swing.JComboBox<String> id;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
