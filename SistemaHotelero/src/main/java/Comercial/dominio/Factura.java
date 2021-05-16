@@ -15,15 +15,23 @@ import java.util.List;
  */
 public class Factura  {
     
+String Id_cliente;
 String Cliente;  
 String Nit;  
 String Telefono; 
 String producto; 
- 
 String Cantidad;  
 String  Precio_por_unidad; 
 String Monto; 
 String TotalmoNto; 
+
+    public String getId_cliente() {
+        return Id_cliente;
+    }
+
+    public void setId_cliente(String Id_cliente) {
+        this.Id_cliente = Id_cliente;
+    }
 
     public String getCliente() {
         return Cliente;
@@ -91,11 +99,10 @@ String TotalmoNto;
 
     @Override
     public String toString() {
-        return "Factura{" + "Cliente=" + Cliente + ", Nit=" + Nit + ", Telefono=" + Telefono + ", producto=" + producto + ", Cantidad=" + Cantidad + ", Precio_por_unidad=" + Precio_por_unidad + ", Monto=" + Monto + ", TotalmoNto=" + TotalmoNto + '}';
+        return "Factura{" + "Id_cliente=" + Id_cliente + ", Cliente=" + Cliente + ", Nit=" + Nit + ", Telefono=" + Telefono + ", producto=" + producto + ", Cantidad=" + Cantidad + ", Precio_por_unidad=" + Precio_por_unidad + ", Monto=" + Monto + ", TotalmoNto=" + TotalmoNto + '}';
     }
 
-   
-
+    
     
  
    

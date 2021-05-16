@@ -103,7 +103,7 @@ public class BitacoraDao extends Conexion {
                 String ip = rs.getString("ip");
                 String accion = rs.getString("accion");
                 String CodigoAplicacion = rs.getString("tabla");
-                String Modulo = rs.getString("modulo");
+                String Modulo = rs.getString("PK_id_Modulo");
 
                 usuario = new Bitacora();
                 usuario.setId_Bitacora(id_bitacora);
@@ -164,7 +164,7 @@ public class BitacoraDao extends Conexion {
                 String ip = rs.getString("ip");
                 String accion = rs.getString("accion");
                 String codigoAplicacion = rs.getString("tabla");
-                String modulo = rs.getString("modulo");
+                String modulo = rs.getString("PK_id_Modulo");
 
                 /**
                  *
