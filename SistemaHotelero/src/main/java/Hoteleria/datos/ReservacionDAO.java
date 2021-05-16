@@ -23,10 +23,10 @@ import java.util.List;
  */
 public class ReservacionDAO {
     public static String id, entrada, salida;
-    private static final String SQL_INSERT = "insert into tbl_reservaciones values(?,?,?,?,?,?,?,?)";
+    private static final String SQL_INSERT = "insert into tbl_reservaciones values(?,?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT = "SELECT * FROM tbl_reservaciones";
-    private static final String SQL_QUERY = "SELECT PK_id_reservacion, PK_no_identificacion, PK_id_habitacion, fecha_reserva, desde, hasta, precio, estado FROM tbl_reservaciones WHERE PK_id_reservacion = ?";
-    private static final String SQL_UPDATE = "UPDATE tbl_reservaciones SET PK_no_identificacion=?, PK_id_habitacion=?, fecha_reserva=?, desde=?, hasta=?, precio=?, estado=? WHERE PK_id_reservacion=?";
+    private static final String SQL_QUERY = "SELECT PK_id_reservacion, PK_no_identificacion, PK_id_habitacion,cantidad_personas, fecha_reserva, desde, hasta, precio, estado FROM tbl_reservaciones WHERE PK_id_reservacion = ?";
+    private static final String SQL_UPDATE = "UPDATE tbl_reservaciones SET PK_no_identificacion=?, PK_id_habitacion=?,cantidad_personas=?, fecha_reserva=?, desde=?, hasta=?, precio=?, estado=? WHERE PK_id_reservacion=?";
     
     public List<Reservacion> select(){
         Connection conn = null;
@@ -43,6 +43,7 @@ public class ReservacionDAO {
                 String id_reservacion = rs.getString("PK_id_reservacion");
                 String dpi = rs.getString("PK_no_identificacion");
                 String id_habitacion = rs.getString("PK_id_habitacion");
+                String cantidad_personas = rs.getString("cantidad_personas");
                 String f_reserva = rs.getString("fecha_reserva");
                 String desde = rs.getString("desde");
                 String hasta = rs.getString("hasta");
@@ -53,6 +54,7 @@ public class ReservacionDAO {
                 reservacion.setId_reservacion(id_reservacion);
                 reservacion.setDpi(dpi);
                 reservacion.setId_habitacion(id_habitacion);
+                reservacion.setCantidadpersonas(cantidad_personas);
                 reservacion.setF_reserva(f_reserva);
                 reservacion.setDesde(desde);
                 reservacion.setHasta(hasta);
@@ -88,14 +90,17 @@ public class ReservacionDAO {
                 String id_reservacion = rs.getString("PK_id_reservacion");
                 String dpi = rs.getString("PK_no_identificacion");
                 String id_habitacion = rs.getString("PK_id_habitacion");
+                String cantidad_personas = rs.getString("cantidad_personas");
                 String f_reserva = rs.getString("fecha_reserva");
                 String desde = rs.getString("desde");
                 String hasta = rs.getString("hasta");
                 String precio = rs.getString("precio");
                 String estado = rs.getString("estado");
+                
                 reservacion.setId_reservacion(id_reservacion);
                 reservacion.setDpi(dpi);
                 reservacion.setId_habitacion(id_habitacion);
+                reservacion.setCantidadpersonas(cantidad_personas);
                 reservacion.setF_reserva(f_reserva);
                 reservacion.setDesde(desde);
                 reservacion.setHasta(hasta);
@@ -133,6 +138,7 @@ public class ReservacionDAO {
                 String id_reserva = rs.getString("PK_id_reservacion");
                 String dpi = rs.getString("PK_no_identificacion");
                 String habitacion = rs.getString("PK_id_habitacion");
+                String cantidad_personas = rs.getString("cantidad_personas");
                 String fecha = rs.getString("fecha_reserva");
                 String desde = rs.getString("desde");
                 String hasta = rs.getString("hasta");
@@ -143,6 +149,7 @@ public class ReservacionDAO {
                 reserva.setId_reservacion(id_reserva);
                 reserva.setDpi(dpi);
                 reserva.setId_habitacion(habitacion);
+                reserva.setCantidadpersonas(cantidad_personas);
                 reserva.setF_reserva(fecha);
                 reserva.setDesde(desde);
                 reserva.setHasta(hasta);
@@ -169,11 +176,12 @@ public class ReservacionDAO {
             stmt.setString(1, reserva.getId_reservacion());
             stmt.setString(2, reserva.getDpi());
             stmt.setString(3, reserva.getId_habitacion());
-            stmt.setString(4, reserva.getF_reserva());
-            stmt.setString(5, reserva.getDesde());
-            stmt.setString(6, reserva.getHasta());
-            stmt.setString(7, reserva.getPrecio());
-            stmt.setString(8, reserva.getEstado());
+            stmt.setString(4, reserva.getCantidadpersonas());
+            stmt.setString(5, reserva.getF_reserva());
+            stmt.setString(6, reserva.getDesde());
+            stmt.setString(7, reserva.getHasta());
+            stmt.setString(8, reserva.getPrecio());
+            stmt.setString(9, reserva.getEstado());
            
 
             //System.out.println("ejecutando query:" + SQL_INSERT);
@@ -201,12 +209,13 @@ public class ReservacionDAO {
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, reservacion.getDpi());
             stmt.setString(2, reservacion.getId_habitacion());
-            stmt.setString(3, reservacion.getF_reserva()); 
-            stmt.setString(4, reservacion.getDesde()); 
-            stmt.setString(5, reservacion.getHasta());
-            stmt.setString(6, reservacion.getPrecio());
-            stmt.setString(7, reservacion.getEstado());
-            stmt.setString(8, reservacion.getId_reservacion());
+            stmt.setString(3, reservacion.getCantidadpersonas());
+            stmt.setString(4, reservacion.getF_reserva());
+            stmt.setString(5, reservacion.getDesde());
+            stmt.setString(6, reservacion.getHasta());
+            stmt.setString(7, reservacion.getPrecio());
+            stmt.setString(8, reservacion.getEstado());
+            stmt.setString(9, reservacion.getId_reservacion());
             
             rows = stmt.executeUpdate();
             
