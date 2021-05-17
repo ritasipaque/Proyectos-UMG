@@ -117,6 +117,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         lblModulo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -148,7 +149,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Mantenimiento Aplicaciones");
+        setTitle("Mantenimiento Habitaciones\n");
         setVisible(true);
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -312,8 +313,10 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
 
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar...", "Individual", "Matrimonial", "Familiar" }));
 
+        buttonGroup1.add(jradioDisponible);
         jradioDisponible.setText("Disponible");
 
+        buttonGroup1.add(jradioOcupado);
         jradioOcupado.setText("Ocupado");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -505,9 +508,11 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         Habitaciones habitaciones_Buscar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
+        if (txtBuscar.getText().length() != 0) {
         habitaciones_Buscar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
         habitaciones_Buscar = habitacionesDAO.query(habitaciones_Buscar);
-
+        
+            
         txtId.setText(String.valueOf(habitaciones_Buscar.getId_Habitaciones()));
         txtDescripcion.setText(String.valueOf(habitaciones_Buscar.getDescripcion()));
         txtPrecio.setText(String.valueOf(habitaciones_Buscar.getPrecio()));
@@ -518,6 +523,9 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
         }
         if (habitaciones_Buscar.getEstado_Habitacion() == 0) {
             jradioOcupado.setSelected(true);
+        }
+        }else  {
+            JOptionPane.showMessageDialog(null, "campo de busqueda esta vacio");
         }
 
         // habitacionesDAO.query(habitaciones_Buscar); 
@@ -567,11 +575,15 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Habitaciones habitaciones_Eliminar = new Habitaciones();
         HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
-
+        if (txtBuscar.getText().length() !=0) {
+            
         habitaciones_Eliminar.setId_Habitaciones(Integer.parseInt(txtBuscar.getText()));
         habitacionesDAO.delete(habitaciones_Eliminar);
         GuardarEnBitacora("Eliminacion", codigoAplicacion, Login.usuarioSesion);
         JOptionPane.showMessageDialog(null, "Registro Eliminado.");
+        }else  {
+            JOptionPane.showMessageDialog(null, "No puede eliminar si el campo esta vacio");
+        }
         tabla();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -589,6 +601,7 @@ public class Mantenimiento_habitaciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbxPiso;
     private javax.swing.JComboBox<String> cbxTipo;
     private javax.swing.JButton jButton1;
