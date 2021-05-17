@@ -173,16 +173,17 @@ INSERT INTO `hoteleria`.`tbl_objetosperdidos` (`PK_id_objeto`, `PK_id_habitacion
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_entrega_habitacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_entrega_habitacion` (
-  `PK_id_entrega` INT NOT NULL ,
-  `no_factura` INT DEFAULT NULL,
-  `PK_id_habitacion` INT DEFAULT NULL,
-  `nombre`VARCHAR(50) NULL DEFAULT NULL,
-   `no_reserva` INT DEFAULT NULL,
-  `fecha`  date NULL DEFAULT NULL,
-  `estado`VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`PK_id_entrega`),
-  FOREIGN KEY (`no_factura`) REFERENCES `tbl_facturacion`(`PK_id_factura`),
-  FOREIGN KEY (`PK_id_habitacion`) REFERENCES `tbl_reservaciones`(`PK_id_reservacion`))
+CREATE TABLE IF NOT EXISTS hoteleria.tbl_entrega_habitacion (
+  PK_id_entrega INT NOT NULL ,
+  PK_id_reservacion INT DEFAULT NULL,
+  PK_id_habitacion INT DEFAULT NULL,
+  PK_no_identificacion INT DEFAULT NULL,
+  nombre VARCHAR(50) NULL DEFAULT NULL,
+  fecha  date NULL DEFAULT NULL,
+  estado VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (PK_id_entrega),
+  FOREIGN KEY (PK_id_habitacion) REFERENCES tbl_mantenimiento_habitaciones(PK_id_habitacion),
+  FOREIGN KEY (PK_id_reservacion) REFERENCES tbl_reservaciones(PK_id_reservacion),
+  FOREIGN KEY (PK_no_identificacion) REFERENCES tbl_huespedes(PK_no_identificacion))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
