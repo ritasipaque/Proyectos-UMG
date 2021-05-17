@@ -197,9 +197,21 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("CODIGO:");
+        jLabel1.setText("IDENTIFICACION:");
+
+        txt_codigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_codigoKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("NOMBRE:");
+
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
 
         BtnIng.setText("AGREGAR");
         BtnIng.addActionListener(new java.awt.event.ActionListener() {
@@ -231,13 +243,31 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
 
         jLabel3.setText("APELLIDO:");
 
+        txt_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellidoKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("NACIONALIDAD:");
+
+        txt_nacionalidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nacionalidadKeyTyped(evt);
+            }
+        });
 
         jLabel7.setText("DIRECCION:");
 
         jLabel8.setText("FRECUENCIA:");
 
         jLabel9.setText("TELEFONO:");
+
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyTyped(evt);
+            }
+        });
 
         jLabel10.setText("NIT:");
 
@@ -270,17 +300,11 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addGap(38, 38, 38)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BtnBus)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txt_nombre)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txt_codigo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBus))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -295,27 +319,26 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                         .addComponent(btn_cancelar))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_apellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_nacionalidad, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txt_direccion)))))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10))
-                        .addGap(18, 18, 18)
+                        .addGap(22, 22, 22)
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_frecuencia, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txt_telefono, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txt_nit, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(txt_frecuencia)
+                            .addComponent(txt_nit)))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel2))
+                        .addGap(9, 9, 9)
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_nacionalidad, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_apellido, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_nombre)
+                            .addComponent(txt_direccion))))
                 .addContainerGap())
         );
         panel1Layout.setVerticalGroup(
@@ -354,7 +377,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txt_nit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
                     .addComponent(BtnMod)
@@ -473,7 +496,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
         }
         }else{
-            JOptionPane.showMessageDialog(null, "El No. de indentificacion del huesped, unicamente pueden ser números");
+            JOptionPane.showMessageDialog(null, "El No. de indentificacion esta Vacio");
         }
         limpiar();
     }//GEN-LAST:event_BtnModActionPerformed
@@ -518,7 +541,7 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
             guardarBitacora.GuardarEnBitacora("Eliminacion", (codigoAplicacion), Login.usuarioHoteleria);
         }else{
-            JOptionPane.showMessageDialog(null, "El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
+            JOptionPane.showMessageDialog(null, "El No. de indentificacion esta vacio");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
             limpiar();
@@ -570,6 +593,56 @@ public class Mantenimiento_Huespedes extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_codigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_codigoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txt_codigoKeyTyped
+
+    private void txt_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txt_telefonoKeyTyped
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Letras.");
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void txt_apellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidoKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Letras.");
+        }
+    }//GEN-LAST:event_txt_apellidoKeyTyped
+
+    private void txt_nacionalidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nacionalidadKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Letras.");
+        }
+    }//GEN-LAST:event_txt_nacionalidadKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
