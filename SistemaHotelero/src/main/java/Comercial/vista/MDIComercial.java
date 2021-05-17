@@ -410,7 +410,7 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
-            if ((new File("src\\main\\java\\Comercial\\reportes\\menu.chm")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\menus.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
                         .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\menu.chm");
