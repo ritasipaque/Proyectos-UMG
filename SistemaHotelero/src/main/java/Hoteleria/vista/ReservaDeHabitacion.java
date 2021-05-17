@@ -5,20 +5,23 @@ package Hoteleria.vista;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.datos.HuespedesDAO;
 import Hoteleria.datos.ReservacionDAO;
 import Hoteleria.dominio.Habitaciones;
 import Hoteleria.dominio.Huespedes;
 import Hoteleria.dominio.Reservacion;
+import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +29,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 /**
  *
@@ -36,12 +46,43 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
     boolean activar_boton = false;
+void habilitarAcciones() {
+
+        var codigoAplicacion = 2201;
+        var usuario = Login.usuarioHoteleria;
+
+        BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnBus.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[5];
+
+        for (int i = 0; i < 5; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            BtnIng.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+    }
 
     /**
      * Creates new form ProcesoReservaDeHS
      */
     public ReservaDeHabitacion() {
         initComponents();
+        habilitarAcciones();
         estado(false);
         cargar_habitaciones();
         actualizar_tabla();
@@ -81,6 +122,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         modelo1.addColumn("No. Reservación");      //LE AÑADIMOS COLUMNAS AL OBJETO MODELO
         modelo1.addColumn("DPI Cliente");
         modelo1.addColumn("ID Habitacion");
+        modelo1.addColumn("Cantidad Personas:");
         modelo1.addColumn("Fecha de Reserva");
         modelo1.addColumn("Fecha de Entrada");
         modelo1.addColumn("Fecha de Salida");
@@ -98,17 +140,19 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         tabla.getColumnModel().getColumn(5).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(6).setCellRenderer(centro);
         tabla.getColumnModel().getColumn(7).setCellRenderer(centro);
+        tabla.getColumnModel().getColumn(8).setCellRenderer(centro);
         
         tabla.getColumnModel().getColumn(0).setPreferredWidth(75);        
         tabla.getColumnModel().getColumn(1).setPreferredWidth(50);
         tabla.getColumnModel().getColumn(2).setPreferredWidth(50);
-        tabla.getColumnModel().getColumn(3).setPreferredWidth(75);        
+        tabla.getColumnModel().getColumn(3).setPreferredWidth(100);        
         tabla.getColumnModel().getColumn(4).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(5).setPreferredWidth(75);
         tabla.getColumnModel().getColumn(6).setPreferredWidth(75);        
-        tabla.getColumnModel().getColumn(7).setPreferredWidth(50);
+        tabla.getColumnModel().getColumn(7).setPreferredWidth(50);       
+        tabla.getColumnModel().getColumn(8).setPreferredWidth(50);
         
-        String datos[] = new String[8];
+        String datos[] = new String[9];
         ReservacionDAO reservaciondao = new ReservacionDAO();
         List<Reservacion> reservacion = reservaciondao.select();
         for (Reservacion reservar : reservacion) {
@@ -116,11 +160,12 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             datos[0] = reservar.getId_reservacion();
             datos[1] = reservar.getDpi();
             datos[2] = reservar.getId_habitacion();
-            datos[3] = reservar.getF_reserva();
-            datos[4] = reservar.getDesde();
-            datos[5] = reservar.getHasta();
-            datos[6] = reservar.getPrecio();
-            datos[7] = reservar.getEstado();
+            datos[3] = reservar.getCantidadpersonas();
+            datos[4] = reservar.getF_reserva();
+            datos[5] = reservar.getDesde();
+            datos[6] = reservar.getHasta();
+            datos[7] = reservar.getPrecio();
+            datos[8] = reservar.getEstado();
             modelo1.addRow(datos);
             tabla.setModel(modelo1);
         }
@@ -137,6 +182,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         fecha_salida.setDate(null);
         id_habitacion.setSelectedIndex(0);
         txt_total.setText("");
+        txt_cantpersonas.setText("");
         estado(false);
     }
 
@@ -156,9 +202,9 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
     public void estado(boolean estado){
         estado_reservacion.setVisible(estado);
-        NF.setVisible(estado);
-        CR.setVisible(estado);
-        YF.setVisible(estado);
+        PE.setVisible(estado);
+        SE.setVisible(estado);
+        Cancelar.setVisible(estado);
         limpio.setVisible(false);
     }
     
@@ -183,7 +229,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         id_cliente = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txt_nombrec = new javax.swing.JTextField();
-        BtnBusR = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         BtnBusC = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txt_telefono = new javax.swing.JTextField();
@@ -198,19 +244,21 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         fecha_entrada = new com.toedter.calendar.JDateChooser();
         fecha_salida = new com.toedter.calendar.JDateChooser();
-        BtnIns = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnReporte = new javax.swing.JButton();
         estado_reservacion = new javax.swing.JLabel();
-        NF = new javax.swing.JRadioButton();
-        CR = new javax.swing.JRadioButton();
-        YF = new javax.swing.JRadioButton();
+        PE = new javax.swing.JRadioButton();
+        SE = new javax.swing.JRadioButton();
+        Cancelar = new javax.swing.JRadioButton();
         limpio = new javax.swing.JRadioButton();
         txt_total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         BtnTotal = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txt_cantpersonas = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -241,10 +289,10 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
         txt_nombrec.setEditable(false);
 
-        BtnBusR.setText("BUSCAR");
-        BtnBusR.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("BUSCAR");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBusRActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -290,32 +338,37 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
 
         fecha_salida.setDateFormatString("yyyy-MM-dd");
 
-        BtnIns.setText("GUARDAR");
-        BtnIns.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("GUARDAR");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnInsActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        jButton5.setText("MODIFICAR");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("MODIFICAR");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        jButton6.setText("REPORTE");
+        BtnReporte.setText("REPORTE");
+        BtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteActionPerformed(evt);
+            }
+        });
 
         estado_reservacion.setText("ESTADO DE LA RESERVACIÓN:");
 
-        estado.add(NF);
-        NF.setText("Pendiente o Entregada la habitación");
+        estado.add(PE);
+        PE.setText("Pendiente de Entrega");
 
-        estado.add(CR);
-        CR.setText("Cancelar Reservación");
+        estado.add(SE);
+        SE.setText("Entregada");
 
-        estado.add(YF);
-        YF.setText("Terminada la estadia en el Hotel");
+        estado.add(Cancelar);
+        Cancelar.setText("Cancelar");
 
         estado.add(limpio);
 
@@ -338,6 +391,13 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         });
 
         jButton4.setText("AYUDA");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Cantidad de Personas:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -346,75 +406,83 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_cantpersonas))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txt_precio)
-                                    .addComponent(id_habitacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fecha_entrada, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                                    .addComponent(txt_total, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel18)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(fecha_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BtnTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txt_nombrec, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(id_reservacion)
-                                            .addComponent(id_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
-                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txt_precio)
+                                            .addComponent(id_habitacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(fecha_entrada, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                            .addComponent(txt_total, javax.swing.GroupLayout.Alignment.LEADING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(BtnBusC)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(BtnBusR)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(fecha_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(BtnTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(txt_nit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(BtnIns)
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(BtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(txt_nombrec, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(id_reservacion)
+                                                    .addComponent(id_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(BtnBusC)
+                                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                                        .addComponent(BtnBus)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                                .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jLabel17)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(txt_nit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(BtnIng)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(BtnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(BtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(BtnReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                         .addGap(48, 48, 48))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(estado_reservacion)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CR)
-                            .addComponent(NF)
-                            .addComponent(YF)
-                            .addComponent(limpio))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(SE)
+                            .addComponent(PE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(Cancelar)
+                                .addGap(18, 18, 18)
+                                .addComponent(limpio)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,7 +493,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(id_reservacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnBusR))
+                            .addComponent(BtnBus))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -467,24 +535,29 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                         .addComponent(txt_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BtnTotal)))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txt_cantpersonas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(estado_reservacion)
-                    .addComponent(NF))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CR)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(YF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(limpio)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(PE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Cancelar)
+                            .addComponent(limpio))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCancelar)
                     .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnIns)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(BtnIng)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnReporte))
                 .addContainerGap())
         );
 
@@ -504,7 +577,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())))
@@ -513,7 +586,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInsActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         boolean reservada=false;
         if (ReservaDeHabitacion.isNumeric(id_reservacion.getText())&&ReservaDeHabitacion.isNumeric(id_cliente.getText())) {
                 ReservacionDAO dao = new ReservacionDAO();
@@ -543,11 +616,12 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                         insertar.setId_reservacion(id_reservacion.getText());
                         insertar.setDpi(id_cliente.getText());
                         insertar.setId_habitacion(id_habitacion.getSelectedItem().toString());
+                        insertar.setCantidadpersonas(txt_cantpersonas.getText());
                         insertar.setF_reserva(fechaactual);
                         insertar.setDesde(fechaentrada);
                         insertar.setHasta(fechasalida);
                         insertar.setPrecio(txt_total.getText());
-                        insertar.setEstado("1");
+                        insertar.setEstado("0");
 
                         dao.insert(insertar);
                         actualizar_tabla();
@@ -560,7 +634,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Habitación no Disponible para esas fechas");
                 }
         }
-    }//GEN-LAST:event_BtnInsActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
     private void id_habitacionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_id_habitacionItemStateChanged
         if (id_habitacion.getSelectedItem().toString().equals("Seleccionar...")) {
@@ -590,7 +664,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BtnBusCActionPerformed
 
-    private void BtnBusRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusRActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         if (ReservaDeHabitacion.isNumeric(id_reservacion.getText())) {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaentrada = null, fechasalida=null;
@@ -600,7 +674,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             buscar = dao.query(buscar);
             id_cliente.setText(buscar.getDpi());
             id_habitacion.setSelectedItem(buscar.getId_habitacion());
-
+            txt_cantpersonas.setText(buscar.getCantidadpersonas());
             try {
                 fechaentrada=formato.parse(buscar.getDesde());
                 fechasalida=formato.parse(buscar.getHasta());
@@ -610,16 +684,16 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             fecha_entrada.setDate(fechaentrada);
             fecha_salida.setDate(fechasalida);
             txt_total.setText(buscar.getPrecio());
-            if (buscar.getEstado().equals("1")) {
-                NF.setSelected(true);
-            }else if(buscar.getEstado().equals("2")){
-                YF.setSelected(true);
+            if (buscar.getEstado().equals("0")) {
+                PE.setSelected(true);
+            }else if(buscar.getEstado().equals("1")){
+                Cancelar.setSelected(true);
             }else if(buscar.getEstado().equals("3")){
-                CR.setSelected(true);
+                SE.setSelected(true);
             }
             estado(true);
         }
-    }//GEN-LAST:event_BtnBusRActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
     private void BtnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTotalActionPerformed
         if (txt_precio.getText().length()!=0&&fecha_entrada.getDate()!=null&&fecha_salida.getDate()!=null) {
@@ -631,7 +705,7 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     limpiar();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         if (ReservaDeHabitacion.isNumeric(id_reservacion.getText())&&ReservaDeHabitacion.isNumeric(id_cliente.getText())) {
             ReservacionDAO dao = new ReservacionDAO();
             Reservacion modificar = new Reservacion();
@@ -643,22 +717,23 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
             modificar.setId_reservacion(id_reservacion.getText());
             modificar.setDpi(id_cliente.getText());
             modificar.setId_habitacion(id_habitacion.getSelectedItem().toString());
+            modificar.setCantidadpersonas(txt_cantpersonas.getText());
             modificar.setF_reserva(fechaactual);
             modificar.setDesde(fechaentrada);
             modificar.setHasta(fechasalida);
             modificar.setPrecio(txt_total.getText());
-            if (NF.isSelected()) {
-               modificar.setEstado("1");
-            } else if(CR.isSelected()){
+            if (PE.isSelected()) {
+               modificar.setEstado("0");
+            } else if(SE.isSelected()){
+                modificar.setEstado("1");
+            } else if(Cancelar.isSelected()){
                 modificar.setEstado("3");
-            } else if(YF.isSelected()){
-                modificar.setEstado("2");
             }
             dao.update(modificar);
             actualizar_tabla();
             limpiar();
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     CatalogoDeHabitaciones catalogo = null;
@@ -670,16 +745,41 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     catalogo.show();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+private Connection connection = null;
+    private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+        
+        try {
+            connection = ConexionHoteleria.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Hoteleria/reportes/ReportesReservacionDeHabitacion.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Servicios");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBus;
     private javax.swing.JButton BtnBusC;
-    private javax.swing.JButton BtnBusR;
     private javax.swing.JButton BtnCancelar;
-    private javax.swing.JButton BtnIns;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnReporte;
     private javax.swing.JButton BtnTotal;
-    private javax.swing.JRadioButton CR;
-    private javax.swing.JRadioButton NF;
-    private javax.swing.JRadioButton YF;
+    private javax.swing.JRadioButton Cancelar;
+    private javax.swing.JRadioButton PE;
+    private javax.swing.JRadioButton SE;
     private javax.swing.ButtonGroup estado;
     private javax.swing.JLabel estado_reservacion;
     private com.toedter.calendar.JDateChooser fecha_actual;
@@ -690,8 +790,6 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField id_reservacion;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -702,10 +800,12 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton limpio;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txt_cantpersonas;
     private javax.swing.JTextField txt_nit;
     private javax.swing.JTextField txt_nombrec;
     private javax.swing.JTextField txt_precio;

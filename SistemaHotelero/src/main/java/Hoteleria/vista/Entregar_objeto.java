@@ -5,6 +5,7 @@
  */
 package Hoteleria.vista;
 
+import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.datos.ObjetosPerdidosDAO;
 import Hoteleria.dominio.Habitaciones;
@@ -14,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 /**
  *
@@ -23,6 +26,7 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableModel modelo2;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    String codigoAplicacion="2205";
 
     /**
      * Creates new form Entregar_objeto
@@ -30,6 +34,9 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
     public Entregar_objeto() {
         initComponents();
         cargar_habitaciones();
+        imprimir_Objetos();
+        imprimir_Objetos_entregar();
+        habilitarAcciones();
     }
     
     public void cargar_habitaciones() {
@@ -40,6 +47,25 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
             if (habitacion.getEstado_Habitacion()==1) {
             id.addItem(String.valueOf(habitacion.getId_Habitaciones()));   
             }
+        }
+    }
+    
+    void habilitarAcciones() {
+
+        var codigoAplicacion = 2205;
+        var usuario = Login.usuarioHoteleria;
+
+        BtnMod.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[1];
+
+        for (int i = 0; i < 1; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+        if (permisosApp[0].equals("1")) {
+            BtnMod.setEnabled(true);
         }
     }
     
@@ -88,6 +114,23 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         tabla2.getColumnModel().getColumn(3).setPreferredWidth(50);
         tabla2.getColumnModel().getColumn(4).setPreferredWidth(50);
     }
+    
+    private static boolean isNumeric(String cadena){
+        try {
+                Integer.parseInt(cadena);
+                return true;
+        } catch (NumberFormatException nfe){
+                return false;
+        }
+    }
+    
+    private void limpiar(){
+        txt_nombre.setText("");
+        txt_dpi.setText("");
+        id.setSelectedItem("Seleccionar...");
+        imprimir_Objetos();
+        imprimir_Objetos_entregar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -115,13 +158,15 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla2 = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("Entregar Objeto Perdido");
+        setVisible(true);
 
         jLabel1.setText("Habitacion:");
 
@@ -226,16 +271,21 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        jButton6.setText("ENTREGAR");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("ENTREGAR");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
         jButton7.setText("?");
 
-        jButton8.setText("REPORTE");
+        jButton2.setText("CANCELAR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -270,9 +320,9 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton6)
+                        .addComponent(BtnMod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton8)
+                        .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton7)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -307,10 +357,10 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
+                    .addComponent(BtnMod)
                     .addComponent(jButton7)
-                    .addComponent(jButton8))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(jButton2))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -319,15 +369,15 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String combobox=id.getSelectedItem().toString();
-        int validar=Integer.parseInt(combobox);
-        imprimir_Objetos();
-        imprimir_Objetos_entregar();
-        
+        int validar=Integer.parseInt(combobox);        
         String datos[] = new String[5];
         ObjetosPerdidosDAO dao = new ObjetosPerdidosDAO();
         List<ObjetoPerdido> personas = dao.select();
         for (ObjetoPerdido persona : personas) {
             if (validar==Integer.parseInt(persona.getHabitacion())) {
+                if (persona.getEstado().equals("1")) {
+                    
+                
             datos[0] = persona.getIdobjeto();
             datos[1] = persona.getHabitacion();
             datos[2] = persona.getAma();
@@ -340,6 +390,7 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
             btnAsignarTodo.setEnabled(true);
             btnQuitarUno.setEnabled(true);
             btnQuitarTodo.setEnabled(true);
+                }
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -375,8 +426,11 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         imprimir_Objetos();
     }//GEN-LAST:event_btnAsignarTodoActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         // TODO add your handling code here:
+        if (Entregar_objeto.isNumeric(id.getSelectedItem().toString())) {
+            if (id.getSelectedItem().toString().length()!=0&&txt_dpi.getText().length()!=0&&
+                    txt_nombre.getText().length()!=0) {
         ObjetosPerdidosDAO modulosDAO = new ObjetosPerdidosDAO();
         String Vector[]=new String[5];
             ObjetoPerdido moduloInsertar = new ObjetoPerdido();
@@ -402,7 +456,16 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         }
             
             JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
-    }//GEN-LAST:event_jButton6ActionPerformed
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Modificacion", (codigoAplicacion), Login.usuarioHoteleria);
+            }else{
+            JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una habitacion");
+        }
+        limpiar();
+    }//GEN-LAST:event_BtnModActionPerformed
 
     private void btnQuitarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarUnoActionPerformed
         // TODO add your handling code here:
@@ -435,17 +498,22 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         imprimir_Objetos();
     }//GEN-LAST:event_btnQuitarTodoActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnMod;
     private javax.swing.JButton btnAsignarTodo;
     private javax.swing.JButton btnAsignarUno;
     private javax.swing.JButton btnQuitarTodo;
     private javax.swing.JButton btnQuitarUno;
     private javax.swing.JComboBox<String> id;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

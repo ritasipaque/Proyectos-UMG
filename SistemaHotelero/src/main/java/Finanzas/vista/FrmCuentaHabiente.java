@@ -384,10 +384,10 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
                      try {
-            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaHabiente.chm")).exists()) {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoCuentaHabiente.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaHabiente.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoCuentaHabiente.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
