@@ -28,6 +28,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 /**
  *
@@ -35,6 +37,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class MantenimientoProveedor extends javax.swing.JInternalFrame {
 int codigoAplicacion = 3003;
+
     /**
      * Creates new form MantenimientoProveedor
      */
@@ -67,6 +70,42 @@ int codigoAplicacion = 3003;
         }
     }
     
+     void habilitarAcciones() {
+
+        int codigoAplicacion = 3001;
+        var usuario = Login.usuarioComercial;
+
+        btnGuardar.setEnabled(false);
+        btnModificar.setEnabled(false);
+        btnEliminar.setEnabled(false);
+        btnBuscar.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[4];
+
+        for (int i = 0; i < 4; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            btnGuardar.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            btnBuscar.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            btnModificar.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            btnEliminar.setEnabled(true);
+        }
+     }
+     
+     
+     
+     
+     
           public void buscar() {
        Proveedor proveedorAConsultar = new Proveedor();
         ProveedorDAO1 proveedorDAO = new ProveedorDAO1();
@@ -134,7 +173,7 @@ int codigoAplicacion = 3003;
         txt_Estado = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
-        btnElimianr = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
@@ -189,10 +228,10 @@ int codigoAplicacion = 3003;
             }
         });
 
-        btnElimianr.setText("Eliminar");
-        btnElimianr.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnElimianrActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -215,50 +254,50 @@ int codigoAplicacion = 3003;
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
                     .addComponent(jLabel21)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addGap(18, 18, 18)
                         .addComponent(txt_Contacto, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel16)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel19)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnModificar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnGuardar)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnElimianr)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addGap(19, 19, 19)))
+                    .addComponent(jLabel16))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel19)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel7Layout.createSequentialGroup()
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_IdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_Direccion))))
+                            .addComponent(txt_Nit, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_IdProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(btnGuardar)
                                 .addGap(18, 18, 18)
-                                .addComponent(txt_Direccion))))
-                    .addComponent(txt_Nit, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnBuscar)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel7Layout.createSequentialGroup()
+                                        .addComponent(btnModificar)
+                                        .addGap(8, 8, 8)
+                                        .addComponent(btnEliminar)
+                                        .addGap(26, 26, 26)
+                                        .addComponent(jButton2))
+                                    .addComponent(txt_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -297,13 +336,13 @@ int codigoAplicacion = 3003;
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
                     .addComponent(txt_Estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnModificar)
-                    .addComponent(btnElimianr)
+                    .addComponent(btnEliminar)
                     .addComponent(jButton2))
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -351,7 +390,7 @@ int codigoAplicacion = 3003;
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
@@ -398,10 +437,13 @@ int codigoAplicacion = 3003;
         proveedorDAO.insert(proveedorAInsertar);
 BitacoraDao BitacoraDAO = new BitacoraDao();
             
-        Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        
+       Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Insertar");
+
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -431,9 +473,11 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
-        Insertar.setAccion("Modificar");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Modifcar");
+
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -446,7 +490,7 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
 
-    private void btnElimianrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimianrActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
         ProveedorDAO1 proveedorDAO = new ProveedorDAO1();
         Proveedor proveedorAEliminar = new Proveedor();
@@ -456,9 +500,11 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Eliminar");
+
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -468,7 +514,7 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         
         llenadoDeTablas();
         limpiar();
-    }//GEN-LAST:event_btnElimianrActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
@@ -476,9 +522,11 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
         BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario("MantenimientoProveedores");
+        Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Buscar");
+
         Insertar.setCodigoAplicacion("3003");
+        Insertar.setModulo("3000");
             try {
                 BitacoraDAO.insert(Insertar);
             } catch (UnknownHostException ex) {
@@ -511,7 +559,7 @@ private Connection connection = null;
     private javax.swing.JTable TablaProveedor;
     public javax.swing.JButton btnAyuda;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnElimianr;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton jButton2;
