@@ -1,37 +1,42 @@
 package Hoteleria.vista;
 
+
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.EntregaHabitacionDAO;
-import Hoteleria.datos.FacturacionDAO;
-import Hoteleria.datos.FormasDePagoDAO;
-import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.datos.HuespedesDAO;
 import Hoteleria.datos.ReservacionDAO;
 import Hoteleria.dominio.EntregaHabitaciones;
-import Hoteleria.dominio.Facturacion;
-import Hoteleria.dominio.FormasDePago;
-import Hoteleria.dominio.Habitaciones;
 import Hoteleria.dominio.Huespedes;
 import Hoteleria.dominio.Reservacion;
 import java.io.File;
 import java.net.UnknownHostException;
-import java.sql.SQLException;
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
@@ -47,7 +52,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     String codigoAplicacion = "2100";
-    String idreservacion, noidentificacion, idhabitacion, fechareservada, desde, hasta, precio, estado;
+    String idreservacion, noidentificacion, idhabitacion, fechareservada, desde, hasta, precio, cantidadpersonas,estado;
     boolean option = false, option2 = false;
 
     /**
@@ -59,8 +64,10 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         fecha_actual();
         actualizartabla();
         actualizar_tabla();
+        
     }
-void habilitarAcciones() {
+
+    void habilitarAcciones() {
 
         var codigoAplicacion = 2202;
         var usuario = Login.usuarioHoteleria;
@@ -90,6 +97,7 @@ void habilitarAcciones() {
             BtnMod.setEnabled(true);
         }
     }
+
     public void fecha_actual() {
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -111,7 +119,6 @@ void habilitarAcciones() {
         txt_Habitaciones.setText("");
         txt_no_identificacion.setText("");
         txt_Nombre.setText("");
-        fecha_actual.setDate(null);
     }
 
     private void actualizartabla() {
@@ -281,6 +288,8 @@ void habilitarAcciones() {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         fecha_actual = new com.toedter.calendar.JDateChooser();
+        jLabel12 = new javax.swing.JLabel();
+        cantidad = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
@@ -299,20 +308,26 @@ void habilitarAcciones() {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Asignaciones Habitaciones:"));
         jPanel1.setToolTipText("");
 
+        txt_Entrega.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_EntregaKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("ID Habitacion:");
 
         txt_Habitaciones.setEditable(false);
 
         jLabel4.setText("Nombre de la persona");
 
-        BtnIng.setText("GUARDAR");
+        BtnIng.setText("ENTREGAR");
         BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnIngActionPerformed(evt);
             }
         });
 
-        BtnMod.setText("MODIFICAR");
+        BtnMod.setText("RECIBIR");
         BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnModActionPerformed(evt);
@@ -364,6 +379,11 @@ void habilitarAcciones() {
         txt_no_identificacion.setEnabled(false);
 
         jButton2.setText("REPORTE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(Entregar);
         Entregar.setText("Entregar");
@@ -378,73 +398,88 @@ void habilitarAcciones() {
 
         jLabel11.setText("No. Habitacion");
 
+        fecha_actual.setDateFormatString("yyyy-MM-dd");
         fecha_actual.setEnabled(false);
+
+        jLabel12.setText("Cantidad de personas");
+
+        cantidad.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(opcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(txt_Entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(opcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addGap(39, 39, 39)
                                 .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                                 .addComponent(listado, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BtnBus))))
+                                .addComponent(BtnBus))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
+                                .addGap(33, 33, 33)
+                                .addComponent(Entregar)
+                                .addGap(18, 18, 18)
+                                .addComponent(Recibir)
+                                .addGap(18, 18, 18)
+                                .addComponent(limpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(BtnIng)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(BtnMod)
+                                            .addGap(26, 26, 26)
+                                            .addComponent(btn_cancelar)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel2))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(133, 133, 133)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txt_no_identificacion, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                    .addComponent(txt_Habitaciones)
+                                    .addComponent(txt_reserva)
+                                    .addComponent(txt_Entrega)))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(BtnIng)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(BtnMod)
-                                    .addGap(26, 26, 26)
-                                    .addComponent(btn_cancelar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btn_ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txt_no_identificacion))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
+                                .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(159, 159, 159)
+                                        .addComponent(jButton2))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
                                         .addComponent(jLabel4)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txt_reserva, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txt_Habitaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                        .addComponent(txt_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(Entregar)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(Recibir)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(limpiar))
-                                        .addComponent(fecha_actual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jLabel8))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txt_Nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel12)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cantidad)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -471,21 +506,25 @@ void habilitarAcciones() {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_no_identificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fecha_actual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(Entregar)
                     .addComponent(Recibir)
                     .addComponent(limpiar))
-                .addGap(70, 70, 70)
+                .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
                     .addComponent(BtnMod)
@@ -580,69 +619,98 @@ void habilitarAcciones() {
 
         String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
 
-        entrega.setPk_id_entrega(txt_Entrega.getText());
-        entrega.setPk_id_reservacion(txt_reserva.getText());
-        entrega.setPk_id_habitacion(txt_Habitaciones.getText());
-        entrega.setPk_no_identificacion(txt_no_identificacion.getText());
-        entrega.setNombre(txt_Nombre.getText());
-        entrega.setFecha(fechaactual);
-        if (Entregar.isSelected()) {
-            entrega.setEstado("1");
-        } else if (Recibir.isSelected()) {
-            entrega.setEstado("2");
+        if (txt_Entrega.getText().length() != 0 && txt_reserva.getText().length() != 0 && Entregar.isSelected()
+                && txt_Habitaciones.getText().length() != 0 && txt_no_identificacion.getText().length() != 0
+                && txt_Nombre.getText().length() != 0 && cantidad.getText().length() != 0 && fecha_actual.getDate() != null) {
+
+            entrega.setPk_id_entrega(txt_Entrega.getText());
+            entrega.setPk_id_reservacion(txt_reserva.getText());
+            entrega.setPk_id_habitacion(txt_Habitaciones.getText());
+            entrega.setPk_no_identificacion(txt_no_identificacion.getText());
+            entrega.setNombre(txt_Nombre.getText());
+            entrega.setFecha(fechaactual);
+            if (Entregar.isSelected()) {
+                entrega.setEstado("1");
+            } else if (Recibir.isSelected()) {
+                entrega.setEstado("2");
+            }
+
+            entregaDAO.insert(entrega);
+
+            
+            JOptionPane.showMessageDialog(null, "Habitación Entregada correctamente");
+
+            ReservacionDAO reservaciondao = new ReservacionDAO();
+            Reservacion reservacion = new Reservacion();
+
+            reservacion.setId_reservacion(listado.getSelectedItem().toString());
+            reservacion.setDpi(noidentificacion);
+            reservacion.setId_habitacion(idhabitacion);
+            reservacion.setF_reserva(fechareservada);
+            reservacion.setDesde(desde);
+            reservacion.setHasta(hasta);
+            reservacion.setPrecio(precio);
+            reservacion.setCantidadpersonas(cantidadpersonas);
+            reservacion.setEstado("1");
+            reservaciondao.update(reservacion);
+            opcion.setSelectedIndex(0);
+            listado.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos :)");
         }
-
-        entregaDAO.insert(entrega);
-
         actualizartabla();
-        limpiar();
-        JOptionPane.showMessageDialog(null, "Habitación Entregada correctamente");
-
-        ReservacionDAO reservaciondao = new ReservacionDAO();
-        Reservacion reservacion = new Reservacion();
-
-        reservacion.setId_reservacion(listado.getSelectedItem().toString());
-        reservacion.setDpi(noidentificacion);
-        reservacion.setId_habitacion(idhabitacion);
-        reservacion.setF_reserva(fechareservada);
-        reservacion.setDesde(desde);
-        reservacion.setHasta(hasta);
-        reservacion.setPrecio(precio);
-        reservacion.setEstado("1");
-        reservaciondao.update(reservacion);
-        opcion.setSelectedIndex(0);
-        listado.setSelectedIndex(0);
+        actualizar_tabla();
+            limpiar();
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         EntregaHabitaciones modificar = new EntregaHabitaciones();
         EntregaHabitacionDAO modificarDAO = new EntregaHabitacionDAO();
-        
-        
-        String id_entrega=txt_Entrega.getText();
-        String reserva = txt_reserva.getText();
-        String habitaciones = txt_Habitaciones.getText();
-        String id_persona = txt_no_identificacion.getText();
-        String nombre = txt_Nombre.getText();
-        String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
-       
-        
-        modificar.setPk_id_entrega(id_entrega);
-        modificar.setPk_id_reservacion(reserva);
-        modificar.setPk_id_habitacion(id_persona);
-        modificar.setPk_no_identificacion(noidentificacion);
-        modificar.setNombre(nombre);
-        modificar.setFecha(fechaactual);
-        modificar.setEstado(estado);
-        
-        if (Entregar.isSelected()) {
-            modificar.setEstado("1");         
+
+        if (txt_Entrega.getText().length() != 0 && txt_reserva.getText().length() != 0 && Recibir.isSelected()
+                && txt_Habitaciones.getText().length() != 0 && txt_no_identificacion.getText().length() != 0
+                && txt_Nombre.getText().length() != 0 && fecha_actual.getDate() != null) {
+
+            String id_entrega = txt_Entrega.getText();
+            String reserva = txt_reserva.getText();
+            String habitaciones = txt_Habitaciones.getText();
+            String id_persona = txt_no_identificacion.getText();
+            String nombre = txt_Nombre.getText();
+            String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
+
+            modificar.setPk_id_entrega(id_entrega);
+            modificar.setPk_id_reservacion(reserva);
+            modificar.setPk_id_habitacion(habitaciones);
+            modificar.setPk_no_identificacion(id_persona);
+            modificar.setNombre(nombre);
+            modificar.setFecha(fechaactual);
+            modificar.setEstado(estado);
+            if (Recibir.isSelected()) {
+                modificar.setEstado("2");
+            }
+            modificarDAO.update(modificar);
+            actualizartabla();
+            
+
+            ReservacionDAO reservaciondao = new ReservacionDAO();
+            Reservacion reservacion = new Reservacion();
+
+            reservacion.setId_reservacion(listado.getSelectedItem().toString());
+            reservacion.setDpi(noidentificacion);
+            reservacion.setId_habitacion(idhabitacion);
+            reservacion.setF_reserva(fechareservada);
+            reservacion.setDesde(desde);
+            reservacion.setHasta(hasta);
+            reservacion.setPrecio(precio);
+            reservacion.setCantidadpersonas(cantidadpersonas);
+            reservacion.setEstado("2");
+            reservaciondao.update(reservacion);
+            opcion.setSelectedIndex(0);
+            listado.setSelectedIndex(0);
+        } else {
+            JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos :)");
         }
-        if (Recibir.isSelected()) {
-            modificar.setEstado("2");
-        }
-        modificarDAO.update(modificar);
-        actualizartabla();
+        actualizar_tabla();
         limpiar();
     }//GEN-LAST:event_BtnModActionPerformed
 
@@ -709,13 +777,14 @@ void habilitarAcciones() {
 
         if (option) {
             if (listado.getSelectedItem().toString() != "Seleccione...") {
-
+                
+                
                 EntregaHabitacionDAO DAO = new EntregaHabitacionDAO();
                 EntregaHabitaciones entrega = new EntregaHabitaciones();
 
                 entrega.setPk_id_entrega(listado.getSelectedItem().toString());
                 entrega = DAO.query(entrega);
-                String fechaactual = new SimpleDateFormat("dd-MM-yyyy").format(fecha_actual.getDate());
+                String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
 
                 try {
                     fechaentrada = formato.parse(entrega.getFecha());
@@ -734,6 +803,20 @@ void habilitarAcciones() {
                 } else if (entrega.getEstado().equals("2")) {
                     Recibir.setSelected(true);
                 }
+                
+                ReservacionDAO reservaciondao = new ReservacionDAO();
+                Reservacion reservacion = new Reservacion();
+                reservacion.setId_reservacion(entrega.getPk_id_reservacion());
+                reservacion = reservaciondao.query(reservacion);
+
+                idreservacion = reservacion.getId_reservacion();
+                noidentificacion = reservacion.getDpi();
+                idhabitacion = reservacion.getId_habitacion();
+                fechareservada = reservacion.getF_reserva();
+                desde = reservacion.getDesde();
+                hasta = reservacion.getHasta();
+                precio = reservacion.getPrecio();
+                cantidadpersonas = reservacion.getCantidadpersonas();
 
             }
         }
@@ -753,6 +836,7 @@ void habilitarAcciones() {
                 desde = reservacion.getDesde();
                 hasta = reservacion.getHasta();
                 precio = reservacion.getPrecio();
+                cantidadpersonas = reservacion.getCantidadpersonas();
 
                 txt_reserva.setText(reservacion.getId_reservacion());
                 txt_Habitaciones.setText(reservacion.getId_habitacion());
@@ -762,6 +846,7 @@ void habilitarAcciones() {
                 buscarmetodo.setCodigo(reservacion.getDpi());
                 buscarmetodo = huespedesdao.query(buscarmetodo);
                 txt_Nombre.setText(buscarmetodo.getNombre() + " " + buscarmetodo.getApellido());
+                cantidad.setText(reservacion.getCantidadpersonas());
 
                 txt_no_identificacion.setText(buscarmetodo.getCodigo());
                 try {
@@ -776,6 +861,35 @@ void habilitarAcciones() {
 
     }//GEN-LAST:event_BtnBusActionPerformed
 
+    private void txt_EntregaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_EntregaKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txt_EntregaKeyTyped
+    private Connection connection = null;
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = ConexionHoteleria.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Hoteleria/reportes/EntregaHabitaciones.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Entrega Habitaciones");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBus;
     private javax.swing.JButton BtnIng;
@@ -785,11 +899,13 @@ void habilitarAcciones() {
     private javax.swing.JButton btn_ayuda;
     private javax.swing.JButton btn_cancelar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField cantidad;
     private com.toedter.calendar.JDateChooser fecha_actual;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

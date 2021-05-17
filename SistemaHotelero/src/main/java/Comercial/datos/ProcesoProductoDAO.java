@@ -21,198 +21,182 @@ import javax.swing.JOptionPane;
  */
 public class ProcesoProductoDAO {
 
-    
     private static final String SQL_SELECT = "SELECT PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto FROM tbl_proceso_producto";
-private static final String SQL_INSERT = "INSERT INTO tbl_proceso_producto (PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto) VALUES(?,?,?,?)";
-private static final String SQL_UPDATE = "UPDATE tbl_proceso_producto SET   nombre_producto= ?, nombre_bodega= ?, existencias_producto= ?   WHERE PK_id_procesoproducto= ?";
-private static final String SQL_QUERY = "SELECT PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto FROM tbl_proceso_producto WHERE PK_id_producto=?";
-private static final String SQL_DELETE = "DELETE FROM tbl_proceso_producto WHERE PK_id_producto=?";
- 
- 
-// public List<Proceso_Producto> select() {
-//        Connection conn = null;
-//        PreparedStatement stmt = null;
-//        ResultSet rs = null;
-//        Proceso_Producto procesoproducto = null;
-//        List<Proceso_Producto> procesoproductos = new ArrayList<Proceso_Producto>();
-//
-//        try {
-//            conn = Conexion.getConnection();
-//            stmt = conn.prepareStatement(SQL_SELECT);
-//            rs = stmt.executeQuery();
-//            while (rs.next()) {
-//                int PK_id_producto = rs.getInt("PK_id_procesoproducto");
-//                String nombre_producto = rs.getString("nombre_producto");
-//                String precio_producto = rs.getString("nombre_bodega");
-//                String descripcion_producto = rs.getString("existencias_producto");
-//               
-//                
-//                 
-//                procesoproducto = new Proceso_Producto();
-//                procesoproducto.setPK_id_producto(PK_id_producto);
-//                procesoproducto.setNombre_producto(nombre_producto);
-//                procesoproducto.setPrecio_producto(precio_producto);
-//                procesoproducto.setDescripcion_producto(descripcion_producto);
-//                procesoproducto.setEstatus_producto(estatus_producto);
-//                procesoproductos.add(procesoproducto);
-//            }
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Conexion.close(rs);
-//            Conexion.close(stmt);
-//            Conexion.close(conn);
-//        }
-//
-//        return productos;
-//    }
-// 
-// 
-// public int insert(Producto aplicacion) {
-//        Connection conn = null;
-//        PreparedStatement stmt = null;
-//        int rows = 0;
-//        try {
-//            conn = Conexion.getConnection();
-//            stmt = conn.prepareStatement(SQL_INSERT);
-//            stmt.setInt(1, aplicacion.getPK_id_producto());
-//            stmt.setString(2, aplicacion.getNombre_producto());
-//            stmt.setString(3, aplicacion.getPrecio_producto());
-//            stmt.setString(4, aplicacion.getDescripcion_producto());
-//            stmt.setString(5, aplicacion.getEstatus_producto());
-//            
-//             
-//            //System.out.println("ejecutando query:" + SQL_INSERT);
-//            rows = stmt.executeUpdate();
-//            //System.out.println("Registros afectados:" + rows);
-//            JOptionPane.showMessageDialog(null, "Registro Exitoso");
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Conexion.close(stmt);
-//            Conexion.close(conn);
-//        }
-//
-//        return rows;
-//    }
-//  public int update(Producto aplicacion) {
-//        Connection conn = null;
-//        PreparedStatement stmt = null;
-//        int rows = 0;
-//
-//        try {
-//            conn = Conexion.getConnection();
-//            System.out.println("ejecutando query: " + SQL_UPDATE);
-//            stmt = conn.prepareStatement(SQL_UPDATE);
-//            
-//            stmt.setString(1, aplicacion.getNombre_producto());
-//            stmt.setString(2, aplicacion.getPrecio_producto());
-//            stmt.setString(3, aplicacion.getDescripcion_producto());
-//            stmt.setString(4, aplicacion.getEstatus_producto());
-//            stmt.setInt(5, aplicacion.getPK_id_producto());
-//            
-//            
-//            rows = stmt.executeUpdate();
-//            //System.out.println("Registros actualizado:" + rows);
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Conexion.close(stmt);
-//            Conexion.close(conn);
-//        }
-//
-//        return rows;
-//    }
-//  public Producto query(Producto producto) {    
-//        Connection conn = null;
-//        PreparedStatement stmt = null;
-//        ResultSet rs = null;
-//        List<Producto> productos = new ArrayList<Producto>();
-//        int rows = 0;
-//
-//        try {
-//            conn = Conexion.getConnection();
-//            System.out.println("Ejecutando query:" + SQL_QUERY);
-//            stmt = conn.prepareStatement(SQL_QUERY);
-//            stmt.setInt(1, producto.getPK_id_producto());
-//            rs = stmt.executeQuery();
-//            while (rs.next()) {
-//               int PK_id_producto = rs.getInt("PK_id_producto");
-//                String nombre_producto = rs.getString("nombre_producto");
-//                String precio_producto = rs.getString("precio_producto");
-//                String descripcion_producto = rs.getString("descripcion_producto");
-//                String estatus_producto = rs.getString("estatus_producto");
-//                 
-//                
-//                producto = new Producto();
-//                producto.setNombre_producto(nombre_producto);
-//                producto.setPrecio_producto(precio_producto);
-//                producto.setDescripcion_producto(descripcion_producto);
-//                producto.setEstatus_producto(estatus_producto);
-//                
-//                //empleados.add(empleado); // Si se utiliza un ArrayList
-//            }
-//            //System.out.println("Registros buscado:" + empleado);
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Conexion.close(rs);
-//            Conexion.close(stmt);
-//            Conexion.close(conn);
-//        }
-//
-//        //return empleados;  // Si se utiliza un ArrayList
-//        return producto;
-//    } 
-// public int delete(Producto aplicacion) {
-//
-//        Connection conn = null;
-//        PreparedStatement stmt = null;
-//        int rows = 0;
-//
-//        try {
-//            conn = Conexion.getConnection();
-//            //System.out.println("Ejecutando query:" + SQL_DELETE);
-//            stmt = conn.prepareStatement(SQL_DELETE);
-//            stmt.setInt(1, aplicacion.getPK_id_producto());
-//            rows = stmt.executeUpdate();
-//            //System.out.println("Registros eliminados:" + rows);
-//        } catch (SQLException ex) {
-//            ex.printStackTrace(System.out);
-//        } finally {
-//            Conexion.close(stmt);
-//            Conexion.close(conn);
-//        }
-//
-//        return rows;
-//    }
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    public List<ProcesoProducto> select() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    private static final String SQL_INSERT = "INSERT INTO tbl_proceso_producto (PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto) VALUES(?,?,?,?)";
+    private static final String SQL_UPDATE = "UPDATE tbl_proceso_producto SET   nombre_producto= ?, nombre_bodega= ?, existencias_producto= ?   WHERE PK_id_procesoproducto= ?";
+    private static final String SQL_QUERY = "SELECT PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto FROM tbl_proceso_producto WHERE PK_id_producto=?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_proceso_producto WHERE PK_id_producto=?";
 
     public List<ProcesoProducto> select() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ProcesoProducto procesoproducto = null;
+        List<ProcesoProducto> procesoproductos = new ArrayList<ProcesoProducto>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int PK_id_procesoproducto = rs.getInt("PK_id_procesoproducto");
+                String nombre_producto = rs.getString("nombre_producto");
+                String nombre_bodega = rs.getString("nombre_bodega");
+                String existencias_producto = rs.getString("existencias_producto");
+
+                procesoproducto = new ProcesoProducto();
+                procesoproducto.setPK_id_procesoproducto(PK_id_procesoproducto);
+                procesoproducto.setNombre_producto(nombre_producto);
+                procesoproducto.setNombre_producto(nombre_producto);
+                procesoproducto.setExistencias_producto(existencias_producto);
+                procesoproductos.add(procesoproducto);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return procesoproductos;
     }
 
-   
+    public int insert(ProcesoProducto procesoproducto) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_INSERT);
+            stmt.setInt(1, procesoproducto.getPK_id_procesoproducto());
+            stmt.setString(2, procesoproducto.getNombre_producto());
+            stmt.setString(3, procesoproducto.getNombre_bodega());
+            stmt.setString(4, procesoproducto.getExistencias_producto());
+
+            //System.out.println("ejecutando query:" + SQL_INSERT);
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros afectados:" + rows);
+            JOptionPane.showMessageDialog(null, "Registro Exitoso");
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+
+    public int update(ProcesoProducto procesoproducto) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            System.out.println("ejecutando query: " + SQL_UPDATE);
+            stmt = conn.prepareStatement(SQL_UPDATE);
+
+            stmt.setString(1, procesoproducto.getNombre_producto());
+            stmt.setString(2, procesoproducto.getNombre_bodega());
+            stmt.setString(3, procesoproducto.getExistencias_producto());
+
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros actualizado:" + rows);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+
+    public ProcesoProducto query(ProcesoProducto moduloC) {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+//            System.out.println("Ejecutando query:" + SQL_QUERY);
+            stmt = conn.prepareStatement(SQL_QUERY);
+            stmt.setInt(1, moduloC.getPK_id_procesoproducto());
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                int PK_id_procesoproducto = rs.getInt("PK_id_procesoproducto");
+                String nombre_producto = rs.getString("nombre_producto");
+                String nombre_bodega = rs.getString("nombre_bodega");
+                String existencias_producto = rs.getString("existencias_producto");
+
+                moduloC = new ProcesoProducto();
+                moduloC.setPK_id_procesoproducto(PK_id_procesoproducto);
+                moduloC.setNombre_producto(nombre_producto);
+                moduloC.setNombre_bodega(nombre_bodega);
+                moduloC.setExistencias_producto(existencias_producto);
+                
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+        return moduloC;
+    }
+
+    public int delete(ProcesoProducto procesoproducto) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+
+        try {
+            conn = Conexion.getConnection();
+            //System.out.println("Ejecutando query:" + SQL_DELETE);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, procesoproducto.getPK_id_procesoproducto());
+            rows = stmt.executeUpdate();
+            //System.out.println("Registros eliminados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+
     
+
+    public List<ProcesoProducto> listar() {
+        List<ProcesoProducto> perfil = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                ProcesoProducto usr = new ProcesoProducto();
+                usr.setPK_id_procesoproducto(rs.getInt(1));
+                usr.setNombre_producto(rs.getString(2));
+                usr.setNombre_bodega(rs.getString(3));
+                usr.setExistencias_producto(rs.getString(4));
+                
+                perfil.add(usr);
+            }
+        } catch (Exception e) {
+        }
+        return perfil;
+    }
 }
