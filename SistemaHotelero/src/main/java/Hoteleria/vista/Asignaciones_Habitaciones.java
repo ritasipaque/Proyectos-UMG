@@ -1,5 +1,7 @@
 package Hoteleria.vista;
 
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,21 +9,14 @@ package Hoteleria.vista;
  */
 import Hoteleria.datos.ConexionHoteleria;
 import Hoteleria.datos.EntregaHabitacionDAO;
-import Hoteleria.datos.FacturacionDAO;
-import Hoteleria.datos.FormasDePagoDAO;
-import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.datos.HuespedesDAO;
 import Hoteleria.datos.ReservacionDAO;
 import Hoteleria.dominio.EntregaHabitaciones;
-import Hoteleria.dominio.Facturacion;
-import Hoteleria.dominio.FormasDePago;
-import Hoteleria.dominio.Habitaciones;
 import Hoteleria.dominio.Huespedes;
 import Hoteleria.dominio.Reservacion;
 import java.io.File;
 import java.net.UnknownHostException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,7 +50,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     String codigoAplicacion = "2100";
-    String idreservacion, noidentificacion, idhabitacion, fechareservada, desde, hasta, precio, estado;
+    String idreservacion, noidentificacion, idhabitacion, fechareservada, desde, hasta, precio, cantidadpersonas,estado;
     boolean option = false, option2 = false;
 
     /**
@@ -67,6 +62,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         fecha_actual();
         actualizartabla();
         actualizar_tabla();
+        
     }
 
     void habilitarAcciones() {
@@ -401,6 +397,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
 
         jLabel11.setText("No. Habitacion");
 
+        fecha_actual.setDateFormatString("yyyy-MM-dd");
         fecha_actual.setEnabled(false);
 
         jLabel12.setText("Cantidad de personas");
@@ -642,8 +639,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
 
             entregaDAO.insert(entrega);
 
-            actualizartabla();
-            limpiar();
+            
             JOptionPane.showMessageDialog(null, "Habitación Entregada correctamente");
 
             ReservacionDAO reservaciondao = new ReservacionDAO();
@@ -656,6 +652,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
             reservacion.setDesde(desde);
             reservacion.setHasta(hasta);
             reservacion.setPrecio(precio);
+            reservacion.setCantidadpersonas(cantidadpersonas);
             reservacion.setEstado("1");
             reservaciondao.update(reservacion);
             opcion.setSelectedIndex(0);
@@ -663,15 +660,18 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos :)");
         }
+        actualizartabla();
+        actualizar_tabla();
+            limpiar();
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         EntregaHabitaciones modificar = new EntregaHabitaciones();
         EntregaHabitacionDAO modificarDAO = new EntregaHabitacionDAO();
 
-        if (txt_Entrega.getText().length() != 0 && txt_reserva.getText().length() != 0 && Entregar.isSelected()
+        if (txt_Entrega.getText().length() != 0 && txt_reserva.getText().length() != 0 && Recibir.isSelected()
                 && txt_Habitaciones.getText().length() != 0 && txt_no_identificacion.getText().length() != 0
-                && txt_Nombre.getText().length() != 0 && cantidad.getText().length() != 0 && fecha_actual.getDate() != null) {
+                && txt_Nombre.getText().length() != 0 && fecha_actual.getDate() != null) {
 
             String id_entrega = txt_Entrega.getText();
             String reserva = txt_reserva.getText();
@@ -682,21 +682,17 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
 
             modificar.setPk_id_entrega(id_entrega);
             modificar.setPk_id_reservacion(reserva);
-            modificar.setPk_id_habitacion(id_persona);
-            modificar.setPk_no_identificacion(noidentificacion);
+            modificar.setPk_id_habitacion(habitaciones);
+            modificar.setPk_no_identificacion(id_persona);
             modificar.setNombre(nombre);
             modificar.setFecha(fechaactual);
             modificar.setEstado(estado);
-
-            if (Entregar.isSelected()) {
-                modificar.setEstado("1");
-            }
             if (Recibir.isSelected()) {
                 modificar.setEstado("2");
             }
             modificarDAO.update(modificar);
             actualizartabla();
-            limpiar();
+            
 
             ReservacionDAO reservaciondao = new ReservacionDAO();
             Reservacion reservacion = new Reservacion();
@@ -708,6 +704,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
             reservacion.setDesde(desde);
             reservacion.setHasta(hasta);
             reservacion.setPrecio(precio);
+            reservacion.setCantidadpersonas(cantidadpersonas);
             reservacion.setEstado("2");
             reservaciondao.update(reservacion);
             opcion.setSelectedIndex(0);
@@ -715,6 +712,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos :)");
         }
+        limpiar();
     }//GEN-LAST:event_BtnModActionPerformed
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
@@ -780,13 +778,14 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
 
         if (option) {
             if (listado.getSelectedItem().toString() != "Seleccione...") {
-
+                
+                
                 EntregaHabitacionDAO DAO = new EntregaHabitacionDAO();
                 EntregaHabitaciones entrega = new EntregaHabitaciones();
 
                 entrega.setPk_id_entrega(listado.getSelectedItem().toString());
                 entrega = DAO.query(entrega);
-                String fechaactual = new SimpleDateFormat("dd-MM-yyyy").format(fecha_actual.getDate());
+                String fechaactual = new SimpleDateFormat("yyyy-MM-dd").format(fecha_actual.getDate());
 
                 try {
                     fechaentrada = formato.parse(entrega.getFecha());
@@ -805,6 +804,20 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
                 } else if (entrega.getEstado().equals("2")) {
                     Recibir.setSelected(true);
                 }
+                
+                ReservacionDAO reservaciondao = new ReservacionDAO();
+                Reservacion reservacion = new Reservacion();
+                reservacion.setId_reservacion(entrega.getPk_id_reservacion());
+                reservacion = reservaciondao.query(reservacion);
+
+                idreservacion = reservacion.getId_reservacion();
+                noidentificacion = reservacion.getDpi();
+                idhabitacion = reservacion.getId_habitacion();
+                fechareservada = reservacion.getF_reserva();
+                desde = reservacion.getDesde();
+                hasta = reservacion.getHasta();
+                precio = reservacion.getPrecio();
+                cantidadpersonas = reservacion.getCantidadpersonas();
 
             }
         }
@@ -824,6 +837,7 @@ public class Asignaciones_Habitaciones extends javax.swing.JInternalFrame {
                 desde = reservacion.getDesde();
                 hasta = reservacion.getHasta();
                 precio = reservacion.getPrecio();
+                cantidadpersonas = reservacion.getCantidadpersonas();
 
                 txt_reserva.setText(reservacion.getId_reservacion());
                 txt_Habitaciones.setText(reservacion.getId_habitacion());
