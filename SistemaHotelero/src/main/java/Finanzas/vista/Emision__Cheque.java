@@ -2,6 +2,7 @@
 package Finanzas.vista;
 
 import Finanzas.datos.BancoDAO;
+import Finanzas.datos.Conexion;
 import Finanzas.datos.CuentaBancariaDAO;
 import Finanzas.datos.CuentaHabienteDAO;
 import Finanzas.datos.EmisionChequeDAO;
@@ -9,11 +10,25 @@ import Finanzas.dominio.EmisionCheque;
 import Finanzas.dominio.Banco;
 import Finanzas.dominio.CuentaBancaria;
 import Finanzas.dominio.CuentaHabiente;
+import java.io.File;
+import java.net.UnknownHostException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 /**
  *
  * @author Nay Ale
@@ -124,6 +139,7 @@ int codigoAplicacion = 1105;
         ComboCuenta = new javax.swing.JComboBox<>();
         ComboPaguese = new javax.swing.JComboBox<>();
         Fecha = new com.toedter.calendar.JDateChooser();
+        btnImprimir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaECheque = new javax.swing.JTable();
@@ -204,6 +220,15 @@ int codigoAplicacion = 1105;
 
         ComboPaguese.setMaximumRowCount(20);
 
+        btnImprimir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -224,7 +249,9 @@ int codigoAplicacion = 1105;
                                 .addGap(14, 14, 14)
                                 .addComponent(Boton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Boton_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Boton_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -233,12 +260,12 @@ int codigoAplicacion = 1105;
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ComboBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -286,7 +313,8 @@ int codigoAplicacion = 1105;
                         .addComponent(Boton_Guardar)
                         .addComponent(Boton_Modificar)
                         .addComponent(Boton_Eliminar)
-                        .addComponent(Boton_Ayuda))))
+                        .addComponent(Boton_Ayuda)
+                        .addComponent(btnImprimir))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle:"));
@@ -361,16 +389,17 @@ int codigoAplicacion = 1105;
         insertar.setMonto_Cheque(txtMonto.getText());
 
         JOptionPane.showMessageDialog(null, "Cheque registrado Exitosamente");
-        //BitacoraDao BitacoraDAO = new BitacoraDao();
-        // Bitacora AInsertar = new Bitacora();
-        // AInsertar.setId_Usuario("EmisionCheque");
-        // AInsertar.setAccion("Insertar");
-        // AInsertar.setCodigoAplicacion("1105");
-        // try{
-            //     BitacoraDAO.insert(AInsertar);
-            // }   catch (UnknownHostException ex) {
-            //     Logger.getLogger(Emision_Cheque.class.getName()).log(Level.SEVERE, null, ex);
-            // }
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+         Bitacora AInsertar = new Bitacora();
+         AInsertar.setId_Usuario("EmisionCheque");
+         AInsertar.setAccion("Insertar");
+         AInsertar.setCodigoAplicacion("1105");
+           AInsertar.setModulo("Finanzas");
+         try{
+                 BitacoraDAO.insert(AInsertar);
+             }   catch (UnknownHostException ex) {
+                 Logger.getLogger(Emision__Cheque.class.getName()).log(Level.SEVERE, null, ex);
+             }
         emisionchequeDAO.insert(insertar);
         llenadodetablas();
     }//GEN-LAST:event_Boton_GuardarActionPerformed
@@ -387,8 +416,18 @@ int codigoAplicacion = 1105;
         modificarcheque.setFK_Cuenta(ComboCuenta.getSelectedItem().toString());
         modificarcheque.setFK_Cuentahabiente(ComboPaguese.getSelectedItem().toString());
         modificarcheque.setMonto_Cheque(txtMonto.getText());
-
         JOptionPane.showMessageDialog(null, "Cheque Modificado Exitosamente");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("EmisionCheque");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1105");
+        AInsertar.setModulo("Finanzas");
+         try{
+                 BitacoraDAO.insert(AInsertar);
+             }   catch (UnknownHostException ex) {
+                 Logger.getLogger(Emision__Cheque.class.getName()).log(Level.SEVERE, null, ex);
+             }
         emisionchequeDAO.insert(modificarcheque);
         llenadodetablas();
     }//GEN-LAST:event_Boton_ModificarActionPerformed
@@ -399,13 +438,57 @@ int codigoAplicacion = 1105;
         //Metodo Para Eliminar con el Numero de Cuenta Bancaria
         chequeeliminar.setNumero_Cheque((txt_Buscar.getText()));
         JOptionPane.showMessageDialog(null, "Cheque Eliminado Exitosamente");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+         Bitacora AInsertar = new Bitacora();
+         AInsertar.setId_Usuario("EmisionCheque");
+         AInsertar.setAccion("Eliminar");
+         AInsertar.setCodigoAplicacion("1105");
+           AInsertar.setModulo("Finanzas");
+         try{
+                 BitacoraDAO.insert(AInsertar);
+             }   catch (UnknownHostException ex) {
+                 Logger.getLogger(Emision__Cheque.class.getName()).log(Level.SEVERE, null, ex);
+             }
         emisionchequeDAO.delete(chequeeliminar);
         llenadodetablas();
     }//GEN-LAST:event_Boton_EliminarActionPerformed
 
     private void Boton_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AyudaActionPerformed
-
+    /// metodo para ejecutar la ayuda que es una guia para Emision Cheque
+        try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoMoneda.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoMoneda.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_Boton_AyudaActionPerformed
+
+    private Connection connection = null;
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+         Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Finanzas/reportes/reporteCheque.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte Emision Cheque");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -419,6 +502,7 @@ int codigoAplicacion = 1105;
     private javax.swing.JComboBox<String> ComboPaguese;
     private com.toedter.calendar.JDateChooser Fecha;
     private javax.swing.JTable TablaECheque;
+    public javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

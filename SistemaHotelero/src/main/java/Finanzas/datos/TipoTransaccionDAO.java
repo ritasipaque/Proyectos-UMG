@@ -89,14 +89,12 @@ public class TipoTransaccionDAO {
         
         try {
             conn = Conexion.getConnection();
-            //System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
             stmt.setString(1, tipo.getCodigo_TipoTransaccion());
             stmt.setString(2, tipo.getTransaccion_Tipo());
             stmt.setInt(3, tipo.getEfecto_TipoTransaccion());
           stmt.setString(4, tipo.getCodigo_TipoTransaccion());
             rows = stmt.executeUpdate();
-            //System.out.println("Registros actualizado:" + rows);
             
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
@@ -119,7 +117,7 @@ public class TipoTransaccionDAO {
             stmt = conn.prepareStatement(sql_delete);
              stmt.setString(1, tipo.getCodigo_TipoTransaccion());
             rows = stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, " Eliminado Con Exito");
+            JOptionPane.showMessageDialog(null, " Registro elminado con Exito");
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {

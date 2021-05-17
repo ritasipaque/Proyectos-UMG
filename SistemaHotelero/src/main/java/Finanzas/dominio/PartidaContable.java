@@ -1,15 +1,86 @@
 package Finanzas.dominio;
 
 import Finanzas.datos.PartidaContableDAO;
+import javax.swing.JOptionPane;
 
 /* @author Diego Vásquez*/
 public class PartidaContable {
 
-    String codigoPartidaContable = "";
-    String fechaPartidaContable = "";
-    String periodoFiscalPartida = "";
-    String glosaPartidaContable = "";
-    String montoCuadre = "";
+    /**
+     * @return the codigoPartidaContable
+     */
+    public String getCodigoPartidaContable() {
+        return codigoPartidaContable;
+    }
+
+    /**
+     * @param codigoPartidaContable the codigoPartidaContable to set
+     */
+    public void setCodigoPartidaContable(String codigoPartidaContable) {
+        this.codigoPartidaContable = codigoPartidaContable;
+    }
+
+    /**
+     * @return the fechaPartidaContable
+     */
+    public String getFechaPartidaContable() {
+        return fechaPartidaContable;
+    }
+
+    /**
+     * @param fechaPartidaContable the fechaPartidaContable to set
+     */
+    public void setFechaPartidaContable(String fechaPartidaContable) {
+        this.fechaPartidaContable = fechaPartidaContable;
+    }
+
+    /**
+     * @return the periodoFiscalPartida
+     */
+    public String getPeriodoFiscalPartida() {
+        return periodoFiscalPartida;
+    }
+
+    /**
+     * @param periodoFiscalPartida the periodoFiscalPartida to set
+     */
+    public void setPeriodoFiscalPartida(String periodoFiscalPartida) {
+        this.periodoFiscalPartida = periodoFiscalPartida;
+    }
+
+    /**
+     * @return the glosaPartidaContable
+     */
+    public String getGlosaPartidaContable() {
+        return glosaPartidaContable;
+    }
+
+    /**
+     * @param glosaPartidaContable the glosaPartidaContable to set
+     */
+    public void setGlosaPartidaContable(String glosaPartidaContable) {
+        this.glosaPartidaContable = glosaPartidaContable;
+    }
+
+    /**
+     * @return the montoCuadre
+     */
+    public String getMontoCuadre() {
+        return montoCuadre;
+    }
+
+    /**
+     * @param montoCuadre the montoCuadre to set
+     */
+    public void setMontoCuadre(String montoCuadre) {
+        this.montoCuadre = montoCuadre;
+    }
+
+    private String codigoPartidaContable = "";
+    private String fechaPartidaContable = "";
+    private String periodoFiscalPartida = "";
+    private String glosaPartidaContable = "";
+    private String montoCuadre = "";
 
     PartidaContableDAO partidaContableDAO = new PartidaContableDAO();
 
@@ -61,5 +132,22 @@ public class PartidaContable {
             }
         }
         return matrixRegistros;
+    }
+    
+    public void RegistrarPartida(PartidaContable objPartida) {
+        
+        if (objPartida.equals(null)) {
+
+            JOptionPane.showMessageDialog(null, "¡NO PUEDEN HABER CAMPOS VACÍOS!", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int respuesta = partidaContableDAO.RegistrarPartidaContable(objPartida);
+
+            if (respuesta == 1) {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO EXITOSO!", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "¡REGISTRO ERRÓNEO!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

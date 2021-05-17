@@ -83,6 +83,10 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_huespedes` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 INSERT INTO `hoteleria`.`tbl_huespedes` (`PK_no_identificacion`, `nombre_huesped`, `apellido_huesped`, `nacionalidad_huesped`, `direccion_huesped`, `frecuencia_huesped`, `telefono_huesped`, `nit_huesped`) VALUES ('1', 'Alberto', 'Suarez', 'Mexicano', '12 calle', 'Constante', '12345678', '87654321');
+INSERT INTO `hoteleria`.`tbl_huespedes` (`PK_no_identificacion`, `nombre_huesped`, `apellido_huesped`, `nacionalidad_huesped`, `direccion_huesped`, `frecuencia_huesped`, `telefono_huesped`, `nit_huesped`) VALUES ('12', 'Luis', 'Lee', 'Guatemalteco', '13 calle', 'Constante', '87654321', '12345678');
+INSERT INTO `hoteleria`.`tbl_huespedes` (`PK_no_identificacion`, `nombre_huesped`, `apellido_huesped`, `nacionalidad_huesped`, `direccion_huesped`, `frecuencia_huesped`, `telefono_huesped`, `nit_huesped`) VALUES ('123', 'Leonel', 'Gomez', 'Keniano', '14 calle', 'Constante', '123456789', '876543216');
+INSERT INTO `hoteleria`.`tbl_huespedes` (`PK_no_identificacion`, `nombre_huesped`, `apellido_huesped`, `nacionalidad_huesped`, `direccion_huesped`, `frecuencia_huesped`, `telefono_huesped`, `nit_huesped`) VALUES ('1234', 'Jefferson', 'Dominguez', 'Mexicano', '15 calle', 'Constante', '612345678', '187654321');
+INSERT INTO `hoteleria`.`tbl_huespedes` (`PK_no_identificacion`, `nombre_huesped`, `apellido_huesped`, `nacionalidad_huesped`, `direccion_huesped`, `frecuencia_huesped`, `telefono_huesped`, `nit_huesped`) VALUES ('12345', 'Gerson', 'Davila', 'Español', '16 calle', 'Constante', '1234585678', '8765443521');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_servicios`
@@ -108,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_reservaciones` (
   `PK_id_reservacion` INT NOT NULL,
   `PK_no_identificacion` INT DEFAULT NULL,
   `PK_id_habitacion` INT DEFAULT NULL,
+  `cantidad_personas` varchar(30) NULL DEFAULT NULL,
   `fecha_reserva` date NULL DEFAULT NULL,
   `desde` date NULL DEFAULT NULL,
   `hasta` date NULL DEFAULT NULL,
@@ -118,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_reservaciones` (
   FOREIGN KEY (`PK_no_identificacion`) REFERENCES `tbl_huespedes`(`PK_no_identificacion`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-INSERT INTO `hoteleria`.`tbl_reservaciones` (`PK_id_reservacion`, `PK_no_identificacion`, `PK_id_habitacion`, `fecha_reserva`, `desde`, `hasta`, `precio`, `estado`) VALUES ('1', '1', '1', '2021-04-17', '2021-04-19', '2021-04-22', '500', '1');
+INSERT INTO `tbl_reservaciones` (`PK_id_reservacion`, `PK_no_identificacion`, `PK_id_habitacion`, `cantidad_personas`, `fecha_reserva`, `desde`, `hasta`, `precio`, `estado`) VALUES ('1', '1', '1', '2 adultos y 2 niños', '2021-05-15', '2021-05-16', '2021-05-20', '750', '1');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_facturacion`
@@ -151,23 +156,34 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_objetosperdidos` (
   `PK_id_ama_de_llaves` INT DEFAULT NULL,
   `fecha_encontrado` date NULL DEFAULT NULL,
   `objeto` VARCHAR(50) NULL DEFAULT NULL,
+  `identificacion` VARCHAR(50) NULL DEFAULT NULL,
+  `nombre` VARCHAR(50) NULL DEFAULT NULL,
+  `estado` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`PK_id_objeto`),
     FOREIGN KEY (`PK_id_habitacion`) REFERENCES `tbl_mantenimiento_habitaciones`(`PK_id_habitacion`),
   FOREIGN KEY (`PK_id_ama_de_llaves`) REFERENCES `tbl_ama_de_llaves`(`PK_id_ama_de_llaves`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+INSERT INTO `hoteleria`.`tbl_objetosperdidos` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('1', '1', '1', '2021-04-17', 'Telefono', '12345678', 'Luis', '2');
+INSERT INTO `hoteleria`.`tbl_objetosperdidos` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('2', '1', '1', '2021-04-18', 'Juguete', 'null', 'null', '1');
+INSERT INTO `hoteleria`.`tbl_objetosperdidos` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('3', '1', '1', '2021-04-19', 'Computadora', 'null', 'null', '1');
+INSERT INTO `hoteleria`.`tbl_objetosperdidos` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('4', '1', '1', '2021-04-20', 'Telefono', 'null', 'null', '1');
+INSERT INTO `hoteleria`.`tbl_objetosperdidos` (`PK_id_objeto`, `PK_id_habitacion`, `PK_id_ama_de_llaves`, `fecha_encontrado`, `objeto`, `identificacion`, `nombre`, `estado`) VALUES ('5', '1', '1', '2021-04-21', 'Audifonos', '124345678', 'Juan', '2');
 
 -- -----------------------------------------------------
 -- Table `hoteleria`.`tbl_entrega_habitacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_entrega_habitacion` (
-  `PK_id_entrega` INT NOT NULL ,
-  `no_factura` INT DEFAULT NULL,
-  `PK_id_habitacion` INT DEFAULT NULL,
-  `nombre`VARCHAR(50) NULL DEFAULT NULL,
-   `no_reserva` INT DEFAULT NULL,
-  `fecha`  date NULL DEFAULT NULL,
-  `estado`VARCHAR(50) NULL DEFAULT NULL,
-  PRIMARY KEY (`PK_id_entrega`))
+CREATE TABLE IF NOT EXISTS hoteleria.tbl_entrega_habitacion (
+  PK_id_entrega INT NOT NULL ,
+  PK_id_reservacion INT DEFAULT NULL,
+  PK_id_habitacion INT DEFAULT NULL,
+  PK_no_identificacion INT DEFAULT NULL,
+  nombre VARCHAR(50) NULL DEFAULT NULL,
+  fecha  date NULL DEFAULT NULL,
+  estado VARCHAR(50) NULL DEFAULT NULL,
+  PRIMARY KEY (PK_id_entrega),
+  FOREIGN KEY (PK_id_habitacion) REFERENCES tbl_mantenimiento_habitaciones(PK_id_habitacion),
+  FOREIGN KEY (PK_id_reservacion) REFERENCES tbl_reservaciones(PK_id_reservacion),
+  FOREIGN KEY (PK_no_identificacion) REFERENCES tbl_huespedes(PK_no_identificacion))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
