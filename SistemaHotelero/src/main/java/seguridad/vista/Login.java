@@ -191,6 +191,7 @@ public class Login extends javax.swing.JFrame {
                 Insertar.setId_Usuario("Login");
                 Insertar.setAccion("Insertar");
                 Insertar.setCodigoAplicacion("000");
+                Insertar.setModulo("Login");
                 try {
                     BitacoraDAO.insert(Insertar);
                 } catch (UnknownHostException ex) {
