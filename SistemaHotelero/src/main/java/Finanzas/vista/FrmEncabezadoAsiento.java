@@ -6,19 +6,33 @@
 package Finanzas.vista;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
-
-/**
+import Finanzas.datos.EncabezadoAsientoDAO;
+import Finanzas.dominio.EncabezadoAsiento;
+import java.util.List;
+/** 
  *
  * @author Diego Vásquez
  */
 public class FrmEncabezadoAsiento extends javax.swing.JFrame {
-
+    
+    public void llenadoDeCombos() throws SQLException  {
+       EncabezadoAsientoDAO EADAO = new EncabezadoAsientoDAO();
+      List<EncabezadoAsiento> tipo = EADAO.select();
+      CbEncab.addItem("Seleccione una opción");
+      for (int i = 0; i < tipo.size(); i++) {
+           CbEncab.addItem(tipo.get(i).getCodigoEA());
+       }
+ }
     /**
      * Creates new form FrmEncabezadoAsiento
      */
-    public FrmEncabezadoAsiento() {
+    public FrmEncabezadoAsiento() throws SQLException {
         initComponents();
+        llenadoDeCombos();
     }
 
     /**
@@ -32,7 +46,7 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CbEncab = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -70,7 +84,7 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(CbEncab, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
@@ -93,7 +107,7 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CbEncab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
@@ -107,8 +121,13 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FrmNuevoEncabezadoAsiento frmNuevoEncabezadoAsiento = new FrmNuevoEncabezadoAsiento();
-        frmNuevoEncabezadoAsiento.setVisible(true);
+        Transaccion_EncabezadoAsiento NuevoEA = null;
+        try {
+            NuevoEA = new Transaccion_EncabezadoAsiento();
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmEncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        NuevoEA.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -125,16 +144,20 @@ public class FrmEncabezadoAsiento extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmEncabezadoAsiento().setVisible(true);
+                try {
+                    new FrmEncabezadoAsiento().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmEncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CbEncab;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

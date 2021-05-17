@@ -106,7 +106,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
 
         for (int i = 0; i < contI; i++) {
             for (int j = 0; j < 4; j++) {
-                JTableRegistros.setValueAt(matrixData[i][j], i, j);;
+                JTableRegistros.setValueAt(matrixData[i][j], i, j);
             }
         }
     }
@@ -118,7 +118,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         initComponents();
         cargarTabla();
         comboBox();
-        habilitarAcciones();
+        //habilitarAcciones();
     }
 
     /**
@@ -327,7 +327,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Insertar");
-        AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setCodigoAplicacion("1003");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -351,7 +353,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Eliminar");
-        AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setCodigoAplicacion("1003");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -376,7 +380,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         objCuenta.Actualizar(objCuenta);
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Modificar");
-        AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setCodigoAplicacion("1003");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -396,7 +402,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Buscar");
-        AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setCodigoAplicacion("1003");
+        AInsertar.setModulo("Finanzas");
+        
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {

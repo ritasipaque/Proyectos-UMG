@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+
 import Comercial.datos.ProductoDAO;
 import Comercial.dominio.Producto;
 import java.util.List;
@@ -17,17 +18,19 @@ import java.util.logging.Logger;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
+import seguridad.vista.MDI_Components;
 
 /**
  *
- * @author SIPAQUE.RITA - DIANA VICTORES 
+ * @author SIPAQUE.RITA - DIANA VICTORES
  */
 public class MantenimientoProductos extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form MantenimientoProductos
      */
-    
     public void llenadoDeTablas() {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("ID Proveedor");
@@ -36,7 +39,7 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         modelo.addColumn("Descripcion");
         modelo.addColumn("Estdo");
         ProductoDAO proveedorDAO = new ProductoDAO();
-        
+
         List<Producto> proveedor = proveedorDAO.select();
         TablaProducto1.setModel(modelo);
         String[] dato = new String[5];
@@ -44,38 +47,37 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
             dato[0] = Integer.toString(proveedor.get(i).getPK_id_producto());
             dato[1] = proveedor.get(i).getNombre_producto();
             dato[2] = proveedor.get(i).getPrecio_producto();
+
             dato[3] = proveedor.get(i).getDescripcion_producto();
             dato[4] = proveedor.get(i).getEstatus_producto();
-            
+
             //System.out.println("vendedor:" + vendedores);
             modelo.addRow(dato);
         }
     }
-    
-          public void buscar() {
-       Producto proveedorAConsultar = new Producto();
+
+    public void buscar() {
+        Producto proveedorAConsultar = new Producto();
         ProductoDAO proveedorDAO = new ProductoDAO();
         proveedorAConsultar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         proveedorAConsultar = proveedorDAO.query(proveedorAConsultar);
-        
+
         txt_Nombre.setText(proveedorAConsultar.getNombre_producto());
-        txt_Precio.setText(proveedorAConsultar.getPrecio_producto());
+        txt_Precio.setText(String.valueOf(proveedorAConsultar.getPrecio_producto()));
+
         txt_Descripcion.setText(proveedorAConsultar.getDescripcion_producto());
         txt_Estado.setText(proveedorAConsultar.getEstatus_producto());
-        
-                
-   
-                
-    }        
-        public void limpiar() {
+
+    }
+
+    public void limpiar() {
         txt_IdProducto.setText("");
         txt_Nombre.setText("");
         txt_Precio.setText("");
         txt_Descripcion.setText("");
         txt_Estado.setText("");
-        }
-    
-    
+    }
+
     public MantenimientoProductos() {
         initComponents();
         llenadoDeTablas();
@@ -298,12 +300,19 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+
+        String id = "0";
+        MantenimientoProductos manteminetoProductosDAO = new MantenimientoProductos();
+
         ProductoDAO productoDAO = new ProductoDAO();
         Producto productoAInsertar = new Producto();
 
         productoAInsertar.setPK_id_producto((int) Integer.parseInt(txt_IdProducto.getText()));
         productoAInsertar.setNombre_producto(txt_Nombre.getText());
         productoAInsertar.setPrecio_producto(txt_Precio.getText());
+
         productoAInsertar.setDescripcion_producto(txt_Descripcion.getText());
         productoAInsertar.setEstatus_producto(txt_Estado.getText());
 
@@ -314,7 +323,9 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         Bitacora Insertar = new Bitacora();
         Insertar.setId_Usuario("MantenimientoProductos");
         Insertar.setAccion("Insertar");
-        Insertar.setCodigoAplicacion("3010");
+        Insertar.setCodigoAplicacion("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+
         try {
             BitacoraDAO.insert(Insertar);
         } catch (UnknownHostException ex) {
@@ -330,7 +341,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         Producto productoAActualizar = new Producto();
         productoAActualizar.setPK_id_producto(Integer.parseInt(txt_IdProducto.getText()));
         productoAActualizar.setNombre_producto(txt_Nombre.getText());
-        productoAActualizar.setPrecio_producto(txt_Precio.getText());
+        productoAActualizar.setNombre_producto(txt_Precio.getText());
+
         productoAActualizar.setDescripcion_producto(txt_Descripcion.getText());
         productoAActualizar.setEstatus_producto(txt_Estado.getText());
         productoDAO.update(productoAActualizar);
@@ -393,8 +405,8 @@ public class MantenimientoProductos extends javax.swing.JInternalFrame {
         try {
             if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm")).exists()) {
                 Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm");
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");

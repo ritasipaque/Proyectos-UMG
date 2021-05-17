@@ -341,6 +341,7 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario("FrmCuentaHabiente");
         AInsertar.setAccion("Registrar");
         AInsertar.setCodigoAplicacion("1009");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -364,11 +365,12 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
 
        
        
-          BitacoraDao BitacoraDAO = new BitacoraDao();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
         Bitacora AInsertar = new Bitacora();
         AInsertar.setId_Usuario("FrmCuentaHabiente");
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1009");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -382,10 +384,10 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         
                      try {
-            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaHabiente.chm")).exists()) {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoCuentaHabiente.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaHabiente.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoCuentaHabiente.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -427,6 +429,19 @@ public class FrmCuentaHabiente extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmCuentaHabiente");
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1009");
+        AInsertar.setModulo("Finanzas");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_btnImprimirActionPerformed
 
 
