@@ -10,23 +10,25 @@ package Comercial.dominio;
  * @author SipaqueRitaMaria
  */
 public class Compra {
-    int Id_compra;
+    int Id_factura;
 String Id_proveedor;
 String Nombre_proveedor;
-String Contacto_proveedor;
 String Nit_proveedor;
 String Id_producto;
 String Nombre_producto;
 String Precio_producto;
 String Cantidad_producto;
+String Subtotal_producto;
 String Total_producto;
+String Fecha_producto;
+//String Pago_producto;
 
-    public int getId_compra() {
-        return Id_compra;
+    public int getId_factura() {
+        return Id_factura;
     }
 
-    public void setId_compra(int Id_compra) {
-        this.Id_compra = Id_compra;
+    public void setId_factura(int Id_factura) {
+        this.Id_factura = Id_factura;
     }
 
     public String getId_proveedor() {
@@ -43,14 +45,6 @@ String Total_producto;
 
     public void setNombre_proveedor(String Nombre_proveedor) {
         this.Nombre_proveedor = Nombre_proveedor;
-    }
-
-    public String getContacto_proveedor() {
-        return Contacto_proveedor;
-    }
-
-    public void setContacto_proveedor(String Contacto_proveedor) {
-        this.Contacto_proveedor = Contacto_proveedor;
     }
 
     public String getNit_proveedor() {
@@ -93,6 +87,14 @@ String Total_producto;
         this.Cantidad_producto = Cantidad_producto;
     }
 
+    public String getSubtotal_producto() {
+        return Subtotal_producto;
+    }
+
+    public void setSubtotal_producto(String Subtotal_producto) {
+        this.Subtotal_producto = Subtotal_producto;
+    }
+
     public String getTotal_producto() {
         return Total_producto;
     }
@@ -101,10 +103,19 @@ String Total_producto;
         this.Total_producto = Total_producto;
     }
 
-    @Override
-    public String toString() {
-        return "Compra{" + "Id_compra=" + Id_compra + ", Id_proveedor=" + Id_proveedor + ", Nombre_proveedor=" + Nombre_proveedor + ", Contacto_proveedor=" + Contacto_proveedor + ", Nit_proveedor=" + Nit_proveedor + ", Id_producto=" + Id_producto + ", Nombre_producto=" + Nombre_producto + ", Precio_producto=" + Precio_producto + ", Cantidad_producto=" + Cantidad_producto + ", Total_producto=" + Total_producto + '}';
+    public String getFecha_producto() {
+        return Fecha_producto;
     }
 
+    public void setFecha_producto(String Fecha_producto) {
+        this.Fecha_producto = Fecha_producto;
+    }
 
+    @Override
+    public String toString() {
+        return "Compra{" + "Id_factura=" + Id_factura + ", Id_proveedor=" + Id_proveedor + ", Nombre_proveedor=" + Nombre_proveedor + ", Nit_proveedor=" + Nit_proveedor + ", Id_producto=" + Id_producto + ", Nombre_producto=" + Nombre_producto + ", Precio_producto=" + Precio_producto + ", Cantidad_producto=" + Cantidad_producto + ", Subtotal_producto=" + Subtotal_producto + ", Total_producto=" + Total_producto + ", Fecha_producto=" + Fecha_producto + '}';
+    }
+
+    
 }
+
