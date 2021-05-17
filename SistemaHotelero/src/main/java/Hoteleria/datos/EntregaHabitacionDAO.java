@@ -1,9 +1,11 @@
+package Hoteleria.datos;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Hoteleria.datos;
+
 
 import Hoteleria.dominio.EntregaHabitaciones;
 import java.sql.*;
@@ -20,8 +22,8 @@ public class EntregaHabitacionDAO {
 
     private static final String SQL_INSERT = "INSERT INTO tbl_entrega_habitacion values(?,?,?,?,?,?,?)";
     private static final String SQL_SELECT = "SELECT * FROM tbl_entrega_habitacion";
-    private static final String SQL_QUERY = "SELECT PK_id_entrega, no_factura, PK_id_habitacion, nombre, no_reserva, fecha,estado FROM tbl_entrega_habitacion WHERE PK_id_entrega = ?";
-    private static final String SQL_UPDATE = "UPDATE tbl_entrega_habitacion SET PK_id_entrega=?, no_factura=?, PK_id_habitacion=?, nombre=?, no_reserva=?, fecha,estado=? WHERE PK_id_entrega=?";
+    private static final String SQL_QUERY = "SELECT * FROM tbl_entrega_habitacion WHERE PK_id_entrega = ?";
+    private static final String SQL_UPDATE = "UPDATE tbl_entrega_habitacion SET  PK_id_reservacion=?, PK_id_habitacion=?,PK_no_identificacion=?, nombre=?,fecha=?,estado=? WHERE PK_id_entrega=?";
     
     public List<EntregaHabitaciones> select(){
         Connection conn = null;
@@ -38,7 +40,7 @@ public class EntregaHabitacionDAO {
                 String id_entrega = rs.getString("PK_id_entrega");
                 String id_reservacion = rs.getString("PK_id_reservacion");
                 String id_habitacion = rs.getString("PK_id_habitacion");
-                String no_identificacion=rs.getString("no_identificacion");
+                String no_identificacion=rs.getString("PK_no_identificacion");
                 String Nombre = rs.getString("nombre");
                 String fecha = rs.getString("fecha");
                 String estado = rs.getString("estado");
@@ -113,7 +115,7 @@ public class EntregaHabitacionDAO {
                 String id_entrega = rs.getString("PK_id_entrega");
                 String id_reservacion = rs.getString("PK_id_reservacion");
                 String id_habitacion = rs.getString("PK_id_habitacion");
-                String no_identificacion=rs.getString("no_identificacion");
+                String no_identificacion=rs.getString("PK_no_identificacion");
                 String Nombre = rs.getString("nombre");
                 String fecha = rs.getString("fecha");
                 String estado = rs.getString("estado");
@@ -126,6 +128,7 @@ public class EntregaHabitacionDAO {
                 habitaciones.setNombre(Nombre);
                 habitaciones.setFecha(fecha);
                 habitaciones.setEstado(estado);
+                
                 rows++;
             }
         } catch (SQLException ex) {
@@ -147,13 +150,14 @@ public class EntregaHabitacionDAO {
             conn = ConexionHoteleria.getConnection();
 //          System.out.println("ejecutando query: " + SQL_UPDATE);
             stmt = conn.prepareStatement(SQL_UPDATE);
-            stmt.setString(1, habitacion.getPk_id_entrega());
-            stmt.setString(2, habitacion.getPk_id_reservacion());
-            stmt.setString(3, habitacion.getPk_id_habitacion());
-            stmt.setString(4, habitacion.getPk_no_identificacion());
-            stmt.setString(5, habitacion.getNombre());
-            stmt.setString(6, habitacion.getFecha());
-            stmt.setString(7, habitacion.getEstado());
+            
+            stmt.setString(1, habitacion.getPk_id_reservacion());
+            stmt.setString(2, habitacion.getPk_id_habitacion());
+            stmt.setString(3, habitacion.getPk_no_identificacion());
+            stmt.setString(4, habitacion.getNombre());
+            stmt.setString(5, habitacion.getFecha());
+            stmt.setString(6, habitacion.getEstado());
+            stmt.setString(7, habitacion.getPk_id_entrega());
 
             
             rows = stmt.executeUpdate();
