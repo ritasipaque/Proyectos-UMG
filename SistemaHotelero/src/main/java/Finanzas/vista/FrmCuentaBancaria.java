@@ -409,6 +409,8 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario("FrmCuentaBancaria");
         AInsertar.setAccion("Registrar");
         AInsertar.setCodigoAplicacion("1006");
+        AInsertar.setModulo("Finanzas");
+        
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -439,6 +441,18 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmCuentaBancaria");
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1006");
+        AInsertar.setModulo("Finanzas");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void Cbox_CuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cbox_CuentaActionPerformed
@@ -449,10 +463,10 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
         // TODO add your handling code here:
                       try {
-            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaBancaria.chm")).exists()) {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoCuentaBancaria.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoCuentaBancaria.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoCuentaBancaria.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -505,6 +519,25 @@ public class FrmCuentaBancaria extends javax.swing.JInternalFrame {
 
     private void BtnElim1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElim1ActionPerformed
         // TODO add your handling code here:
+          CuentaBancariaDAO cuentadao = new CuentaBancariaDAO();
+        CuentaBancaria cuentaeliminar = new CuentaBancaria();
+        cuentaeliminar.setNumero_CuentaBancaria((TxtBuscar.getText()));
+        cuentadao.delete(cuentaeliminar);
+
+        llenadoDeTablas();
+    
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmCuentaBancaria");
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1006");
+        AInsertar.setModulo("Finanzas");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
+          }
     }//GEN-LAST:event_BtnElim1ActionPerformed
 
 

@@ -24,7 +24,7 @@ public class FacturacionDAO {
     private static final String SQL_SELECT = "SELECT PK_id_factura, PK_id_reservacion, nombre_factura, formaPago_factura, noTarjeta_factura, totalReservacion_factura, totalServicios_factura, totalFacturacion_factura FROM tbl_facturacion";
     private static final String SQL_QUERY = "SELECT nombre_metodo FROM tbl_metodos_de_pago";
     private static final String SQL_PK = "nombre_metodo";
-    private static final String SQL_QUERY2 = "SELECT PK_id_reservacion, desde, hasta, precio FROM tbl_reservaciones WHERE PK_id_reservacion = ?";
+    private static final String SQL_QUERY2 = "SELECT PK_id_entrega, nombre FROM tbl_entrega_habitacion WHERE PK_id_entrega = ?";
     private static final String SQL_INSERT = "INSERT INTO tbl_facturacion(PK_id_factura, PK_id_reservacion, nombre_factura, fechaEntrada_factura, fechaSalida_factura, formaPago_factura, noTarjeta_factura, cvv_factura, fechaCaducidad_factura, totalReservacion_factura, totalServicios_factura, totalFacturacion_factura, estado) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public List<Facturacion> select() {
@@ -90,16 +90,12 @@ public class FacturacionDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                int id_ama_de_llaves = rs.getInt("PK_id_reservacion");
-                String nombre_ama_de_llaves = rs.getString("desde");
-                String apellido_ama_de_llaves = rs.getString("hasta");
-                int piso_ama_de_llaves = rs.getInt("precio");
+                int id_ama_de_llaves = rs.getInt("PK_id_entrega");
+                String nombre_ama_de_llaves = rs.getString("nombre");
 
                 ama_De_Llaves = new Facturacion();
                 ama_De_Llaves.setId_Reservacion(id_ama_de_llaves);
-                ama_De_Llaves.setFechaEntrada_Factura(nombre_ama_de_llaves);
-                ama_De_Llaves.setFechaSalida_Factura(apellido_ama_de_llaves);
-                ama_De_Llaves.setTotalReservacion_Factura(piso_ama_de_llaves);
+                ama_De_Llaves.setNombre_Factura(nombre_ama_de_llaves);
                 rows++;
             }
         } catch (SQLException ex) {

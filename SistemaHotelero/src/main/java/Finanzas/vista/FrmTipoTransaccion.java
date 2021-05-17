@@ -186,6 +186,12 @@ public void buscarperfil(){
             }
         });
 
+        TxtEfecto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtEfectoKeyTyped(evt);
+            }
+        });
+
         BtnIng1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         BtnIng1.setText("Registrar");
         BtnIng1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -341,6 +347,7 @@ public void buscarperfil(){
         AInsertar.setId_Usuario("FrmTipoTransaccion");
         AInsertar.setAccion("Elimiar");
         AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -369,6 +376,7 @@ public void buscarperfil(){
         AInsertar.setId_Usuario("FrmTipoTransaccion");
         AInsertar.setAccion("Modificar");
         AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
         try{
             BitacoraDAO.insert(AInsertar);
             
@@ -382,7 +390,7 @@ public void buscarperfil(){
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
 
-     Map p = new HashMap();
+        Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -398,15 +406,28 @@ public void buscarperfil(){
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
+        try {
+            BitacoraDAO.insert(AInsertar);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
 
         try {
-            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoTransaccion.chm")).exists()) {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTransaccion.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoTransaccion.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTransaccion.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -451,7 +472,44 @@ public void buscarperfil(){
 
     private void BtnIng1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIng1ActionPerformed
         // TODO add your handling code here:
+        
+          
+        TipoTransaccionDAO cuentadao = new TipoTransaccionDAO();
+        TipoTransaccion insertarcuenta = new TipoTransaccion();
+        insertarcuenta.setCodigo_TipoTransaccion(TxtCodigo1.getText());
+        insertarcuenta.setTransaccion_Tipo(TxtTipo.getText());
+
+       
+       insertarcuenta.setEfecto_TipoTransaccion(Integer.parseInt(TxtEfecto.getText()));
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("FrmTipoTransaccion");
+        AInsertar.setAccion("buscar");
+        AInsertar.setCodigoAplicacion("1002");
+        AInsertar.setModulo("Finanzas");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(FrmCuentaHabiente.class.getName()).log(Level.SEVERE, null, ex);
+          }
+       
+         cuentadao.insert(insertarcuenta);
+
+           llenadoDeTablas();
+
     }//GEN-LAST:event_BtnIng1ActionPerformed
+
+    private void TxtEfectoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtEfectoKeyTyped
+        // TODO add your handling code here:
+          char validar=evt.getKeyChar();
+        if(Character.isLetter(validar)){
+          getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(rootPane, "INGRESAR SOLO NUMEROS");
+        }
+    }//GEN-LAST:event_TxtEfectoKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
