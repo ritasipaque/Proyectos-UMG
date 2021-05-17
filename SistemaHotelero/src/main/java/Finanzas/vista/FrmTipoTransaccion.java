@@ -390,7 +390,7 @@ public void buscarperfil(){
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
 
-     Map p = new HashMap();
+        Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
 
@@ -406,19 +406,19 @@ public void buscarperfil(){
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         BitacoraDao BitacoraDAO = new BitacoraDao();
         Bitacora AInsertar = new Bitacora();
         AInsertar.setId_Usuario("FrmTipoTransaccion");
         AInsertar.setAccion("Imprimir");
         AInsertar.setCodigoAplicacion("1002");
         AInsertar.setModulo("Finanzas");
-        try{
+        try {
             BitacoraDAO.insert(AInsertar);
-            
+
         } catch (UnknownHostException ex) {
-              Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
-          }
+            Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
