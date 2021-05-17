@@ -1,8 +1,10 @@
 package Hoteleria.vista;
 
 import Hoteleria.datos.FacturacionDAO;
+import Hoteleria.datos.ReservacionDAO;
 import Hoteleria.datos.ServiciosDAO;
 import Hoteleria.dominio.Facturacion;
+import Hoteleria.dominio.Reservacion;
 import Hoteleria.dominio.Servicios;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -691,14 +693,21 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
         Facturacion ama_De_Llaves_Buscar = new Facturacion();
         FacturacionDAO ama_De_Llaves_DAO = new FacturacionDAO();
 
+        ReservacionDAO huespedesdao = new ReservacionDAO();
+        Reservacion buscarReserva = new Reservacion();
+
         ama_De_Llaves_Buscar.setId_Reservacion(Integer.parseInt(txtReserva.getText()));
         ama_De_Llaves_Buscar = ama_De_Llaves_DAO.query(ama_De_Llaves_Buscar);
 
-        txtEntrada.setText(String.valueOf(ama_De_Llaves_Buscar.getFechaEntrada_Factura()));
-        txtSalida.setText(String.valueOf(ama_De_Llaves_Buscar.getFechaSalida_Factura()));
-        txtTotalReservacion.setText(String.valueOf(ama_De_Llaves_Buscar.getTotalReservacion_Factura()));
+        buscarReserva.setId_reservacion(String.valueOf(ama_De_Llaves_Buscar.getId_Reservacion()));
+        buscarReserva = huespedesdao.query(buscarReserva);
 
-        txtNombre.setEditable(true);
+        txtNombre.setText(String.valueOf(ama_De_Llaves_Buscar.getNombre_Factura()));
+        txtEntrada.setText(String.valueOf(buscarReserva.getDesde()));
+        txtSalida.setText(String.valueOf(buscarReserva.getHasta()));
+        txtTotalReservacion.setText(String.valueOf(buscarReserva.getPrecio()));
+
+        //txtNombre.setEditable(true);
         cbxPago.setEnabled(true);
         //txtNoTarjeta.setEditable(true);
         //txtCvv.setEditable(true);
