@@ -22,6 +22,8 @@ import seguridad.dominio.Bitacora;
  */
 public class Proceso_Producto extends javax.swing.JFrame {
 
+    
+    //PROCESO NO FUNCIONAL FALTA HABILITAR BOTONES 
     /**
      * Creates new form Proceso_Producto
      */
@@ -120,14 +122,14 @@ public class Proceso_Producto extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Existencias");
 
-        jButton1.setText("Buscar");
+        jButton1.setText("Validar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Limpiar");
+        jButton3.setText("Guardar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -145,9 +147,9 @@ public class Proceso_Producto extends javax.swing.JFrame {
                     .addComponent(txtnombrebodega)
                     .addComponent(txtExistenciasProducto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -216,6 +218,7 @@ public class Proceso_Producto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:}buscar();
+        
 //        BitacoraDao BitacoraDAO = new BitacoraDao();
 //        Bitacora Insertar = new Bitacora();
 //        Insertar.setId_Usuario("Proceso_Producto");
@@ -226,6 +229,7 @@ public class Proceso_Producto extends javax.swing.JFrame {
 //        } catch (UnknownHostException ex) {
 //            Logger.getLogger(Proceso_Producto.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
