@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author familia Sipaque
+ * @author familia Sipaque - Diana Victores
  */
 public class ProductoDAO {
     
