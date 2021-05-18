@@ -93,7 +93,7 @@ public class PartidaContableDAO extends Conexion {
 
         return matrixClasificacion;
     }
-    
+
     public int RegistrarPartidaContable(PartidaContable objpartidaContable) {
 
         int flagRegistro = 0;
@@ -126,5 +126,42 @@ public class PartidaContableDAO extends Conexion {
             Conexion.close(stmt);
         }
         return flagRegistro;
+    }
+
+    public String[][] getDetallePartida(PartidaContable pc) {
+
+        String[][] matrixPartida;
+        int contadorData = getCantidadRegistros();
+        matrixPartida = new String[contadorData][3];
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement("SELECT cuentacontable_asiento, monto_debe, monto_haber FROM asientocontabledetalle \n"
+                    + "INNER JOIN partidacontable ON partidacontable.Codigo_PartidaContable = asientocontabledetalle.Partida_Asiento\n"
+                    + "WHERE Partida_Asiento = ?");
+
+            stmt.setString(1, pc.getCodigoPartidaContable());
+            rs = stmt.executeQuery();
+            int rowCount = 0;
+
+            while (rs.next()) {
+                matrixPartida[rowCount][0] = rs.getString(1);
+                matrixPartida[rowCount][1] = rs.getString(2);
+                matrixPartida[rowCount][2] = rs.getString(3);
+                rowCount++;
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return matrixPartida;
     }
 }

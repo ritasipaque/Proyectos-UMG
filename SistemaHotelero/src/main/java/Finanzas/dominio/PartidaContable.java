@@ -133,9 +133,24 @@ public class PartidaContable {
         }
         return matrixRegistros;
     }
-    
+
+    public String[][] getTablaPartidas(PartidaContable pc) {
+        String[][] matrixRegistros;
+
+        partidaContableDAO.getDetallePartida(pc);
+
+        matrixRegistros = new String[partidaContableDAO.TablaDespliegue().length][3];
+
+        for (int i = 0; i < partidaContableDAO.getDetallePartida(pc).length; i++) {
+            for (int j = 0; j < 3; j++) {
+                matrixRegistros[i][j] = partidaContableDAO.getDetallePartida(pc)[i][j];
+            }
+        }
+        return matrixRegistros;
+    }
+
     public void RegistrarPartida(PartidaContable objPartida) {
-        
+
         if (objPartida.equals(null)) {
 
             JOptionPane.showMessageDialog(null, "¡NO PUEDEN HABER CAMPOS VACÍOS!", "ERROR", JOptionPane.ERROR_MESSAGE);
