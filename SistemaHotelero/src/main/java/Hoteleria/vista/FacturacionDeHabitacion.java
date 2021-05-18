@@ -9,7 +9,6 @@ import Hoteleria.dominio.Reservacion;
 import Hoteleria.dominio.Servicios;
 import java.io.File;
 import java.sql.Connection;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -183,6 +182,17 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
 
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
+    }
+    
+    public void limpiarCompra(){
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            String Vector[] = new String[2];
+            Vector[0] = jTable2.getValueAt(i, 0).toString();
+            Vector[1] = jTable2.getValueAt(i, 1).toString();
+            modelo2.addRow(Vector);
+            suma = suma - Integer.parseInt(Vector[1]);
+        }
+        LimpiarTabla2();
     }
 
     public void limpiar() {
@@ -872,6 +882,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                     if (confirmar == 0) {
                         ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
                         limpiar();
+                        limpiarCompra();
                         //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
                         //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
                         txtNombre.setEditable(false);
@@ -924,6 +935,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, "Su cambio es de " + cambio);
                             ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
                             limpiar();
+                            limpiarCompra();
                             txtNombre.setEditable(false);
                             cbxPago.setEnabled(false);
                             txtNoTarjeta.setEditable(false);
@@ -940,6 +952,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                         if (confirmar == 0) {
                             ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
                             limpiar();
+                            limpiarCompra();
                             //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
                             //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
                             txtNombre.setEditable(false);
@@ -984,6 +997,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                     if (confirmar == 0) {
                         ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
                         limpiar();
+                        limpiarCompra();
                         //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
                         //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
                         txtNombre.setEditable(false);
