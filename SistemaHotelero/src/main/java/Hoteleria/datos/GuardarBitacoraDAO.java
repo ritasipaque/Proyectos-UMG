@@ -46,7 +46,7 @@ public class GuardarBitacoraDAO {
                 AInsertar.setModulo("2000");
                 estado = true;
                 break;
-            case "SALIR":
+            case "Salir":
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("CERRAR SESIÓN");
                 AInsertar.setCodigoAplicacion(codigoModulo);
