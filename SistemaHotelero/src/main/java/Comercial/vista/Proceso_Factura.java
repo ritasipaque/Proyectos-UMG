@@ -439,7 +439,7 @@ cantidad.setText(buscarf.getCantidad());
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbox_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 27, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2))
@@ -468,10 +468,15 @@ cantidad.setText(buscarf.getCantidad());
                             .addComponent(jLabel8)
                             .addComponent(cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(monto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(monto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(22, 22, 22))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnBuscar)
+                                .addGap(4, 4, 4)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel10)
                             .addComponent(tot, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -479,23 +484,16 @@ cantidad.setText(buscarf.getCantidad());
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7)
+                            .addComponent(jButton6)
+                            .addComponent(jButton1))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton7)
-                                    .addComponent(jButton6)
-                                    .addComponent(jButton1))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(btnEliminar)
-                                    .addComponent(btnAgregar)
-                                    .addComponent(btnModificar))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnBuscar)
-                                .addGap(34, 34, 34))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminar)
+                            .addComponent(btnAgregar)
+                            .addComponent(btnModificar))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -504,7 +502,7 @@ cantidad.setText(buscarf.getCantidad());
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
     
 //   
-        String[] dato = new String[7];
+          String[] dato = new String[7];
    
          
             dato[0] = cliente.getText();
@@ -532,7 +530,7 @@ cantidad.setText(buscarf.getCantidad());
                 ClienteDAO.insert(AInsertar);
       llenadoDeTablas2();   
    
-     limpiar();
+     
       
       
 float tot3 ;     
@@ -594,7 +592,20 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-facturaDao DAO = new   facturaDao  ();
+      float tot3 ;     
+float tot2 ;
+float tot4 ;
+ String nodo1,nodo2,noda4;
+ String r;
+        tot2=Float.parseFloat(tot.getText());
+        tot3=Float.parseFloat(monto.getText());
+      
+      JtProductos1.getModel();
+
+   
+    tot4=tot2-tot3;
+    tot.setText(String.valueOf(tot4));
+        facturaDao DAO = new   facturaDao  ();
                 Factura AEliminar = new  Factura();
                AEliminar.setId_cliente(id.getText());
                 AEliminar.setCliente(cliente.getText());
@@ -608,18 +619,7 @@ facturaDao DAO = new   facturaDao  ();
                 DAO.delete(AEliminar);
       llenadoDeTablas2();
 
-      float tot3 ;     
-float tot2 ;
- String nodo1,nodo2,noda4;
- String r;
-        tot2=Float.parseFloat(tot.getText());
-        tot3=Float.parseFloat(monto.getText());
-      
-      JtProductos1.getModel();
 
-   
-    tot2=tot2-tot3;
-    tot.setText(String.valueOf(tot2));
     BitacoraDao BitacoraDAO = new BitacoraDao();
             
         Bitacora Insertar = new Bitacora();
@@ -640,6 +640,42 @@ float tot2 ;
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+//    facturaDao Da1 = new   facturaDao  ();
+//             
+//                Factura AModifica1 = new  Factura();
+////               
+//AModifica1.setCliente(id.getText());                    
+//AModifica1.setCliente(cliente.getText());
+//            
+//                AModifica1.setNit(nit.getText());
+//
+//                AModifica1.setTelefono(telefono.getText());
+//                AModifica1.setProducto(producto.getText());
+//              AModifica1.setPrecio_por_unidad(precio.getText());
+//                AModifica1.setCantidad(cantidad.getText());
+//                      AModifica1.setTotalmoNto(tot.getText());
+//                            AModifica1.setMonto(monto.getText());
+//                Da1.update(AModifica1);
+//        
+            
+                    BitacoraDao BitacoraDAO = new BitacoraDao();
+            limpiar();
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Modificar");
+    
+ Insertar.setCodigoAplicacion("3006");
+           Insertar.setModulo("3000");
+
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+              JOptionPane.showMessageDialog(null, "Buton fuera de  servicio");
+            
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
 private Connection connection = null;
@@ -651,7 +687,7 @@ private Connection connection = null;
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                + "/src/main/java/Comercial/reportes/report1.jrxml");
+                + "/src/main/java/Comercial/reportes/PFactura.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("deudor ");
