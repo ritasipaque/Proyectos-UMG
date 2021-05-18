@@ -27,9 +27,9 @@ public class DepositosDAO {
        private static final String SQL_INSERT = "INSERT INTO depositos(Id_pedido,Cliente,cuenta ,Fecha_inicial,Fecha_final,Nit,telefono,producto ,Detalle, Cantidad) VALUES(?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_SELECT = "SELECT Id_pedido,Cliente,cuenta ,Fecha_inicial ,Fecha_final ,Nit,telefono,producto ,Detalle, Cantidad FROM depositos";
     private static final String SQL_QUERY3 = "SELECT Id_pedido,Cliente,cuenta ,Fecha_inicial ,Fecha_final,Nit,telefono,producto ,Detalle, Cantidad FROM depositos WHERE Id_pedido = ?";
-  private static final String SQL_UPDATE = "UPDATE   depositos  SET Id_pedido = ? ,Cliente = ? ,cuenta = ? ,Fecha_inicial = ?,Fecha_final = ? ,Nit = ?,telefono = ?,producto = ? , Detalle = ?, Cantidad = ? WHERE Id_pedido";
+  private static final String SQL_UPDATE = "UPDATE depositos  SET Id_pedido = ? ,Cliente = ? ,cuenta = ? ,Fecha_inicial = ?,Fecha_final = ? ,Nit = ?,telefono = ?,producto = ? , Detalle = ?, Cantidad = ? WHERE Id_pedido";
     private static final String SQL_DELETE = "DELETE FROM depositos WHERE Id_pedido =?";
-  
+   private static final String SQL_UPDATE1 = "UPDATE depositos SET Id_pedido=? , Cliente= ? ,cuenta= ?  ,Fecha_inicial= ? ,Fecha_final= ? ,Nit= ? ,telefono= ? ,producto = ? ,Detalle= ? , Cantidad = ?  WHERE Id_pedido" ;
      public  List<Deposito>  select() {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -216,24 +216,26 @@ return ventas ;
         try {
             conn = Conexion.getConnection();
             System.out.println("ejecutando query: " + SQL_UPDATE);
-     
-            stmt.setString(1,   mod.getCliente());       
-            stmt.setString(2,    mod.getCuenta());
-               stmt.setString(3,    mod.getFecha_inicial());
-                  stmt.setString(4,    mod.getFecha_final());
-                     stmt.setString(5,    mod.getNit());
-                        stmt.setString(6,   mod.getTelefono());
-                          stmt.setString(7,    mod.getProducto());
-                     stmt.setString(8,   mod.getDetalle());
-                stmt.setString(8,   mod.getCantidad());
+        stmt.setString(1,  mod.getId_pedido());
+            stmt.setString(2,   mod.getCliente());       
+            stmt.setString(3,    mod.getCuenta());
+               stmt.setString(4,    mod.getFecha_inicial());
+                  stmt.setString(5,    mod.getFecha_final());
+                     stmt.setString(6,    mod.getNit());
+                        stmt.setString(7,   mod.getTelefono());
+                          stmt.setString(8,    mod.getProducto());
+                     stmt.setString(9,   mod.getDetalle());
+                stmt.setString(9,   mod.getCantidad());
             rows = stmt.executeUpdate();
-            System.out.println("Registros actualizado:" + rows);
-
+           
+   rows = stmt.executeUpdate();
+            System.out.println("Registros afectados:" + rows);
+             System.out.println("Registros buscado:" + mod);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
          
-             Conexion.close(stmt);
+           
             Conexion.close(conn);
         }
 
@@ -271,5 +273,44 @@ return ventas ;
         return rows;
     }
     
-    
+      public int update1(Deposito lol) {
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        int rows = 0;
+        try {
+             
+            
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_UPDATE1);
+         
+            stmt.setString(1,  lol.getCliente());       
+            stmt.setString(2,   lol.getCuenta());
+               stmt.setString(3,   lol.getFecha_inicial());
+                  stmt.setString(4,   lol.getFecha_final());
+                     stmt.setString(5,   lol.getNit());
+                        stmt.setString(6,   lol.getTelefono());
+                          stmt.setString(7,   lol.getProducto());
+                     stmt.setString(8, lol.getDetalle());
+                stmt.setString(9,  lol.getCantidad());
+       
+
+            System.out.println("ejecutando query:" + SQL_INSERT);
+            rows = stmt.executeUpdate();
+            System.out.println("Registros afectados:" + rows);
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return rows;
+    }
+      
+      
+      
+      
+      
+      
 }
