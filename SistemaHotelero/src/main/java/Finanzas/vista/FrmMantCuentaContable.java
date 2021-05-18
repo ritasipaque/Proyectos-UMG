@@ -46,6 +46,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         BtnMod.setEnabled(false);
         BtnElim.setEnabled(false);
         BtnBus.setEnabled(false);
+        BtnPrint.setEnabled(false);
 
         GenerarPermisos permisos = new GenerarPermisos();
 
@@ -66,6 +67,9 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         }
         if (permisosApp[3].equals("1")) {
             BtnElim.setEnabled(true);
+        }
+        if (permisosApp[4].equals("1")) {
+            BtnPrint.setEnabled(true);
         }
     }
 
@@ -153,7 +157,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         BtnElim = new javax.swing.JButton();
         BtnBus = new javax.swing.JButton();
         BtnAyuda = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        BtnPrint = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableRegistros = new javax.swing.JTable();
 
@@ -240,10 +244,10 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Reporte");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnPrint.setText("Reporte");
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnPrintActionPerformed(evt);
             }
         });
 
@@ -269,7 +273,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(JCmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(BtnPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -291,7 +295,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JCmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton1))
+                    .addComponent(BtnPrint))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -348,7 +352,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Insertar");
         AInsertar.setCodigoAplicacion("1003");
-        AInsertar.setModulo("Finanzas");
+        AInsertar.setModulo("1000");
         
         try {
             BitacoraDAO.insert(AInsertar);
@@ -374,7 +378,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1003");
-        AInsertar.setModulo("Finanzas");
+        AInsertar.setModulo("1000");
         
         try {
             BitacoraDAO.insert(AInsertar);
@@ -401,7 +405,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Modificar");
         AInsertar.setCodigoAplicacion("1003");
-        AInsertar.setModulo("Finanzas");
+        AInsertar.setModulo("1000");
         
         try {
             BitacoraDAO.insert(AInsertar);
@@ -423,7 +427,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Buscar");
         AInsertar.setCodigoAplicacion("1003");
-        AInsertar.setModulo("Finanzas");
+        AInsertar.setModulo("1000");
         
         try {
             BitacoraDAO.insert(AInsertar);
@@ -454,7 +458,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_BtnAyudaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         JasperReport report;
         JasperPrint print;
 
@@ -480,15 +484,15 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         Bitacora AInsertar = new Bitacora();
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Imprimir");
-        AInsertar.setCodigoAplicacion("1000");
-        AInsertar.setModulo("Finanzas");
+        AInsertar.setCodigoAplicacion("1003");
+        AInsertar.setModulo("1000");
         try {
             BitacoraDAO.insert(AInsertar);
 
         } catch (UnknownHostException ex) {
             Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -497,12 +501,12 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
     private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnPrint;
     private javax.swing.JComboBox<String> JCmbClasificacion;
     private javax.swing.JComboBox<String> JCmbEstado;
     private javax.swing.JTable JTableRegistros;
     private javax.swing.JTextField JTxtCodigoCuenta;
     private javax.swing.JTextField JTxtNombre;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
