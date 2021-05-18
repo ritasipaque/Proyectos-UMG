@@ -27,15 +27,23 @@ import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 import Comercial.datos.Conexion;
 import java.io.File;
+import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Aplicacion_Perfil;
+import seguridad.vista.GenerarPermisos;
+import seguridad.vista.Login;
 
 /**
  *
@@ -50,7 +58,37 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
      ButtonGroup RadiosGrupo;
      int codigoAplicacion = 3007;
     
-    
+    void habilitarAcciones() {
+
+        int codigoAplicacion = 3001;
+        var usuario = Login.usuarioComercial;
+
+        GenerarCompra.setEnabled(false);
+        validar.setEnabled(false);
+        valiar.setEnabled(false);
+        Eliminar.setEnabled(false);
+
+        GenerarPermisos permisos = new GenerarPermisos();
+
+        String[] permisosApp = new String[4];
+
+        for (int i = 0; i < 4; i++) {
+            permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
+        }
+
+        if (permisosApp[0].equals("1")) {
+            GenerarCompra.setEnabled(true);
+        }
+        if (permisosApp[1].equals("1")) {
+            validar.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            valiar.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            Eliminar.setEnabled(true);
+        }
+     }
 
     /**
      * Creates new form ProcesoCompra
@@ -95,7 +133,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        GenerarCompra = new javax.swing.JButton();
+        PRODUCTO = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -133,6 +171,20 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         jLabel17 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        GenerarCompra = new javax.swing.JButton();
+        Ayuda = new javax.swing.JButton();
+
+        javax.swing.GroupLayout PRODUCTOLayout = new javax.swing.GroupLayout(PRODUCTO.getContentPane());
+        PRODUCTO.getContentPane().setLayout(PRODUCTOLayout);
+        PRODUCTOLayout.setHorizontalGroup(
+            PRODUCTOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        PRODUCTOLayout.setVerticalGroup(
+            PRODUCTOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setClosable(true);
         setIconifiable(true);
@@ -141,13 +193,6 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         setTitle("Proceso Compra");
         setToolTipText("");
         setVisible(true);
-
-        GenerarCompra.setText("GenerarCompra");
-        GenerarCompra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GenerarCompraActionPerformed(evt);
-            }
-        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Proveedor"));
 
@@ -388,6 +433,22 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel21.setText(" Nit :001250089 56");
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Efectivo", "Trajeta", " " }));
+
+        GenerarCompra.setText("GenerarCompra");
+        GenerarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenerarCompraActionPerformed(evt);
+            }
+        });
+
+        Ayuda.setText("Ayuda");
+        Ayuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AyudaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -402,21 +463,6 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(320, 320, 320)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGap(24, 24, 24)
-                                    .addComponent(jLabel17)
-                                    .addGap(76, 76, 76))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel19)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txt_idfacutra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel21))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -425,15 +471,36 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                         .addComponent(RBEP0)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RBEPvacio)
-                        .addGap(41, 41, 41)
-                        .addComponent(GenerarCompra)))
+                        .addGap(30, 30, 30)
+                        .addComponent(GenerarCompra)
+                        .addGap(49, 49, 49)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(320, 320, 320)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel17)
+                        .addGap(76, 76, 76))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_idfacutra, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel21)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Ayuda)
+                .addGap(271, 271, 271))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Ayuda))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt_idfacutra)
@@ -455,10 +522,10 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
                         .addComponent(RBEP1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(GenerarCompra)
-                            .addComponent(RBEPvacio))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(RBEPvacio))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(GenerarCompra))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -482,101 +549,36 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+         txt_idfacutra.setText("");
+        txt_nombre.setText("");
+         txt_combox.setSelectedIndex(0);
+       
+        txt_nit.setText("");
+        
+        model.getDataVector().removeAllElements();
+        tbtTabla.updateUI();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
 
         eliminar();
-    }//GEN-LAST:event_EliminarActionPerformed
-
-    private void GenerarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarCompraActionPerformed
-        // TODO add your handling code here:
-         
-        double S = 0, tot;
-        for (int i = 0; i < tbtTabla.getRowCount(); i++) {
-            S = S + Double.parseDouble(model.getValueAt(i, 8).toString());
+        BitacoraDao BitacoraDAO = new BitacoraDao();
             
-        }
-        S = redondear(S);
-        //txt_subtotal.setText(String.valueOf(S));
+        
+       Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Eliminar");
 
-        tot = S;
-        tot = redondear(tot);
-        
-        txt_total.setText(String.valueOf(tot));
-        
-        
-        if (txt_cantidad.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "INGRESE LA CANTIDAD A COMPRAR", "SISTEMA", JOptionPane.WARNING_MESSAGE);
-            txt_cantidad.requestFocus();
-            return;
-        }
-        if (txt_precio.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "INGRESE EL PRECIO DEL PRODUCTO", "SISTEMA", JOptionPane.WARNING_MESSAGE);
-            txt_precio.requestFocus();
-            return;
-        }
-        //Entrada
-        String datos[] = new String[10];
-        datos[0] = txt_idfacutra.getText();
-        datos[1] = txt_combox.getSelectedItem().toString();
-        datos[2] = txt_nombre.getText();
-        datos[3] = txt_nit.getText();
-        datos[4] = uno.getSelectedItem().toString();
-        datos[5] = txt_nombreproducto.getText();
-        datos[6] = txt_precio.getText();
-        datos[7] = txt_cantidad.getText();
-        
-        
-        Double imp = Double.parseDouble(datos[6]) * Double.parseDouble(datos[7]);
-        imp = redondear(imp);
-        datos[8] = imp.toString();
-        
-        
-        txt_1.setText(String.valueOf(imp));
-        txt_total.setText(String.valueOf(tot));
-        datos[9] = txt_fecha.getText();
-        
-         
-        
-        
-        model.addRow(datos);
-        calTot();
-
-        CompraDAO proveedorDAO = new CompraDAO();
-        Compra proveedorAInsertar = new Compra();
-        proveedorAInsertar.setId_factura((int) Integer.parseInt(txt_idfacutra.getText()));
-        proveedorAInsertar.setId_proveedor(txt_combox.getSelectedItem().toString());
-        proveedorAInsertar.setNombre_proveedor(txt_nombre.getText());
-        proveedorAInsertar.setNit_proveedor(txt_nit.getText());
-        proveedorAInsertar.setId_producto(uno.getSelectedItem().toString());
-        proveedorAInsertar.setNombre_producto(txt_nombreproducto.getText());
-        proveedorAInsertar.setPrecio_producto(txt_precio.getText());
-        proveedorAInsertar.setCantidad_producto(txt_cantidad.getText());
-        proveedorAInsertar.setSubtotal_producto(txt_1.getText());
-        proveedorAInsertar.setTotal_producto(txt_total.getText());
-        proveedorAInsertar.setFecha_producto(txt_fecha.getText());
-//         proveedorAInsertar.setPago_producto(txt_1.getText()); 
-         
-         
-
-        proveedorDAO.insert(proveedorAInsertar);
-
-        JOptionPane.showMessageDialog(this, "COMPRA REALIZADA", "SISTEMA", JOptionPane.INFORMATION_MESSAGE);
-
-        
-        uno.setSelectedIndex(0);
-        txt_nombreproducto.setText("");
-        txt_precio.setText("");
-        txt_cantidad.setText("");
-        txt_1.setText("");
-
-        
-        
-        
-    }//GEN-LAST:event_GenerarCompraActionPerformed
+        Insertar.setCodigoAplicacion("3007");
+        Insertar.setModulo("3000");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_EliminarActionPerformed
 
     private void valiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valiarActionPerformed
         // TODO add your handling code here:
@@ -599,6 +601,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
 
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
         // TODO add your handling code here:
+       
         
 
           String valor = txt_combox.getSelectedItem().toString();
@@ -618,15 +621,144 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
 
             estadovalidacion = 0;
         }
+        
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        
+       Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Buscar");
+
+        Insertar.setCodigoAplicacion("3007");
+        Insertar.setModulo("3000");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        
     }//GEN-LAST:event_validarActionPerformed
 
     private void RBEP0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBEP0ActionPerformed
         // TODO add your handling code here:
 
+prueba uno= new prueba();
+MDIComercial.jdpescritorio.add(uno);
+uno.toFront();
+uno.setVisible(true);
+
+
         
         
         
     }//GEN-LAST:event_RBEP0ActionPerformed
+
+    private void GenerarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarCompraActionPerformed
+        // TODO add your handling code here:
+
+        double S = 0, tot;
+        for (int i = 0; i < tbtTabla.getRowCount(); i++) {
+            S = S + Double.parseDouble(model.getValueAt(i, 8).toString());
+
+        }
+        S = redondear(S);
+        //txt_subtotal.setText(String.valueOf(S));
+
+        tot = S;
+        tot = redondear(tot);
+
+        txt_total.setText(String.valueOf(tot));
+
+        if (txt_cantidad.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE LA CANTIDAD A COMPRAR", "SISTEMA", JOptionPane.WARNING_MESSAGE);
+            txt_cantidad.requestFocus();
+            return;
+        }
+        if (txt_precio.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "INGRESE EL PRECIO DEL PRODUCTO", "SISTEMA", JOptionPane.WARNING_MESSAGE);
+            txt_precio.requestFocus();
+            return;
+        }
+        //Entrada
+        String datos[] = new String[10];
+        datos[0] = txt_idfacutra.getText();
+        datos[1] = txt_combox.getSelectedItem().toString();
+        datos[2] = txt_nombre.getText();
+        datos[3] = txt_nit.getText();
+        datos[4] = uno.getSelectedItem().toString();
+        datos[5] = txt_nombreproducto.getText();
+        datos[6] = txt_precio.getText();
+        datos[7] = txt_cantidad.getText();
+
+        Double imp = Double.parseDouble(datos[6]) * Double.parseDouble(datos[7]);
+        imp = redondear(imp);
+        datos[8] = imp.toString();
+
+        txt_1.setText(String.valueOf(imp));
+        txt_total.setText(String.valueOf(tot));
+        datos[9] = txt_fecha.getText();
+
+        model.addRow(datos);
+        calTot();
+
+        CompraDAO proveedorDAO = new CompraDAO();
+        Compra proveedorAInsertar = new Compra();
+        proveedorAInsertar.setId_factura((int) Integer.parseInt(txt_idfacutra.getText()));
+        proveedorAInsertar.setId_proveedor(txt_combox.getSelectedItem().toString());
+        proveedorAInsertar.setNombre_proveedor(txt_nombre.getText());
+        proveedorAInsertar.setNit_proveedor(txt_nit.getText());
+        proveedorAInsertar.setId_producto(uno.getSelectedItem().toString());
+        proveedorAInsertar.setNombre_producto(txt_nombreproducto.getText());
+        proveedorAInsertar.setPrecio_producto(txt_precio.getText());
+        proveedorAInsertar.setCantidad_producto(txt_cantidad.getText());
+        proveedorAInsertar.setSubtotal_producto(txt_1.getText());
+        proveedorAInsertar.setTotal_producto(txt_total.getText());
+        proveedorAInsertar.setFecha_producto(txt_fecha.getText());
+        //         proveedorAInsertar.setPago_producto(txt_1.getText());
+
+        proveedorDAO.insert(proveedorAInsertar);
+
+        JOptionPane.showMessageDialog(this, "COMPRA REALIZADA", "SISTEMA", JOptionPane.INFORMATION_MESSAGE);
+
+        uno.setSelectedIndex(0);
+        txt_nombreproducto.setText("");
+        txt_precio.setText("");
+        txt_cantidad.setText("");
+        txt_1.setText("");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+            
+        
+       Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Guardar");
+
+        Insertar.setCodigoAplicacion("3007");
+        Insertar.setModulo("3000");
+            try {
+                BitacoraDAO.insert(Insertar);
+            } catch (UnknownHostException ex) {
+                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+    }//GEN-LAST:event_GenerarCompraActionPerformed
+
+    private void AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AyudaActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm")).exists()) {
+                Process p = Runtime
+                .getRuntime()
+                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_AyudaActionPerformed
 private double redondear(double num) {
         return Math.rint(num * 100) / 100;
     }
@@ -667,12 +799,15 @@ private double redondear(double num) {
     }private Connection connection = null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Ayuda;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton GenerarCompra;
+    private javax.swing.JDialog PRODUCTO;
     private javax.swing.JRadioButton RBEP0;
     private javax.swing.JRadioButton RBEP1;
     public javax.swing.JRadioButton RBEPvacio;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
