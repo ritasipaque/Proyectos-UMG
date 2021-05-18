@@ -830,16 +830,15 @@ private Connection connection = null;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnReporteActionPerformed
 
-
-    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-MDIHoteleria.logo.setVisible(true);          // TODO add your handling code here:
-    MDIHoteleria.logo.setVisible(true);
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+MDIHoteleria.logo.setVisible(true);             // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
-    MDIHoteleria.logo.setVisible(true);
-
+MDIHoteleria.logo.setVisible(true);             // TODO add your handling code here:
     }//GEN-LAST:event_formInternalFrameDeactivated
+
+                                      
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
