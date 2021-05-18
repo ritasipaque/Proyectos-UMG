@@ -59,11 +59,11 @@ public class MDIComercial extends javax.swing.JFrame {
         } else {
             //No existe imagen.
         }
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = logo.getSize();
         logo.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         logo.setVisible(true);
-        jDesktopPane1.add(logo);
+        jdpescritorio.add(logo);
     }
 
     /**
@@ -75,8 +75,7 @@ public class MDIComercial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane()
-        ;
+        jdpescritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         M_ccompras = new javax.swing.JMenu();
@@ -109,18 +108,7 @@ public class MDIComercial extends javax.swing.JFrame {
         setTitle("Sistema Hotelero");
         setResizable(false);
 
-        jDesktopPane1.setBackground(new java.awt.Color(255, 204, 0));
-
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1350, Short.MAX_VALUE)
-        );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
-        );
+        jdpescritorio.setBackground(new java.awt.Color(255, 204, 0));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -288,11 +276,11 @@ public class MDIComercial extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addComponent(jdpescritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jdpescritorio, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE)
         );
 
         pack();
@@ -309,8 +297,8 @@ public class MDIComercial extends javax.swing.JFrame {
 
         Mantenimiento_Cliente = new Mantenimiento_Cliente();
 
-        jDesktopPane1.add(Mantenimiento_Cliente);
-        Dimension desktopSize = jDesktopPane1.getSize();
+        jdpescritorio.add(Mantenimiento_Cliente);
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Mantenimiento_Cliente.getSize();
         Mantenimiento_Cliente.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Mantenimiento_Cliente.show();
@@ -338,9 +326,9 @@ public class MDIComercial extends javax.swing.JFrame {
     private void M_deudorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_deudorActionPerformed
         Mantenimiento_Acreedor = new Mantenimiento_Deudores();
 
-        jDesktopPane1.add(Mantenimiento_Acreedor);
+        jdpescritorio.add(Mantenimiento_Acreedor);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Mantenimiento_Acreedor.getSize();
         Mantenimiento_Acreedor.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Mantenimiento_Acreedor.show();
@@ -367,9 +355,9 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void M_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_proveedorActionPerformed
         MantenimientoProveedor = new MantenimientoProveedor();
-        jDesktopPane1.add(MantenimientoProveedor);
+        jdpescritorio.add(MantenimientoProveedor);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = MantenimientoProveedor.getSize();
         MantenimientoProveedor.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         MantenimientoProveedor.show();
@@ -382,8 +370,8 @@ public class MDIComercial extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         FmrBitacora = new seguridad.vista.FmrBitacora();
 
-        jDesktopPane1.add(FmrBitacora);
-        Dimension desktopSize = jDesktopPane1.getSize();
+        jdpescritorio.add(FmrBitacora);
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = FmrBitacora.getSize();
         FmrBitacora.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         FmrBitacora.show();
@@ -410,7 +398,7 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
-            if ((new File("src\\main\\java\\Comercial\\reportes\\menus.chm")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\menu.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
                         .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\menu.chm");
@@ -466,9 +454,9 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void M_producto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_M_producto1ActionPerformed
         MantenimientoProductos = new MantenimientoProductos();
-        jDesktopPane1.add(MantenimientoProductos);
+        jdpescritorio.add(MantenimientoProductos);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = MantenimientoProductos.getSize();
         MantenimientoProductos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         MantenimientoProductos.show();
@@ -494,10 +482,12 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void FacturaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturaComprasActionPerformed
         // TODO add your handling code here:
-        Factura = new FacturaProveedor();
-        jDesktopPane1.add(Factura);
+        
+         FacturaProveedor ip= new FacturaProveedor();
+    jdpescritorio.add(ip);
+    ip.show();
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Factura.getSize();
         Factura.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Factura.show();
@@ -508,9 +498,9 @@ public class MDIComercial extends javax.swing.JFrame {
     private void ProcesoCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoCompraActionPerformed
         // TODO add your handling code here:
         Compra = new ProcesoCompra();
-        jDesktopPane1.add(Compra);
+        jdpescritorio.add(Compra);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Compra.getSize();
         Compra.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Compra.show();
@@ -521,9 +511,9 @@ public class MDIComercial extends javax.swing.JFrame {
     private void P_depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_depositoActionPerformed
 
         Proceso_Depositos = new Proceso_Depositos();
-        jDesktopPane1.add(Proceso_Depositos);
+        jdpescritorio.add(Proceso_Depositos);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Proceso_Depositos.getSize();
         Proceso_Depositos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Proceso_Depositos.show();
@@ -551,9 +541,9 @@ public class MDIComercial extends javax.swing.JFrame {
     private void P_pedido_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_pedido_facturaActionPerformed
 
         Proceso_Factura = new Proceso_Factura();
-        jDesktopPane1.add(Proceso_Factura);
+       jdpescritorio.add(Proceso_Factura);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Proceso_Factura.getSize();
         Proceso_Factura.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Proceso_Factura.show();
@@ -579,9 +569,9 @@ public class MDIComercial extends javax.swing.JFrame {
     private void ProcesoInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesoInventarioActionPerformed
         // TODO add your handling code here:
         Proceso_Producto = new Proceso_Producto();
-        jDesktopPane1.add(Proceso_Producto);
+        jdpescritorio.add(Proceso_Producto);
 
-        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Proceso_Producto.getSize();
         Proceso_Producto.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
         Proceso_Producto.show();
@@ -645,7 +635,6 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenuItem ProcesoCompra;
     public static javax.swing.JMenuItem ProcesoInventario;
     public static javax.swing.JMenu cerrar_sesion;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
@@ -656,5 +645,6 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem7;
+    public static javax.swing.JDesktopPane jdpescritorio;
     // End of variables declaration//GEN-END:variables
 }
