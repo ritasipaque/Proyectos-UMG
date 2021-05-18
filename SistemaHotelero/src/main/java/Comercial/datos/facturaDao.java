@@ -26,7 +26,7 @@ public class facturaDao {
    private static final String SQL_INSERT = "INSERT INTO tbl_pedido_factura(id_cliente,Cliente,Nit,telefono,producto , Cantidad ,Precio_por_unidad,Monto,Total) VALUES(?, ?,?, ?,?, ?,?,?,?)";
     private static final String SQL_SELECT = "SELECT id_cliente,Cliente,Nit,telefono,producto , Cantidad ,Precio_por_unidad,Monto,Total FROM tbl_pedido_factura";
     private static final String SQL_QUERY = "SELECT id_cliente,Cliente,Nit,telefono,producto , Cantidad ,Precio_por_unidad,Monto,Total FROM tbl_pedido_factura WHERE id_cliente = ?";
-  private static final String SQL_UPDATE = "UPDATE   tbl_pedido_factura  SET id_cliente= ?,Cliente=?,Monto=?,Estatus=? ,Id_producto=? ,Detalle=?, Cantidad=? ,Precio_por_unidad =? WHERE id_cliente = ?";
+  private static final String SQL_UPDATE = "UPDATE tbl_pedido_factura  SET Cliente=? , Nit=? , telefono=? , producto=? , Cantidad =? , Precio_por_unidad , Monto=? , Total =? WHERE id_cliente =?";
     private static final String SQL_DELETE = "DELETE FROM tbl_pedido_factura WHERE id_cliente= ?";
   
 

@@ -187,6 +187,7 @@ cantidad.setText(B.getCantidad());
              cantidad.setText("");
               f1.setText("");
                f2.setText("");
+                 detalle.setText("");
     }
     /**
      * Creates new form Proceso_Depositos
@@ -583,21 +584,20 @@ BitacoraDao BitacoraDAO = new BitacoraDao();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-     DepositosDAO D = new   DepositosDAO  ();
+     DepositosDAO Da1 = new   DepositosDAO  ();
              
-                Deposito AModificat = new  Deposito();
+                Deposito AModifica1 = new  Deposito();
 //               
-                AModificat .setId_pedido(i.getText());
-                AModificat .setCliente(cliente.getText());
-                AModificat .setCuenta(cuenta.getText());
-                AModificat .setNit(nit.getText());
-                AModificat .setFecha_inicial(f1.getText());
-                AModificat .setFecha_final(f2.getText());      
-                AModificat .setTelefono(telefono.getText());
-                AModificat .setProducto(producto.getText());
-                AModificat .setDetalle(detalle.getText());
-                AModificat .setCantidad(cantidad.getText());
-                D.update(AModificat);
+                               AModifica1.setCliente(cliente.getText());
+                AModifica1.setCuenta(cuenta.getText());
+                AModifica1.setNit(nit.getText());
+                AModifica1.setFecha_inicial(f1.getText());
+                AModifica1.setFecha_final(f2.getText());      
+                AModifica1.setTelefono(telefono.getText());
+                AModifica1.setProducto(producto.getText());
+                AModifica1.setDetalle(detalle.getText());
+                AModifica1.setCantidad(cantidad.getText());
+                Da1.update1(AModifica1);
         
                 llenadoDeTablas(); 
                     BitacoraDao BitacoraDAO = new BitacoraDao();

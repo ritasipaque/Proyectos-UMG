@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class EmisionChequeDAO {
     
-   private static final String SQL_SELECT = "SELECT Numero_Cheque, Fecha_Cheque, FK_Banco, FK_Cuenta, FK_Cuentahabiente, Monto_Cheque,  FROM cheque  ";
+   private static final String SQL_SELECT = "SELECT Numero_Cheque, Fecha_Cheque, FK_Banco, FK_Cuenta, FK_Cuentahabiente, Monto_Cheque  FROM cheque";
    private static final String SQL_INSERT = "INSERT INTO  cheque VALUES(?,?,?,?,?,?)";
    private static final String SQL_DELETE = "DELETE FROM  cheque   WHERE Numero_Cheque =?";
    private static final String SQL_UPDATE = "UPDATE  cheque  SET  Numero_Cheque=?,  Fecha_Cheque=?, FK_Banco=?, FK_Cuenta=?, FK_Cuentahabiente=?, Monto_Cheque=?  WHERE    Numero_Cheque= ?";
@@ -136,15 +136,25 @@ public int update(EmisionCheque emisioncheque){
     }   
 
      public List<EmisionCheque> listar() {
-        List<EmisionCheque> emisioncheque = new ArrayList <>();
+        List<EmisionCheque> emisioncheque = new ArrayList <EmisionCheque>();
         Connection conn = null;
         PreparedStatement stmt = null;
-        ResultSet rs = null;   
+        ResultSet rs = null;
+        //EmisionCheque tipos = null;
+        
         try {
             conn=Conexion.getConnection();
             stmt=conn.prepareStatement(SQL_SELECT);
             rs=stmt.executeQuery();
             while (rs.next()) {
+            String Numero_Cheque = rs.getString("Numero_Cheque");
+            String Fecha_Cheque = rs.getString("Fecha_Cheque");
+            String FK_Banco = rs.getString("FK_Banco");
+            String FK_Cuenta = rs.getString("FK_Cuenta");
+           String FK_Cuentahabiente = rs.getString("FK_Cuentahabiente");
+            String Monto_Cheque = rs.getString("Monto_Cheque");
+            
+            
             EmisionCheque usr = new EmisionCheque();
             usr.setNumero_Cheque(rs.getString(1));
             usr.setFecha_Cheque(rs.getString(2));
@@ -155,7 +165,12 @@ public int update(EmisionCheque emisioncheque){
             emisioncheque.add(usr);
              }
          }catch (Exception e){
-         }
+            // System.out.println(e);
+         } finally {
+            Conexion.close(conn);
+            Conexion.close(stmt);
+            Conexion.close(rs);
+        }
          return emisioncheque;
      }
      
