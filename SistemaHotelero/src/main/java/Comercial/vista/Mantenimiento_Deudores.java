@@ -7,13 +7,22 @@ package Comercial.vista;
 
 import Comercial.datos.DeudoresDAO;
 import Comercial.dominio.Deudores;
+import Comercial.datos.Conexion;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
@@ -47,14 +56,14 @@ public class Mantenimiento_Deudores extends javax.swing.JInternalFrame {
         if (permisosApp[0].equals("1")) {
             btnAgregar.setEnabled(true);
         }
-        if (permisosApp[1].equals("1")) {
+        if (permisosApp[1].equals("0")) {
             btnBuscar.setEnabled(true);
         }
-        if (permisosApp[2].equals("1")) {
+        if (permisosApp[2].equals("0")) {
             btnModificar.setEnabled(true);
         }
-        if (permisosApp[3].equals("1")) {
-            btnEliminar.setEnabled(true);
+        if (permisosApp[3].equals("0")) {
+            btnEliminar.setEnabled(false);
         }
     }
 
@@ -165,6 +174,7 @@ producto.setText(Buscar.getProducto());
         btnBuscar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -255,6 +265,13 @@ producto.setText(Buscar.getProducto());
             }
         });
 
+        jButton2.setText("Reporte");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,7 +327,9 @@ producto.setText(Buscar.getProducto());
                         .addComponent(btnBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(i, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(164, 164, 164))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(83, 83, 83))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,7 +362,7 @@ producto.setText(Buscar.getProducto());
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(estatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(monto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -353,7 +372,8 @@ producto.setText(Buscar.getProducto());
                     .addComponent(btnModificar)
                     .addComponent(btnBuscar)
                     .addComponent(btnAgregar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
@@ -515,6 +535,27 @@ producto.setText(Buscar.getProducto());
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
+private Connection connection = null;
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                + "/src/main/java/Comercial/reportes/MantenimientoDeudor.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("deudor ");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -529,6 +570,7 @@ producto.setText(Buscar.getProducto());
     private static javax.swing.JTextField estatus;
     private static javax.swing.JTextField i;
     private static javax.swing.JButton jButton1;
+    private static javax.swing.JButton jButton2;
     private static javax.swing.JLabel jLabel1;
     private static javax.swing.JLabel jLabel2;
     private static javax.swing.JLabel jLabel3;
