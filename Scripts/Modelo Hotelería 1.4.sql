@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS `hoteleria`.`tbl_facturacion` (
   `nombre_factura` VARCHAR(50) NULL DEFAULT NULL,
   `fechaEntrada_factura` VARCHAR(20) NULL DEFAULT NULL,
   `fechaSalida_factura` VARCHAR(20) NULL DEFAULT NULL,
-  `formaPago_factura` VARCHAR(20) NULL DEFAULT NULL,
+  `formaPago_factura` VARCHAR(50) NULL DEFAULT NULL,
   `noTarjeta_factura` INT(50) NULL DEFAULT NULL,
   `cvv_factura` INT(10) NULL DEFAULT NULL,
   `fechaCaducidad_factura` VARCHAR(20) NULL DEFAULT NULL,
