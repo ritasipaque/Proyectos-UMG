@@ -38,7 +38,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
     DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     FacturacionDAO cargarCbx = new FacturacionDAO();
     int suma = 0, total;
-    
+
     void habilitarAcciones() {
 
         var codigoAplicacion = 2203;
@@ -358,7 +358,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel7.setText("No. Tarjeta:");
+        jLabel7.setText("No. Tarjeta / Cuenta:");
 
         txtNoTarjeta.setEditable(false);
         txtNoTarjeta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -481,6 +481,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
         jdateCaducidad.setEnabled(false);
 
         btnConfirmarPago.setText("Confirmar Pago");
+        btnConfirmarPago.setEnabled(false);
         btnConfirmarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarPagoActionPerformed(evt);
@@ -530,7 +531,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jdateCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(18, Short.MAX_VALUE))
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(5, 5, 5)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -670,7 +671,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 717, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 710, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -770,6 +771,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                 btnAsignarTodos.setEnabled(true);
                 btnQuitarUno.setEnabled(true);
                 btnQuitarTodos.setEnabled(true);
+                btnConfirmarPago.setEnabled(true);
             }
         } else {
             JOptionPane.showMessageDialog(null, "El número de factura y de reservación deben estar llenos.");
@@ -910,6 +912,74 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
                     ama_De_Llaves_Insertar.setTotalFactura_Factura(Integer.parseInt(txtTotalFacturacion.getText()));
                     ama_De_Llaves_Insertar.setEstado_Factura(1);
 
+                    int pago = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la totalidad de su pago"));
+                    int pago2 = Integer.parseInt(txtTotalFacturacion.getText());
+
+                    if (pago < pago2) {
+                        JOptionPane.showConfirmDialog(null, "El monto ingresado no es la totalidad de la factura.");
+                    } else if (pago > pago2) {
+                        int cambio = pago - pago2;
+                        int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea seguir adelante con su pago?", "Pago", JOptionPane.YES_NO_OPTION);
+                        if (confirmar == 0) {
+                            JOptionPane.showMessageDialog(null, "Su cambio es de " + cambio);
+                            ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
+                            limpiar();
+                            txtNombre.setEditable(false);
+                            cbxPago.setEnabled(false);
+                            txtNoTarjeta.setEditable(false);
+                            txtCvv.setEditable(false);
+                            jdateCaducidad.setEnabled(false);
+                            btnAsignarUno.setEnabled(false);
+                            btnAsignarTodos.setEnabled(false);
+                            btnQuitarUno.setEnabled(false);
+                            btnQuitarTodos.setEnabled(false);
+                            btnConfirmarPago.setEnabled(false);
+                        }
+                    } else if (pago == pago2) {
+                        int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea seguir adelante con su pago?", "Pago", JOptionPane.YES_NO_OPTION);
+                        if (confirmar == 0) {
+                            ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
+                            limpiar();
+                            //GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+                            //guardarBitacora.GuardarEnBitacora("Facturacion", Integer.toString(codigoAplicacion), Login.usuarioHoteleria);
+                            txtNombre.setEditable(false);
+                            cbxPago.setEnabled(false);
+                            txtNoTarjeta.setEditable(false);
+                            txtCvv.setEditable(false);
+                            jdateCaducidad.setEnabled(false);
+                            btnAsignarUno.setEnabled(false);
+                            btnAsignarTodos.setEnabled(false);
+                            btnQuitarUno.setEnabled(false);
+                            btnQuitarTodos.setEnabled(false);
+                            btnConfirmarPago.setEnabled(false);
+                        }
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
+            }
+        } else if (cbx_Pago.equals("Criptomoneda Ethereum") || cbx_Pago.equals("PAYPAL")
+                || cbx_Pago.equals("MovilPay")) {
+            if (txtFactura.getText().length() != 0 && txtReserva.getText().length() != 0
+                    && txtNoTarjeta.getText().length() != 0
+                    && txtTotalReservacion.getText().length() != 0 && txtTotalServicios.getText().length() != 0
+                    && txtTotalFacturacion.getText().length() != 0 && cbx_Pago != "Seleccionar...") {
+                {
+                    ama_De_Llaves_Insertar.setId_Factura(Integer.parseInt(txtFactura.getText()));
+                    ama_De_Llaves_Insertar.setId_Reservacion(Integer.parseInt(txtReserva.getText()));
+                    ama_De_Llaves_Insertar.setNombre_Factura(txtNombre.getText());
+                    ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
+                    ama_De_Llaves_Insertar.setFechaSalida_Factura(txtSalida.getText());
+                    ama_De_Llaves_Insertar.setFechaEntrada_Factura(txtEntrada.getText());
+                    ama_De_Llaves_Insertar.setFormaPago_Factura(cbx_Pago);
+                    ama_De_Llaves_Insertar.setNoTarjeta_Factura(Integer.parseInt(txtNoTarjeta.getText()));
+                    ama_De_Llaves_Insertar.setCvv_Factura(0);
+                    ama_De_Llaves_Insertar.setCaducidad_Factura(null);
+                    ama_De_Llaves_Insertar.setTotalReservacion_Factura(Integer.parseInt(txtTotalReservacion.getText()));
+                    ama_De_Llaves_Insertar.setTotalServicios_Factura(Integer.parseInt(txtTotalServicios.getText()));
+                    ama_De_Llaves_Insertar.setTotalFactura_Factura(Integer.parseInt(txtTotalFacturacion.getText()));
+                    ama_De_Llaves_Insertar.setEstado_Factura(1);
+
                     int confirmar = JOptionPane.showConfirmDialog(this, "¿Desea seguir adelante con su pago?", "Pago", JOptionPane.YES_NO_OPTION);
                     if (confirmar == 0) {
                         ama_De_Llaves_DAO.insert(ama_De_Llaves_Insertar);
@@ -931,6 +1001,7 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Todos los campos tienen que estar llenos");
             }
+
         }
         tabla();
     }//GEN-LAST:event_btnConfirmarPagoActionPerformed
@@ -992,6 +1063,18 @@ public class FacturacionDeHabitacion extends javax.swing.JInternalFrame {
             jdateCaducidad.setEnabled(true);
         } else if (cbx_Pago.equals("Efectivo")) {
             txtNoTarjeta.setEditable(false);
+            txtCvv.setEditable(false);
+            jdateCaducidad.setEnabled(false);
+        } else if (cbx_Pago.equals("Criptomoneda Ethereum")) {
+            txtNoTarjeta.setEditable(true);
+            txtCvv.setEditable(false);
+            jdateCaducidad.setEnabled(false);
+        } else if (cbx_Pago.equals("PAYPAL")) {
+            txtNoTarjeta.setEditable(true);
+            txtCvv.setEditable(false);
+            jdateCaducidad.setEnabled(false);
+        } else if (cbx_Pago.equals("MovilPay")) {
+            txtNoTarjeta.setEditable(true);
             txtCvv.setEditable(false);
             jdateCaducidad.setEnabled(false);
         }
