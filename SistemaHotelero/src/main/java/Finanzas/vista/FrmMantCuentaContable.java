@@ -5,15 +5,23 @@
  */
 package Finanzas.vista;
 
+import Finanzas.datos.Conexion;
 import Finanzas.dominio.ClasificacionCuenta;
 import Finanzas.dominio.CuentaContable;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.GenerarPermisos;
@@ -233,6 +241,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         );
 
         jButton1.setText("Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -440,6 +453,42 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_BtnAyudaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            Connection conex = Conexion.getConnection();
+            String ruta = "src\\main\\java\\Finanzas\\reportes\\CuentasContables.jasper";
+
+            report = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+
+            JasperPrint jprint = JasperFillManager.fillReport(ruta, null, conex);
+            
+            JasperViewer jview = new JasperViewer(jprint, false);
+            
+            jview.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            jview.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setModulo("Finanzas");
+        try {
+            BitacoraDAO.insert(AInsertar);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
