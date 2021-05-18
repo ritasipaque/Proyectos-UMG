@@ -203,6 +203,24 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Objetos Perdidos");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameDeactivated(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("INFORMACION"));
 
@@ -247,6 +265,11 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         });
 
         jButton6.setText("Ayuda");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Reporte");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -337,6 +360,17 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tabla1);
 
         jLabel5.setText("ID:");
+
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_idActionPerformed(evt);
+            }
+        });
+        txt_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_idKeyTyped(evt);
+            }
+        });
 
         BtnBus.setText("Buscar");
         BtnBus.addActionListener(new java.awt.event.ActionListener() {
@@ -463,8 +497,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         // TODO add your handling code here:
-        if (txt_habitacion.getSelectedItem().toString().length()!=0&&txt_ama.getSelectedItem().toString().length()!=0&&
-                    txt_objeto.getText().length()!=0) {
+        if (ObjetosPerdidos.isNumeric(txt_id.getText())) {
             ObjetosPerdidosDAO modulosDAO = new ObjetosPerdidosDAO();
             ObjetoPerdido moduloEliminar = new ObjetoPerdido();
             moduloEliminar.setIdobjeto(txt_id.getText());
@@ -531,13 +564,46 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {                                         
-    MDIHoteleria.logo.setVisible(true);
-    }                                        
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        // TODO add your handling code here:
+        MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameClosed
 
-    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {                                              
-    MDIHoteleria.logo.setVisible(true);
-    }
+    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
+        // TODO add your handling code here:
+        MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameDeactivated
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaObjetosPerdidos.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaObjetosPerdidos.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+
+    }//GEN-LAST:event_txt_idActionPerformed
+
+    private void txt_idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txt_idKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBus;

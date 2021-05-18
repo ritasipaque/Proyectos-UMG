@@ -10,6 +10,7 @@ import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.datos.ObjetosPerdidosDAO;
 import Hoteleria.dominio.Habitaciones;
 import Hoteleria.dominio.ObjetoPerdido;
+import java.io.File;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -179,7 +180,19 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Identificacion:");
 
+        txt_dpi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_dpiKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Nombre:");
+
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Objetos Encontrados"));
 
@@ -279,6 +292,11 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         });
 
         jButton7.setText("?");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CANCELAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -392,7 +410,7 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
             btnQuitarTodo.setEnabled(true);
                 }
             }
-        }
+        }      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnAsignarUnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarUnoActionPerformed
@@ -455,7 +473,7 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
             modulosDAO.update(moduloInsertar);   
         }
             
-            JOptionPane.showMessageDialog(null, "Modulo registrado correctamente");
+            JOptionPane.showMessageDialog(null, "Objeto Entregado");
             GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
             guardarBitacora.GuardarEnBitacora("Modificacion", (codigoAplicacion), Login.usuarioHoteleria);
             }else{
@@ -502,6 +520,43 @@ public class Entregar_objeto extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt_dpiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_dpiKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txt_dpiKeyTyped
+
+    private void txt_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isDigit(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Letras.");
+        }
+    }//GEN-LAST:event_txt_nombreKeyTyped
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaEntregaObjetoPerdido.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaEntregaObjetoPerdido.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
