@@ -101,32 +101,6 @@ public class TransaccionBancariaDAO {
         return rows;
     }
 
-      public int update(TransaccionBancaria tipo){
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        int rows = 0;
-        
-        try {
-            conn = Conexion.getConnection();
-            //System.out.println("ejecutando query: " + SQL_UPDATE);
-            stmt = conn.prepareStatement(SQL_UPDATE);
-         //   stmt.setString(1, tipo.getCodigo_TipoTransaccion());
-           // stmt.setString(2, tipo.getTransaccion_Tipo());
-           // stmt.setInt(3, tipo.getEfecto_TipoTransaccion());
-           // stmt.setString(4, tipo.getCodigo_TipoTransaccion());
-            rows = stmt.executeUpdate();
-            //System.out.println("Registros actualizado:" + rows);
-            
-        } catch (SQLException ex) {
-            ex.printStackTrace(System.out);
-        }
-        finally{
-            Conexion.close(stmt);
-            Conexion.close(conn);
-        }
-        
-        return rows;
-    }
 
     public int delete(TransaccionBancaria tipo) {
         Connection conn = null;
