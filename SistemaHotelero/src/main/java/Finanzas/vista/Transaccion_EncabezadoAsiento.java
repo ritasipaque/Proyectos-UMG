@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author Diego Vásquez
+ * @author Carlos Castillo
  */
 public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
    

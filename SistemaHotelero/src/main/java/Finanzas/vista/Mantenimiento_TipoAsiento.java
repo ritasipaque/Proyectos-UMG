@@ -4,12 +4,27 @@
  * and open the template in the editor.
  */
 package Finanzas.vista;
+import Finanzas.datos.Conexion;
 import Finanzas.dominio.TipoAsiento;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import Finanzas.datos.TipoAsientoDAO;
 import java.io.File;
+import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Login;
 
 /**
  *
@@ -63,13 +78,14 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         txtID = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
-        BtnAgregar = new javax.swing.JButton();
-        BtnModificar = new javax.swing.JButton();
-        BtnEliminar = new javax.swing.JButton();
-        BtnBuscar = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        BtnAyu = new javax.swing.JButton();
+        BtnRep = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -92,8 +108,8 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTipo)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtID, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(txtTipo))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -110,31 +126,31 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BtnAgregar.setText("Agregar");
-        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setText("Agregar");
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAgregarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        BtnModificar.setText("Modificar");
-        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("Modificar");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        BtnEliminar.setText("Eliminar");
-        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("Eliminar");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        BtnBuscar.setText("Buscar");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBus.setText("Buscar");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -148,10 +164,17 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(Tabla);
 
-        jButton1.setText("?");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnAyu.setText("?");
+        BtnAyu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnAyuActionPerformed(evt);
+            }
+        });
+
+        BtnRep.setText("Reporte");
+        BtnRep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRepActionPerformed(evt);
             }
         });
 
@@ -162,23 +185,25 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnAgregar)
+                        .addComponent(BtnIng)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnModificar)
+                        .addComponent(BtnMod)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnEliminar)
+                        .addComponent(BtnElim)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnBuscar)
+                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(BtnRep)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnAyu)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnAgregar, BtnBuscar, BtnEliminar, BtnModificar});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnBus, BtnElim, BtnIng, BtnMod, BtnRep});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,11 +212,12 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnAgregar)
-                    .addComponent(BtnModificar)
-                    .addComponent(BtnEliminar)
-                    .addComponent(BtnBuscar)
-                    .addComponent(jButton1))
+                    .addComponent(BtnIng)
+                    .addComponent(BtnMod)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnBus)
+                    .addComponent(BtnAyu)
+                    .addComponent(BtnRep))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -200,7 +226,19 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Agregar");
+        AInsertar.setCodigoAplicacion("1004");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_TipoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         TipoAsiento TAInsertar = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
         if (txtID.getText().length() != 0 && txtTipo.getText().length() !=0) {
@@ -219,9 +257,21 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
             llenadoDeTablas();
         }
         llenadoDeTablas();
-    }//GEN-LAST:event_BtnAgregarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1004");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_TipoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         if ( txtID.getText().length()!=0 && txtTipo.getText().length()!=0){
         TipoAsiento TAMod = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
@@ -234,9 +284,21 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         else {
             JOptionPane.showMessageDialog(null, "No se ha podido modificar");
         }
-    }//GEN-LAST:event_BtnModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1004");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_TipoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         if ( txtID.getText().length()!=0 ){
         TipoAsiento TADEL = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
@@ -256,9 +318,21 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         llenadoDeTablas();
         limpiar();
     }
-    }//GEN-LAST:event_BtnEliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Buscar");
+        AInsertar.setCodigoAplicacion("1004");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_TipoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         if (txtID.getText().length()!=0){
         TipoAsiento TABUS = new TipoAsiento();
         TipoAsientoDAO TADAO = new TipoAsientoDAO();
@@ -276,10 +350,21 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
             llenadoDeTablas();
         }
         llenadoDeTablas();
-    }//GEN-LAST:event_BtnBuscarActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+    private void BtnAyuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyuActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Ayuda");
+        AInsertar.setCodigoAplicacion("1004");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_TipoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         try {
             if ((new File("src\\main\\java\\Finanzas\\ayudas\\AyudaMantenimientoTipoAsiento.chm")).exists()) {
                 Process p = Runtime
@@ -293,16 +378,48 @@ public class Mantenimiento_TipoAsiento extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnAyuActionPerformed
+    private Connection connection = null;
+    private void BtnRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRepActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Reporte");
+        AInsertar.setCodigoAplicacion("1004");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Mantenimiento_TipoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Finanzas/reportes/ReporteTipoAsiento.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Cuenta Bancaria");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_BtnRepActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAgregar;
-    private javax.swing.JButton BtnBuscar;
-    private javax.swing.JButton BtnEliminar;
-    private javax.swing.JButton BtnModificar;
+    private javax.swing.JButton BtnAyu;
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnRep;
     private javax.swing.JTable Tabla;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
