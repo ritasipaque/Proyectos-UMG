@@ -5,6 +5,7 @@
  */
 package Finanzas.vista;
 
+import Finanzas.datos.Conexion;
 import Finanzas.datos.EncabezadoAsientoDAO;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.sql.SQLException;
@@ -13,20 +14,34 @@ import javax.swing.UIManager;
 import Finanzas.datos.MonedaDAO;
 import Finanzas.dominio.EncabezadoAsiento;
 import Finanzas.dominio.Moneda;
+import java.io.File;
+import java.net.UnknownHostException;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
+import seguridad.vista.Login;
 /**
  *
  * @author Carlos Castillo
  */
 public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
-   
+       int codigoAplicacion = 1102;
+
     public void llenadoDeCombos() throws SQLException  {
        MonedaDAO moneda = new MonedaDAO();
       List<Moneda> tipo = moneda.listar();
@@ -97,6 +112,7 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
         BtnMod = new javax.swing.JButton();
         BtnElim = new javax.swing.JButton();
         BtnBus = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
 
@@ -150,37 +166,50 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JdA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CbMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCod)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4))
+                            .addGap(36, 36, 36)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(JdA, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(CbMoneda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCod)))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnBus, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {BtnBus, BtnElim, BtnIng, BtnMod, jButton1});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -205,7 +234,8 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
                     .addComponent(BtnIng)
                     .addComponent(BtnMod)
                     .addComponent(BtnElim)
-                    .addComponent(BtnBus))
+                    .addComponent(BtnBus)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -226,10 +256,12 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,6 +280,19 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Ingresar");
+        AInsertar.setCodigoAplicacion("1102");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Transaccion_EncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        
         EncabezadoAsiento EAI = new EncabezadoAsiento();
         EncabezadoAsientoDAO EADAO = new EncabezadoAsientoDAO();
         if (txtCod.getText().length() != 0 && txtADes.getText().length() != 0) {
@@ -284,6 +329,18 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnIngActionPerformed
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Eliminar");
+        AInsertar.setCodigoAplicacion("1102");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Transaccion_EncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }        
         EncabezadoAsiento EAE = new EncabezadoAsiento();
         EncabezadoAsientoDAO EADAO = new EncabezadoAsientoDAO();
 
@@ -307,6 +364,18 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnElimActionPerformed
 
     private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1102");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Transaccion_EncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         EncabezadoAsiento EAM = new EncabezadoAsiento();
         EncabezadoAsientoDAO EADAO = new EncabezadoAsientoDAO();
         String Fecha = new SimpleDateFormat("dd/MM/yyyy").format(JdA.getDate());
@@ -327,6 +396,18 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnModActionPerformed
 
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Buscar");
+        AInsertar.setCodigoAplicacion("1102");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Transaccion_EncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
         EncabezadoAsiento EAB = new EncabezadoAsiento();
         EncabezadoAsientoDAO EADAO = new EncabezadoAsientoDAO();
         EAB.setCodigoEA((txtCod.getText()));
@@ -355,6 +436,37 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
             Logger.getLogger(Transaccion_EncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnBusActionPerformed
+private Connection connection = null;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1102");
+        AInsertar.setModulo("1000");
+        try{
+            BitacoraDAO.insert(AInsertar);
+            
+        } catch (UnknownHostException ex) {
+              Logger.getLogger(Transaccion_EncabezadoAsiento.class.getName()).log(Level.SEVERE, null, ex);
+          }
+        Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Finanzas/reportes/ReporteTransEncabezadoAsiento.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte de Transaccional Encabezado Asiento");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,6 +499,7 @@ public class Transaccion_EncabezadoAsiento extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> CbMoneda;
     private com.toedter.calendar.JDateChooser JdA;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
