@@ -5,7 +5,7 @@
  */
 package seguridad.vista;
 
-import Finanzas.vista.FrmCuentaHabiente;
+
 import java.io.File;
 import java.net.UnknownHostException;
 import java.sql.Connection;
@@ -440,7 +440,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Mantenimiento_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         Usuario usuarioBuscar = new Usuario();
@@ -487,7 +487,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Mantenimiento_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         Usuario usuarioEliminar = new Usuario();
@@ -513,7 +513,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Mantenimiento_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         Usuario usuarioMod = new Usuario();
@@ -559,7 +559,7 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Mantenimiento_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         Usuario usuarioInsertar = new Usuario();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -614,13 +614,13 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
         Bitacora AInsertar = new Bitacora();
         
         AInsertar.setId_Usuario(Login.usuarioSesion);
-        AInsertar.setAccion("Reporte");
+        AInsertar.setAccion("Ayuda");
         AInsertar.setCodigoAplicacion("10");
         AInsertar.setModulo("0");
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Mantenimiento_Usuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
             if ((new File("src\\main\\java\\seguridad\\ayuda\\AyudaMantenimientoUsuarios.chm")).exists()) {
@@ -638,7 +638,18 @@ public class Mantenimiento_Usuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BtnAyudaActionPerformed
 private Connection connection = null;
     private void BtnRepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRepActionPerformed
-
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        
+        AInsertar.setId_Usuario(Login.usuarioSesion);
+        AInsertar.setAccion("Reporte");
+        AInsertar.setCodigoAplicacion("10");
+        AInsertar.setModulo("0");
+        try {
+            BitacoraDAO.insert(AInsertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Mantenimiento_Usuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Map p = new HashMap();
         JasperReport report;
         JasperPrint print;
