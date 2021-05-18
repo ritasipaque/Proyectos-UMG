@@ -543,6 +543,7 @@ public class FrmAsientoContable extends javax.swing.JInternalFrame {
         BtnAceptarPartida.setEnabled(true);
         BtnBuscarPartida.setEnabled(true);
         BtnBuscarEncabezado.setEnabled(true);
+        BtnNuevaPartida.setEnabled(true);
 
 
     }//GEN-LAST:event_BtnRegistrarActionPerformed

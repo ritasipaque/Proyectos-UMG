@@ -348,18 +348,18 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         objCuenta.setClasificacionCuentaContable(descripcionCuenta);
         objCuenta.setEstadoCuentaContable(estadoCuenta);
         objCuenta.Insertar(objCuenta);
-        
+
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Insertar");
         AInsertar.setCodigoAplicacion("1003");
         AInsertar.setModulo("1000");
-        
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         cargarTabla();
         JTxtCodigoCuenta.setText("");
         JTxtNombre.setText("");
@@ -368,24 +368,21 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
 
     private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         CuentaContable objCuenta = new CuentaContable();
-
         String codigoCuenta = JTxtCodigoCuenta.getText();
 
-        objCuenta.setCodigoCuentaContable(codigoCuenta);
+        objCuenta.Eliminar(codigoCuenta);
 
-        objCuenta.Eliminar(objCuenta);
-        
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1003");
         AInsertar.setModulo("1000");
-        
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         cargarTabla();
     }//GEN-LAST:event_BtnElimActionPerformed
 
@@ -406,7 +403,7 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         AInsertar.setAccion("Modificar");
         AInsertar.setCodigoAplicacion("1003");
         AInsertar.setModulo("1000");
-        
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
@@ -423,18 +420,18 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
         objCuenta.setCodigoCuentaContable(codigoClasificacion);
 
         objCuenta.Buscar(objCuenta);
-        
+
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Buscar");
         AInsertar.setCodigoAplicacion("1003");
         AInsertar.setModulo("1000");
-        
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         JTxtCodigoCuenta.setText(objCuenta.Buscar(objCuenta)[0]);
         JTxtNombre.setText(objCuenta.Buscar(objCuenta)[1]);
         JCmbClasificacion.setSelectedItem(objCuenta.Buscar(objCuenta)[2]);
@@ -469,11 +466,11 @@ public class FrmMantCuentaContable extends javax.swing.JInternalFrame {
             report = (JasperReport) JRLoader.loadObjectFromFile(ruta);
 
             JasperPrint jprint = JasperFillManager.fillReport(ruta, null, conex);
-            
+
             JasperViewer jview = new JasperViewer(jprint, false);
-            
+
             jview.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            
+
             jview.setVisible(true);
 
         } catch (Exception e) {
