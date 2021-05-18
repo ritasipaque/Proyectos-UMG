@@ -131,68 +131,121 @@ public class GenerarPermisos {
                 MDIHoteleria.menu_procesos.setVisible(true);
                 MDIHoteleria.submenu_mantenimientos.setVisible(false);
                 MDIHoteleria.submenu_procesos.setVisible(false);
+
+                MDIHoteleria.mnt_amadellaves.setVisible(false);
+                MDIHoteleria.mnt_formasdepago.setVisible(false);
+                MDIHoteleria.mnt_habitaciones.setVisible(false);
+                MDIHoteleria.mnt_huespedes.setVisible(false);
+                MDIHoteleria.mnt_pisos.setVisible(false);
+                MDIHoteleria.mnt_servicios.setVisible(false);
+
+                MDIHoteleria.Reserva_De_Habitacion.setVisible(false);
+                MDIHoteleria.Entregar_Recibir_Habitacion.setVisible(false);
+                MDIHoteleria.Facturacion.setVisible(false);
+                MDIHoteleria.Objetos_Perdidos.setVisible(false);
+                MDIHoteleria.Entrega_Objetos_Perdidos.setVisible(false);
+
                 ejecutarPermisos.ejecutarBusqueda(usuario);
                 for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
                     if (varApp >= 2001 && varApp <= 2200) {
                         MDIHoteleria.submenu_mantenimientos.setVisible(true);
                         switch (varApp) {
-                            case 2001:MDIHoteleria.mnt_amadellaves.setVisible(true);break;
-                            case 2002:MDIHoteleria.mnt_formasdepago.setVisible(true);break;
-                            case 2003:MDIHoteleria.mnt_habitaciones.setVisible(true);break;
-                            case 2004:MDIHoteleria.mnt_huespedes.setVisible(true);break;
-                            case 2005:MDIHoteleria.mnt_pisos.setVisible(true);break;
-                            case 2006:MDIHoteleria.mnt_servicios.setVisible(true);break;
-                            default:    
+                            case 2001:
+                                MDIHoteleria.mnt_amadellaves.setVisible(true);
+                                break;
+                            case 2002:
+                                MDIHoteleria.mnt_formasdepago.setVisible(true);
+                                break;
+                            case 2003:
+                                MDIHoteleria.mnt_habitaciones.setVisible(true);
+                                break;
+                            case 2004:
+                                MDIHoteleria.mnt_huespedes.setVisible(true);
+                                break;
+                            case 2005:
+                                MDIHoteleria.mnt_pisos.setVisible(true);
+                                break;
+                            case 2006:
+                                MDIHoteleria.mnt_servicios.setVisible(true);
+                                break;
+                            default:
                         }
                     }
                     if (varApp >= 2201 && varApp <= 2400) {
                         MDIHoteleria.submenu_procesos.setVisible(true);
                         switch (varApp) {
                             case 2201:
-                            case 2300:
-                            case 2400:
-                                MDIHoteleria.submenu_procesos.setVisible(true);
+                                MDIHoteleria.Reserva_De_Habitacion.setVisible(true);
                                 break;
+                            case 2202:
+                                MDIHoteleria.Entregar_Recibir_Habitacion.setVisible(true);
+                                break;
+                            case 2203:
+                                MDIHoteleria.Facturacion.setVisible(true);
+                                break;
+                            case 2204:
+                                MDIHoteleria.Objetos_Perdidos.setVisible(true);
+                                break;
+                            case 2205:
+                                MDIHoteleria.Entrega_Objetos_Perdidos.setVisible(true);
+                                break;
+                            default:
                         }
                     }
                 }
             }
             if (modulo == "Comercial") {
-                
-   
-      ejecutarPermisos.ejecutarBusqueda(usuario);
-                   MDIComercial.M_venta.setVisible(false);
-                    MDIComercial.M_compras.setVisible(false);
-                      MDIComercial.M_inventario.setVisible(false);
-                           MDIComercial.P_ventas.setVisible(false);
-                              MDIComercial.P_compras.setVisible(false);
 
-                   for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
+                ejecutarPermisos.ejecutarBusqueda(usuario);
+                MDIComercial.M_venta.setVisible(false);
+                MDIComercial.M_compras.setVisible(false);
+                MDIComercial.M_inventario.setVisible(false);
+                MDIComercial.P_ventas.setVisible(false);
+                MDIComercial.P_compras.setVisible(false);
+             //   MDIComercial.ProcesoInventario.setVisible(false);
+                for (int i = 0; i < ejecutarPermisos.getAplicaciones().length; i++) {
                     int varApp = Integer.parseInt(ejecutarPermisos.getAplicaciones()[i]);
                     if (varApp >= 3000 && varApp <= 3360) {
-                  MDIComercial.M_venta.setVisible(true);
-                    MDIComercial.M_compras.setVisible(true);
-                      MDIComercial.M_inventario.setVisible(true);
-                         MDIComercial.P_ventas.setVisible(true);
-                              MDIComercial.P_compras.setVisible(true);
+                        MDIComercial.M_venta.setVisible(true);
+                        MDIComercial.M_compras.setVisible(true);
+                        MDIComercial.M_inventario.setVisible(true);
+                        MDIComercial.P_ventas.setVisible(true);
+                        MDIComercial.P_compras.setVisible(true);
+                    //    MDIComercial.ProcesoInventario.setVisible(true);
                         switch (varApp) {
-                             case 3001 :  MDIComercial.M_cliente.setVisible(true);break;  
-                             case 3002:   MDIComercial.M_deudor.setVisible(true);break;
-                             case 3003:     MDIComercial.M_proveedor.setVisible(true);break;
-                              case 3004:  MDIComercial.M_producto1.setVisible(true);break;
-                                case 3005:  MDIComercial.P_pedido_factura.setVisible(true);break;
-                                  case 3006:  MDIComercial.P_deposito.setVisible(true);break;
-                                    case 3007:  MDIComercial.ProcesoCompra.setVisible(true);break;
-                                       case 3008:  MDIComercial.FacturaCompras.setVisible(true);break;       
+                            case 3001:
+                                MDIComercial.M_cliente.setVisible(true);
+                                break;
+                            case 3002:
+                                MDIComercial.M_deudor.setVisible(true);
+                                break;
+                            case 3003:
+                                MDIComercial.M_proveedor.setVisible(true);
+                                break;
+                            case 3004:
+                                MDIComercial.M_producto1.setVisible(true);
+                                break;
+                            case 3005:
+                                MDIComercial.P_pedido_factura.setVisible(true);
+                                break;
+                            case 3006:
+                                MDIComercial.P_deposito.setVisible(true);
+                                break;
+                            case 3007:
+                                MDIComercial.ProcesoCompra.setVisible(true);
+                                break;
+                            case 3008:
+                                MDIComercial.FacturaCompras.setVisible(true);
+                                break;
 
-                         
+                            case 3009:
+                                MDIComercial.P_producto.setVisible(true);
+                                break;
                         }
                     }
-                    
+
                 }
-                
-                
 
             }
         } catch (NumberFormatException ex) {

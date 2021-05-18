@@ -2,6 +2,7 @@
 package Finanzas.vista;
 
 import Finanzas.datos.BancoDAO;
+import Finanzas.datos.Conexion;
 import Finanzas.datos.CuentaBancariaDAO;
 import Finanzas.datos.CuentaHabienteDAO;
 import Finanzas.datos.EmisionChequeDAO;
@@ -9,11 +10,25 @@ import Finanzas.dominio.EmisionCheque;
 import Finanzas.dominio.Banco;
 import Finanzas.dominio.CuentaBancaria;
 import Finanzas.dominio.CuentaHabiente;
+import java.io.File;
+import java.net.UnknownHostException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import seguridad.datos.BitacoraDao;
+import seguridad.dominio.Bitacora;
 /**
  *
  * @author Nay Ale
@@ -60,7 +75,7 @@ int codigoAplicacion = 1105;
           EmisionChequeDAO emisionchequeDAO = new EmisionChequeDAO();
           List<EmisionCheque> echeque = emisionchequeDAO.listar();
           TablaECheque.setModel(modelo);
-          String[] dato = new String[5];
+          String[] dato = new String[6];
           for (int i = 0; i < echeque.size(); i++) {
               dato[0] = echeque.get(i).getNumero_Cheque();
               dato[1] = echeque.get(i).getFecha_Cheque();
@@ -108,10 +123,10 @@ int codigoAplicacion = 1105;
         jPanel1 = new javax.swing.JPanel();
         Boton_Buscar = new javax.swing.JButton();
         txt_Buscar = new javax.swing.JTextField();
-        Boton_Guardar = new javax.swing.JButton();
-        Boton_Modificar = new javax.swing.JButton();
-        Boton_Eliminar = new javax.swing.JButton();
-        Boton_Ayuda = new javax.swing.JButton();
+        BtnIng = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnAyu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -124,6 +139,7 @@ int codigoAplicacion = 1105;
         ComboCuenta = new javax.swing.JComboBox<>();
         ComboPaguese = new javax.swing.JComboBox<>();
         Fecha = new com.toedter.calendar.JDateChooser();
+        btnImprimir = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaECheque = new javax.swing.JTable();
@@ -150,39 +166,39 @@ int codigoAplicacion = 1105;
             }
         });
 
-        Boton_Guardar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Guardar.setText("Guardar");
-        Boton_Guardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+        BtnIng.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnIng.setText("Guardar");
+        BtnIng.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnIng.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_GuardarActionPerformed(evt);
+                BtnIngActionPerformed(evt);
             }
         });
 
-        Boton_Modificar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Modificar.setText("Modificar");
-        Boton_Modificar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Modificar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnMod.setText("Modificar");
+        BtnMod.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_ModificarActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
-        Boton_Eliminar.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Eliminar.setText("Eliminar");
-        Boton_Eliminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnElim.setText("Eliminar");
+        BtnElim.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_EliminarActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        Boton_Ayuda.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        Boton_Ayuda.setText("Ayuda");
-        Boton_Ayuda.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Boton_Ayuda.addActionListener(new java.awt.event.ActionListener() {
+        BtnAyu.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        BtnAyu.setText("Ayuda");
+        BtnAyu.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BtnAyu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_AyudaActionPerformed(evt);
+                BtnAyuActionPerformed(evt);
             }
         });
 
@@ -204,6 +220,15 @@ int codigoAplicacion = 1105;
 
         ComboPaguese.setMaximumRowCount(20);
 
+        btnImprimir.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        btnImprimir.setText("Imprimir");
+        btnImprimir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -218,13 +243,15 @@ int codigoAplicacion = 1105;
                                 .addGap(18, 18, 18)
                                 .addComponent(txt_Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Boton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnIng, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Boton_Modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnMod, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14)
-                                .addComponent(Boton_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BtnElim, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(Boton_Ayuda, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BtnAyu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -233,12 +260,12 @@ int codigoAplicacion = 1105;
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ComboBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -283,10 +310,11 @@ int codigoAplicacion = 1105;
                     .addComponent(txt_Buscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(Boton_Buscar)
-                        .addComponent(Boton_Guardar)
-                        .addComponent(Boton_Modificar)
-                        .addComponent(Boton_Eliminar)
-                        .addComponent(Boton_Ayuda))))
+                        .addComponent(BtnIng)
+                        .addComponent(BtnMod)
+                        .addComponent(BtnElim)
+                        .addComponent(BtnAyu)
+                        .addComponent(btnImprimir))))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle:"));
@@ -347,7 +375,7 @@ int codigoAplicacion = 1105;
 
     }//GEN-LAST:event_Boton_BuscarActionPerformed
 
-    private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
+    private void BtnIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngActionPerformed
         EmisionChequeDAO emisionchequeDAO = new EmisionChequeDAO();
         EmisionCheque insertar = new EmisionCheque();
 
@@ -361,21 +389,22 @@ int codigoAplicacion = 1105;
         insertar.setMonto_Cheque(txtMonto.getText());
 
         JOptionPane.showMessageDialog(null, "Cheque registrado Exitosamente");
-        //BitacoraDao BitacoraDAO = new BitacoraDao();
-        // Bitacora AInsertar = new Bitacora();
-        // AInsertar.setId_Usuario("EmisionCheque");
-        // AInsertar.setAccion("Insertar");
-        // AInsertar.setCodigoAplicacion("1105");
-        // try{
-            //     BitacoraDAO.insert(AInsertar);
-            // }   catch (UnknownHostException ex) {
-            //     Logger.getLogger(Emision_Cheque.class.getName()).log(Level.SEVERE, null, ex);
-            // }
+         BitacoraDao BitacoraDAO = new BitacoraDao();
+         Bitacora AInsertar = new Bitacora();
+         AInsertar.setId_Usuario("EmisionCheque");
+         AInsertar.setAccion("Insertar");
+         AInsertar.setCodigoAplicacion("1105");
+           AInsertar.setModulo("Finanzas");
+         try{
+                 BitacoraDAO.insert(AInsertar);
+             }   catch (UnknownHostException ex) {
+                 Logger.getLogger(Emision__Cheque.class.getName()).log(Level.SEVERE, null, ex);
+             }
         emisionchequeDAO.insert(insertar);
         llenadodetablas();
-    }//GEN-LAST:event_Boton_GuardarActionPerformed
+    }//GEN-LAST:event_BtnIngActionPerformed
 
-    private void Boton_ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_ModificarActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         EmisionChequeDAO emisionchequeDAO = new EmisionChequeDAO();
         EmisionCheque modificarcheque = new EmisionCheque();
 
@@ -387,38 +416,93 @@ int codigoAplicacion = 1105;
         modificarcheque.setFK_Cuenta(ComboCuenta.getSelectedItem().toString());
         modificarcheque.setFK_Cuentahabiente(ComboPaguese.getSelectedItem().toString());
         modificarcheque.setMonto_Cheque(txtMonto.getText());
-
         JOptionPane.showMessageDialog(null, "Cheque Modificado Exitosamente");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario("EmisionCheque");
+        AInsertar.setAccion("Modificar");
+        AInsertar.setCodigoAplicacion("1105");
+        AInsertar.setModulo("Finanzas");
+         try{
+                 BitacoraDAO.insert(AInsertar);
+             }   catch (UnknownHostException ex) {
+                 Logger.getLogger(Emision__Cheque.class.getName()).log(Level.SEVERE, null, ex);
+             }
         emisionchequeDAO.insert(modificarcheque);
         llenadodetablas();
-    }//GEN-LAST:event_Boton_ModificarActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
-    private void Boton_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_EliminarActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         EmisionChequeDAO emisionchequeDAO = new EmisionChequeDAO();
         EmisionCheque chequeeliminar = new EmisionCheque();
         //Metodo Para Eliminar con el Numero de Cuenta Bancaria
         chequeeliminar.setNumero_Cheque((txt_Buscar.getText()));
         JOptionPane.showMessageDialog(null, "Cheque Eliminado Exitosamente");
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+         Bitacora AInsertar = new Bitacora();
+         AInsertar.setId_Usuario("EmisionCheque");
+         AInsertar.setAccion("Eliminar");
+         AInsertar.setCodigoAplicacion("1105");
+           AInsertar.setModulo("Finanzas");
+         try{
+                 BitacoraDAO.insert(AInsertar);
+             }   catch (UnknownHostException ex) {
+                 Logger.getLogger(Emision__Cheque.class.getName()).log(Level.SEVERE, null, ex);
+             }
         emisionchequeDAO.delete(chequeeliminar);
         llenadodetablas();
-    }//GEN-LAST:event_Boton_EliminarActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void Boton_AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_AyudaActionPerformed
+    private void BtnAyuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyuActionPerformed
+    /// metodo para ejecutar la ayuda que es una guia para Emision Cheque
+        try {
+            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoMoneda.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoMoneda.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_BtnAyuActionPerformed
 
-    }//GEN-LAST:event_Boton_AyudaActionPerformed
+    private Connection connection = null;
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+         Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Finanzas/reportes/reporteCheque.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("Reporte Emision Cheque");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_Ayuda;
     private javax.swing.JButton Boton_Buscar;
-    private javax.swing.JButton Boton_Eliminar;
-    private javax.swing.JButton Boton_Guardar;
-    private javax.swing.JButton Boton_Modificar;
+    private javax.swing.JButton BtnAyu;
+    private javax.swing.JButton BtnElim;
+    private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private javax.swing.JComboBox<String> ComboBanco;
     private javax.swing.JComboBox<String> ComboCuenta;
     private javax.swing.JComboBox<String> ComboPaguese;
     private com.toedter.calendar.JDateChooser Fecha;
     private javax.swing.JTable TablaECheque;
+    public javax.swing.JButton btnImprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -5,17 +5,25 @@
  */
 package Comercial.vista;
 
-
 import Comercial.datos.ClienteDao;
+import Comercial.datos.Conexion;
 
 import Comercial.dominio.Cliente;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.Aplicacion_Perfil;
@@ -28,10 +36,12 @@ import seguridad.vista.MDI_Components;
  * @author PERSONAL
  */
 public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
-  int   codigoAplicacion = 3001;
+
+    int codigoAplicacion = 3001;
+
     void habilitarAcciones() {
 
-      int   codigoAplicacion = 3001;
+        int codigoAplicacion = 3001;
         var usuario = Login.usuarioComercial;
 
         btnAgregar.setEnabled(false);
@@ -47,7 +57,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
             permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
 
-        if (permisosApp[0].equals("1")) {
+        if (permisosApp[0].equals("0")) {
             btnAgregar.setEnabled(true);
         }
         if (permisosApp[1].equals("1")) {
@@ -61,64 +71,60 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
         }
     }
 
-    
     public void llenadoDeTablas() {
         /**
- *
- * creaccion de la tabla de de titulos  
- */
+         *
+         * creaccion de la tabla de de titulos
+         */
         DefaultTableModel modelo = new DefaultTableModel();
-       modelo.addColumn("ID Cliente");
+        modelo.addColumn("ID Cliente");
         modelo.addColumn("Cliente");
         modelo.addColumn("Nit");
-          modelo.addColumn("Telefono");
-          modelo.addColumn("Poducto");
-          modelo.addColumn("Estatis Cliente");
-           modelo.addColumn("Capital");
-             modelo.addColumn("Cuenta");
-  
-     ClienteDao  ventasDAO = new  ClienteDao();
-  
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Poducto");
+        modelo.addColumn("Estatis Cliente");
+        modelo.addColumn("Capital");
+        modelo.addColumn("Cuenta");
 
+        ClienteDao ventasDAO = new ClienteDao();
 
-       List<Cliente> ventas = ventasDAO.select();
+        List<Cliente> ventas = ventasDAO.select();
         JtProductos1.setModel(modelo);
         String[] dato = new String[8];
-    for (int i = 0; i < ventas.size(); i++) {
+        for (int i = 0; i < ventas.size(); i++) {
             dato[0] = (ventas.get(i).getId_cliente());
             dato[1] = ventas.get(i).getCliente();
-              dato[2] = ventas.get(i).getNit();
+            dato[2] = ventas.get(i).getNit();
             dato[3] = (ventas.get(i).getTelefono());
-          dato[4] = (ventas.get(i).getProducto());
+            dato[4] = (ventas.get(i).getProducto());
             dato[5] = (ventas.get(i).getEstatus_Cliente());
             dato[6] = ventas.get(i).getMonto();
-              dato[7] = ventas.get(i).getCuenta();
-          
-          
+            dato[7] = ventas.get(i).getCuenta();
+
             System.out.println("vendedor:" + ventas);
             modelo.addRow(dato);
         }
-     }
- public void buscarVendedor() {
-     
-   
-     ClienteDao Clientes= new ClienteDao ();
-            
+    }
+
+    public void buscarVendedor() {
+
+        ClienteDao Clientes = new ClienteDao();
+
         Cliente Buscar = new Cliente();
 
+        Buscar.setId_cliente(i.getText());
+        Buscar = Clientes.query(Buscar);
+        cliente.setText(Buscar.getCliente());
+        ID.setText(Buscar.getId_cliente());
+        nit.setText(Buscar.getNit());
+        monto.setText(Buscar.getMonto());
+        estatus.setText(Buscar.getEstatus_Cliente());
+        telefono.setText(Buscar.getTelefono());
+        producto.setText(Buscar.getProducto());
+        cuenta.setText(Buscar.getCuenta());
 
-Buscar.setId_cliente(i.getText());
-Buscar=Clientes.query(Buscar);         
-cliente.setText(Buscar.getCliente());
-ID.setText(Buscar.getId_cliente());
-nit.setText(Buscar.getNit());
-monto.setText(Buscar.getMonto());
-estatus.setText(Buscar.getEstatus_Cliente());
-telefono.setText(Buscar.getTelefono());
-producto.setText(Buscar.getProducto());
-cuenta.setText(Buscar.getCuenta());
-  
     }
+
     public void limpiar() {
         ID.setText("");
         cliente.setText("");
@@ -126,17 +132,18 @@ cuenta.setText(Buscar.getCuenta());
         monto.setText("");
         estatus.setText("");
         telefono.setText("");
-           producto.setText("");
-            cuenta.setText("");
+        producto.setText("");
+        cuenta.setText("");
     }
+
     /**
      * Creates new form Mantenimiento_Cliente
      */
     public Mantenimiento_Cliente() {
-        int   codigoAplicacion = 3001;
+        int codigoAplicacion = 3001;
         initComponents();
         habilitarAcciones();
-         llenadoDeTablas() ;
+        llenadoDeTablas();
     }
 
     /**
@@ -174,6 +181,7 @@ cuenta.setText(Buscar.getCuenta());
         i = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         cuenta = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -268,6 +276,13 @@ cuenta.setText(Buscar.getCuenta());
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Cuenta");
 
+        jButton2.setText("Reporte");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -297,7 +312,9 @@ cuenta.setText(Buscar.getCuenta());
                                 .addComponent(btnBuscar)
                                 .addGap(18, 18, 18)
                                 .addComponent(i, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(155, 155, 155))))
+                                .addGap(44, 44, 44)
+                                .addComponent(jButton2)
+                                .addGap(38, 38, 38))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -380,7 +397,8 @@ cuenta.setText(Buscar.getCuenta());
                         .addComponent(btnModificar)
                         .addComponent(btnEliminar)
                         .addComponent(btnBuscar)
-                        .addComponent(i, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(i, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2)))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -391,46 +409,44 @@ cuenta.setText(Buscar.getCuenta());
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
 
-        ClienteDao dao = new    ClienteDao  ();
+        ClienteDao dao = new ClienteDao();
 
-         Cliente modi = new    Cliente ();
-        modi.setId_cliente (ID.getText());
+        Cliente modi = new Cliente();
+        modi.setId_cliente(ID.getText());
         modi.setCliente(cliente.getText());
         modi.setNit(nit.getText());
         modi.setMonto(monto.getText());
         modi.setEstatus_Cliente(estatus.getText());
         modi.setTelefono(telefono.getText());
         modi.setProducto(producto.getText());
-         modi.setCuenta(cuenta.getText());
+        modi.setCuenta(cuenta.getText());
 
         dao.update(modi);
         llenadoDeTablas();
-         limpiar();
-             BitacoraDao BitacoraDAO = new BitacoraDao();
-            
+        limpiar();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
         Bitacora Insertar = new Bitacora();
-      
+
         Insertar.setAccion("Modificar");
         Insertar.setId_Usuario(Login.usuarioComercial);
-         GenerarPermisos permisos = new GenerarPermisos();
-    MDI_Components mdi_Components = new MDI_Components();
- Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
 
-        
-            try {
-                BitacoraDAO.insert(Insertar);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        ClienteDao acreedor = new ClienteDao ();
+        ClienteDao acreedor = new ClienteDao();
 
         Cliente vendedorAEliminar = new Cliente();
         vendedorAEliminar.setId_cliente(ID.getText());
@@ -440,60 +456,59 @@ cuenta.setText(Buscar.getCuenta());
         vendedorAEliminar.setEstatus_Cliente(estatus.getText());
         vendedorAEliminar.setTelefono(telefono.getText());
         vendedorAEliminar.setProducto(producto.getText());
-            vendedorAEliminar.setCuenta(cuenta.getText());
+        vendedorAEliminar.setCuenta(cuenta.getText());
         acreedor.delete(vendedorAEliminar);
         llenadoDeTablas();
- limpiar();
+        limpiar();
         JOptionPane.showMessageDialog(null, "Cliente Eliminado.");
-            BitacoraDao BitacoraDAO = new BitacoraDao();
-            
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
         Bitacora Insertar = new Bitacora();
-      
+
         Insertar.setAccion("Eliminar");
-         GenerarPermisos permisos = new GenerarPermisos();
-    MDI_Components mdi_Components = new MDI_Components();
- Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
- Insertar.setId_Usuario(Login.usuarioComercial);
-            try {
-                BitacoraDAO.insert(Insertar);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-         
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-    BitacoraDao BitacoraDAO = new BitacoraDao();
-            
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
         Bitacora Insertar = new Bitacora();
-       
+
         Insertar.setAccion("Buscar");
-          GenerarPermisos permisos = new GenerarPermisos();
-    MDI_Components mdi_Components = new MDI_Components();
- Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
- Insertar.setId_Usuario(Login.usuarioComercial);
-            try {
-                BitacoraDAO.insert(Insertar);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         buscarVendedor();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       
-          GenerarPermisos permisos = new GenerarPermisos();
-    MDI_Components mdi_Components = new MDI_Components();
-       
-        String id="0";
-        ClienteDao ClienteDAO = new ClienteDao ();
- 
+
+        GenerarPermisos permisos = new GenerarPermisos();
+        MDI_Components mdi_Components = new MDI_Components();
+
+        String id = "0";
+        ClienteDao ClienteDAO = new ClienteDao();
+
         Cliente AInsertar = new Cliente();
         AInsertar.setId_cliente(ID.getText());
         AInsertar.setCliente(cliente.getText());
@@ -502,26 +517,26 @@ cuenta.setText(Buscar.getCuenta());
         AInsertar.setEstatus_Cliente(estatus.getText());
         AInsertar.setTelefono(telefono.getText());
         AInsertar.setProducto(producto.getText());
-           AInsertar.setCuenta(cuenta.getText());
+        AInsertar.setCuenta(cuenta.getText());
         ClienteDAO.insert(AInsertar);
-        
+
         llenadoDeTablas();
-         limpiar();
-             BitacoraDao BitacoraDAO = new BitacoraDao();
-            
+        limpiar();
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
         Bitacora Insertar = new Bitacora();
         Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Insertar");
-    
- Insertar.setCodigoAplicacion("3001");
-           Insertar.setModulo("Comercial");
 
-            try {
-                BitacoraDAO.insert(Insertar);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
+        Insertar.setCodigoAplicacion("3001");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -530,7 +545,7 @@ cuenta.setText(Buscar.getCuenta());
     }//GEN-LAST:event_nitActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     try {
+        try {
             if ((new File("src\\main\\java\\Comercial\\reportes\\Clientes.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
@@ -549,6 +564,28 @@ cuenta.setText(Buscar.getCuenta());
     private void estatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_estatusActionPerformed
+private Connection connection = null;
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+  Map p = new HashMap();
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            connection = Conexion.getConnection();
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
+                    + "/src/main/java/Comercial/reportes/MantenimientoCliente.jrxml");
+            print = JasperFillManager.fillReport(report, p, connection);
+            JasperViewer view = new JasperViewer(print, false);
+            view.setTitle("cliente ");
+            view.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -563,6 +600,7 @@ cuenta.setText(Buscar.getCuenta());
     private javax.swing.JTextField estatus;
     private javax.swing.JTextField i;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

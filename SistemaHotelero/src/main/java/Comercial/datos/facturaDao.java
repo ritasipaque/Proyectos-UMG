@@ -23,11 +23,11 @@ import java.util.List;
  */
 public class facturaDao {
     
-   private static final String SQL_INSERT = "INSERT INTO tbl_pedido_factura(Id_cliente,Cliente,Monto,producto , Cantidad ,Precio_por_unidad,telefono,Nit) VALUES(?, ?,?, ?,?, ?,?,?)";
-    private static final String SQL_SELECT = "SELECT Id_cliente,Cliente,Monto,producto , Cantidad ,Precio_por_unidad,telefono FROM tbl_pedido_factura";
-    private static final String SQL_QUERY = "SELECT Id_cliente,Cliente,Monto,producto , Cantidad ,Precio_por_unidad,telefonoFROM tbl_pedido_factura WHERE Id_cliente = ?";
-  private static final String SQL_UPDATE = "UPDATE   tbl_pedido_factura  SET Id_cliente= ?,Cliente=?,Monto=?,Estatus=? ,Id_producto=? ,Detalle=?, Cantidad=? ,Precio_por_unidad =? WHERE id_vendedor = ?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_pedido_factura WHERE Id_cliente= ?";
+   private static final String SQL_INSERT = "INSERT INTO tbl_pedido_factura(id_cliente,Cliente,Nit,telefono,producto , Cantidad ,Precio_por_unidad,Monto,Total) VALUES(?, ?,?, ?,?, ?,?,?,?)";
+    private static final String SQL_SELECT = "SELECT id_cliente,Cliente,Nit,telefono,producto , Cantidad ,Precio_por_unidad,Monto,Total FROM tbl_pedido_factura";
+    private static final String SQL_QUERY = "SELECT id_cliente,Cliente,Nit,telefono,producto , Cantidad ,Precio_por_unidad,Monto,Total FROM tbl_pedido_factura WHERE id_cliente = ?";
+  private static final String SQL_UPDATE = "UPDATE tbl_pedido_factura  SET Cliente=? , Nit=? , telefono=? , producto=? , Cantidad =? , Precio_por_unidad , Monto=? , Total =? WHERE id_cliente =?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_pedido_factura WHERE id_cliente= ?";
   
 
     /**
@@ -59,21 +59,23 @@ public class facturaDao {
                 String telefono = rs.getString("telefono");
                   String producto = rs.getString("producto");
                   String cantidad = rs.getString("Cantidad");
-                  String  precio = rs.getString("Precio_por_unidad ");
+                  String  precio = rs.getString("Precio_por_unidad");
                  String monto = rs.getString("monto");
+                    String total = rs.getString("Total");
 
                 /**
                  *
                  * concatenacionde de variables de de busqueda
                  */
                   venta = new Factura();
+                  venta.setId_cliente(id_cliente);
                   venta.setCliente(cliente);    
                     venta.setNit(nit);
                     venta.setTelefono(telefono);
                     venta.setProducto(producto);                
                     venta.setCantidad(cantidad);
                     venta.setPrecio_por_unidad(precio);
-                
+                venta.setTotalmoNto(total);
                        venta.setMonto(monto);
 
                     ventas.add(venta);
@@ -109,44 +111,41 @@ public class facturaDao {
             conn = Conexion.getConnection();
             System.out.println("Ejecutando query:" + SQL_QUERY);
             stmt = conn.prepareStatement(SQL_QUERY);
-          
+            stmt.setString(1, venta.getId_cliente());
             rs = stmt.executeQuery();
             while (rs.next()) {
-                /**
+             /**
                  *
                  * busqueda de datos de la bitacocora en la de usuarios
                  */
-                
-                  
                  String id_cliente  = rs.getString("id_cliente");
                 String cliente  = rs.getString("Cliente");
                  String nit = rs.getString("Nit");
                 String telefono = rs.getString("telefono");
                   String producto = rs.getString("producto");
-                  
-                  
-             
                   String cantidad = rs.getString("Cantidad");
-                  String  precio = rs.getString("Precio_por_unidad ");
-                 
-                    String monto = rs.getString("monto");
+                  String  precio = rs.getString("Precio_por_unidad");
+                 String monto = rs.getString("monto");
+                    String total = rs.getString("Total");
 
                 /**
                  *
                  * concatenacionde de variables de de busqueda
                  */
-                   venta = new Factura();
-                 venta.setCliente(cliente);    
+                  venta = new Factura();
+                  venta.setId_cliente(id_cliente);
+                  venta.setCliente(cliente);    
                     venta.setNit(nit);
                     venta.setTelefono(telefono);
                     venta.setProducto(producto);                
                     venta.setCantidad(cantidad);
                     venta.setPrecio_por_unidad(precio);
-                  
+                venta.setTotalmoNto(total);
                        venta.setMonto(monto);
-                       ventas.add(venta);
+
+                    ventas.add(venta);
             }
-            //System.out.println("Registros buscado:" + vendedor);
+            System.out.println("Registros buscado:" + venta);
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
         } finally {
@@ -169,14 +168,16 @@ public class facturaDao {
             conn = Conexion.getConnection();
             stmt = conn.prepareStatement(SQL_INSERT);
       
-            stmt.setString(1,  insertar.getCliente());
-            stmt.setString(2,  insertar.getNit());
-              stmt.setString(3,   insertar.getTelefono());
-            stmt.setString(4,   insertar.getProducto());
-                stmt.setString(5,  insertar.getCantidad());
-            stmt.setString(6,  insertar.getPrecio_por_unidad());
-             stmt.setString(7,  insertar.getTotalmoNto());
+            stmt.setString(1,  insertar.getId_cliente());
+            stmt.setString(2,  insertar.getCliente());
+            stmt.setString(3,  insertar.getNit());
+              stmt.setString(4,   insertar.getTelefono());
+            stmt.setString(5,   insertar.getProducto());
+                stmt.setString(6,  insertar.getCantidad());
+            stmt.setString(7,  insertar.getPrecio_por_unidad());
+           
                  stmt.setString(8,  insertar.getMonto());
+                      stmt.setString(9,  insertar.getTotalmoNto());
 
             System.out.println("ejecutando query:" + SQL_INSERT);
             rows = stmt.executeUpdate();
@@ -203,14 +204,17 @@ public class facturaDao {
            stmt = conn.prepareStatement(SQL_UPDATE);
           
             
-            stmt.setString(1,  insertar.getCliente());
-            stmt.setString(2,  insertar.getNit());
-              stmt.setString(3,   insertar.getTelefono());
-            stmt.setString(4,   insertar.getProducto());
-                stmt.setString(5,  insertar.getCantidad());
-            stmt.setString(6,  insertar.getPrecio_por_unidad());
-             stmt.setString(7,  insertar.getTotalmoNto());
+              stmt.setString(1,  insertar.getId_cliente());
+            stmt.setString(2,  insertar.getCliente());
+            stmt.setString(3,  insertar.getNit());
+              stmt.setString(4,   insertar.getTelefono());
+            stmt.setString(5,   insertar.getProducto());
+                stmt.setString(6,  insertar.getCantidad());
+            stmt.setString(7,  insertar.getPrecio_por_unidad());
+           
                  stmt.setString(8,  insertar.getMonto());
+                      stmt.setString(9,  insertar.getTotalmoNto());
+
             System.out.println("ejecutando query: " + SQL_UPDATE);
            
             rows = stmt.executeUpdate();
@@ -237,14 +241,17 @@ public class facturaDao {
             stmt = conn.prepareStatement(SQL_DELETE);
         
           
-            stmt.setString(1,  insertar.getCliente());
-            stmt.setString(2,  insertar.getNit());
-              stmt.setString(3,   insertar.getTelefono());
-            stmt.setString(4,   insertar.getProducto());
-                stmt.setString(5,  insertar.getCantidad());
-            stmt.setString(6,  insertar.getPrecio_por_unidad());
-             stmt.setString(7,  insertar.getTotalmoNto());
-                 stmt.setString(8,  insertar.getMonto());
+           stmt.setString(1,  insertar.getId_cliente());
+//            stmt.setString(2,  insertar.getCliente());
+//            stmt.setString(3,  insertar.getNit());
+//              stmt.setString(4,   insertar.getTelefono());
+//            stmt.setString(5,   insertar.getProducto());
+//                stmt.setString(6,  insertar.getCantidad());
+//            stmt.setString(7,  insertar.getPrecio_por_unidad());
+//           
+//                 stmt.setString(8,  insertar.getMonto());
+//                      stmt.setString(9,  insertar.getTotalmoNto());
+
            System.out.println("Ejecutando query:" + SQL_DELETE);
            
             rows = stmt.executeUpdate();
