@@ -206,13 +206,12 @@ public class Proceso_Producto extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(167, 167, 167)
-                            .addComponent(jLabel4)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAyuda))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAyuda)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -224,9 +223,9 @@ public class Proceso_Producto extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,32 +246,10 @@ public class Proceso_Producto extends javax.swing.JInternalFrame {
                 ProcesoProductoDAO procesoproductoDAO = new ProcesoProductoDAO();
                 usuarioAConsultar.setNombre_bodega((txtnombrebodega.getText()));
 
-                //                BitacoraDao BitacoraDAO = new BitacoraDao();
-                //
-                //                Bitacora Insertar = new Bitacora();
-                //                Insertar.setId_Usuario("Proceso_Producto");
-                //                Insertar.setAccion("Insertar");
-                //                Insertar.setCodigoAplicacion("000");
-                //                Insertar.setModulo("3009");
-                //
-                //                try {
-                //                    BitacoraDAO.insert(Insertar);
-                //                } catch (UnknownHostException ex) {
-                //                    Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-                //                }
                 System.out.println(usuarioAConsultar.toString());
                 // Recuperación de información a través de otro objeto
                 usuarioAConsultar = procesoproductoDAO.query(usuarioAConsultar);
-
-                //                System.out.println("regresa " + usuarioAConsultar.toString());
-                //
-                //                System.out.println("regresa contraseña " + txtContraseña.getText());
-                //
-                //                System.out.println("regresa objeto contraseña " + usuarioAConsultar.getPassword_usuario());
-                //
-                //                System.out.println("regresa usuario " + txtUsuario.getText());
-                //
-                //                System.out.println("regresa objeto usuario " + usuarioAConsultar.getId_usuario());
+                System.out.println("regresa objeto usuario " + usuarioAConsultar.getPK_id_procesoproducto());
                 //**********************************************************************************************************************************************************************
                 if (txtnombrebodega.getText().equals(usuarioAConsultar.getNombre_bodega()) && txtExistenciasProducto.getText().equals(usuarioAConsultar.getExistencias_producto())) {
                     //  if (txtUsuario.getText().equals(Integer.toString(usuarioAConsultar.getId_usuario()))) {
@@ -310,19 +287,6 @@ public class Proceso_Producto extends javax.swing.JInternalFrame {
 
         procesoproductoDAO.insert(productoAInsertar);
 
-        //BITACORA
-        //        BitacoraDao BitacoraDAO = new BitacoraDao();
-        //        Bitacora Insertar = new Bitacora();
-        //        Insertar.setId_Usuario("MantenimientoProductos");
-        //        Insertar.setAccion("Insertar");
-        //        Insertar.setCodigoAplicacion("3000");
-        //        Insertar.setId_Usuario(Login.usuarioComercial);
-        //
-        //        try {
-        //            BitacoraDAO.insert(Insertar);
-        //        } catch (UnknownHostException ex) {
-        //            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-        //        }
         llenadoDeTablas();
         limpiar();
 
@@ -331,11 +295,12 @@ public class Proceso_Producto extends javax.swing.JInternalFrame {
     private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
         // TODO add your handling code here:
         try {
-            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm")).exists()) {
+            if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaProcesoProducto.chm")).exists()) {
                 Process p = Runtime
                         .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaMantenimientoProducto.chm");
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaProcesoProducto.chm");
                 p.waitFor();
+
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
             }
