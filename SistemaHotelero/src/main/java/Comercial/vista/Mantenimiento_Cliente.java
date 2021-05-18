@@ -57,7 +57,7 @@ public class Mantenimiento_Cliente extends javax.swing.JInternalFrame {
             permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
 
-        if (permisosApp[0].equals("1")) {
+        if (permisosApp[0].equals("0")) {
             btnAgregar.setEnabled(true);
         }
         if (permisosApp[1].equals("1")) {
@@ -573,7 +573,7 @@ private Connection connection = null;
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                    + "/src/main/java/Comercial/reportes/cliente.jrxml");
+                    + "/src/main/java/Comercial/reportes/MantenimientoCliente.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("cliente ");
