@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import seguridad.vista.CambioC;
 import seguridad.vista.GenerarPermisos;
 import seguridad.vista.Login;
 import seguridad.vista.MDI_Components;
@@ -19,6 +20,7 @@ import seguridad.vista.MDI_Components;
     @author Diego Vásquez
  */
 public class MDIFinanzas extends javax.swing.JFrame {
+
     private Transaccion_Bancaria FrmTransacion;
     private FrmTipoTransaccion fmTipo;
     private Mantenimiento_Banco formMantenimiento_Banco;//llamado a la ventana Mantenimiento Banco
@@ -31,8 +33,6 @@ public class MDIFinanzas extends javax.swing.JFrame {
     GenerarPermisos permisos = new GenerarPermisos();
     MDI_Components mdi_Components = new MDI_Components();
 
-    
-    
     public MDIFinanzas() throws UnknownHostException {
         var modulo_nombre = "Finanzas";
         initComponents();
@@ -69,6 +69,8 @@ public class MDIFinanzas extends javax.swing.JFrame {
         EncabezadoAsiento = new javax.swing.JMenuItem();
         JMenuInformes = new javax.swing.JMenu();
         JMenuHerramientas = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         JMenuAyuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -237,6 +239,23 @@ public class MDIFinanzas extends javax.swing.JFrame {
 
         JMenuHerramientas.setText("Herramientas");
         JMenuHerramientas.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+
+        jMenuItem2.setText("Bitácora");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        JMenuHerramientas.add(jMenuItem2);
+
+        jMenuItem3.setText("Cambio de Clave");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        JMenuHerramientas.add(jMenuItem3);
+
         JMenuBarFinanzas.add(JMenuHerramientas);
 
         JMenuAyuda.setText("Ayuda");
@@ -337,9 +356,9 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }//GEN-LAST:event_JMenuItemAsientoContableActionPerformed
 
     private void JMenuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCerrarSesionActionPerformed
-       /*===== OPERACIÓN CERRAR SESIÓN ====
+        /*===== OPERACIÓN CERRAR SESIÓN ====
           Variable entera respuesta_cs*/
-       Login frmLogin = new Login();
+        Login frmLogin = new Login();
         int respuesta_cs = JOptionPane.showConfirmDialog(this, "¿Desea Cerrar Sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
 
         if (respuesta_cs == 0) {
@@ -349,7 +368,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     }//GEN-LAST:event_JMenuCerrarSesionActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-       
+
         try {
             // TODO add your handling code here:
             FrmTransacion = new Transaccion_Bancaria();
@@ -367,7 +386,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
             Logger.getLogger(MDIFinanzas.class.getName()).log(Level.SEVERE, null, ex);
         }
         JDesktopFinanzas.add(formEmision_Cheque);
-        
+
     }//GEN-LAST:event_JMenunEmisionChequeActionPerformed
 
     private void EncabezadoAsientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EncabezadoAsientoActionPerformed
@@ -380,6 +399,18 @@ public class MDIFinanzas extends javax.swing.JFrame {
         frm_encabezadoasiento.setVisible(true);
         JDesktopFinanzas.add(frm_encabezadoasiento);
     }//GEN-LAST:event_EncabezadoAsientoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        FmrBitacora frmBitacora = new FmrBitacora();
+        frmBitacora.setVisible(true);
+        JDesktopFinanzas.add(frmBitacora);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        CambioC cambioClave = new CambioC();
+        cambioClave.setVisible(true);
+        JDesktopFinanzas.add(cambioClave);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public static void main(String args[]) {
 
@@ -427,5 +458,7 @@ public class MDIFinanzas extends javax.swing.JFrame {
     public static javax.swing.JMenuItem JMenuTipoTransaccion;
     private javax.swing.JMenuItem JMenunEmisionCheque;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
