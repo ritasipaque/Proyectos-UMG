@@ -6,6 +6,7 @@ package Hoteleria.vista;
  * and open the template in the editor.
  */
 import Hoteleria.datos.ConexionHoteleria;
+import Hoteleria.datos.GuardarBitacoraDAO;
 import Hoteleria.datos.HabitacionesDAO;
 import Hoteleria.datos.HuespedesDAO;
 import Hoteleria.datos.ReservacionDAO;
@@ -46,6 +47,10 @@ public class ReservaDeHabitacion extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
     boolean activar_boton = false;
+    String codigoAplicacion="2201";
+    
+    GuardarBitacoraDAO guardaraccion = new GuardarBitacoraDAO();
+    
 void habilitarAcciones() {
 
         var codigoAplicacion = 2201;
@@ -203,7 +208,8 @@ void habilitarAcciones() {
     public void estado(boolean estado){
         estado_reservacion.setVisible(estado);
         PE.setVisible(estado);
-        SE.setVisible(estado);
+        ET.setVisible(estado);
+        RC.setVisible(estado);
         Cancelar.setVisible(estado);
         limpio.setVisible(false);
     }
@@ -237,7 +243,7 @@ void habilitarAcciones() {
         txt_nit = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         id_habitacion = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        BtnCatalogo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txt_precio = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -249,16 +255,17 @@ void habilitarAcciones() {
         BtnReporte = new javax.swing.JButton();
         estado_reservacion = new javax.swing.JLabel();
         PE = new javax.swing.JRadioButton();
-        SE = new javax.swing.JRadioButton();
+        ET = new javax.swing.JRadioButton();
         Cancelar = new javax.swing.JRadioButton();
         limpio = new javax.swing.JRadioButton();
         txt_total = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         BtnTotal = new javax.swing.JButton();
         BtnCancelar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BtnAyuda = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txt_cantpersonas = new javax.swing.JTextField();
+        RC = new javax.swing.JRadioButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -337,10 +344,10 @@ void habilitarAcciones() {
             }
         });
 
-        jButton1.setText("MOSTRAR CATALOGO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnCatalogo.setText("MOSTRAR CATALOGO");
+        BtnCatalogo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnCatalogoActionPerformed(evt);
             }
         });
 
@@ -382,8 +389,8 @@ void habilitarAcciones() {
         estado.add(PE);
         PE.setText("Pendiente de Entrega");
 
-        estado.add(SE);
-        SE.setText("Entregada");
+        estado.add(ET);
+        ET.setText("Entregada");
 
         estado.add(Cancelar);
         Cancelar.setText("Cancelar");
@@ -408,14 +415,17 @@ void habilitarAcciones() {
             }
         });
 
-        jButton4.setText("AYUDA");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnAyuda.setText("AYUDA");
+        BtnAyuda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnAyudaActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Cantidad de Personas:");
+
+        estado.add(RC);
+        RC.setText("Recibida");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -454,7 +464,7 @@ void habilitarAcciones() {
                                                 .addComponent(jLabel4)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(fecha_salida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(BtnCatalogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(BtnTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -484,7 +494,7 @@ void habilitarAcciones() {
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(BtnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(BtnAyuda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(BtnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -494,7 +504,10 @@ void habilitarAcciones() {
                         .addComponent(estado_reservacion)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(ET)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(RC))
                             .addComponent(PE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(Cancelar)
@@ -534,7 +547,7 @@ void habilitarAcciones() {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(id_habitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(BtnCatalogo))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -562,7 +575,9 @@ void habilitarAcciones() {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(PE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ET)
+                            .addComponent(RC))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Cancelar)
@@ -570,7 +585,7 @@ void habilitarAcciones() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCancelar)
-                    .addComponent(jButton4))
+                    .addComponent(BtnAyuda))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnIng)
@@ -640,7 +655,8 @@ void habilitarAcciones() {
                         insertar.setHasta(fechasalida);
                         insertar.setPrecio(txt_total.getText());
                         insertar.setEstado("0");
-
+                        JOptionPane.showMessageDialog(null, "Reservación guardada exitosamente");
+                        guardaraccion.GuardarEnBitacora("Insertar",codigoAplicacion, Login.usuarioHoteleria);
                         dao.insert(insertar);
                         actualizar_tabla();
                         limpiar();
@@ -674,22 +690,27 @@ void habilitarAcciones() {
 
             buscarmetodo.setCodigo(id_cliente.getText());
             buscarmetodo = huespedesdao.query(buscarmetodo);
+            if (buscarmetodo.getNombre()!=null) {
             txt_nombrec.setText(buscarmetodo.getNombre()+" "+buscarmetodo.getApellido());
             txt_nit.setText(buscarmetodo.getNit());
             txt_telefono.setText(buscarmetodo.getTelefono());
+            }else{
+                JOptionPane.showMessageDialog(null, "DPI no encontrado");
+            }
         }else{
             JOptionPane.showMessageDialog(null, "El DPI son unicamente números revise nuevamente");
         }
     }//GEN-LAST:event_BtnBusCActionPerformed
 
     private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
-        if (ReservaDeHabitacion.isNumeric(id_reservacion.getText())) {
+        if (ReservaDeHabitacion.isNumeric(id_reservacion.getText())&&id_reservacion.getText().length()!=0) {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaentrada = null, fechasalida=null;
             ReservacionDAO dao = new ReservacionDAO();
             Reservacion buscar = new Reservacion();
             buscar.setId_reservacion(id_reservacion.getText());
             buscar = dao.query(buscar);
+            if (buscar.getDpi()!=null) {
             id_cliente.setText(buscar.getDpi());
             id_habitacion.setSelectedItem(buscar.getId_habitacion());
             txt_cantpersonas.setText(buscar.getCantidadpersonas());
@@ -704,12 +725,18 @@ void habilitarAcciones() {
             txt_total.setText(buscar.getPrecio());
             if (buscar.getEstado().equals("0")) {
                 PE.setSelected(true);
-            }else if(buscar.getEstado().equals("1")){
-                Cancelar.setSelected(true);
             }else if(buscar.getEstado().equals("3")){
-                SE.setSelected(true);
+                Cancelar.setSelected(true);
+            }else if(buscar.getEstado().equals("1")){
+                ET.setSelected(true);
+            }else if(buscar.getEstado().equals("2")){
+                RC.setSelected(true);
             }
+            
             estado(true);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "El codigo son solo numeros y/o el campo no tiene que estar vacio");
         }
     }//GEN-LAST:event_BtnBusActionPerformed
 
@@ -742,18 +769,23 @@ void habilitarAcciones() {
             modificar.setPrecio(txt_total.getText());
             if (PE.isSelected()) {
                modificar.setEstado("0");
-            } else if(SE.isSelected()){
+            } else if(ET.isSelected()){
                 modificar.setEstado("1");
+            } else if(RC.isSelected()){
+                modificar.setEstado("2");
             } else if(Cancelar.isSelected()){
                 modificar.setEstado("3");
             }
+            
+            JOptionPane.showMessageDialog(null, "Reservación modificada exitosamente");
+            guardaraccion.GuardarEnBitacora("Insertar", codigoAplicacion, Login.usuarioHoteleria);
             dao.update(modificar);
             actualizar_tabla();
             limpiar();
         }
     }//GEN-LAST:event_BtnModActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatalogoActionPerformed
     CatalogoDeHabitaciones catalogo = null;
         try {
             catalogo = new CatalogoDeHabitaciones();
@@ -761,11 +793,23 @@ void habilitarAcciones() {
             Logger.getLogger(ReservaDeHabitacion.class.getName()).log(Level.SEVERE, null, ex);
         }
     catalogo.show();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnCatalogoActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
+try {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\Ayuda de Reservacion de Habitación.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\Ayuda de Reservacion de Habitación.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }         
+    }//GEN-LAST:event_BtnAyudaActionPerformed
 private Connection connection = null;
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
         Map p = new HashMap();
@@ -786,26 +830,32 @@ private Connection connection = null;
         }        // TODO add your handling code here:
     }//GEN-LAST:event_BtnReporteActionPerformed
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-MDIHoteleria.logo.setVisible(true);          // TODO add your handling code here:
-    }//GEN-LAST:event_formInternalFrameClosed
 
     private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
 MDIHoteleria.logo.setVisible(true);          // TODO add your handling code here:
+    MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
+    MDIHoteleria.logo.setVisible(true);
+
     }//GEN-LAST:event_formInternalFrameDeactivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnAyuda;
     private javax.swing.JButton BtnBus;
     private javax.swing.JButton BtnBusC;
     private javax.swing.JButton BtnCancelar;
+    private javax.swing.JButton BtnCatalogo;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
     private javax.swing.JButton BtnReporte;
     private javax.swing.JButton BtnTotal;
     private javax.swing.JRadioButton Cancelar;
+    private javax.swing.JRadioButton ET;
     private javax.swing.JRadioButton PE;
-    private javax.swing.JRadioButton SE;
+    private javax.swing.JRadioButton RC;
     private javax.swing.ButtonGroup estado;
     private javax.swing.JLabel estado_reservacion;
     private com.toedter.calendar.JDateChooser fecha_actual;
@@ -814,8 +864,6 @@ MDIHoteleria.logo.setVisible(true);          // TODO add your handling code here
     private javax.swing.JTextField id_cliente;
     private javax.swing.JComboBox<String> id_habitacion;
     private javax.swing.JTextField id_reservacion;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
