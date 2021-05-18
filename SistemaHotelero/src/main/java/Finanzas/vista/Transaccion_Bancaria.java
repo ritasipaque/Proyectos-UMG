@@ -38,7 +38,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Transaccion_Bancaria extends javax.swing.JInternalFrame {
     
-     public void llenadoDeCombos() throws SQLException  {
+     public void llenadoDeCombos()  {
        CuentaBancariaDAO tipodao = new CuentaBancariaDAO();
       List<CuentaBancaria> tipo = tipodao.listar();
       Cbox_Bancaria.addItem("Seleccione una opción");
@@ -110,7 +110,6 @@ public class Transaccion_Bancaria extends javax.swing.JInternalFrame {
         btnRegistrar = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
         TxtBuscar = new javax.swing.JTextField();
-        BtnAyuda = new javax.swing.JButton();
         btnEliminar1 = new javax.swing.JButton();
         label12 = new javax.swing.JLabel();
         label13 = new javax.swing.JLabel();
@@ -166,15 +165,6 @@ public class Transaccion_Bancaria extends javax.swing.JInternalFrame {
         });
 
         TxtBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        BtnAyuda.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        BtnAyuda.setText("Ayuda:");
-        BtnAyuda.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        BtnAyuda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAyudaActionPerformed(evt);
-            }
-        });
 
         btnEliminar1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         btnEliminar1.setText("Eliminar");
@@ -235,22 +225,17 @@ public class Transaccion_Bancaria extends javax.swing.JInternalFrame {
                                     .addComponent(Cbox_Bancaria, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(TxtBeneficiario, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGap(5, 5, 5)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(113, 113, 113))
+                    .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(241, 241, 241))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(label7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Fecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -392,26 +377,6 @@ private Connection connection = null;
         
     }//GEN-LAST:event_btnImprimirActionPerformed
 
-    private void BtnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAyudaActionPerformed
-
-   
-        
-           try {
-            if ((new File("src\\main\\java\\Finanzas\\ayudas\\MantenimientoTransaccion.chm")).exists()) {
-                Process p = Runtime
-                        .getRuntime()
-                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Finanzas\\ayudas\\MantenimientoTransaccion.chm");
-                p.waitFor();
-            } else {
-                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
-            }
-            //System.out.println("Correcto");
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }    
-
-    }//GEN-LAST:event_BtnAyudaActionPerformed
-
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
         // TODO add your handling code here:
         TransaccionBancariaDAO tipodAO = new TransaccionBancariaDAO();
@@ -428,7 +393,6 @@ private Connection connection = null;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnAyuda;
     private javax.swing.JComboBox<String> Cbox_Bancaria;
     private javax.swing.JComboBox<String> Cbox_Tipo;
     private com.toedter.calendar.JDateChooser Fecha;
