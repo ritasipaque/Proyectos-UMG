@@ -22,22 +22,37 @@ public class GuardarBitacoraDAO {
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("Inserción");
                 AInsertar.setCodigoAplicacion(codigoModulo);
-                AInsertar.setModulo("0002");
+                AInsertar.setModulo("2000");
                 estado = true;
                 break;
             case "Modificacion":
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("Modificación");
                 AInsertar.setCodigoAplicacion(codigoModulo);
-                AInsertar.setModulo("0002");
+                AInsertar.setModulo("2000");
                 estado = true;
                 break;
             case "Eliminacion":
                 AInsertar.setId_Usuario(idUsuario);
                 AInsertar.setAccion("Eliminación");
                 AInsertar.setCodigoAplicacion(codigoModulo);
-                AInsertar.setModulo("0002");
+                AInsertar.setModulo("2000");
                 estado = true;
+                break;
+            case "Acceso":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("Acceso");
+                AInsertar.setCodigoAplicacion(codigoModulo);
+                AInsertar.setModulo("2000");
+                estado = true;
+                break;
+            case "Salir":
+                AInsertar.setId_Usuario(idUsuario);
+                AInsertar.setAccion("CERRAR SESIÓN");
+                AInsertar.setCodigoAplicacion(codigoModulo);
+                AInsertar.setModulo("2000");
+                estado = true;
+                break;
         }
         if (estado == true) {
             try {

@@ -5,13 +5,23 @@
  */
 package Finanzas.vista;
 
+import Finanzas.datos.Conexion;
 import Finanzas.dominio.ClasificacionCuenta;
 import java.io.File;
 import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import seguridad.datos.BitacoraDao;
 import seguridad.dominio.Bitacora;
 import seguridad.vista.GenerarPermisos;
@@ -56,6 +66,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JBtnAyuda = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         JTxtDescripcion = new javax.swing.JTextArea();
+        BtnPrint = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableClasificacion = new javax.swing.JTable();
 
@@ -146,6 +157,13 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JTxtDescripcion.setRows(5);
         jScrollPane2.setViewportView(JTxtDescripcion);
 
+        BtnPrint.setText("Reporte");
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -162,8 +180,11 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(JTxtClasificacion)
-                            .addComponent(JTxtCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(JTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BtnPrint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -173,7 +194,8 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(JTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnPrint))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JTxtClasificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,6 +253,7 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         BtnMod.setEnabled(false);
         BtnElim.setEnabled(false);
         BtnBus.setEnabled(false);
+        BtnPrint.setEnabled(false);
 
         GenerarPermisos permisos = new GenerarPermisos();
 
@@ -251,6 +274,9 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         }
         if (permisosApp[3].equals("1")) {
             BtnElim.setEnabled(true);
+        }
+        if (permisosApp[4].equals("1")) {
+            BtnPrint.setEnabled(true);
         }
     }
 
@@ -297,18 +323,18 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Insertar(objClasificarCuenta);
-        
+
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Insertar");
         AInsertar.setCodigoAplicacion("1000");
-        AInsertar.setModulo("Finanzas");
-        
+        AInsertar.setModulo("1000");
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         cargarTabla();
         JTxtCodigo.setText("");
         JTxtClasificacion.setText("");
@@ -329,18 +355,18 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         JTxtCodigo.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[0]);
         JTxtClasificacion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[1]);
         JTxtDescripcion.setText(objClasificarCuenta.Buscar(objClasificarCuenta)[2]);
-        
+
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Búsqueda");
         AInsertar.setCodigoAplicacion("1000");
-        AInsertar.setModulo("Finanzas");
-        
+        AInsertar.setModulo("1000");
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         cargarTabla();
 
 
@@ -358,18 +384,18 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setDescripcionClasificacion(descripcionCuenta);
 
         objClasificarCuenta.Actualizar(objClasificarCuenta);
-        
+
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Actualizar");
         AInsertar.setCodigoAplicacion("1000");
-        AInsertar.setModulo("Finanzas");
-        
+        AInsertar.setModulo("1000");
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         cargarTabla();
     }//GEN-LAST:event_BtnModActionPerformed
 
@@ -381,18 +407,18 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         objClasificarCuenta.setCodigoClasificacion(codigoClasificacion);
 
         objClasificarCuenta.Eliminar(objClasificarCuenta);
-        
+
         AInsertar.setId_Usuario(Login.usuarioFianzas);
         AInsertar.setAccion("Eliminar");
         AInsertar.setCodigoAplicacion("1000");
-        AInsertar.setModulo("Finanzas");
-        
+        AInsertar.setModulo("1000");
+
         try {
             BitacoraDAO.insert(AInsertar);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Mantenimiento_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         cargarTabla();
     }//GEN-LAST:event_BtnElimActionPerformed
 
@@ -412,12 +438,50 @@ public class FrmMantClasificacionCuentas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_JBtnAyudaActionPerformed
 
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+
+        JasperReport report;
+        JasperPrint print;
+
+        try {
+            Connection conex = Conexion.getConnection();
+            String ruta = "src\\main\\java\\Finanzas\\reportes\\ClasificacionCuentas.jasper";
+
+            report = (JasperReport) JRLoader.loadObjectFromFile(ruta);
+
+            JasperPrint jprint = JasperFillManager.fillReport(ruta, null, conex);
+            
+            JasperViewer jview = new JasperViewer(jprint, false);
+            
+            jview.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            
+            jview.setVisible(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+        Bitacora AInsertar = new Bitacora();
+        AInsertar.setId_Usuario(Login.usuarioFianzas);
+        AInsertar.setAccion("Imprimir");
+        AInsertar.setCodigoAplicacion("1000");
+        AInsertar.setModulo("1000");
+        try {
+            BitacoraDAO.insert(AInsertar);
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(FrmTipoTransaccion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBus;
     private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
     private javax.swing.JButton BtnMod;
+    private javax.swing.JButton BtnPrint;
     private javax.swing.JButton JBtnAyuda;
     private javax.swing.JTable JTableClasificacion;
     private javax.swing.JTextField JTxtClasificacion;

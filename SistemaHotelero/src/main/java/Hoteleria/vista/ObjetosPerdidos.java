@@ -43,7 +43,7 @@ import seguridad.vista.Login;
 public class ObjetosPerdidos extends javax.swing.JInternalFrame {
     DefaultTableModel modelo1;
     DefaultTableCellRenderer centro= new DefaultTableCellRenderer();
-    //String codigoAplicacion="2004";
+    String codigoAplicacion="2204";
 
     /**
      * Creates new form ObjetoPerdido
@@ -54,21 +54,24 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         fecha_actual();
         cargar_AmaDeLlaves();
         imprimir_Objetos();
-        //habilitarAcciones();
+        habilitarAcciones();
     }
     
-    /*void habilitarAcciones() {
+    void habilitarAcciones() {
 
-        var codigoAplicacion = 2004;
+        var codigoAplicacion = 2204;
         var usuario = Login.usuarioHoteleria;
 
         BtnIng.setEnabled(false);
+        BtnMod.setEnabled(false);
+        BtnElim.setEnabled(false);
+        BtnBus.setEnabled(false);
 
         GenerarPermisos permisos = new GenerarPermisos();
 
-        String[] permisosApp = new String[1];
+        String[] permisosApp = new String[5];
 
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
             permisosApp[i] = permisos.getAccionesAplicacion(codigoAplicacion, usuario)[i];
         }
 
@@ -76,7 +79,16 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             System.out.println(permisosApp[0]);
             BtnIng.setEnabled(true);
         }
-    }*/
+        if (permisosApp[1].equals("1")) {
+            BtnBus.setEnabled(true);
+        }
+        if (permisosApp[2].equals("1")) {
+            BtnMod.setEnabled(true);
+        }
+        if (permisosApp[3].equals("1")) {
+            BtnElim.setEnabled(true);
+        }
+    }
 
     public void cargar_habitaciones() {
         txt_habitacion.addItem("Seleccionar...");
@@ -175,8 +187,8 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         txt_objeto = new javax.swing.JTextField();
         BtnIng = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        BtnElim = new javax.swing.JButton();
+        BtnMod = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -184,13 +196,31 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         tabla1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         txt_id = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnBus = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
         setTitle("Objetos Perdidos");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameDeactivated(evt);
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("INFORMACION"));
 
@@ -220,21 +250,26 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setText("Eliminar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        BtnElim.setText("Eliminar");
+        BtnElim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                BtnElimActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Editar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        BtnMod.setText("Editar");
+        BtnMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                BtnModActionPerformed(evt);
             }
         });
 
         jButton6.setText("Ayuda");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Reporte");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -256,12 +291,12 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                         .addComponent(txt_objeto, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnElim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnIng, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BtnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -301,8 +336,8 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                     .addComponent(txt_objeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
+                    .addComponent(BtnElim)
+                    .addComponent(BtnMod)
                     .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -326,10 +361,21 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
 
         jLabel5.setText("ID:");
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                txt_idActionPerformed(evt);
+            }
+        });
+        txt_id.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_idKeyTyped(evt);
+            }
+        });
+
+        BtnBus.setText("Buscar");
+        BtnBus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBusActionPerformed(evt);
             }
         });
 
@@ -346,7 +392,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(BtnBus)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -357,7 +403,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(BtnBus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -403,6 +449,8 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             huespedesdao.insert(guardarmetodo);
             imprimir_Objetos();
             JOptionPane.showMessageDialog(null, "Objeto guardado correctamente");
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Insertar", (codigoAplicacion), Login.usuarioHoteleria);
             /*GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
                     guardarBitacora.GuardarEnBitacora("Insertar", (codigoAplicacion), Login.usuarioHoteleria);*/
             }else{
@@ -420,7 +468,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnBusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBusActionPerformed
         // TODO add your handling code here:
         if (ObjetosPerdidos.isNumeric(txt_id.getText())) {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
@@ -443,28 +491,29 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             }
             fecha_actual.setDate(fechaguardado);
         }else{
-            JOptionPane.showMessageDialog(null,"El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
+            JOptionPane.showMessageDialog(null,"El ID esta vacio");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnBusActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void BtnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnElimActionPerformed
         // TODO add your handling code here:
-        if (txt_habitacion.getSelectedItem().toString().length()!=0&&txt_ama.getSelectedItem().toString().length()!=0&&
-                    txt_objeto.getText().length()!=0) {
+        if (ObjetosPerdidos.isNumeric(txt_id.getText())) {
             ObjetosPerdidosDAO modulosDAO = new ObjetosPerdidosDAO();
             ObjetoPerdido moduloEliminar = new ObjetoPerdido();
             moduloEliminar.setIdobjeto(txt_id.getText());
             modulosDAO.delete(moduloEliminar);
             imprimir_Objetos();
             JOptionPane.showMessageDialog(null, "Huesped eliminado correctamente");
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Eliminacion", (codigoAplicacion), Login.usuarioHoteleria);
         }else{
-            JOptionPane.showMessageDialog(null, "El No. de indentificacion esta vacio y/o el codigo debe de ser solo números");
+            JOptionPane.showMessageDialog(null, "El ID esta vacio");
                 //Si el campo esta vacio o no inserta números muestra un mensaje de error
         }
             limpiar();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_BtnElimActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void BtnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModActionPerformed
         // TODO add your handling code here:
         if (ObjetosPerdidos.isNumeric(txt_id.getText())) {
             if (txt_habitacion.getSelectedItem().toString().length()!=0&&txt_ama.getSelectedItem().toString().length()!=0&&
@@ -482,6 +531,8 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             huespedesdao.update(modificarmetodo);
             imprimir_Objetos();
             JOptionPane.showMessageDialog(null, "Objeto actualizado correctamente");
+            GuardarBitacoraDAO guardarBitacora = new GuardarBitacoraDAO();
+            guardarBitacora.GuardarEnBitacora("Modificacion", (codigoAplicacion), Login.usuarioHoteleria);
         }else{
             JOptionPane.showMessageDialog(null, "Existen campos vacios, por favor revise y llene los campos");
         }
@@ -489,7 +540,7 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "ID esta vacio");
         }
         limpiar();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_BtnModActionPerformed
 
     private Connection connection = null;
     
@@ -513,21 +564,54 @@ public class ObjetosPerdidos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {                                         
-    MDIHoteleria.logo.setVisible(true);
-    }                                        
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        // TODO add your handling code here:
+        MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameClosed
 
-    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {                                              
-    MDIHoteleria.logo.setVisible(true);
-    }
+    private void formInternalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameDeactivated
+        // TODO add your handling code here:
+        MDIHoteleria.logo.setVisible(true);
+    }//GEN-LAST:event_formInternalFrameDeactivated
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        try {
+            if ((new File("src\\main\\java\\Hoteleria\\ayuda\\AyudaObjetosPerdidos.chm")).exists()) {
+                Process p = Runtime
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Hoteleria\\ayuda\\AyudaObjetosPerdidos.chm");
+                p.waitFor();
+            } else {
+                JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
+            }
+            //System.out.println("Correcto");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
+
+    }//GEN-LAST:event_txt_idActionPerformed
+
+    private void txt_idKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_idKeyTyped
+        // TODO add your handling code here:
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+        }
+    }//GEN-LAST:event_txt_idKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBus;
+    private javax.swing.JButton BtnElim;
     private javax.swing.JButton BtnIng;
+    private javax.swing.JButton BtnMod;
     private com.toedter.calendar.JDateChooser fecha_actual;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
