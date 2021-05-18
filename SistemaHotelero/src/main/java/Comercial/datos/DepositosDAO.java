@@ -29,7 +29,7 @@ public class DepositosDAO {
     private static final String SQL_QUERY3 = "SELECT Id_pedido,Cliente,cuenta ,Fecha_inicial ,Fecha_final,Nit,telefono,producto ,Detalle, Cantidad FROM depositos WHERE Id_pedido = ?";
   private static final String SQL_UPDATE = "UPDATE depositos  SET Id_pedido = ? ,Cliente = ? ,cuenta = ? ,Fecha_inicial = ?,Fecha_final = ? ,Nit = ?,telefono = ?,producto = ? , Detalle = ?, Cantidad = ? WHERE Id_pedido";
     private static final String SQL_DELETE = "DELETE FROM depositos WHERE Id_pedido =?";
-   private static final String SQL_UPDATE1 = "UPDATE depositos SET Id_pedido=? , Cliente= ? ,cuenta= ?  ,Fecha_inicial= ? ,Fecha_final= ? ,Nit= ? ,telefono= ? ,producto = ? ,Detalle= ? , Cantidad = ?  WHERE Id_pedido" ;
+   private static final String SQL_UPDATE1 = "UPDATE depositos SET  Cliente= ? ,cuenta= ?  ,Fecha_inicial= ? ,Fecha_final= ? ,Nit= ? ,telefono= ? ,producto = ? ,Detalle= ? , Cantidad = ?  WHERE Id_pedido" ;
      public  List<Deposito>  select() {
         Connection conn = null;
         PreparedStatement stmt = null;

@@ -187,6 +187,7 @@ cantidad.setText(B.getCantidad());
              cantidad.setText("");
               f1.setText("");
                f2.setText("");
+                 detalle.setText("");
     }
     /**
      * Creates new form Proceso_Depositos
