@@ -9,6 +9,7 @@ import Finanzas.dominio.PartidaContable;
 import javax.swing.table.DefaultTableModel;
 
 
+
 /**
  *
  * @author Diego Vásquez
