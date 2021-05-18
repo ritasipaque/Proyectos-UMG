@@ -106,6 +106,11 @@ public class MDIHoteleria extends javax.swing.JFrame {
         cerrar_sesion = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jDesktopPane1.setBackground(new java.awt.Color(228, 68, 68));
 
@@ -434,6 +439,10 @@ public class MDIHoteleria extends javax.swing.JFrame {
         formBitacoraH.setVisible(true);
         logo.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    guardaraccion.GuardarEnBitacora("Salir","2000", Login.usuarioHoteleria);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
