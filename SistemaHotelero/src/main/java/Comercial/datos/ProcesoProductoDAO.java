@@ -22,10 +22,11 @@ import javax.swing.JOptionPane;
 public class ProcesoProductoDAO {
 
     private static final String SQL_SELECT = "SELECT PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto FROM tbl_proceso_producto";
+    private static final String SQL_SELECT2 = "SELECT  nombre_producto, existencias_producto FROM tbl_proceso_producto";
     private static final String SQL_INSERT = "INSERT INTO tbl_proceso_producto (PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto) VALUES(?,?,?,?)";
     private static final String SQL_UPDATE = "UPDATE tbl_proceso_producto SET   nombre_producto= ?, nombre_bodega= ?, existencias_producto= ?   WHERE PK_id_procesoproducto= ?";
-    private static final String SQL_QUERY = "SELECT PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto FROM tbl_proceso_producto WHERE PK_id_producto=?";
-    private static final String SQL_DELETE = "DELETE FROM tbl_proceso_producto WHERE PK_id_producto=?";
+    private static final String SQL_QUERY = "SELECT PK_id_procesoproducto, nombre_producto, nombre_bodega, existencias_producto FROM tbl_proceso_producto WHERE PK_id_procesoproducto=?";
+    private static final String SQL_DELETE = "DELETE FROM tbl_proceso_producto WHERE PK_id_procesoproducto=?";
 
     public List<ProcesoProducto> select() {
         Connection conn = null;
@@ -47,6 +48,38 @@ public class ProcesoProductoDAO {
                 procesoproducto = new ProcesoProducto();
                 procesoproducto.setPK_id_procesoproducto(PK_id_procesoproducto);
                 procesoproducto.setNombre_producto(nombre_producto);
+                procesoproducto.setNombre_bodega(nombre_bodega);
+                procesoproducto.setExistencias_producto(existencias_producto);
+                procesoproductos.add(procesoproducto);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
+        } finally {
+            Conexion.close(rs);
+            Conexion.close(stmt);
+            Conexion.close(conn);
+        }
+
+        return procesoproductos;
+    }
+
+    public List<ProcesoProducto> select2() {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        ProcesoProducto procesoproducto = null;
+        List<ProcesoProducto> procesoproductos = new ArrayList<ProcesoProducto>();
+
+        try {
+            conn = Conexion.getConnection();
+            stmt = conn.prepareStatement(SQL_SELECT2);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                String nombre_producto = rs.getString("nombre_producto");
+                String existencias_producto = rs.getString("existencias_producto");
+
+                procesoproducto = new ProcesoProducto();
                 procesoproducto.setNombre_producto(nombre_producto);
                 procesoproducto.setExistencias_producto(existencias_producto);
                 procesoproductos.add(procesoproducto);
@@ -139,7 +172,6 @@ public class ProcesoProductoDAO {
                 moduloC.setNombre_producto(nombre_producto);
                 moduloC.setNombre_bodega(nombre_bodega);
                 moduloC.setExistencias_producto(existencias_producto);
-                
 
             }
         } catch (SQLException ex) {
@@ -175,8 +207,6 @@ public class ProcesoProductoDAO {
         return rows;
     }
 
-    
-
     public List<ProcesoProducto> listar() {
         List<ProcesoProducto> perfil = new ArrayList<>();
         Connection conn = null;
@@ -192,7 +222,7 @@ public class ProcesoProductoDAO {
                 usr.setNombre_producto(rs.getString(2));
                 usr.setNombre_bodega(rs.getString(3));
                 usr.setExistencias_producto(rs.getString(4));
-                
+
                 perfil.add(usr);
             }
         } catch (Exception e) {

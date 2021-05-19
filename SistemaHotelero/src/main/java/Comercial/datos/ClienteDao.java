@@ -25,7 +25,7 @@ public class ClienteDao {
         private static final String SQL_INSERT = "INSERT INTO tbl_cliente(Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto,cuenta) VALUES(?, ?,?, ?,?, ?,?,?)";
     private static final String SQL_SELECT = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto,cuenta FROM tbl_cliente";
     private static final String SQL_QUERY = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto, cuenta FROM tbl_cliente WHERE Id_cliente = ?";
-  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente = ?,cliente =?,Nit= ? , telefono = ? ,producto = ? , Estatus_Cliente = ? , Monto = ?,cuenta WHERE Id_cliente";
+  private static final String SQL_UPDATE = "UPDATE tbl_cliente SET  Id_cliente = ?,cliente =?,Nit= ? , telefono = ? ,producto = ? , Estatus_Cliente = ? , Monto = ?,cuenta =? WHERE Id_cliente";
     private static final String SQL_DELETE = "DELETE FROM tbl_cliente  WHERE Id_cliente = ? ";
       private static final String SQL_QUERY22 = "SELECT Id_cliente,cliente,Nit,telefono,producto,Estatus_Cliente,Monto,cliente, cuenta FROM tbl_cliente WHERE cliente = ?";
   
