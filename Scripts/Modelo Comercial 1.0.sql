@@ -181,3 +181,4 @@ INSERT INTO `areacomercial`.`tbl_proveedor` (`PK_id_proveedor`, `nombre_proveedo
 INSERT INTO `areacomercial`.`tbl_proveedor` (`PK_id_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `contacto_proveedor`, `telefono_proveedor`, `nit_proveedor`, `email_proveedor`, `estatus_proveedor`) VALUES ('86', 'Kerns', 'Cuidad,Guatemala', 'Jose Castañeda', '17220089', '5512380-7', 'kerns@gmail.com', '1');
 
 INSERT INTO `areacomercial`.`tbl_compra` (`Id_Factura`, `Id_proveedor`, `Nombre_proveedor`, `Nit_proveedor`, `Id_producto`, `Nombre_producto`, `Precio_producto`, `Cantidad_producto`, `Subtotal_producto`, `Total_producto`, `Fecha_producto`) VALUES ('2', '13', 'CocaCola', '459999345-1', '34', 'Jugo de La Granja', '14', '2', '28', '28', '17-may.-2021');
+
