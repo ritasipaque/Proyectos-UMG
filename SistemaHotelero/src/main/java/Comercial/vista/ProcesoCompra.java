@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+
 import java.sql.Connection;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
@@ -50,33 +51,32 @@ import seguridad.vista.Login;
  * @author SipaqueRitaMaria
  */
 public class ProcesoCompra extends javax.swing.JInternalFrame {
-      ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
+
+    ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
     int estadovalidacion;
     ProductoDAO productos = new ProductoDAO();
     int variable1;
     DefaultTableModel model = new DefaultTableModel();
-     ButtonGroup RadiosGrupo;
-     int codigoAplicacion = 3007;
-    
-     
-     public void llenadoDeTablas() {
+    ButtonGroup RadiosGrupo;
+    int codigoAplicacion = 3007;
+
+    public void llenadoDeTablas() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("No.FACTURA");
         model.addColumn("NO.PROVEEDOR");
         model.addColumn("NOMBRE");
         model.addColumn("NIT");
         model.addColumn("ID");
-        
-        
-       model.addColumn("PRODUCTO");
+
+        model.addColumn("PRODUCTO");
         model.addColumn("PRECIO");
         model.addColumn("CANTIDAD");
         model.addColumn("SUBTOTAL");
         model.addColumn("FECHA");
         model.addColumn("PAGO");
-        
+
         CompraDAO proveedorDAO = new CompraDAO();
-        
+
         List<Compra> proveedor = proveedorDAO.select();
         tbtTabla.setModel(model);
         String[] dato = new String[11];
@@ -92,21 +92,14 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
             dato[8] = proveedor.get(i).getSubtotal_producto();
             dato[9] = proveedor.get(i).getFecha_producto();
             dato[10] = proveedor.get(i).getPago_producto();
-            
-            
+
             //System.out.println("vendedor:" + vendedores);
             model.addRow(dato);
-            
-            
-            
+
         }
-            
-             
-     }
-     
-     
-     
-     
+
+    }
+
     void habilitarAcciones() {
 
         int codigoAplicacion = 3001;
@@ -137,29 +130,20 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         if (permisosApp[3].equals("1")) {
             Eliminar.setEnabled(true);
         }
-        
-         
-        
-         
-        
-        
-        
-        
-     }
-    
-    
-   
-        
+
+    }
+
     /**
      * Creates new form ProcesoCompra
-     */ public void buscar() {
-       Compra proveedorAConsultar = new Compra();
+     */
+    public void buscar() {
+        Compra proveedorAConsultar = new Compra();
         CompraDAO proveedorDAO = new CompraDAO();
         proveedorAConsultar.setId_factura(Integer.parseInt(txt_idfacutra.getText()));
         proveedorAConsultar = proveedorDAO.query(proveedorAConsultar);
-         txt_combox.setSelectedItem(proveedorAConsultar.getId_proveedor());
-       
-         txt_nombre.setText(proveedorAConsultar.getNombre_proveedor());
+        txt_combox.setSelectedItem(proveedorAConsultar.getId_proveedor());
+
+        txt_nombre.setText(proveedorAConsultar.getNombre_proveedor());
         txt_nit.setText(proveedorAConsultar.getNit_proveedor());
         uno.setSelectedItem(proveedorAConsultar.getId_producto());
         txt_nombreproducto.setText(proveedorAConsultar.getNombre_producto());
@@ -167,16 +151,11 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         txt_cantidad.setText(proveedorAConsultar.getCantidad_producto());
         txt_1.setText(proveedorAConsultar.getSubtotal_producto());
         txt_total.setText(proveedorAConsultar.getSubtotal_producto());
-        
+
         txt_fecha.setText(proveedorAConsultar.getFecha_producto());
         pago.setSelectedItem(proveedorAConsultar.getId_proveedor());
-        
-        
-      
-        
-        
-     }
 
+    }
 
     public ProcesoCompra() {
         initComponents();
@@ -190,19 +169,18 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         model.addColumn("NIT");
         model.addColumn("NOMBRE");
         model.addColumn("PRECIO");
-        
+
         model.addColumn("NO.PRODUCTO");
         model.addColumn("CANTIDAD");
         model.addColumn("SUBTOTAL");
-        
+
         model.addColumn("FECHA");
-         model.addColumn("PAGO");
-       
+        model.addColumn("PAGO");
 
         this.tbtTabla.setModel(model);
-        
-        Date sistFecha=new Date ();
-        SimpleDateFormat formato =new SimpleDateFormat("dd-MMM-YYYY");
+
+        Date sistFecha = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-YYYY");
         txt_fecha.setText(formato.format(sistFecha));
         RadiosGrupo = new ButtonGroup();
 //        RadiosGrupo.add(RBEP1);
@@ -637,7 +615,7 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                + "/src/main/java/Comercial/reportes/Compra.jrxml");
+                    + "/src/main/java/Comercial/reportes/Compra.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte de Proceso compras");
@@ -646,27 +624,23 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-         txt_idfacutra.setText("");
+        txt_idfacutra.setText("");
         txt_nombre.setText("");
-         txt_combox.setSelectedIndex(0);
-       
+        txt_combox.setSelectedIndex(0);
+
         txt_nit.setText("");
-        
+
         model.getDataVector().removeAllElements();
         tbtTabla.updateUI();
-        
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
- 
-        
-      
-              eliminara();
 
-        
-        
-        
+        eliminara();
+
+
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void valiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valiarActionPerformed
@@ -690,10 +664,8 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
 
     private void validarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_validarActionPerformed
         // TODO add your handling code here:
-       
-        
 
-          String valor = txt_combox.getSelectedItem().toString();
+        String valor = txt_combox.getSelectedItem().toString();
         int valorint = Integer.parseInt(valor);
         ProveedorDAO1 perfilDAO = new ProveedorDAO1();
         Proveedor perfilconsultar = new Proveedor();
@@ -703,44 +675,40 @@ public class ProcesoCompra extends javax.swing.JInternalFrame {
             estadovalidacion = 1;
 
             txt_nombre.setText(perfilconsultar.getNombre_proveedor());
-            
 
             txt_nit.setText(perfilconsultar.getNit_proveedor());
         } else {
 
             estadovalidacion = 0;
         }
-        
+
         BitacoraDao BitacoraDAO = new BitacoraDao();
-            
-        
-       Bitacora Insertar = new Bitacora();
+
+        Bitacora Insertar = new Bitacora();
         Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Buscar");
 
         Insertar.setCodigoAplicacion("3007");
         Insertar.setModulo("3000");
-            try {
-                BitacoraDAO.insert(Insertar);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-        
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_validarActionPerformed
 
     private void RBEP0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBEP0ActionPerformed
         // TODO add your handling code here:
- Proceso_Producto uno= new Proceso_Producto();
-MDIComercial.jdpescritorio.add(uno);
-uno.toFront();
-uno.setVisible(true);
-Proceso_Producto.txtProductoNuevo.setText(txt_nombreproducto.getText());
-Proceso_Producto.txtNuevaExistencia.setText(txt_cantidad.getText());
+        Proceso_Producto uno = new Proceso_Producto();
+        MDIComercial.jdpescritorio.add(uno);
+        uno.toFront();
+        uno.setVisible(true);
+        Proceso_Producto.txtProductoNuevo.setText(txt_nombreproducto.getText());
+        Proceso_Producto.txtNuevaExistencia.setText(txt_cantidad.getText());
 
-        
-        
-        
+
     }//GEN-LAST:event_RBEP0ActionPerformed
 
     private void GenerarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenerarCompraActionPerformed
@@ -788,7 +756,6 @@ Proceso_Producto.txtNuevaExistencia.setText(txt_cantidad.getText());
         txt_total.setText(String.valueOf(tot));
         datos[9] = txt_fecha.getText();
         datos[10] = pago.getSelectedItem().toString();
-       
 
         model.addRow(datos);
         calTot();
@@ -819,21 +786,20 @@ Proceso_Producto.txtNuevaExistencia.setText(txt_cantidad.getText());
         txt_1.setText("");
         pago.setSelectedIndex(0);
         BitacoraDao BitacoraDAO = new BitacoraDao();
-            
-        
-       Bitacora Insertar = new Bitacora();
+
+        Bitacora Insertar = new Bitacora();
         Insertar.setId_Usuario(Login.usuarioComercial);
         Insertar.setAccion("Guardar");
 
         Insertar.setCodigoAplicacion("3007");
         Insertar.setModulo("3000");
-            try {
-                BitacoraDAO.insert(Insertar);
-            } catch (UnknownHostException ex) {
-                Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-        
-            }
-llenadoDeTablas();
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        llenadoDeTablas();
     }//GEN-LAST:event_GenerarCompraActionPerformed
 
     private void AyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AyudaActionPerformed
@@ -841,8 +807,8 @@ llenadoDeTablas();
         try {
             if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm")).exists()) {
                 Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm");
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -851,7 +817,7 @@ llenadoDeTablas();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-         llenadoDeTablas();
+        llenadoDeTablas();
     }//GEN-LAST:event_AyudaActionPerformed
 
     private void Ayuda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ayuda1ActionPerformed
@@ -860,9 +826,9 @@ llenadoDeTablas();
     }//GEN-LAST:event_Ayuda1ActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        CompraDAO proveedorDAO = new  CompraDAO();
+        CompraDAO proveedorDAO = new CompraDAO();
         Compra proveedorAActualizar = new Compra();
-                
+
         proveedorAActualizar.setId_factura(Integer.parseInt(txt_idfacutra.getText()));
         proveedorAActualizar.setId_proveedor(txt_combox.getSelectedItem().toString());
         proveedorAActualizar.setNombre_proveedor(txt_nombre.getText());
@@ -875,7 +841,6 @@ llenadoDeTablas();
         proveedorAActualizar.setTotal_producto(txt_total.getText());
         proveedorAActualizar.setFecha_producto(txt_fecha.getText());
         proveedorAActualizar.setPago_producto(pago.getSelectedItem().toString());
-        
 
         proveedorDAO.update(proveedorAActualizar);
         JOptionPane.showMessageDialog(null, "Modificación Exitosa.");
@@ -893,14 +858,13 @@ llenadoDeTablas();
         } catch (UnknownHostException ex) {
             Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
         }
-         llenadoDeTablas();
+        llenadoDeTablas();
 
 //        llenadoDeTablas();
 //        limpiar();
-
         // TODO add your handling code here:
     }//GEN-LAST:event_btnModificarActionPerformed
-private double redondear(double num) {
+    private double redondear(double num) {
         return Math.rint(num * 100) / 100;
     }
 
@@ -928,16 +892,17 @@ private double redondear(double num) {
         double S = 0, tot;
         for (int i = 0; i < tbtTabla.getRowCount(); i++) {
             S = S + Double.parseDouble(model.getValueAt(i, 8).toString());
-            
+
         }
         S = redondear(S);
         //txt_subtotal.setText(String.valueOf(S));
 
         tot = S;
         tot = redondear(tot);
-        
+
         txt_total.setText(String.valueOf(tot));
-    }private Connection connection = null;
+    }
+    private Connection connection = null;
 
     private void eliminara() {
         int rpta = JOptionPane.showConfirmDialog(this, "ESTA SEGURO DE ELIMINAR ESTA FILA", "SISTEMA", JOptionPane.INFORMATION_MESSAGE);
@@ -956,7 +921,8 @@ private double redondear(double num) {
             }
         } else {
             JOptionPane.showMessageDialog(null, "No hay Filas en la Tabla");
-        }}
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ayuda;
     private javax.swing.JButton Ayuda1;
