@@ -183,3 +183,4 @@ INSERT INTO `areacomercial`.`tbl_producto` (`PK_id_producto`, `nombre_producto`,
 INSERT INTO `areacomercial`.`tbl_producto` (`PK_id_producto`, `nombre_producto`, `precio_producto`, `descripcion_producto`, `estatus_producto`) VALUES ('89', 'Gaseosa Peysi', '13', 'vence 31/012/2021', '1');
 INSERT INTO `areacomercial`.`tbl_producto` (`PK_id_producto`, `nombre_producto`, `precio_producto`, `descripcion_producto`, `estatus_producto`) VALUES ('67', 'Pasta de Dientes', '17', 'vence 3/03/2022', '1');
 INSERT INTO `areacomercial`.`tbl_compra` (`Id_Factura`, `Id_proveedor`, `Nombre_proveedor`, `Nit_proveedor`, `Id_producto`, `Nombre_producto`, `Precio_producto`, `Cantidad_producto`, `Subtotal_producto`, `Total_producto`, `Fecha_producto`) VALUES ('2', '13', 'CocaCola', '459999345-1', '34', 'Jugo de La Granja', '14', '2', '28', '28', '17-may.-2021');
+

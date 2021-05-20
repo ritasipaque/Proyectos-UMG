@@ -611,13 +611,13 @@ public class Proceso_Producto extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField txtExistenciasProducto;
+    public static javax.swing.JTextField txtExistenciasProducto;
     private javax.swing.JTextField txtExistenciasTotales;
     private javax.swing.JTextField txtIDNombreProducto;
-    private javax.swing.JTextField txtNuevaExistencia;
-    private javax.swing.JTextField txtProductoNuevo;
+    public static javax.swing.JTextField txtNuevaExistencia;
+    public static javax.swing.JTextField txtProductoNuevo;
     private javax.swing.JComboBox<String> txt_combox;
     private com.toedter.calendar.JDateChooser txtfechaActualizacion;
-    private javax.swing.JTextField txtnombrebodega;
+    public static javax.swing.JTextField txtnombrebodega;
     // End of variables declaration//GEN-END:variables
 }
