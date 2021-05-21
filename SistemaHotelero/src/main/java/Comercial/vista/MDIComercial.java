@@ -30,7 +30,7 @@ public class MDIComercial extends javax.swing.JFrame {
     private seguridad.vista.FmrBitacora FmrBitacora;
     private MantenimientoProveedor MantenimientoProveedor;
     private Proceso_Factura Proceso_Factura;
-    private Proceso_Depositos Proceso_Depositos;
+    private MantenimientoBodega MantenimientoBodega;
     private Proceso_Producto Proceso_Producto;
     private ProcesoCompra Compra;
     private FacturaProveedor Factura;
@@ -85,11 +85,11 @@ public class MDIComercial extends javax.swing.JFrame {
         M_compras = new javax.swing.JMenu();
         M_proveedor = new javax.swing.JMenuItem();
         M_inventario = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         M_producto1 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         P_ventas = new javax.swing.JMenu();
         P_pedido_factura = new javax.swing.JMenuItem();
-        P_deposito = new javax.swing.JMenuItem();
         P_compras = new javax.swing.JMenu();
         ProcesoCompra = new javax.swing.JMenuItem();
         FacturaCompras = new javax.swing.JMenuItem();
@@ -153,6 +153,15 @@ public class MDIComercial extends javax.swing.JFrame {
 
         M_inventario.setText("Mantenimientos Inventarios");
 
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Mantenimiento Bodegas");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        M_inventario.add(jCheckBoxMenuItem1);
+
         M_producto1.setText("Mantenimiento Producto");
         M_producto1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,14 +186,6 @@ public class MDIComercial extends javax.swing.JFrame {
             }
         });
         P_ventas.add(P_pedido_factura);
-
-        P_deposito.setText("Depositos");
-        P_deposito.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                P_depositoActionPerformed(evt);
-            }
-        });
-        P_ventas.add(P_deposito);
 
         jMenu4.add(P_ventas);
 
@@ -482,10 +483,10 @@ public class MDIComercial extends javax.swing.JFrame {
 
     private void FacturaComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FacturaComprasActionPerformed
         // TODO add your handling code here:
-        
-         FacturaProveedor ip= new FacturaProveedor();
-    jdpescritorio.add(ip);
-    ip.show();
+
+        FacturaProveedor ip = new FacturaProveedor();
+        jdpescritorio.add(ip);
+        ip.show();
 
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Factura.getSize();
@@ -508,40 +509,10 @@ public class MDIComercial extends javax.swing.JFrame {
         Compra.setVisible(true);
     }//GEN-LAST:event_ProcesoCompraActionPerformed
 
-    private void P_depositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_depositoActionPerformed
-
-        Proceso_Depositos = new Proceso_Depositos();
-        jdpescritorio.add(Proceso_Depositos);
-
-        Dimension desktopSize = jdpescritorio.getSize();
-        Dimension FrameSize = Proceso_Depositos.getSize();
-        Proceso_Depositos.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
-        Proceso_Depositos.show();
-        logo.setVisible(true);
-        Proceso_Depositos.setVisible(true);
-        BitacoraDao BitacoraDAO = new BitacoraDao();
-
-        Bitacora Insertar = new Bitacora();
-        Insertar.setId_Usuario(Login.usuarioComercial);
-        Insertar.setAccion("Acceso");
-
-        Insertar.setCodigoAplicacion("3010");
-        Insertar.setModulo("3000");
-
-        try {
-            BitacoraDAO.insert(Insertar);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-    }//GEN-LAST:event_P_depositoActionPerformed
-
     private void P_pedido_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P_pedido_facturaActionPerformed
 
         Proceso_Factura = new Proceso_Factura();
-       jdpescritorio.add(Proceso_Factura);
+        jdpescritorio.add(Proceso_Factura);
 
         Dimension desktopSize = jdpescritorio.getSize();
         Dimension FrameSize = Proceso_Factura.getSize();
@@ -594,6 +565,33 @@ public class MDIComercial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ProcesoInventarioActionPerformed
 
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        MantenimientoBodega = new MantenimientoBodega();
+        jdpescritorio.add(MantenimientoBodega);
+
+        Dimension desktopSize = jdpescritorio.getSize();
+        Dimension FrameSize = MantenimientoBodega.getSize();
+        MantenimientoBodega.setLocation((desktopSize.width - FrameSize.width) / 2, (desktopSize.height - FrameSize.height) / 2);
+        MantenimientoBodega.show();
+        logo.setVisible(true);
+        MantenimientoBodega.setVisible(true);
+        BitacoraDao BitacoraDAO = new BitacoraDao();
+
+        Bitacora Insertar = new Bitacora();
+        Insertar.setId_Usuario(Login.usuarioComercial);
+        Insertar.setAccion("Acceso");
+
+        Insertar.setCodigoAplicacion("3009");
+        Insertar.setModulo("3000");
+
+        try {
+            BitacoraDAO.insert(Insertar);
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(Aplicacion_Perfil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -628,13 +626,13 @@ public class MDIComercial extends javax.swing.JFrame {
     public static javax.swing.JMenuItem M_proveedor;
     public static javax.swing.JMenu M_venta;
     public static javax.swing.JMenu P_compras;
-    public static javax.swing.JMenuItem P_deposito;
     public static javax.swing.JMenuItem P_pedido_factura;
     public static javax.swing.JMenu P_producto;
     public static javax.swing.JMenu P_ventas;
     public static javax.swing.JMenuItem ProcesoCompra;
     public static javax.swing.JMenuItem ProcesoInventario;
     public static javax.swing.JMenu cerrar_sesion;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
