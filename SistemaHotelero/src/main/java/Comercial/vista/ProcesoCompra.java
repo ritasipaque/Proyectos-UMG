@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Comercial.vista;
+
 import java.sql.Connection;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
@@ -42,36 +43,36 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author SipaqueRitaMaria
  */
 public class ProcesoCompra extends javax.swing.JInternalFrame {
-ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
+
+    ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
     int estadovalidacion;
     ProductoDAO productos = new ProductoDAO();
     int variable1;
     DefaultTableModel model = new DefaultTableModel();
-     ButtonGroup RadiosGrupo;
-     int codigoAplicacion = 3007;
+    ButtonGroup RadiosGrupo;
+    int codigoAplicacion = 3007;
+
     /**
      * Creates new form Compra
      */
-     
-     public void llenadoDeTablas() {
+
+    public void llenadoDeTablas() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("NO.FACTURA");
         model.addColumn("NO.PROVEEDOR");
         model.addColumn("NOMBRE");
         model.addColumn("NIT");
         model.addColumn("ID");
-        
-        
-       model.addColumn("PRODUCTO");
+
+        model.addColumn("PRODUCTO");
         model.addColumn("PRECIO");
         model.addColumn("CANTIDAD");
         model.addColumn("SUBTOTAL");
         model.addColumn("FECHA");
-         model.addColumn("PAGO");
-          
-        
+        model.addColumn("PAGO");
+
         CompraDAO proveedorDAO = new CompraDAO();
-        
+
         List<Compra> proveedor = proveedorDAO.select();
         tbtTabla.setModel(model);
         String[] dato = new String[11];
@@ -87,25 +88,22 @@ ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
             dato[8] = proveedor.get(i).getSubtotal_producto();
             dato[9] = proveedor.get(i).getFecha_producto();
             dato[10] = proveedor.get(i).getPago_producto();
-             
-            
+
             //System.out.println("vendedor:" + vendedores);
             model.addRow(dato);
             llenadoDeTablas();
         }
-        
-            
-        }
-           
-     
-     public void buscar() {
-       Compra proveedorAConsultar = new Compra();
+
+    }
+
+    public void buscar() {
+        Compra proveedorAConsultar = new Compra();
         CompraDAO proveedorDAO = new CompraDAO();
         proveedorAConsultar.setId_factura(Integer.parseInt(txt_idfacutra.getText()));
         proveedorAConsultar = proveedorDAO.query(proveedorAConsultar);
-         txt_combox.setSelectedItem(proveedorAConsultar.getId_proveedor());
-       
-         txt_nombre.setText(proveedorAConsultar.getNombre_proveedor());
+        txt_combox.setSelectedItem(proveedorAConsultar.getId_proveedor());
+
+        txt_nombre.setText(proveedorAConsultar.getNombre_proveedor());
         txt_nit.setText(proveedorAConsultar.getNit_proveedor());
         uno.setSelectedItem(proveedorAConsultar.getId_producto());
         txt_nombreproducto.setText(proveedorAConsultar.getNombre_producto());
@@ -113,17 +111,12 @@ ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
         txt_cantidad.setText(proveedorAConsultar.getCantidad_producto());
         txt_1.setText(proveedorAConsultar.getSubtotal_producto());
         txt_total.setText(proveedorAConsultar.getSubtotal_producto());
-        
+
         txt_fecha.setText(proveedorAConsultar.getFecha_producto());
         txt_pago.setSelectedItem(proveedorAConsultar.getPago_producto());
-        
-        
-        
-      
-        
-        
-     }
-     
+
+    }
+
     public ProcesoCompra() {
         initComponents();
         cargarCombobox.query2(txt_combox);
@@ -135,15 +128,14 @@ ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
         model.addColumn("NIT");
         model.addColumn("NOMBRE");
         model.addColumn("PRECIO");
-        
+
         model.addColumn("NO.PRODUCTO");
         model.addColumn("CANTIDAD");
         model.addColumn("SUBTOTAL");
-        
+
         model.addColumn("FECHA");
         model.addColumn("PAGO");
-        
-       
+
 //
         this.tbtTabla.setModel(model);
 //        
@@ -651,8 +643,6 @@ ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
         txt_total.setText(String.valueOf(tot));
         datos[9] = txt_fecha.getText();
         datos[10] = txt_pago.getSelectedItem().toString();
-        
-       
 
         model.addRow(datos);
         calTot();
@@ -691,16 +681,15 @@ ProveedorDAO1 cargarCombobox = new ProveedorDAO1();
         // TODO add your handling code here:
 
         eliminar();
-        
-        
+
         CompraDAO proveedorDAO = new CompraDAO();
         Compra proveedorAEliminar = new Compra();
         proveedorAEliminar.setId_factura(Integer.parseInt(txt_idfacutra.getText()));
         proveedorDAO.delete(proveedorAEliminar);
 //        JOptionPane.showMessageDialog(null, "Registro Eliminado.");
-        
+
     }//GEN-LAST:event_EliminarActionPerformed
-private java.sql.Connection connection = null;
+    private java.sql.Connection connection = null;
     private void ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteActionPerformed
         // TODO add your handling code here:
         Map p = new HashMap();
@@ -710,7 +699,7 @@ private java.sql.Connection connection = null;
         try {
             connection = Conexion.getConnection();
             report = JasperCompileManager.compileReport(new File("").getAbsolutePath()
-                + "/src/main/java/Comercial/reportes/Compra.jrxml");
+                    + "/src/main/java/Comercial/reportes/Compra.jrxml");
             print = JasperFillManager.fillReport(report, p, connection);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte de Proceso compras");
@@ -724,7 +713,7 @@ private java.sql.Connection connection = null;
 
     private void RBEP0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBEP0ActionPerformed
         // TODO add your handling code here:
-        Proceso_Producto uno= new Proceso_Producto();
+        Proceso_Producto uno = new Proceso_Producto();
         MDIComercial.jdpescritorio.add(uno);
         uno.toFront();
         uno.setVisible(true);
@@ -736,7 +725,7 @@ private java.sql.Connection connection = null;
     private void Ayuda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Ayuda1ActionPerformed
         // TODO add your handling code here:
         buscar();
-       
+
         llenadoDeTablas();
     }//GEN-LAST:event_Ayuda1ActionPerformed
 
@@ -745,8 +734,8 @@ private java.sql.Connection connection = null;
         try {
             if ((new File("src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm")).exists()) {
                 Process p = Runtime
-                .getRuntime()
-                .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm");
+                        .getRuntime()
+                        .exec("rundll32 url.dll,FileProtocolHandler src\\main\\java\\Comercial\\reportes\\AyudaProcesoCompra.chm");
                 p.waitFor();
             } else {
                 JOptionPane.showMessageDialog(null, "La ayuda no Fue encontrada");
@@ -755,26 +744,23 @@ private java.sql.Connection connection = null;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-       
+
     }//GEN-LAST:event_AyudaActionPerformed
 
     private void Reporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reporte1ActionPerformed
         // TODO add your handling code here:
-        int fila=tbtTabla.getRowCount();
-        for ( int i = fila-1; i>=0;i--){
+        int fila = tbtTabla.getRowCount();
+        for (int i = fila - 1; i >= 0; i--) {
             model.removeRow(i);
         }
         txt_idfacutra.setText("");
         txt_combox.setSelectedIndex(0);
         txt_nombre.setText("");
-        
+
         txt_nit.setText("");
-      txt_total.setText("");
-     
-        
-        
-        
-        
+        txt_total.setText("");
+
+
     }//GEN-LAST:event_Reporte1ActionPerformed
 
 
@@ -821,7 +807,7 @@ private java.sql.Connection connection = null;
     private javax.swing.JComboBox<String> uno;
     // End of variables declaration//GEN-END:variables
 
-private double redondear(double num) {
+    private double redondear(double num) {
         return Math.rint(num * 100) / 100;
     }
 
@@ -849,26 +835,15 @@ private double redondear(double num) {
         double S = 0, tot;
         for (int i = 0; i < tbtTabla.getRowCount(); i++) {
             S = S + Double.parseDouble(model.getValueAt(i, 8).toString());
-            
+
         }
         S = redondear(S);
         //txt_subtotal.setText(String.valueOf(S));
 
         tot = S;
         tot = redondear(tot);
-        
+
         txt_total.setText(String.valueOf(tot));
     }
-    
-
-
-
-
-
-
-
-
-
-
 
 }
