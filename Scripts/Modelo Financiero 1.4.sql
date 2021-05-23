@@ -444,7 +444,7 @@ ALTER TABLE `banco`
 -- Indices de la tabla `cheque`
 --
 ALTER TABLE `cheque`
-  ADD PRIMARY KEY (`Num_Cheque`),
+  ADD PRIMARY KEY (`Numero_Cheque`),
   ADD KEY `FK_BANCOCHEQUE` (`FK_Banco`);
 
 --
@@ -593,8 +593,4 @@ ALTER TABLE `cheque`
   ADD CONSTRAINT `fkChequeCuentaHabiente1` FOREIGN KEY (`FK_Cuentahabiente`) REFERENCES `CuentaHabiente` (`Codigo_CuentaHabiente`);
 COMMIT;
 
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
