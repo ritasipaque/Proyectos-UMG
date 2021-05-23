@@ -71,7 +71,7 @@ INSERT INTO `banco` (`Codigo_Banco`, `Nombre_Banco`, `Clave_Banco`, `Telefono_Ba
 --
 
 CREATE TABLE `cheque` (
-  `Num_Cheque` varchar(255) NOT NULL,
+  `Numero_Cheque` varchar(255) NOT NULL,
   `Fecha_Cheque` varchar(255) NOT NULL,
   `FK_Banco` varchar(255) NOT NULL,
   `FK_Cuenta` varchar(255) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE `cheque` (
 -- Volcado de datos para la tabla `cheque`
 --
 
-INSERT INTO `cheque` (`Num_Cheque`, `Fecha_Cheque`, `FK_Banco`,`FK_Cuenta`,`FK_Cuentahabiente`,`Monto_Cheque`) VALUES
+INSERT INTO `cheque` (`Numero_Cheque`, `Fecha_Cheque`, `FK_Banco`,`FK_Cuenta`,`FK_Cuentahabiente`,`Monto_Cheque`) VALUES
 ('00022','09/05/2021','AC0221','499399','33949','455'),
 ('00023','05/05/2021','AC0221','499399','12343','3433'),
 ('00024','04/05/2021','AC0221','499399','12444','45444'),
